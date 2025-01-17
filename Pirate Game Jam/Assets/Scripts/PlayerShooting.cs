@@ -34,14 +34,13 @@ public class PlayerShooting : MonoBehaviour
             //getting mouse position
             Vector3 mousePos = Input.mousePosition;
             mousePos = mainCamera.ScreenToWorldPoint(mousePos);
-            mousePos.y = transform.position.y;
             mousePos.z = transform.position.z;
 
             //physics calc
             Vector2 gunToMouse = (transform.position - mousePos).normalized;
             Vector2 recoil = gunToMouse * recoilForce;
             Vector2 recoilDiff = recoil * lastRecoil / recoilTime;
-            float accelRate = 30f;
+            float accelRate = 10f;
             Vector2 force = recoilDiff * accelRate;
 
             rb.AddForce(force);

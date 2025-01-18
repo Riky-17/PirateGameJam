@@ -1,70 +1,80 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public abstract class Enemy : MonoBehaviour
 {
     Rigidbody2D rb;
 
-    [SerializeField] bool DebugMode = true;
-    [SerializeField] float lookDistance = 5;
-    [SerializeField] float maxDistance = 3;
-    [SerializeField] float speed = 5;
-    float maxDistanceOffset = .75f;
+    [SerializeField] List<Vector2> waypoints;
+    int waypointIndex;
+    //the time to spend between each waypoint
+    [SerializeField] float waypointTime = 1;
+    float lastWaypointTime;
+
+    [SerializeField] bool debugMode = false;
+    [SerializeField] protected float lookDistance = 5;
+    [SerializeField] protected float maxDistance = 3;
+    [SerializeField] protected float speed = 5;
+    protected float maxDistanceOffset = .75f;
     
     Collider2D[] colliders;
 
-    PlayerMovement playerMovement;
+    protected PlayerMovement player;
 
     void Awake() => rb = GetComponent<Rigidbody2D>();
 
     void Update()
     {
-        if(playerMovement != null && (playerMovement.transform.position - transform.position).magnitude > lookDistance)
-            playerMovement = null;
+        if(player != null && (player.transform.position - transform.position).magnitude > lookDistance)
+            player = null;
     }
 
-    void FixedUpdate()
+    protected void Patrol()
     {
-        if(playerMovement == null)
-            LookForPlayer();
-        else
-            Movement();
+        if(waypoints.Count == 0)
+            return;
         
+        Vector3 waypoint = waypoints[waypointIndex];
+        Vector2 enemyToPoint = waypoint - transform.position;
+
+        if(enemyToPoint.magnitude < .1f)
+        {
+            lastWaypointTime += Time.fixedDeltaTime;
+            if(lastWaypointTime < waypointTime)
+                return;
+
+            lastWaypointTime = 0;
+            waypointIndex = waypointIndex != waypoints.Count - 1 ? waypointIndex + 1 : 0;
+            waypoint = waypoints[waypointIndex];
+            enemyToPoint = waypoint - transform.position;
+        }
+
+        AddForce(enemyToPoint.normalized, 3);
     }
 
-    private void Movement()
-    {
-        // getting a copy vector of the player and making that vector y equals to the this enemy
-        Vector3 playerFlat = playerMovement.transform.position;
-        playerFlat.y = transform.position.y;
-        Vector2 enemyToPlayerFlat = playerFlat - transform.position;
+    protected abstract void ChasePlayer();
 
-        // getting the non flat distance to calculate the actual distance
-        float enemyToPlayer = (playerMovement.transform.position - transform.position).magnitude;
-        
-        Vector2 velocity = enemyToPlayerFlat.normalized * speed;
-        Vector2 velocityDiff = velocity - rb.linearVelocity;
-        float accelRate = 3/*enemyToPlayer > maxDistance + maxDistanceOffset || enemyToPlayer < maxDistance +maxDistanceOffset ? 6 : 10*/;
-        Vector2 force = velocityDiff * accelRate;
-
-        if(enemyToPlayer > maxDistance + maxDistanceOffset)
-            rb.AddForce(force);
-        else if(enemyToPlayer < maxDistance - maxDistanceOffset)
-            rb.AddForce(-force);
-    }
-
-    private void LookForPlayer()
+    protected void LookForPlayer()
     {
         colliders = Physics2D.OverlapCircleAll(transform.position, lookDistance);
 
         foreach (Collider2D collider in colliders)
-            if(collider.TryGetComponent(out playerMovement))
+            if(collider.TryGetComponent(out player))
                 break;
+    }
+
+    protected void AddForce(Vector2 dir, float accelRate)
+    {
+        Vector2 velocity = dir * speed;
+        Vector2 velocityDiff = velocity - rb.linearVelocity;
+        Vector2 force = velocityDiff * accelRate;
+        rb.AddForce(force);
     }
 
     void OnDrawGizmos()
     {
-        if (DebugMode)
+        if (debugMode)
         {
             Gizmos.color = Color.green;
             Gizmos.DrawWireSphere(transform.position, lookDistance);
@@ -75,6 +85,10 @@ public class Enemy : MonoBehaviour
             Gizmos.color = Color.blue;
             Gizmos.DrawWireSphere(transform.position, maxDistance + maxDistanceOffset);
             Gizmos.DrawWireSphere(transform.position, maxDistance - maxDistanceOffset);
+            
+            Gizmos.color = Color.red;
+            foreach (Vector2 waypoint in waypoints)
+                Gizmos.DrawSphere(waypoint, .25f);
         }
     }
 }

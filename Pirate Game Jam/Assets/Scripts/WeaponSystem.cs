@@ -1,36 +1,10 @@
 using System.Collections;
 using UnityEngine;
 
-public abstract class WeaponSystem : MonoBehaviour
-{
-    internal int initialBulletNum;
-    public int bulletsNum;
-    public float reloadTime;
-    internal bool canShoot = true;
-    public float bulletSpeed = 10f;
-
-    public abstract void Shoot(Transform muzzle, GameObject bullet); //shoot method called
-
-    //timer for reloading weapons when running out of ammo
-    public IEnumerator ReloadingSpeed(float loadCooldown)
-    {
-        while (loadCooldown > 0)
-        {
-            loadCooldown -= Time.deltaTime;
-            yield return null;
-        }
-        canShoot = true;
-        bulletsNum = initialBulletNum;
-        //add in canvas the visual description of this 
-
-    }
-
-    public abstract void WeaponAmmo(); //initializing variables in weapons
-}
-
+/*
 public class AssaultRifle : WeaponSystem
 {
-    public override void WeaponAmmo()
+    private void Awake()
     {
         bulletsNum = 30;
         initialBulletNum = bulletsNum;
@@ -54,15 +28,15 @@ public class AssaultRifle : WeaponSystem
     }
 
 }
-
 public class GrenadeLauncher : WeaponSystem
 {
-    public override void WeaponAmmo()
+    private void Awake()
     {
         bulletsNum = 5;
         initialBulletNum = bulletsNum;
         reloadTime = 10f;
     }
+
 
     public override void Shoot(Transform muzzle, GameObject grenade)
     {
@@ -80,56 +54,6 @@ public class GrenadeLauncher : WeaponSystem
         }
     }
 }
+*/
 
-public class Shotgun : WeaponSystem
-{
-    public override void WeaponAmmo()
-    {
-        bulletsNum = 8;
-        initialBulletNum = bulletsNum;
-        reloadTime = 5f;
-    }
-    
-    public override void Shoot(Transform muzzle, GameObject bullet)
-    {
-        if (canShoot && bulletsNum > 0)
-        {
-            GameObject tempBullet = Instantiate(bullet, muzzle.position, Quaternion.identity);
-            tempBullet.GetComponent<Rigidbody2D>().AddForce(transform.right * bulletSpeed * Time.deltaTime);
-            bulletsNum--;
-            Destroy(tempBullet, 2f);
-        }
-        else if (bulletsNum <= 0)
-        {
-            StartCoroutine(ReloadingSpeed(reloadTime));
-            canShoot = false;
-        }
-    }
-}
-
-public class Marksman : WeaponSystem
-{
-    public override void WeaponAmmo()
-    {
-        bulletsNum = 10;
-        initialBulletNum = bulletsNum;
-        reloadTime = 3f;
-    }
-    public override void Shoot(Transform muzzle, GameObject bullet)
-    {
-        if (canShoot && bulletsNum > 0)
-        {
-            GameObject tempBullet = Instantiate(bullet, muzzle.position, Quaternion.identity);
-            tempBullet.GetComponent<Rigidbody2D>().AddForce(transform.right * bulletSpeed * Time.deltaTime);
-            bulletsNum--;
-            Destroy(tempBullet, 2f);
-        }
-        else if (bulletsNum <= 0)
-        {
-            StartCoroutine(ReloadingSpeed(reloadTime));
-            canShoot = false;
-        }
-    }
-
-}
 

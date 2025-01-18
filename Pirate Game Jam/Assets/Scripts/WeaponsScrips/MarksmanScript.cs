@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class MarksmanScript : MonoBehaviour
+public class MarksmanScript : WeaponSystem
 {
     Rigidbody2D rb;
     SpriteRenderer sr;
@@ -14,30 +14,58 @@ public class MarksmanScript : MonoBehaviour
     public Transform shootingPoint;
     public GameObject bulletPrefab;
 
+
     void Awake()
     {
         rb = GetComponentInParent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
         pm = GetComponentInParent<PlayerMovement>();
+
+        //assigning the bullets and time to reload 
+        bulletsNum = 20;
+        reloadTime = 5f;
+        initialBulletNum = bulletsNum;
     }
 
-    // Update is called once per frame
+    private void OnEnable()
+    {
+        if(bulletsNum <= 0)
+        {
+            canShoot = false;
+            StartCoroutine(ReloadingSpeed(reloadTime));
+        }
+    }
+
     void Update()
     {
-        Shoot();
+        Shoot(shootingPoint, bulletPrefab);
     }
-
-    void Shoot()
+    
+    public override void Shoot(Transform muzzle, GameObject bullet)
     {
         if (Input.GetMouseButtonDown(0))
         {
-            //shoot
-            Instantiate(bulletPrefab, shootingPoint.position, transform.rotation); // Instantiates bulletPrefab at shootingPoint position and facing towards mousePos
-            anim.Play("Shoot"); // Plays Shoot animation on left mouse click
 
-            //recoil
-            lastRecoil = recoilTime;
+            if (canShoot && bulletsNum > 0)
+            {
+                //shoot
+                GameObject tempBullet = Instantiate(bullet, muzzle.position, transform.rotation);
+                tempBullet.GetComponent<Rigidbody2D>().AddForce(transform.right * bulletSpeed * Time.deltaTime);
+                bulletsNum--;
+                Destroy(tempBullet, 2f);
+                anim.Play("Shoot");
+                //recoil
+                lastRecoil = recoilTime;
+
+                //check ammo
+                if (bulletsNum == 0)
+                {
+                    canShoot = false;
+                    StartCoroutine(ReloadingSpeed(reloadTime));
+                }
+
+            }
         }
     }
 
@@ -45,7 +73,7 @@ public class MarksmanScript : MonoBehaviour
     {
         Recoil();
     }
-    
+
     void Recoil()
     {
         if (lastRecoil > 0)

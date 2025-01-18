@@ -1,26 +1,27 @@
 using UnityEngine;
+using UnityEngine.Rendering;
 
-public class PlayerController : MonoBehaviour
+public class PlayerMovement : MonoBehaviour
 {
-    SpriteRenderer sr;
-    Vector2 mousePos;
 
+    [HideInInspector] public Vector2 mousePos;
     Rigidbody2D rb;
     Vector2 moveInput;
 
     [SerializeField] float speed = 6;
-    [SerializeField] float recoilForce = 15f;
-
-    //how much should the recoil last for
-    float recoilTime = .3f;
-    float lastRecoil;
 
     bool canMove = true;
 
-    void Awake()
+    //weapon objects -> assigned in inspector
+    [SerializeField] GameObject[] weapons;
+
+    void Start()
     { 
-        sr = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
+
+        //disabling game objects except for the first weapon 
+        DisablingWeapons();
+        weapons[0].SetActive(true);
     }
     
 
@@ -29,13 +30,12 @@ public class PlayerController : MonoBehaviour
         Movement();
         MousePosition();
         SpriteRotation();
-        Shoot();
+        SwitchWeapon();
     }
 
     void FixedUpdate()
     {
-        PhysicsCalc();
-        Recoil();
+        PhysicsCalc();       
     }
 
     void Movement()
@@ -57,7 +57,36 @@ public class PlayerController : MonoBehaviour
             moveInput = moveInput.normalized;
         }
     }
-
+    void SwitchWeapon()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            DisablingWeapons();
+            weapons[0].SetActive(true);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            DisablingWeapons();
+            weapons[1].SetActive(true);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            DisablingWeapons();
+            weapons[2].SetActive(true);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            DisablingWeapons();
+            weapons[3].SetActive(true);
+        }
+    }
+    void DisablingWeapons()
+    {
+        foreach (var weapon in weapons)
+        {
+            weapon.SetActive(false);
+        }
+    }
     void MousePosition()
     {
         mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition); // Gets Vector2 mouse position
@@ -81,31 +110,7 @@ public class PlayerController : MonoBehaviour
         transform.rotation = Quaternion.Euler(0, 0, rotZ);
     }
 
-    void Shoot()
-    {
-        if (Input.GetMouseButtonDown(0))
-        {
-            //shoot
+   
 
-            //recoil
-            lastRecoil = recoilTime;
-        }
-    }
-
-    void Recoil()
-    {
-        if (lastRecoil > 0)
-        {
-            //physics calc
-            Vector2 gunToMouse = new Vector2(transform.position.x - mousePos.x, transform.position.y - mousePos.y).normalized;
-            Vector2 recoil = gunToMouse * recoilForce;
-            Vector2 recoilDiff = recoil * lastRecoil / recoilTime;
-            float accelRate = 10f;
-            Vector2 force = recoilDiff * accelRate;
-
-            rb.AddForce(force);
-
-            lastRecoil -= Time.fixedDeltaTime;
-        }
-    }
+    
 }

@@ -1,38 +1,70 @@
 using UnityEngine;
 
-public class GrenadeScript : MonoBehaviour
+public class GrenadeScript : WeaponSystem
 {
     Rigidbody2D rb;
     SpriteRenderer sr;
     PlayerMovement pm;
-    
+    Animator anim;
+
     //how much should the recoil last for
     float recoilTime = .3f;
     float lastRecoil;
     [SerializeField] float recoilForce = 15f;
 
-    
+
+    public Transform shootingPoint;
+    public GameObject bulletPrefab;
+
     void Awake()
     {
+        anim = GetComponent<Animator>();
         rb = GetComponentInParent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
         pm = GetComponentInParent<PlayerMovement>();
+
+        bulletsNum = 5;
+        initialBulletNum = bulletsNum;
+        reloadTime = 5f;
     }
 
-    // Update is called once per frame
+    private void OnEnable()
+    {
+        if (bulletsNum <= 0)
+        {
+            canShoot = false;
+            StartCoroutine(ReloadingSpeed(reloadTime));
+        }
+    }
+
     void Update()
     {
-        Shoot();
+        Shoot(shootingPoint, bulletPrefab);
     }
 
-    void Shoot()
+    public override void Shoot(Transform muzzle, GameObject bullet)
     {
         if (Input.GetMouseButtonDown(0))
         {
-            //shoot
+            if (canShoot && bulletsNum > 0)
+            {
+                //shoot
 
-            //recoil
-            lastRecoil = recoilTime;
+                GameObject tempBullet = Instantiate(bullet, muzzle.position, transform.rotation);
+                bulletsNum--;
+                Destroy(tempBullet, 2.5f);
+                //anim.Play("Shoot");
+                //recoil
+                lastRecoil = recoilTime;
+
+                //check ammo
+                if (bulletsNum == 0)
+                {
+                    canShoot = false;
+                    StartCoroutine(ReloadingSpeed(reloadTime));
+                }
+
+            }
         }
     }
 

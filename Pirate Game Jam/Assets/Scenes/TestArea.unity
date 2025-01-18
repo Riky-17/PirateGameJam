@@ -231,6 +231,7 @@ GameObject:
   m_Component:
   - component: {fileID: 92214434}
   - component: {fileID: 92214433}
+  - component: {fileID: 92214435}
   m_Layer: 0
   m_Name: AssaultRifle
   m_TagString: Untagged
@@ -308,6 +309,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2030776699}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &92214435
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 92214432}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9dbf06e2e024cf4b8fb6f888ef22a10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  recoilForce: 15
 --- !u!1 &113713535
 GameObject:
   m_ObjectHideFlags: 0
@@ -318,6 +332,7 @@ GameObject:
   m_Component:
   - component: {fileID: 113713537}
   - component: {fileID: 113713536}
+  - component: {fileID: 113713538}
   m_Layer: 0
   m_Name: Shotgun
   m_TagString: Untagged
@@ -395,6 +410,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2030776699}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &113713538
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 113713535}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f1798a373d24fd45a6ffcb38bfcf2c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  recoilForce: 15
 --- !u!1 &324446221
 GameObject:
   m_ObjectHideFlags: 0
@@ -474,6 +502,37 @@ MonoBehaviour:
   m_FirstSelected: {fileID: 0}
   m_sendNavigationEvents: 1
   m_DragThreshold: 10
+--- !u!1 &334043376
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 334043377}
+  m_Layer: 0
+  m_Name: Muzzle
+  m_TagString: Muzzle
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &334043377
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 334043376}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.95, y: 0.28, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2030776699}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &427686108
 GameObject:
   m_ObjectHideFlags: 0
@@ -484,9 +543,7 @@ GameObject:
   m_Component:
   - component: {fileID: 427686110}
   - component: {fileID: 427686109}
-  - component: {fileID: 427686112}
-  - component: {fileID: 427686113}
-  - component: {fileID: 427686114}
+  - component: {fileID: 427686111}
   m_Layer: 0
   m_Name: MarksmanRifle
   m_TagString: Untagged
@@ -564,83 +621,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2030776699}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &427686112
+--- !u!114 &427686111
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 427686108}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c4cab94a71adedf4281a91d0144e384b, type: 3}
+  m_Script: {fileID: 11500000, guid: 60ea700f4d586ba428096583e749e339, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 6
   recoilForce: 15
---- !u!50 &427686113
-Rigidbody2D:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 427686108}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
---- !u!58 &427686114
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 427686108}
-  m_Enabled: 0
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_Radius: 0.5
 --- !u!1 &606078667
 GameObject:
   m_ObjectHideFlags: 0
@@ -651,6 +644,7 @@ GameObject:
   m_Component:
   - component: {fileID: 606078669}
   - component: {fileID: 606078668}
+  - component: {fileID: 606078670}
   m_Layer: 0
   m_Name: GrenadeLauncher
   m_TagString: Untagged
@@ -728,6 +722,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2030776699}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &606078670
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 606078667}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b51838ed2d85ca74ba7452b8ee3cd319, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  recoilForce: 15
 --- !u!1 &1049360754
 GameObject:
   m_ObjectHideFlags: 0
@@ -1069,6 +1076,7 @@ Transform:
   - {fileID: 92214434}
   - {fileID: 606078669}
   - {fileID: 113713537}
+  - {fileID: 334043377}
   m_Father: {fileID: 1049360755}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &2030776700
@@ -1146,8 +1154,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4cab94a71adedf4281a91d0144e384b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mousePos: {x: 0, y: 0}
   speed: 6
-  recoilForce: 15
+  weapons:
+  - {fileID: 427686108}
+  - {fileID: 92214432}
+  - {fileID: 606078667}
+  - {fileID: 113713535}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

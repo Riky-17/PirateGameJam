@@ -54,7 +54,7 @@ public class AssaultScript : WeaponSystem
                 bool goingUp = false;
                 float bulletsFriction = 50f;
                 Quaternion bulletSprite = Quaternion.Euler(0f, 0f, bulletsFriction);
-                GameObject tempBullet = Instantiate(bullet, muzzle.position, transform.rotation);
+                GameObject tempBullet = Instantiate(bullet, muzzle.position, transform.rotation * bulletSprite);
                 if(bulletsFriction <= -maxFriction)
                 {
                     goingUp = true;

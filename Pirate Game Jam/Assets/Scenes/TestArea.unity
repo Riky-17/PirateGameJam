@@ -849,7 +849,7 @@ GameObject:
   - component: {fileID: 422687224}
   - component: {fileID: 422687223}
   - component: {fileID: 422687222}
-  - component: {fileID: 422687221}
+  - component: {fileID: 422687225}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -872,22 +872,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1049360755}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &422687221
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 422687219}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd1d2df3621b8234ab1af3a904a08079, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  DebugMode: 1
-  lookDistance: 5
-  maxDistance: 3
-  speed: 5
 --- !u!50 &422687222
 Rigidbody2D:
   serializedVersion: 5
@@ -1016,6 +1000,26 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &422687225
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 422687219}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84b4e48ac16ec2b4ca394bd1e2af5b8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waypoints:
+  - {x: 14, y: -3}
+  - {x: 8, y: -3}
+  waypointTime: 1
+  debugMode: 0
+  lookDistance: 5
+  maxDistance: 3
+  speed: 5
 --- !u!1 &427686108
 GameObject:
   m_ObjectHideFlags: 0
@@ -1255,7 +1259,7 @@ GameObject:
   - component: {fileID: 983150397}
   - component: {fileID: 983150396}
   - component: {fileID: 983150395}
-  - component: {fileID: 983150394}
+  - component: {fileID: 983150398}
   m_Layer: 0
   m_Name: Enemy (1)
   m_TagString: Untagged
@@ -1278,22 +1282,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1049360755}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &983150394
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 983150392}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd1d2df3621b8234ab1af3a904a08079, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  DebugMode: 1
-  lookDistance: 5
-  maxDistance: 3
-  speed: 5
 --- !u!50 &983150395
 Rigidbody2D:
   serializedVersion: 5
@@ -1422,6 +1410,26 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &983150398
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 983150392}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84b4e48ac16ec2b4ca394bd1e2af5b8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waypoints:
+  - {x: -14, y: -3}
+  - {x: -8, y: -3}
+  waypointTime: 1
+  debugMode: 0
+  lookDistance: 5
+  maxDistance: 3
+  speed: 5
 --- !u!1 &1049360754
 GameObject:
   m_ObjectHideFlags: 0

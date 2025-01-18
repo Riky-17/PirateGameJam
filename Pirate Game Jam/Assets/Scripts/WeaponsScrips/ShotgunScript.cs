@@ -13,7 +13,6 @@ public class ShotgunScript : MonoBehaviour
     //getting the weapon object
     private Shotgun shotgun;
 
-
     void Awake()
     {
         rb = GetComponentInParent<Rigidbody2D>();
@@ -37,10 +36,12 @@ public class ShotgunScript : MonoBehaviour
             lastRecoil = recoilTime;
         }
     }
+
     private void FixedUpdate()
     {
         Recoil();
     }
+    
     void Recoil()
     {
         if (lastRecoil > 0)

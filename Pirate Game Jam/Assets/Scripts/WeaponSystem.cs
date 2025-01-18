@@ -12,7 +12,7 @@ public abstract class WeaponSystem : MonoBehaviour
     public abstract void Shoot(Transform muzzle, GameObject bullet); //shoot method called
 
     //timer for reloading weapons when running out of ammo
-    public IEnumerator reloadingSpeed(float loadCooldown)
+    public IEnumerator ReloadingSpeed(float loadCooldown)
     {
         while (loadCooldown > 0)
         {
@@ -24,14 +24,13 @@ public abstract class WeaponSystem : MonoBehaviour
         //add in canvas the visual description of this 
 
     }
-    public abstract void weaponAmmo(); //initializing variables in weapons
 
-
+    public abstract void WeaponAmmo(); //initializing variables in weapons
 }
 
 public class AssaultRifle : WeaponSystem
 {
-    public override void weaponAmmo()
+    public override void WeaponAmmo()
     {
         bulletsNum = 30;
         initialBulletNum = bulletsNum;
@@ -49,7 +48,7 @@ public class AssaultRifle : WeaponSystem
         }
         else if (bulletsNum <= 0)
         {
-            StartCoroutine(reloadingSpeed(reloadTime));
+            StartCoroutine(ReloadingSpeed(reloadTime));
             canShoot = false;
         }
     }
@@ -58,12 +57,13 @@ public class AssaultRifle : WeaponSystem
 
 public class GrenadeLauncher : WeaponSystem
 {
-    public override void weaponAmmo()
+    public override void WeaponAmmo()
     {
         bulletsNum = 5;
         initialBulletNum = bulletsNum;
         reloadTime = 10f;
     }
+
     public override void Shoot(Transform muzzle, GameObject grenade)
     {
         if (canShoot && bulletsNum > 0)
@@ -75,19 +75,21 @@ public class GrenadeLauncher : WeaponSystem
         }
         else if (bulletsNum <= 0)
         {
-            StartCoroutine(reloadingSpeed(reloadTime));
+            StartCoroutine(ReloadingSpeed(reloadTime));
             canShoot = false;
         }
     }
 }
+
 public class Shotgun : WeaponSystem
 {
-    public override void weaponAmmo()
+    public override void WeaponAmmo()
     {
         bulletsNum = 8;
         initialBulletNum = bulletsNum;
         reloadTime = 5f;
     }
+    
     public override void Shoot(Transform muzzle, GameObject bullet)
     {
         if (canShoot && bulletsNum > 0)
@@ -99,14 +101,15 @@ public class Shotgun : WeaponSystem
         }
         else if (bulletsNum <= 0)
         {
-            StartCoroutine(reloadingSpeed(reloadTime));
+            StartCoroutine(ReloadingSpeed(reloadTime));
             canShoot = false;
         }
     }
 }
+
 public class Marksman : WeaponSystem
 {
-    public override void weaponAmmo()
+    public override void WeaponAmmo()
     {
         bulletsNum = 10;
         initialBulletNum = bulletsNum;
@@ -123,7 +126,7 @@ public class Marksman : WeaponSystem
         }
         else if (bulletsNum <= 0)
         {
-            StartCoroutine(reloadingSpeed(reloadTime));
+            StartCoroutine(ReloadingSpeed(reloadTime));
             canShoot = false;
         }
     }

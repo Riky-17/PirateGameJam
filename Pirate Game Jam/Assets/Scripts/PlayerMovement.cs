@@ -3,7 +3,6 @@ using UnityEngine.Rendering;
 
 public class PlayerMovement : MonoBehaviour
 {
-
     [HideInInspector] public Vector2 mousePos;
     Rigidbody2D rb;
     Vector2 moveInput;
@@ -57,6 +56,7 @@ public class PlayerMovement : MonoBehaviour
             moveInput = moveInput.normalized;
         }
     }
+
     void SwitchWeapon()
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
@@ -80,6 +80,7 @@ public class PlayerMovement : MonoBehaviour
             weapons[3].SetActive(true);
         }
     }
+
     void DisablingWeapons()
     {
         foreach (var weapon in weapons)
@@ -87,6 +88,7 @@ public class PlayerMovement : MonoBehaviour
             weapon.SetActive(false);
         }
     }
+    
     void MousePosition()
     {
         mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition); // Gets Vector2 mouse position

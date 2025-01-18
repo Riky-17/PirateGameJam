@@ -5,6 +5,7 @@ public class GrenadeScript : MonoBehaviour
     Rigidbody2D rb;
     SpriteRenderer sr;
     PlayerMovement pm;
+    
     //how much should the recoil last for
     float recoilTime = .3f;
     float lastRecoil;
@@ -23,6 +24,7 @@ public class GrenadeScript : MonoBehaviour
     {
         Shoot();
     }
+
     void Shoot()
     {
         if (Input.GetMouseButtonDown(0))
@@ -33,10 +35,12 @@ public class GrenadeScript : MonoBehaviour
             lastRecoil = recoilTime;
         }
     }
+
     private void FixedUpdate()
     {
         Recoil();
     }
+
     void Recoil()
     {
         if (lastRecoil > 0)

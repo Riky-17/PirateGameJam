@@ -10,7 +10,6 @@ public class AssaultScript : MonoBehaviour
     float lastRecoil;
     [SerializeField] float recoilForce = 15f;
 
-
     void Awake()
     {
         rb = GetComponentInParent<Rigidbody2D>();
@@ -23,6 +22,7 @@ public class AssaultScript : MonoBehaviour
     {
         Shoot();
     }
+
     void Shoot()
     {
         if (Input.GetMouseButtonDown(0))
@@ -33,10 +33,12 @@ public class AssaultScript : MonoBehaviour
             lastRecoil = recoilTime;
         }
     }
+
     private void FixedUpdate()
     {
         Recoil();
     }
+
     void Recoil()
     {
         if (lastRecoil > 0)

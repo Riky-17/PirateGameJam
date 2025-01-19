@@ -15,7 +15,7 @@ public class ParachuteSoldier : Enemy
 
         if(!isGrounded)
         {
-            if (Physics2D.Raycast(transform.position, -transform.up, .5f, groundMask))
+            if (Physics2D.Raycast(transform.position, -transform.up, 2f, groundMask))
             {
                 isGrounded = true;
                 gameObject.layer = (int)MathF.Log(agentMask.value, 2);

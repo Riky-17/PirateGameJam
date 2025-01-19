@@ -17,6 +17,11 @@ public class MarksmanScript : WeaponSystem
 
     void Awake()
     {
+
+        //Canvas
+        weaponaryText = GameObject.FindGameObjectWithTag("Canvas").GetComponent<WeaponDisplay>();
+        weaponaryText.updateWeapon(this.gameObject.name);
+
         rb = GetComponentInParent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
@@ -30,8 +35,11 @@ public class MarksmanScript : WeaponSystem
 
     private void OnEnable()
     {
-        if(bulletsNum <= 0)
+        weaponaryText.updateAmmo(bulletsNum.ToString());
+        weaponaryText.updateWeapon(this.gameObject.name);
+        if (bulletsNum <= 0)
         {
+       
             canShoot = false;
             StartCoroutine(ReloadingSpeed(reloadTime));
         }
@@ -40,6 +48,7 @@ public class MarksmanScript : WeaponSystem
     void Update()
     {
         Shoot(shootingPoint, bulletPrefab);
+        ManualReload(reloadTime);
     }
     
     public override void Shoot(Transform muzzle, GameObject bullet)
@@ -52,12 +61,16 @@ public class MarksmanScript : WeaponSystem
                 //shoot
                 GameObject tempBullet = Instantiate(bullet, muzzle.position, transform.rotation);
                 tempBullet.GetComponent<Rigidbody2D>().AddForce(transform.right * bulletSpeed * Time.deltaTime);
+
                 bulletsNum--;
+                weaponaryText.updateAmmo(bulletsNum.ToString());
+
                 Destroy(tempBullet, 2f);
                 anim.Play("Shoot");
+
                 //recoil
                 lastRecoil = recoilTime;
-
+                
                 //check ammo
                 if (bulletsNum == 0)
                 {

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class Enemy : MonoBehaviour
 {
-    Rigidbody2D rb;
+    protected Rigidbody2D rb;
 
     [SerializeField] List<Vector2> waypoints;
     int waypointIndex;
@@ -18,6 +18,8 @@ public abstract class Enemy : MonoBehaviour
     [SerializeField] protected float speed = 5;
     protected float maxDistanceOffset = .75f;
     
+    [SerializeField] protected float shootingCooldown = 2;
+    float  lastShot = 2;
     Collider2D[] colliders;
 
     protected PlayerMovement player;
@@ -26,8 +28,18 @@ public abstract class Enemy : MonoBehaviour
 
     void Update()
     {
+        if(shootingCooldown > lastShot)
+            lastShot += Time.deltaTime;
+
         if(player != null && (player.transform.position - transform.position).magnitude > lookDistance)
             player = null;
+
+        if (player != null)
+        {
+            Vector2 shootDir = (player.transform.position - transform.position).normalized;
+            if(lastShot >= shootingCooldown)
+                Shoot(shootDir);
+        }
     }
 
     protected void Patrol()
@@ -70,6 +82,13 @@ public abstract class Enemy : MonoBehaviour
         Vector2 velocityDiff = velocity - rb.linearVelocity;
         Vector2 force = velocityDiff * accelRate;
         rb.AddForce(force);
+    }
+
+    // TODO
+    protected void Shoot(Vector2 dir)
+    {
+        lastShot = 0;
+        Debug.Log("Shoot: " + dir);
     }
 
     void OnDrawGizmos()

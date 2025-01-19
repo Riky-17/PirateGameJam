@@ -1,16 +1,29 @@
+using System;
 using UnityEngine;
 
-public class FootSoldier : Enemy
+public class ParachuteSoldier : Enemy
 {
+    [SerializeField] LayerMask agentMask;
+    [SerializeField] LayerMask groundMask;
+
+    bool isGrounded = false;
+
     void FixedUpdate()
     {
         if(player == null)
-        {
             LookForPlayer();
-            Patrol();
+
+        if(!isGrounded)
+        {
+            if (Physics2D.Raycast(transform.position, -transform.up, .5f, groundMask))
+            {
+                gameObject.layer = (int)MathF.Log(agentMask.value, 2);
+                isGrounded = true;
+            }
         }
         else
-            ChasePlayer();
+            if(player != null)
+                ChasePlayer();
     }
 
     protected override void ChasePlayer()

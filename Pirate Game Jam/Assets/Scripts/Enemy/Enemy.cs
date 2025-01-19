@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Enemy : MonoBehaviour
+public abstract class Enemy : MonoBehaviour, IHealth
 {
     protected Rigidbody2D rb;
 
@@ -24,6 +24,8 @@ public abstract class Enemy : MonoBehaviour
 
     protected PlayerMovement player;
 
+    public float Health { get; set; }
+
     void Awake() => rb = GetComponent<Rigidbody2D>();
 
     void Update()
@@ -31,14 +33,14 @@ public abstract class Enemy : MonoBehaviour
         if(shootingCooldown > lastShot)
             lastShot += Time.deltaTime;
 
-        if(player != null && (player.transform.position - transform.position).magnitude > lookDistance)
-            player = null;
-
         if (player != null)
         {
             Vector2 shootDir = (player.transform.position - transform.position).normalized;
             if(lastShot >= shootingCooldown)
                 Shoot(shootDir);
+
+            if ((player.transform.position - transform.position).magnitude > lookDistance)
+                player = null;
         }
     }
 
@@ -65,7 +67,27 @@ public abstract class Enemy : MonoBehaviour
         AddForce(enemyToPoint.normalized, 3);
     }
 
-    protected abstract void ChasePlayer();
+    protected virtual void ChasePlayer()
+    {
+        // getting a copy vector of the player and making that vector y equals to the this enemy
+        Vector3 playerFlat = player.transform.position;
+        playerFlat.y = transform.position.y;
+        Vector2 enemyToPlayerFlat = playerFlat - transform.position;
+        Vector2 dir = enemyToPlayerFlat.normalized;
+
+        // getting the non flat distance to calculate the actual distance
+        float enemyToPlayer = (player.transform.position - transform.position).magnitude;
+        if(enemyToPlayer < maxDistance + maxDistanceOffset && enemyToPlayer > maxDistance - maxDistanceOffset)
+        {
+            rb.linearVelocityX = 0;
+            return;
+        }
+        
+        if(enemyToPlayer < maxDistance - maxDistanceOffset)
+            dir = -dir;
+        
+        AddForce(dir, 3);
+    }
 
     protected void LookForPlayer()
     {
@@ -85,10 +107,23 @@ public abstract class Enemy : MonoBehaviour
     }
 
     // TODO
-    protected void Shoot(Vector2 dir)
+    protected virtual void Shoot(Vector2 dir)
     {
         lastShot = 0;
         Debug.Log("Shoot: " + dir);
+    }
+
+    public void Damage(int damageAmount)
+    {
+        Health-= damageAmount;
+        if(Health <= 0)
+            Die();
+    }
+
+    //TODO
+    public void Die()
+    {
+        
     }
 
     void OnDrawGizmos()

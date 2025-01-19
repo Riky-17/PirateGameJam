@@ -60,7 +60,7 @@ public class GrenadeScript : WeaponSystem
                 bulletsNum--;
                 weaponaryText.updateAmmo(bulletsNum.ToString());
 
-                Destroy(tempBullet, 2.5f);
+                Destroy(tempBullet, 2f);
                 anim.SetTrigger("isShooting");
                 //recoil
                 lastRecoil = recoilTime;

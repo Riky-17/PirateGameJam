@@ -1,3 +1,5 @@
+using System.Collections;
+using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
@@ -17,6 +19,9 @@ public class AssaultScript : WeaponSystem
     public Transform shootingPoint;
     public GameObject bulletPrefab;
 
+    private bool isShooting = true;
+    private int sprayAngle = 20;
+    private float fireRafe = 0.1f;
 
     void Awake()
     {
@@ -57,17 +62,20 @@ public class AssaultScript : WeaponSystem
             if (canShoot && bulletsNum > 0)
             {
                 //shoot
-                int Innacuracy = Random.Range(-50, 50);;
-                Quaternion bulletSprite = Quaternion.Euler(0f, 0f, Innacuracy);
-                GameObject tempBullet = Instantiate(bullet, muzzle.position, transform.rotation * bulletSprite);            
-
-                bulletsNum--;
-                weaponaryText.updateAmmo(bulletsNum.ToString());
-                Destroy(tempBullet, 2f);
-                anim.SetTrigger("isShooting");
-                //recoil
-                lastRecoil = recoilTime;
-
+                if (isShooting)
+                {
+                    int Innacuracy = Random.Range(-sprayAngle, sprayAngle); ;
+                    Quaternion bulletSprite = Quaternion.Euler(0f, 0f, Innacuracy);
+                    GameObject tempBullet = Instantiate(bullet, muzzle.position, transform.rotation * bulletSprite);
+                    bulletsNum--;
+                    weaponaryText.updateAmmo(bulletsNum.ToString());
+                    StartCoroutine(fireRate());
+                    Destroy(tempBullet, 2f);
+                    anim.SetTrigger("isShooting");
+                    //recoil
+                    lastRecoil = recoilTime;
+                }
+                
                 //check ammo
                 if (bulletsNum == 0)
                 {
@@ -78,7 +86,12 @@ public class AssaultScript : WeaponSystem
             
         }
     }
-
+    private IEnumerator fireRate()
+    {
+        isShooting = false;
+        yield return new WaitForSeconds(fireRafe);
+        isShooting = true;
+    }
     private void FixedUpdate()
     {
         Recoil();

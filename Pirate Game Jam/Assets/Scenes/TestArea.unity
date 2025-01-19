@@ -541,7 +541,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -258.99997}
+  m_AnchoredPosition: {x: 0, y: -236}
   m_SizeDelta: {x: 898.4276, y: 41.0603}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &111249269
@@ -1335,7 +1335,7 @@ MonoBehaviour:
   reloadTime: 0
   bulletSpeed: 10
   recoilForce: 15
-  shootingPoint: {fileID: 334043377}
+  shootingPoint: {fileID: 8696196957081513764, guid: 82d9e1902a316e744af510bdec1e2b74, type: 3}
   bulletPrefab: {fileID: 1433002351112098743, guid: 81ebf33e32ebf724d8b4291ae1995a40, type: 3}
 --- !u!95 &427686112
 Animator:

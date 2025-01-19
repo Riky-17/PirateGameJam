@@ -3,58 +3,30 @@ using UnityEngine.UI;
 
 public class BalancedSliderController : MonoBehaviour
 {
-    public RectTransform redFill; // Reference to the red fill
-    public RectTransform blueFill; // Reference to the blue fill
-    public float fillSpeed = 0.01f; // Speed at which the bar changes
-    private float totalWidth; // Total width of the bar area
-    private float redFillAmount = 0.5f; // Starting value for the red fill (50%)
-    private bool isLocked = false; // To lock the bar once fully filled by one color
+    public RectTransform middleBar; // Reference to the middle bar (small rectangle)
+    public float moveSpeed = 0.01f; // Speed at which the bar moves
+    public float minPosition = 0f; // Minimum position (leftmost)
+    public float maxPosition = 1f; // Maximum position (rightmost)
 
-    void Start()
-    {
-        // Get the width of the entire bar area (total width)
-        totalWidth = redFill.rect.width + blueFill.rect.width;
-
-        // Initially set the fill to be 50/50
-        UpdateFillBars();
-    }
+    private float currentPosition = 0.5f; // Start at the middle
 
     void Update()
     {
-        if (!isLocked)
+        // Move the bar left (Z) or right (X) based on input
+        if (Input.GetKey(KeyCode.Z))
         {
-            if (Input.GetKey(KeyCode.Z)) // Press Z to make red expand
-            {
-                AdjustFillAmount(-fillSpeed); // Increase red fill
-            }
-            if (Input.GetKey(KeyCode.X)) // Press X to make blue expand
-            {
-                AdjustFillAmount(fillSpeed); // Increase blue fill
-            }
+            currentPosition -= moveSpeed * Time.deltaTime; // Move left
         }
-    }
-
-    void AdjustFillAmount(float amount)
-    {
-        // Adjust the red fill amount (and implicitly blue fill amount)
-        redFillAmount = Mathf.Clamp(redFillAmount + amount, 0f, 1f); // Keep the value between 0 and 1
-        UpdateFillBars();
-    }
-
-    void UpdateFillBars()
-    {
-        // Update the size of the red and blue fills based on the percentage
-        float redWidth = redFillAmount * totalWidth; // Red's width
-        float blueWidth = (1f - redFillAmount) * totalWidth; // Blue's width
-
-        // Set the width for the red and blue fills
-        redFill.sizeDelta = new Vector2(redWidth, redFill.sizeDelta.y);
-        blueFill.sizeDelta = new Vector2(blueWidth, blueFill.sizeDelta.y);
-
-        // Lock if one color has completely taken over
-        if (redFillAmount == 0f || redFillAmount == 1f)
+        if (Input.GetKey(KeyCode.X))
         {
-            isLocked = true;
+            currentPosition += moveSpeed * Time.deltaTime; // Move right
         }
+
+        // Clamp the position to ensure it doesn't move out of bounds
+        currentPosition = Mathf.Clamp(currentPosition, minPosition, maxPosition);
+
+        // Update the middle bar's position
+        middleBar.anchorMin = new Vector2(currentPosition, middleBar.anchorMin.y);
+        middleBar.anchorMax = new Vector2(currentPosition, middleBar.anchorMax.y);
     }
 }

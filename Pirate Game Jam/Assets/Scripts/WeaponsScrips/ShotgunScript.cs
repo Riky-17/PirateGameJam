@@ -20,19 +20,24 @@ public class ShotgunScript : WeaponSystem
 
     void Awake()
     {
+        //Canvas
+        weaponaryText = GameObject.FindGameObjectWithTag("Canvas").GetComponent<WeaponDisplay>();
+
         anim = GetComponent<Animator>();
         rb = GetComponentInParent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
         pm = GetComponentInParent<PlayerMovement>();
 
         //assigning the bullets and time to reload 
-        bulletsNum = 3;
+        bulletsNum = 5;
         reloadTime = 3f;
-        initialBulletNum = 10;
+        initialBulletNum = 5;
     }
 
     private void OnEnable()
     {
+        weaponaryText.updateAmmo(bulletsNum.ToString());
+        weaponaryText.updateWeapon(this.gameObject.name);
         if (bulletsNum <= 0)
         {
             canShoot = false;
@@ -44,10 +49,7 @@ public class ShotgunScript : WeaponSystem
     {
         Shoot(shootingPoint, bulletPrefab);
 
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            StartCoroutine(ReloadingSpeed(reloadTime));
-        }
+        ManualReload(reloadTime);
     }
     public override void Shoot(Transform muzzle, GameObject bullet)
     {
@@ -72,7 +74,9 @@ public class ShotgunScript : WeaponSystem
                 {
                     Destroy(tempbullet, 1f);
                 }
+                anim.SetTrigger("isShooting");
                 bulletsNum--;
+                weaponaryText.updateAmmo(bulletsNum.ToString());
                 //anim.Play("Shoot");
 
                 //recoil

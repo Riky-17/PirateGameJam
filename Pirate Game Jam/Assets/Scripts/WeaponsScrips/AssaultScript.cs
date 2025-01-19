@@ -17,20 +17,26 @@ public class AssaultScript : WeaponSystem
     public Transform shootingPoint;
     public GameObject bulletPrefab;
 
+
     void Awake()
     {
+        //Canvas
+        weaponaryText = GameObject.FindGameObjectWithTag("Canvas").GetComponent<WeaponDisplay>();
+
         anim = GetComponent<Animator>();
         rb = GetComponentInParent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
         pm = GetComponentInParent<PlayerMovement>();
 
         //assigning bullets and reload time 
-        bulletsNum = 1000;
+        bulletsNum = 80;
         initialBulletNum = bulletsNum;
-        reloadTime = 3f;
+        reloadTime = 2f;
     }
     private void OnEnable()
     {
+        weaponaryText.updateAmmo(bulletsNum.ToString()); 
+        weaponaryText.updateWeapon(this.gameObject.name);
         if (bulletsNum <= 0)
         {
             canShoot = false;
@@ -41,6 +47,7 @@ public class AssaultScript : WeaponSystem
     void Update()
     {
         Shoot(shootingPoint, bulletPrefab);
+        ManualReload(reloadTime);
     }
 
     public override void Shoot(Transform muzzle, GameObject bullet)
@@ -50,32 +57,14 @@ public class AssaultScript : WeaponSystem
             if (canShoot && bulletsNum > 0)
             {
                 //shoot
-                float maxFriction = 50;
-                bool goingUp = false;
-                float bulletsFriction = 50f;
-                Quaternion bulletSprite = Quaternion.Euler(0f, 0f, bulletsFriction);
-                GameObject tempBullet = Instantiate(bullet, muzzle.position, transform.rotation * bulletSprite);
-                if(bulletsFriction <= -maxFriction)
-                {
-                    goingUp = true;
-                }
-                else if(bulletsFriction >= maxFriction)
-                {
-                    goingUp = false;
-                }
-                //--------------
-                if (goingUp)
-                {
-                    bulletsFriction -= 5f;
-                }
-                else
-                {
-                    bulletsFriction += 5f;
-                }
+                int Innacuracy = Random.Range(-50, 50);;
+                Quaternion bulletSprite = Quaternion.Euler(0f, 0f, Innacuracy);
+                GameObject tempBullet = Instantiate(bullet, muzzle.position, transform.rotation * bulletSprite);            
 
                 bulletsNum--;
+                weaponaryText.updateAmmo(bulletsNum.ToString());
                 Destroy(tempBullet, 2f);
-                //anim.Play("Shoot");
+                anim.SetTrigger("isShooting");
                 //recoil
                 lastRecoil = recoilTime;
 

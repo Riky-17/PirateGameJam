@@ -4,27 +4,34 @@ using UnityEngine;
 public class GrenadeExplotion : MonoBehaviour
 {
     [SerializeField] float speed = 3f;
-    [SerializeField] float explotionDelay = 2f;
+    [SerializeField] float explosionDelay = 2f;
     Rigidbody2D rb;
-    float explotionRadius = 15f;
-    CircleCollider2D cc;
+    float explosionRadius = 15f;
+    public GameObject explosionPrefab;
+    SpriteRenderer sr;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        sr = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
-        cc = GetComponent<CircleCollider2D>();
         rb.linearVelocity = transform.right * speed; // Bullet moves towards the right when instantiated
-        StartCoroutine(ExplotionDelay(explotionDelay));
+        StartCoroutine(ExplosionDelay(explosionDelay));      
     }
 
-    IEnumerator ExplotionDelay(float explotion)
+    IEnumerator ExplosionDelay(float explotion)
     {
         yield return new WaitForSeconds(explotion);
-        //animation
-        Debug.Log("Explotion Occured");
-        //exploting it 
-        cc.radius = explotionRadius;       
-        
+
+        GameObject tempExp = Instantiate(explosionPrefab, transform.position, transform.rotation);
+
+        //making it big
+        tempExp.transform.localScale *= explosionRadius;
+
+        //disabling sr 
+        sr.enabled = false;
+
+        //destroying the object
+        Destroy(tempExp, 0.3f);                             
     }
 }

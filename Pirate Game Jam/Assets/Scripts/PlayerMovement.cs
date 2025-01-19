@@ -1,7 +1,6 @@
 using UnityEngine;
-using UnityEngine.Rendering;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : MonoBehaviour, IHealth
 {
     [HideInInspector] public Vector2 mousePos;
     Rigidbody2D rb;
@@ -14,30 +13,30 @@ public class PlayerMovement : MonoBehaviour
     //weapon objects -> assigned in inspector
     [SerializeField] GameObject[] weapons;
 
-    void Start()
-    { 
-        rb = GetComponent<Rigidbody2D>();
+    //health system
+    public float Health { get => health; set => health = value; }
+    float health;
 
+    void Awake() => rb = GetComponent<Rigidbody2D>();
+
+    void Start()
+    {
         //disabling game objects except for the first weapon 
         DisablingWeapons();
         weapons[0].SetActive(true);
     }
     
-
     void Update()
     {
-        Movement();
+        GetMovementInput();
         MousePosition();
         SpriteRotation();
         SwitchWeapon();
     }
 
-    void FixedUpdate()
-    {
-        PhysicsCalc();       
-    }
+    void FixedUpdate() => Movement();
 
-    void Movement()
+    void GetMovementInput()
     {
         moveInput = Vector2.zero;
 
@@ -94,7 +93,7 @@ public class PlayerMovement : MonoBehaviour
         mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition); // Gets Vector2 mouse position
     }
 
-    void PhysicsCalc()
+    void Movement()
     {
         //physics calc
         Vector2 velocityInput = moveInput * speed;
@@ -112,7 +111,16 @@ public class PlayerMovement : MonoBehaviour
         transform.rotation = Quaternion.Euler(0, 0, rotZ);
     }
 
-   
+    public void Damage(int damageAmount)
+    {
+        health -= damageAmount;
+        if(health <= 0)
+            Die();
+    }
 
-    
+    //TODO
+    public void Die()
+    {
+        
+    }
 }

@@ -7,14 +7,14 @@ public class BalancedSliderController : MonoBehaviour
     public RectTransform redFill; // Reference to the red fill
     public RectTransform blueFill; // Reference to the blue fill
 
-    private float sliderWidth; // The total width of the slider fill area
+    private float sliderWidth; // The width of the slider's fill area
 
     void Start()
     {
-        // Get the width of the slider's Fill Area
-        sliderWidth = balanceSlider.GetComponent<RectTransform>().sizeDelta.x;
+        // Get the width of the slider's Fill Area (the RectTransform of the Fill)
+        sliderWidth = balanceSlider.GetComponent<RectTransform>().rect.width;
 
-        // Set the slider to start at the middle
+        // Set the slider to start at the middle (50/50)
         balanceSlider.value = 0.5f;
 
         // Update the fill visuals initially
@@ -32,11 +32,11 @@ public class BalancedSliderController : MonoBehaviour
 
     private void UpdateFills()
     {
-        // Calculate the width for each fill
+        // Calculate the width for each fill based on the slider value
         float redWidth = balanceSlider.value * sliderWidth;
         float blueWidth = (1 - balanceSlider.value) * sliderWidth;
 
-        // Update the size of the fills
+        // Update the size of the fills (ensure they stay within the slider)
         redFill.sizeDelta = new Vector2(redWidth, redFill.sizeDelta.y);
         blueFill.sizeDelta = new Vector2(blueWidth, blueFill.sizeDelta.y);
     }

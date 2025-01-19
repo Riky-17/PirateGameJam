@@ -1335,8 +1335,8 @@ MonoBehaviour:
   reloadTime: 0
   bulletSpeed: 10
   recoilForce: 15
-  shootingPoint: {fileID: 8696196957081513764, guid: 82d9e1902a316e744af510bdec1e2b74, type: 3}
-  bulletPrefab: {fileID: 1433002351112098743, guid: 81ebf33e32ebf724d8b4291ae1995a40, type: 3}
+  shootingPoint: {fileID: 334043377}
+  bulletPrefab: {fileID: 1433002351112098743, guid: 82d9e1902a316e744af510bdec1e2b74, type: 3}
 --- !u!95 &427686112
 Animator:
   serializedVersion: 7

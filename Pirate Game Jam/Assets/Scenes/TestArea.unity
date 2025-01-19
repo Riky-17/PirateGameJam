@@ -321,7 +321,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9dbf06e2e024cf4b8fb6f888ef22a10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bulletsNum: 0
+  reloadTime: 0
+  bulletSpeed: 10
   recoilForce: 15
+  shootingPoint: {fileID: 0}
+  bulletPrefab: {fileID: 0}
 --- !u!1 &106899713
 GameObject:
   m_ObjectHideFlags: 0
@@ -556,7 +561,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f1798a373d24fd45a6ffcb38bfcf2c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bulletsNum: 0
+  reloadTime: 0
+  bulletSpeed: 10
   recoilForce: 15
+  shootingPoint: {fileID: 0}
+  bulletPrefab: {fileID: 0}
 --- !u!1 &306949324
 GameObject:
   m_ObjectHideFlags: 0
@@ -1122,6 +1132,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60ea700f4d586ba428096583e749e339, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bulletsNum: 0
+  reloadTime: 0
+  bulletSpeed: 10
   recoilForce: 15
   shootingPoint: {fileID: 334043377}
   bulletPrefab: {fileID: 1433002351112098743, guid: 81ebf33e32ebf724d8b4291ae1995a40, type: 3}
@@ -1247,7 +1260,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b51838ed2d85ca74ba7452b8ee3cd319, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bulletsNum: 0
+  reloadTime: 0
+  bulletSpeed: 10
   recoilForce: 15
+  shootingPoint: {fileID: 0}
+  bulletPrefab: {fileID: 0}
 --- !u!1 &687160100
 GameObject:
   m_ObjectHideFlags: 0
@@ -1465,8 +1483,8 @@ Transform:
   m_GameObject: {fileID: 983150392}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -12, y: -2, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -11.596, y: -1.55, z: 0}
+  m_LocalScale: {x: 4.1073, y: 3.9081, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1049360755}
@@ -1535,8 +1553,8 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    pivot: {x: 0.52, y: -0.14}
+    oldSize: {x: 0.25, y: 0.5}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -1588,8 +1606,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Sprite: {fileID: -1086705462366488707, guid: 26306761ed7a15c4c96a4d72db067c64, type: 3}
+  m_Color: {r: 1, g: 0.9858491, b: 0.9858491, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

@@ -4,7 +4,7 @@ public interface IHealth
 {
     float Health { get; set;}
 
-    public void Damage(int damageAmount);
+    public void Damage(float damageAmount);
 
     void Die();
 }

@@ -28,7 +28,7 @@ public abstract class Enemy : MonoBehaviour, IHealth
 
     protected PlayerMovement player;
 
-    public float Health { get; set; }
+    public float Health { get; set; } = 100;
 
 
     void Awake()
@@ -175,9 +175,10 @@ public abstract class Enemy : MonoBehaviour, IHealth
         weapon.Shoot(dir, aimRot);
     }
 
-    public void Damage(int damageAmount)
+    public void Damage(float damageAmount)
     {
         Health-= damageAmount;
+        Debug.Log(Health);
         if(Health <= 0)
             Die();
     }

@@ -68,7 +68,7 @@ public class MarksmanScript : WeaponSystem
             {
                 //shoot
                 GameObject tempBullet = Instantiate(bullet, muzzle.position, transform.rotation);
-                tempBullet.GetComponent<Rigidbody2D>().AddForce(transform.right * bulletSpeed * Time.deltaTime);
+                tempBullet.GetComponent<Bullet>().shooterLayer = pm.gameObject.layer;
 
                 bulletsNum--;
                 weaponaryText.updateAmmo(bulletsNum.ToString());

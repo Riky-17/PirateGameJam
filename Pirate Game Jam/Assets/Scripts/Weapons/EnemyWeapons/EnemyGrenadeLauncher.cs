@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class EnemyGranadeLauncher : EnemyWeapon
+public class EnemyGrenadeLauncher : EnemyWeapon
 {
     public override void Shoot(Vector3 dir, Quaternion aimRotation)
     {

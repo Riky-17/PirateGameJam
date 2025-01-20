@@ -62,6 +62,7 @@ public class GrenadeScript : WeaponSystem
                 //shoot
 
                 GameObject tempBullet = Instantiate(bullet, muzzle.position, transform.rotation);
+                tempBullet.GetComponent<GrenadeExplotion>().shooterLayer = pm.gameObject.layer;
                 bulletsNum--;
                 weaponaryText.updateAmmo(bulletsNum.ToString());
 

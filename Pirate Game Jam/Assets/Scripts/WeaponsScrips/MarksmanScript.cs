@@ -35,6 +35,7 @@ public class MarksmanScript : WeaponSystem
 
     private void OnEnable()
     {
+        weaponaryText.UpdateWeaponChosen(0);
         weaponaryText.updateAmmo(bulletsNum.ToString());
         weaponaryText.updateWeapon(this.gameObject.name);
         if (bulletsNum <= 0)

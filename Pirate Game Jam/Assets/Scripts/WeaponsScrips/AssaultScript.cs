@@ -40,7 +40,8 @@ public class AssaultScript : WeaponSystem
     }
     private void OnEnable()
     {
-        weaponaryText.updateAmmo(bulletsNum.ToString()); 
+        weaponaryText.UpdateWeaponChosen(1);
+        weaponaryText.updateAmmo(bulletsNum.ToString());
         weaponaryText.updateWeapon(this.gameObject.name);
         if (bulletsNum <= 0)
         {
@@ -59,39 +60,36 @@ public class AssaultScript : WeaponSystem
     {
         if (PanelsManager.canReadInput)
         {
-            if (Input.GetMouseButtonDown(0))
-            {
-                if (Input.GetMouseButton(0))
-                {
-                    if (canShoot && bulletsNum > 0)
-                    {
-                        //shoot
-                        if (isShooting)
-                        {
-                            int Innacuracy = Random.Range(-sprayAngle, sprayAngle); ;
-                            Quaternion bulletSprite = Quaternion.Euler(0f, 0f, Innacuracy);
-                            GameObject tempBullet = Instantiate(bullet, muzzle.position, transform.rotation * bulletSprite);
-                            bulletsNum--;
-                            weaponaryText.updateAmmo(bulletsNum.ToString());
-                            StartCoroutine(fireRate());
-                            Destroy(tempBullet, 2f);
-                            anim.SetTrigger("isShooting");
-                            //recoil
-                            lastRecoil = recoilTime;
-                        }
 
-                        //check ammo
-                        if (bulletsNum == 0)
-                        {
-                            canShoot = false;
-                            StartCoroutine(ReloadingSpeed(reloadTime));
-                        }
+            if (Input.GetMouseButton(0))
+            {
+                if (canShoot && bulletsNum > 0)
+                {
+                    //shoot
+                    if (isShooting)
+                    {
+                        int Innacuracy = Random.Range(-sprayAngle, sprayAngle); ;
+                        Quaternion bulletSprite = Quaternion.Euler(0f, 0f, Innacuracy);
+                        GameObject tempBullet = Instantiate(bullet, muzzle.position, transform.rotation * bulletSprite);
+                        bulletsNum--;
+                        weaponaryText.updateAmmo(bulletsNum.ToString());
+                        StartCoroutine(fireRate());
+                        Destroy(tempBullet, 2f);
+                        anim.SetTrigger("isShooting");
+                        //recoil
+                        lastRecoil = recoilTime;
                     }
 
+                    //check ammo
+                    if (bulletsNum == 0)
+                    {
+                        canShoot = false;
+                        StartCoroutine(ReloadingSpeed(reloadTime));
+                    }
                 }
+
             }
-            
-        }       
+        }
     }
     private IEnumerator fireRate()
     {

@@ -245,6 +245,11 @@ MonoBehaviour:
   - {fileID: 1499047964}
   - {fileID: 1803670246}
   - {fileID: 1687327729}
+  weaponsInfo:
+  - {fileID: 2069612210}
+  - {fileID: 1082804672}
+  - {fileID: 1925434254}
+  - {fileID: 485494893}
 --- !u!114 &19225843
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5380,7 +5385,7 @@ GameObject:
   - component: {fileID: 1025982827}
   - component: {fileID: 1025982826}
   m_Layer: 5
-  m_Name: Image
+  m_Name: CurrentWeaponInfoPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6425,7 +6430,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1323381630
 RectTransform:
   m_ObjectHideFlags: 0

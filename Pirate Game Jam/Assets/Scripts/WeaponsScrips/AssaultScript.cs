@@ -40,9 +40,13 @@ public class AssaultScript : WeaponSystem
     }
     private void OnEnable()
     {
+        //UI
         weaponaryText.UpdateWeaponChosen(1);
         weaponaryText.updateAmmo(bulletsNum.ToString());
         weaponaryText.updateWeapon(this.gameObject.name);
+        weaponInfo();
+
+        //reload
         if (bulletsNum <= 0)
         {
             canShoot = false;
@@ -117,5 +121,9 @@ public class AssaultScript : WeaponSystem
 
             lastRecoil -= Time.fixedDeltaTime;
         }
+    }
+    public void weaponInfo()
+    {
+        weaponaryText.PauseWeaponInfo("10", fireRafe.ToString(), recoilTime.ToString(), initialBulletNum.ToString());
     }
 }

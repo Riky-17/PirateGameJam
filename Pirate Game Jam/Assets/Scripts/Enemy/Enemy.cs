@@ -5,6 +5,7 @@ using UnityEngine;
 public abstract class Enemy : MonoBehaviour, IHealth
 {
     protected Rigidbody2D rb;
+    protected Animator anim;
 
     [SerializeField] List<Vector2> waypoints;
     int waypointIndex;
@@ -29,9 +30,11 @@ public abstract class Enemy : MonoBehaviour, IHealth
 
     public float Health { get; set; }
 
+
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
         weapon = GetComponent<EnemyWeapon>();
 
         if(weapon == null)
@@ -146,6 +149,24 @@ public abstract class Enemy : MonoBehaviour, IHealth
 
     protected void AddForce(Vector2 dir, float accelRate)
     {
+        if (rb.linearVelocityX == 0f) // Plays Idle animation when not moving
+        {
+            anim.Play("Idle");
+        }
+        else if (dir.x != 0) // Plays Walk animation and flips the sprite depending on direction it's moving
+        {
+            anim.Play("Walk");
+            if (dir.x < 0) // Left Direction
+            {
+                transform.localScale = new Vector2(-1, 1);
+            }
+            if (dir.x > 0) // Right Direction
+            {
+                transform.localScale = new Vector2(1, 1);
+            }
+        }
+        
+
         Vector2 velocity = dir * speed;
         Vector2 velocityDiff = velocity - rb.linearVelocity;
         Vector2 force = velocityDiff * accelRate;

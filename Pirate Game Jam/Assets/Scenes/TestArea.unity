@@ -172,7 +172,7 @@ MonoBehaviour:
   m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 1980, y: 1080}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -6253,7 +6253,7 @@ MonoBehaviour:
   - {x: 14, y: -3}
   - {x: 8, y: -3}
   waypointTime: 1
-  debugMode: 0
+  debugMode: 1
   lookDistance: 5
   maxDistance: 3
   speed: 5

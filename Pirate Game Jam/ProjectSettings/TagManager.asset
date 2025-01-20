@@ -40,23 +40,11 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Background
+    uniqueID: 456509247
+    locked: 0
   - name: Default
     uniqueID: 0
-    locked: 0
-  - name: Sky
-    uniqueID: 999915753
-    locked: 0
-  - name: FarDes
-    uniqueID: 4237831279
-    locked: 0
-  - name: ClosDes
-    uniqueID: 425998217
-    locked: 0
-  - name: Cac
-    uniqueID: 1665322117
-    locked: 0
-  - name: End
-    uniqueID: 105565179
     locked: 0
   m_RenderingLayers:
   - Default

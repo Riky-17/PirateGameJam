@@ -57,34 +57,41 @@ public class AssaultScript : WeaponSystem
 
     public override void Shoot(Transform muzzle, GameObject bullet)
     {
-        if (Input.GetMouseButton(0) && PanelsManager.canReadInput)
+        if (PanelsManager.canReadInput)
         {
-            if (canShoot && bulletsNum > 0)
+            if (Input.GetMouseButtonDown(0))
             {
-                //shoot
-                if (isShooting)
+                if (Input.GetMouseButton(0))
                 {
-                    int Innacuracy = Random.Range(-sprayAngle, sprayAngle); ;
-                    Quaternion bulletSprite = Quaternion.Euler(0f, 0f, Innacuracy);
-                    GameObject tempBullet = Instantiate(bullet, muzzle.position, transform.rotation * bulletSprite);
-                    bulletsNum--;
-                    weaponaryText.updateAmmo(bulletsNum.ToString());
-                    StartCoroutine(fireRate());
-                    Destroy(tempBullet, 2f);
-                    anim.SetTrigger("isShooting");
-                    //recoil
-                    lastRecoil = recoilTime;
+                    if (canShoot && bulletsNum > 0)
+                    {
+                        //shoot
+                        if (isShooting)
+                        {
+                            int Innacuracy = Random.Range(-sprayAngle, sprayAngle); ;
+                            Quaternion bulletSprite = Quaternion.Euler(0f, 0f, Innacuracy);
+                            GameObject tempBullet = Instantiate(bullet, muzzle.position, transform.rotation * bulletSprite);
+                            bulletsNum--;
+                            weaponaryText.updateAmmo(bulletsNum.ToString());
+                            StartCoroutine(fireRate());
+                            Destroy(tempBullet, 2f);
+                            anim.SetTrigger("isShooting");
+                            //recoil
+                            lastRecoil = recoilTime;
+                        }
+
+                        //check ammo
+                        if (bulletsNum == 0)
+                        {
+                            canShoot = false;
+                            StartCoroutine(ReloadingSpeed(reloadTime));
+                        }
+                    }
+
                 }
-                
-                //check ammo
-                if (bulletsNum == 0)
-                {
-                    canShoot = false;
-                    StartCoroutine(ReloadingSpeed(reloadTime));
-                }
-            }                                
+            }
             
-        }
+        }       
     }
     private IEnumerator fireRate()
     {

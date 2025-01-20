@@ -35,9 +35,10 @@ public abstract class Enemy : MonoBehaviour, IHealth
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
-        weapon = GetComponent<EnemyWeapon>();
+        //weapon = GetComponent<EnemyWeapon>();
+        weapon = GetComponentInChildren<EnemyWeapon>();
 
-        if(weapon == null)
+        if (weapon == null)
             return;
         shootingTimer = weapon.shootingTimer;
     }
@@ -122,7 +123,7 @@ public abstract class Enemy : MonoBehaviour, IHealth
             waypoint = waypoints[waypointIndex];
             enemyToPoint = waypoint - transform.position;
         }
-
+        
         FaceDirection(enemyToPoint);
         AddForce(enemyToPoint.normalized, 3);
     }

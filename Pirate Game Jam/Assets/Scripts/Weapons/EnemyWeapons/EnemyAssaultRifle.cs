@@ -14,6 +14,8 @@ public class EnemyAssaultRifle : EnemyWeapon
 
     public override void Shoot(Vector3 dir, Quaternion aimRotation)
     {
+        isShooting = true;
+        anim.SetTrigger("isShooting");
         float inaccuracy = Random.Range(-sprayAngle, sprayAngle);
         Quaternion bulletRotation = aimRotation * Quaternion.Euler(0, 0, inaccuracy);
         Bullet bullet = Instantiate(bulletSO.bulletPrefab, transform.position + dir, bulletRotation);
@@ -24,5 +26,6 @@ public class EnemyAssaultRifle : EnemyWeapon
     {
         fireRateTimer = 0;
         fireTimer = 0;
+        isShooting = false;
     }
 }

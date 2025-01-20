@@ -1784,7 +1784,6 @@ MonoBehaviour:
   lookDistance: 5
   maxDistance: 3
   speed: 5
-  shootingCooldown: 2
 --- !u!95 &640515847
 Animator:
   serializedVersion: 7
@@ -2383,14 +2382,12 @@ MonoBehaviour:
   lookDistance: 5
   maxDistance: 3
   speed: 5
-  shootingCooldown: 2
   agentMask:
     serializedVersion: 2
     m_Bits: 128
   groundMask:
     serializedVersion: 2
     m_Bits: 8
-  isGrounded: 0
 --- !u!50 &1265083545
 Rigidbody2D:
   serializedVersion: 5

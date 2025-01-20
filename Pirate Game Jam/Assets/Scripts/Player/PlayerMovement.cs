@@ -108,7 +108,17 @@ public class PlayerMovement : MonoBehaviour, IHealth
         // Rotates sprite based on mouse position
         Vector2 mouseVector = new Vector2(mousePos.x - transform.position.x, mousePos.y - transform.position.y);
         float rotZ = Mathf.Atan2(mouseVector.y, mouseVector.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(0, 0, rotZ);
+
+        if (rotZ >= -90 && rotZ <= 90)
+        {
+            transform.rotation = Quaternion.Euler(0, 0, rotZ);
+            transform.localScale = new Vector2(1, 1);
+        }
+        else
+        {
+            transform.rotation = Quaternion.Euler(0, 0, rotZ);
+            transform.localScale = new Vector2(1, -1);
+        }
     }
 
     public void Damage(float damageAmount)

@@ -19,33 +19,77 @@ public abstract class Enemy : MonoBehaviour, IHealth
     [SerializeField] protected float speed = 5;
     protected float maxDistanceOffset = .75f;
     
-    [SerializeField] protected float shootingCooldown = 2;
+    float shootingTimer = 2;
     float  lastShot = 2;
     Collider2D[] colliders;
+
+    //the type of weapon the enemy has
+    protected EnemyWeapon weapon;
 
     protected PlayerMovement player;
 
     public float Health { get; set; }
 
-    protected virtual void Awake()
+
+    void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        weapon = GetComponent<EnemyWeapon>();
+
+        if(weapon == null)
+            return;
+        shootingTimer = weapon.shootingTimer;
     }
 
     void Update()
     {
-        if(shootingCooldown > lastShot)
+        if(shootingTimer > lastShot)
             lastShot += Time.deltaTime;
 
         if (player != null)
         {
-            Vector2 shootDir = (player.transform.position - transform.position).normalized;
-            if(lastShot >= shootingCooldown)
-                Shoot(shootDir);
-
             if ((player.transform.position - transform.position).magnitude > lookDistance)
+            {
                 player = null;
+                if(weapon != null && weapon is EnemyAssaultRifle assaultRifle)
+                    assaultRifle.ResetTimers();
+                return;
+            }
+
+            if(weapon == null)
+                return;
+            
+            if(lastShot >= shootingTimer)
+            {   
+                Vector2 shootDir = (player.transform.position - transform.position).normalized;
+
+                //doing it custom for assault rifle since it is the only automatic weapon
+                if(weapon is EnemyAssaultRifle assaultRifle)
+                {
+                    if(assaultRifle.FireAmount <= assaultRifle.fireTimer)
+                    {
+                        assaultRifle.fireTimer = 0;
+                        lastShot = 0;
+                        return;
+                    }
+
+                    if(assaultRifle.FireRate <= assaultRifle.fireRateTimer)
+                    {
+                        Shoot(shootDir);
+                        assaultRifle.fireRateTimer = 0;
+                    }
+                    else
+                        assaultRifle.fireRateTimer += Time.deltaTime;
+                    
+                    assaultRifle.fireTimer += Time.deltaTime;
+                }
+                else
+                {
+                    Shoot(shootDir);
+                    lastShot = 0;
+                }
+            }
         }
     }
 
@@ -129,11 +173,11 @@ public abstract class Enemy : MonoBehaviour, IHealth
         rb.AddForce(force);
     }
 
-    // TODO
     protected virtual void Shoot(Vector2 dir)
     {
-        lastShot = 0;
-        Debug.Log("Shoot: " + dir);
+        Vector3 upwards = Vector3.Cross(Vector3.forward, dir);
+        Quaternion aimRot = Quaternion.LookRotation(Vector3.forward, upwards);
+        weapon.Shoot(dir, aimRot);
     }
 
     public void Damage(int damageAmount)

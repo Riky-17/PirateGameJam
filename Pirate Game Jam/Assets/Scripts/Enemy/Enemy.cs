@@ -30,7 +30,6 @@ public abstract class Enemy : MonoBehaviour, IHealth
 
     public float Health { get; set; } = 100;
 
-
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -43,7 +42,7 @@ public abstract class Enemy : MonoBehaviour, IHealth
         shootingTimer = weapon.shootingTimer;
     }
 
-    // doing it on start and not on awake so that we avoid racing conflicts
+    // doing it on start and not on awake so to avoid racing conflicts
     void Start() => GameManager.Instance.Enemies.Add(this);
 
     void OnDisable() => GameManager.Instance.Enemies.Remove(this);

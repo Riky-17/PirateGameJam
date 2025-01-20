@@ -43,6 +43,11 @@ public abstract class Enemy : MonoBehaviour, IHealth
         shootingTimer = weapon.shootingTimer;
     }
 
+    // doing it on start and not on awake so that we avoid racing conflicts
+    void Start() => GameManager.Instance.Enemies.Add(this);
+
+    void OnDisable() => GameManager.Instance.Enemies.Remove(this);
+
     void Update()
     {
         // Plays Idle animation when not moving in x-axis, otherwise plays Walk animation

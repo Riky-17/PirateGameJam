@@ -755,9 +755,9 @@ MonoBehaviour:
   reloadTime: 1.5
   canShoot: 1
   bulletSpeed: 10
+  bullet: {fileID: 11400000, guid: 76006c33d9e057d43a431b7a5aa1164e, type: 2}
   recoilForce: 5
   shootingPoint: {fileID: 334043377}
-  bulletPrefab: {fileID: 1433002351112098743, guid: 81ebf33e32ebf724d8b4291ae1995a40, type: 3}
 --- !u!95 &92214436
 Animator:
   serializedVersion: 7
@@ -1203,9 +1203,9 @@ MonoBehaviour:
   reloadTime: 0
   canShoot: 1
   bulletSpeed: 10
+  bullet: {fileID: 11400000, guid: 76006c33d9e057d43a431b7a5aa1164e, type: 2}
   recoilForce: 20
   shootingPoint: {fileID: 334043377}
-  bulletPrefab: {fileID: 1433002351112098743, guid: 81ebf33e32ebf724d8b4291ae1995a40, type: 3}
 --- !u!95 &113713539
 Animator:
   serializedVersion: 7
@@ -2284,9 +2284,9 @@ MonoBehaviour:
   reloadTime: 0
   canShoot: 1
   bulletSpeed: 10
+  bullet: {fileID: 11400000, guid: 097a0b1c896ac934cbdca4fd38a7a275, type: 2}
   recoilForce: 15
   shootingPoint: {fileID: 334043377}
-  bulletPrefab: {fileID: 1433002351112098743, guid: 82d9e1902a316e744af510bdec1e2b74, type: 3}
 --- !u!95 &427686112
 Animator:
   serializedVersion: 7
@@ -2879,9 +2879,9 @@ MonoBehaviour:
   reloadTime: 0
   canShoot: 1
   bulletSpeed: 10
+  bullet: {fileID: 11400000, guid: 198459120051d93448078b7fad601e65, type: 2}
   recoilForce: 25
   shootingPoint: {fileID: 334043377}
-  bulletPrefab: {fileID: 2377026129302228463, guid: 285e4bfc38a2f7e40841169037bec7af, type: 3}
 --- !u!95 &606078671
 Animator:
   serializedVersion: 7
@@ -3135,6 +3135,7 @@ GameObject:
   - component: {fileID: 640515844}
   - component: {fileID: 640515843}
   - component: {fileID: 640515846}
+  - component: {fileID: 640515848}
   m_Layer: 7
   m_Name: FootSoldier
   m_TagString: Untagged
@@ -3301,7 +3302,7 @@ MonoBehaviour:
   - {x: -14, y: -3}
   - {x: -8, y: -3}
   waypointTime: 1
-  debugMode: 0
+  debugMode: 1
   lookDistance: 5
   maxDistance: 3
   speed: 5
@@ -3327,6 +3328,22 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &640515848
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 640515840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c1575536a77eeb4c838ab411708d1cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletSO: {fileID: 11400000, guid: 76006c33d9e057d43a431b7a5aa1164e, type: 2}
+  shootingTimer: 1.5
+  fireRateTimer: 0
+  fireTimer: 0
 --- !u!1 &720550647
 GameObject:
   m_ObjectHideFlags: 0
@@ -6215,6 +6232,7 @@ GameObject:
   - component: {fileID: 1265083546}
   - component: {fileID: 1265083545}
   - component: {fileID: 1265083544}
+  - component: {fileID: 1265083549}
   m_Layer: 8
   m_Name: Parachute Soldier
   m_TagString: Untagged
@@ -6253,7 +6271,7 @@ MonoBehaviour:
   - {x: 14, y: -3}
   - {x: 8, y: -3}
   waypointTime: 1
-  debugMode: 1
+  debugMode: 0
   lookDistance: 5
   maxDistance: 3
   speed: 5
@@ -6413,6 +6431,20 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1265083549
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1265083542}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74db0c6e123e4e243a784b95ecf07d56, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletSO: {fileID: 11400000, guid: 76006c33d9e057d43a431b7a5aa1164e, type: 2}
+  shootingTimer: 1.5
 --- !u!1 &1323381629
 GameObject:
   m_ObjectHideFlags: 0

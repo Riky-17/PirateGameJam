@@ -17,7 +17,6 @@ public class AssaultScript : WeaponSystem
 
 
     public Transform shootingPoint;
-    public GameObject bulletPrefab;
 
     private bool isShooting = true;
     private int sprayAngle = 20;
@@ -56,11 +55,11 @@ public class AssaultScript : WeaponSystem
 
     void Update()
     {
-        Shoot(shootingPoint, bulletPrefab);
+        Shoot(shootingPoint, bullet);
         ManualReload(reloadTime);
     }
 
-    public override void Shoot(Transform muzzle, GameObject bullet)
+    public override void Shoot(Transform muzzle, BulletSO bullet)
     {
         if (PanelsManager.canReadInput)
         {
@@ -74,11 +73,14 @@ public class AssaultScript : WeaponSystem
                     {
                         int Innacuracy = Random.Range(-sprayAngle, sprayAngle); ;
                         Quaternion bulletSprite = Quaternion.Euler(0f, 0f, Innacuracy);
-                        GameObject tempBullet = Instantiate(bullet, muzzle.position, transform.rotation * bulletSprite);
+                        Bullet tempBullet = Instantiate(bullet.bulletPrefab, muzzle.position, transform.rotation * bulletSprite);
+                        //initializing the bullet script
+                        tempBullet.Init(bullet.speed, pm.gameObject.layer, bullet.damage);
+
                         bulletsNum--;
                         weaponaryText.updateAmmo(bulletsNum.ToString());
                         StartCoroutine(fireRate());
-                        Destroy(tempBullet, 2f);
+                        Destroy(tempBullet.gameObject, 2f);
                         anim.SetTrigger("isShooting");
                         //recoil
                         lastRecoil = recoilTime;

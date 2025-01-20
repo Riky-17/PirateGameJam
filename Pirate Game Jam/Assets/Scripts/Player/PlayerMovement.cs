@@ -15,7 +15,7 @@ public class PlayerMovement : MonoBehaviour, IHealth
 
     //health system
     public float Health { get => health; set => health = value; }
-    float health;
+    float health = 100;
 
     void Awake() => rb = GetComponent<Rigidbody2D>();
 
@@ -111,9 +111,10 @@ public class PlayerMovement : MonoBehaviour, IHealth
         transform.rotation = Quaternion.Euler(0, 0, rotZ);
     }
 
-    public void Damage(int damageAmount)
+    public void Damage(float damageAmount)
     {
         health -= damageAmount;
+        Debug.Log(health);
         if(health <= 0)
             Die();
     }

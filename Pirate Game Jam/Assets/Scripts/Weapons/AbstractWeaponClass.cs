@@ -11,7 +11,9 @@ public abstract class WeaponSystem : MonoBehaviour
     public bool canShoot = true;
     public float bulletSpeed = 10f;
 
-    public abstract void Shoot(Transform muzzle, GameObject bullet); //shoot method called
+    [SerializeField] protected BulletSO bullet;
+
+    public abstract void Shoot(Transform muzzle, BulletSO bullet); //shoot method called
 
     internal WeaponDisplay weaponaryText;
 

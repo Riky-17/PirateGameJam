@@ -10,9 +10,13 @@ public abstract class EnemyWeapon : MonoBehaviour
 
     [SerializeField] protected BulletSO bulletSO;
 
-    public float shootingTimer = 1.5f;
+    public Transform shootingPoint;
+
+    public float shootingTimer;
+    public float lastShot;
 
     public abstract void Shoot(Vector3 dir, Quaternion aimRotation);
+    public abstract void Idle();
 
 
     void Awake()
@@ -27,12 +31,16 @@ public abstract class EnemyWeapon : MonoBehaviour
         if (isShooting)
         {
             SpriteRotation();
+            //isShooting = true;
+            //anim.Play("Shoot");
         }
         else
         {
             transform.rotation = attachedEnemy.transform.rotation;
-            //transform.localScale = attachedEnemy.transform.localScale;
             transform.localScale = new Vector2(1, 1);
+
+            //isShooting = false;
+            //anim.Play("Idle");
         }
     }
 

@@ -18,7 +18,7 @@ public class EnemyAssaultRifle : EnemyWeapon
         anim.SetTrigger("isShooting");
         float inaccuracy = Random.Range(-sprayAngle, sprayAngle);
         Quaternion bulletRotation = aimRotation * Quaternion.Euler(0, 0, inaccuracy);
-        Bullet bullet = Instantiate(bulletSO.bulletPrefab, transform.position + dir, bulletRotation);
+        Bullet bullet = Instantiate(bulletSO.bulletPrefab, shootingPoint.position + dir, bulletRotation);
         bullet.Init(bulletSO.speed, gameObject.layer, bulletSO.damage);
     }
 
@@ -27,5 +27,10 @@ public class EnemyAssaultRifle : EnemyWeapon
         fireRateTimer = 0;
         fireTimer = 0;
         isShooting = false;
+    }
+
+    public override void Idle()
+    {
+        anim.Play("Idle");
     }
 }

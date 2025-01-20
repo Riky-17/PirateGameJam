@@ -41,6 +41,7 @@ public abstract class Enemy : MonoBehaviour, IHealth
         if (weapon == null)
             return;
         shootingTimer = weapon.shootingTimer;
+        lastShot = weapon.lastShot;
     }
 
     void Update()
@@ -101,6 +102,12 @@ public abstract class Enemy : MonoBehaviour, IHealth
                     lastShot = 0;
                 }
             }
+            else if (lastShot >= 0.1f && lastShot < shootingTimer)
+            {
+                weapon.Idle();
+            }
+
+
         }
     }
 

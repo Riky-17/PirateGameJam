@@ -667,7 +667,7 @@ MonoBehaviour:
   IgnoreTimeScale: 0
   WorldUpOverride: {fileID: 0}
   ChannelMask: -1
-  UpdateMethod: 2
+  UpdateMethod: 0
   BlendUpdateMethod: 1
   LensModeOverride:
     Enabled: 0
@@ -1006,9 +1006,9 @@ MonoBehaviour:
   reloadTime: 0
   canShoot: 1
   bulletSpeed: 10
+  bullet: {fileID: 0}
   recoilForce: 20
   shootingPoint: {fileID: 321494942}
-  bulletPrefab: {fileID: 1433002351112098743, guid: 81ebf33e32ebf724d8b4291ae1995a40, type: 3}
 --- !u!212 &180075957
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -5443,9 +5443,9 @@ MonoBehaviour:
   reloadTime: 0
   canShoot: 1
   bulletSpeed: 10
+  bullet: {fileID: 0}
   recoilForce: 15
   shootingPoint: {fileID: 321494942}
-  bulletPrefab: {fileID: 1433002351112098743, guid: 82d9e1902a316e744af510bdec1e2b74, type: 3}
 --- !u!95 &1039735103
 Animator:
   serializedVersion: 7
@@ -8293,9 +8293,9 @@ MonoBehaviour:
   reloadTime: 0
   canShoot: 1
   bulletSpeed: 10
+  bullet: {fileID: 0}
   recoilForce: 25
   shootingPoint: {fileID: 321494942}
-  bulletPrefab: {fileID: 2377026129302228463, guid: 285e4bfc38a2f7e40841169037bec7af, type: 3}
 --- !u!212 &1626166211
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -9531,9 +9531,9 @@ MonoBehaviour:
   reloadTime: 1.5
   canShoot: 1
   bulletSpeed: 10
+  bullet: {fileID: 0}
   recoilForce: 5
   shootingPoint: {fileID: 321494942}
-  bulletPrefab: {fileID: 1433002351112098743, guid: 81ebf33e32ebf724d8b4291ae1995a40, type: 3}
 --- !u!212 &1794670592
 SpriteRenderer:
   m_ObjectHideFlags: 0

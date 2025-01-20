@@ -5,7 +5,13 @@ public class EnemyMarksman : EnemyWeapon
     public override void Shoot(Vector3 dir, Quaternion aimRotation)
     {
         isShooting = true;
-        Bullet bullet = Instantiate(bulletSO.bulletPrefab, transform.position + dir, aimRotation);
+        anim.Play("Shoot");
+        Bullet bullet = Instantiate(bulletSO.bulletPrefab, shootingPoint.position + dir, aimRotation);
         bullet.Init(bulletSO.speed, gameObject.layer, bulletSO.damage);
+    }
+
+    public override void Idle()
+    {
+        anim.Play("Idle");
     }
 }

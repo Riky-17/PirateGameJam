@@ -44,6 +44,16 @@ public abstract class Enemy : MonoBehaviour, IHealth
 
     void Update()
     {
+        // Plays Idle animation when not moving in x-axis, otherwise plays Walk animation
+        if (rb.linearVelocityX == 0f)
+        {
+            anim.Play("Idle");
+        }
+        else
+        {
+            anim.Play("Walk");
+        }
+
         if(shootingTimer > lastShot)
             lastShot += Time.deltaTime;
 
@@ -113,6 +123,7 @@ public abstract class Enemy : MonoBehaviour, IHealth
             enemyToPoint = waypoint - transform.position;
         }
 
+        FaceDirection(enemyToPoint);
         AddForce(enemyToPoint.normalized, 3);
     }
 
@@ -123,6 +134,8 @@ public abstract class Enemy : MonoBehaviour, IHealth
         playerFlat.y = transform.position.y;
         Vector2 enemyToPlayerFlat = playerFlat - transform.position;
         Vector2 dir = enemyToPlayerFlat.normalized;
+
+        FaceDirection(dir);
 
         // getting the non flat distance to calculate the actual distance
         float enemyToPlayer = (player.transform.position - transform.position).magnitude;
@@ -149,24 +162,6 @@ public abstract class Enemy : MonoBehaviour, IHealth
 
     protected void AddForce(Vector2 dir, float accelRate)
     {
-        if (rb.linearVelocityX == 0f) // Plays Idle animation when not moving
-        {
-            anim.Play("Idle");
-        }
-        else if (dir.x != 0) // Plays Walk animation and flips the sprite depending on direction it's moving
-        {
-            anim.Play("Walk");
-            if (dir.x < 0) // Left Direction
-            {
-                transform.localScale = new Vector2(-1, 1);
-            }
-            if (dir.x > 0) // Right Direction
-            {
-                transform.localScale = new Vector2(1, 1);
-            }
-        }
-        
-
         Vector2 velocity = dir * speed;
         Vector2 velocityDiff = velocity - rb.linearVelocity;
         Vector2 force = velocityDiff * accelRate;
@@ -191,6 +186,18 @@ public abstract class Enemy : MonoBehaviour, IHealth
     public void Die()
     {
         
+    }
+
+    public void FaceDirection(Vector2 dir)
+    {
+        if (dir.x < 0) // Left Direction
+        {
+            transform.localScale = new Vector2(-1, 1);
+        }
+        if (dir.x > 0) // Right Direction
+        {
+            transform.localScale = new Vector2(1, 1);
+        }
     }
 
     void OnDrawGizmos()

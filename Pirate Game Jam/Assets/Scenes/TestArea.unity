@@ -6248,7 +6248,7 @@ MonoBehaviour:
   - {x: 14, y: -3}
   - {x: 8, y: -3}
   waypointTime: 1
-  debugMode: 0
+  debugMode: 1
   lookDistance: 5
   maxDistance: 3
   speed: 5

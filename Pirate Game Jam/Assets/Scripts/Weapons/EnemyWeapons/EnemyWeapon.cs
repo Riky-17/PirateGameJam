@@ -2,7 +2,7 @@ using UnityEngine;
 
 public abstract class EnemyWeapon : MonoBehaviour
 {
-    [SerializeField] protected GameObject bulletPrefab;
+    [SerializeField] protected BulletSO bulletSO;
 
     public float shootingTimer = 1.5f;
 

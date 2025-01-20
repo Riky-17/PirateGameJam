@@ -4,6 +4,7 @@ public class EnemyGrenadeLauncher : EnemyWeapon
 {
     public override void Shoot(Vector3 dir, Quaternion aimRotation)
     {
-        Instantiate(bulletPrefab, transform.position + dir, aimRotation);
+        Bullet bullet = Instantiate(bulletSO.bulletPrefab, transform.position + dir, aimRotation);
+        bullet.Init(bulletSO.speed, gameObject.layer, bulletSO.damage);
     }
 }

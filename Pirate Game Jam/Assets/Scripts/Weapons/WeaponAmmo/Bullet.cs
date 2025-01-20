@@ -2,14 +2,13 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    [SerializeField] float speed = 3f;
-    [SerializeField] float damage = 10;
-    public LayerMask shooterLayer;
-    Rigidbody2D rb;
+    [HideInInspector] protected float damage = 10;
+    [HideInInspector] protected LayerMask shooterLayer;
+    protected Rigidbody2D rb;
 
-    void Awake() => rb = GetComponent<Rigidbody2D>();
+    protected virtual void Awake() => rb = GetComponent<Rigidbody2D>();
 
-    void Start() => rb.linearVelocity = transform.right * speed; // Bullet moves towards the right when instantiated
+    // void Start() => rb.linearVelocity = transform.right * speed; // Bullet moves towards the right when instantiated
 
     void FixedUpdate()
     {
@@ -17,8 +16,6 @@ public class Bullet : MonoBehaviour
 
         if(raycastHit.collider == null)
             return;
-
-        Debug.Log(shooterLayer.value);
 
         if(raycastHit.collider.TryGetComponent(out IHealth target))
         {
@@ -29,5 +26,12 @@ public class Bullet : MonoBehaviour
         }
 
         Destroy(gameObject);
+    }
+
+    public void Init(float speed, LayerMask shooterLayer, float damage)
+    {
+        rb.linearVelocity = transform.right * speed;
+        this.shooterLayer = shooterLayer;
+        this.damage = damage;
     }
 }

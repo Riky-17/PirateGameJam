@@ -1,13 +1,10 @@
 using System.Collections;
 using UnityEngine;
 
-public class GrenadeExplotion : MonoBehaviour
+public class GrenadeExplotion : Bullet
 {
-    [SerializeField] float speed = 3f;
-    [SerializeField] float damage = 10f;
-    public LayerMask shooterLayer;
     [SerializeField] float explosionDelay = 1.5f;
-    Rigidbody2D rb;
+
     float explosionRadius = 15f;
     public GameObject explosionPrefab;
     SpriteRenderer sr;
@@ -15,11 +12,15 @@ public class GrenadeExplotion : MonoBehaviour
 
     Collider2D[] colliders;
 
+    protected override void Awake()
+    {
+        base.Awake();
+        sr = GetComponent<SpriteRenderer>();
+    }
+
     void Start()
     {
-        sr = GetComponent<SpriteRenderer>();
-        rb = GetComponent<Rigidbody2D>();
-        rb.linearVelocity = transform.right * speed; // Bullet moves towards the right when instantiated
+        // rb.linearVelocity = transform.right * speed; // Bullet moves towards the right when instantiated
         StartCoroutine(ExplosionDelay());
     }
 
@@ -51,6 +52,7 @@ public class GrenadeExplotion : MonoBehaviour
         //destroying the object
         Destroy(tempExp, 0.3f);                             
     }
+
     IEnumerator ExplosionDelay()
     {
         
@@ -61,6 +63,7 @@ public class GrenadeExplotion : MonoBehaviour
             hasExploted = true;
         }      
     }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (!hasExploted)

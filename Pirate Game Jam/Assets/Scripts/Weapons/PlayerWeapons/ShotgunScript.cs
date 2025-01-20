@@ -16,7 +16,6 @@ public class ShotgunScript : WeaponSystem
     [SerializeField] float recoilForce = 15f;
 
     public Transform shootingPoint;
-    public GameObject bulletPrefab;
 
     void Awake()
     {
@@ -52,11 +51,11 @@ public class ShotgunScript : WeaponSystem
 
     void Update()
     {
-        Shoot(shootingPoint, bulletPrefab);
+        Shoot(shootingPoint, bullet);
 
         ManualReload(reloadTime);
     }
-    public override void Shoot(Transform muzzle, GameObject bullet)
+    public override void Shoot(Transform muzzle, BulletSO bullet)
     {
         if (Input.GetMouseButtonDown(0) && PanelsManager.canReadInput)
         {
@@ -65,20 +64,16 @@ public class ShotgunScript : WeaponSystem
             {
 
                 //shoot
-                float bulletsFriction = 30f;
-                GameObject[] tempBullets = new GameObject[5];
-                List<GameObject> DestroyableBullets = new List<GameObject>();
-                foreach (GameObject tempbullet in tempBullets)
+                for (int bulletsFriction = 30; bulletsFriction >= -30; bulletsFriction-= 15)
                 {
-                    Quaternion tempRotation = Quaternion.Euler(0f, 0f, bulletsFriction);                  
-                    bulletsFriction -= 15;    
-                    DestroyableBullets.Add(Instantiate(bullet, muzzle.position, muzzle.rotation * tempRotation));
-                    
+                    Quaternion tempRotation = Quaternion.Euler(0f, 0f, bulletsFriction);
+                    Bullet tempBullet = Instantiate(bullet.bulletPrefab, muzzle.position, muzzle.rotation * tempRotation);
+                    //initializing the bullet script
+                    tempBullet.Init(bullet.speed, pm.gameObject.layer, bullet.damage);
+
+                    Destroy(tempBullet.gameObject, 1f);
                 }
-                foreach(GameObject tempbullet in DestroyableBullets)
-                {
-                    Destroy(tempbullet, 1f);
-                }
+                
                 anim.SetTrigger("isShooting");
                 bulletsNum--;
                 weaponaryText.updateAmmo(bulletsNum.ToString());

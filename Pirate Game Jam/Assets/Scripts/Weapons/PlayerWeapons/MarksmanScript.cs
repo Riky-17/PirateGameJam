@@ -12,7 +12,6 @@ public class MarksmanScript : WeaponSystem
     [SerializeField] float recoilForce = 15f;
 
     public Transform shootingPoint;
-    public GameObject bulletPrefab;
 
 
     void Awake()
@@ -55,11 +54,11 @@ public class MarksmanScript : WeaponSystem
 
     void Update()
     {
-        Shoot(shootingPoint, bulletPrefab);
+        Shoot(shootingPoint, bullet);
         ManualReload(reloadTime);
     }
     
-    public override void Shoot(Transform muzzle, GameObject bullet)
+    public override void Shoot(Transform muzzle, BulletSO bullet)
     {
         if (Input.GetMouseButtonDown(0) && PanelsManager.canReadInput)
         {
@@ -67,8 +66,9 @@ public class MarksmanScript : WeaponSystem
             if (canShoot && bulletsNum > 0)
             {
                 //shoot
-                GameObject tempBullet = Instantiate(bullet, muzzle.position, transform.rotation);
-                tempBullet.GetComponent<Bullet>().shooterLayer = pm.gameObject.layer;
+                Bullet tempBullet = Instantiate(bullet.bulletPrefab, muzzle.position, transform.rotation);
+                //initializing the bullet script
+                tempBullet.Init(bullet.speed, pm.gameObject.layer, bullet.damage);
 
                 bulletsNum--;
                 weaponaryText.updateAmmo(bulletsNum.ToString());

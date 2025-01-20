@@ -9,7 +9,8 @@ public class EnemyShotgun : EnemyWeapon
         for (int bulletAngle = bulletMaxAngles; bulletAngle >= -bulletMaxAngles; bulletAngle-= 15)
         {
             Quaternion bulletRotation = aimRotation * Quaternion.Euler(0, 0, bulletAngle);
-            Instantiate(bulletPrefab, transform.position, bulletRotation);
+            Bullet bullet = Instantiate(bulletSO.bulletPrefab, transform.position, bulletRotation);
+            bullet.Init(bulletSO.speed, gameObject.layer, bulletSO.damage);
         }
     }
 }

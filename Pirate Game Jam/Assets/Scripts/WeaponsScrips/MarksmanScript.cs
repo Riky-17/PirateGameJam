@@ -18,9 +18,12 @@ public class MarksmanScript : WeaponSystem
     void Awake()
     {
 
-        //Canvas
+        //UI
         weaponaryText = GameObject.FindGameObjectWithTag("Canvas").GetComponent<WeaponDisplay>();
         weaponaryText.updateWeapon(this.gameObject.name);
+        weaponaryText.UpdateWeaponChosen(0);
+        weaponaryText.PauseWeaponInfo("10", "0.5", recoilTime.ToString(), initialBulletNum.ToString());
+
 
         rb = GetComponentInParent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
@@ -35,9 +38,13 @@ public class MarksmanScript : WeaponSystem
 
     private void OnEnable()
     {
+        //UI
         weaponaryText.UpdateWeaponChosen(0);
         weaponaryText.updateAmmo(bulletsNum.ToString());
         weaponaryText.updateWeapon(this.gameObject.name);
+        weaponInfo();
+
+        //RELOAD
         if (bulletsNum <= 0)
         {
        
@@ -107,5 +114,10 @@ public class MarksmanScript : WeaponSystem
         {
             anim.Play("Idle"); // Plays Idle animation when recoil is finished
         }
+    }
+
+    public void weaponInfo()
+    {
+        weaponaryText.PauseWeaponInfo("30", "0.1", recoilTime.ToString(), initialBulletNum.ToString());
     }
 }

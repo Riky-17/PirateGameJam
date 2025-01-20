@@ -36,9 +36,13 @@ public class ShotgunScript : WeaponSystem
 
     private void OnEnable()
     {
+        //UI
         weaponaryText.UpdateWeaponChosen(3);
         weaponaryText.updateAmmo(bulletsNum.ToString());
+        weaponInfo();
         weaponaryText.updateWeapon(this.gameObject.name);
+
+        // reload 
         if (bulletsNum <= 0)
         {
             canShoot = false;
@@ -115,5 +119,10 @@ public class ShotgunScript : WeaponSystem
 
             lastRecoil -= Time.fixedDeltaTime;
         }
+    }
+
+    public void weaponInfo()
+    {
+        weaponaryText.PauseWeaponInfo("50", "0.5", recoilTime.ToString(), initialBulletNum.ToString());
     }
 }

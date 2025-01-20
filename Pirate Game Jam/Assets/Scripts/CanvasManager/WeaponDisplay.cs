@@ -10,7 +10,7 @@ public class WeaponDisplay : MonoBehaviour
     [SerializeField] private TMP_Text bulletsLeft;
 
     [SerializeField] private Image[] weaponsChosen;
-
+    [SerializeField] private TMP_Text[] weaponsInfo;
     private void Awake()
     {
         foreach (var weapon in weaponsChosen)
@@ -35,5 +35,12 @@ public class WeaponDisplay : MonoBehaviour
             weapon.gameObject.SetActive(false);
         }
         weaponsChosen[number].gameObject.SetActive(true);
+    }
+    public void PauseWeaponInfo(string damage, string fireRate, string reloadSpeed, string maxAmmo)
+    {
+        weaponsInfo[0].text = damage;
+        weaponsInfo[1].text = fireRate;
+        weaponsInfo[2].text = reloadSpeed;
+        weaponsInfo[3].text = maxAmmo;
     }
 }

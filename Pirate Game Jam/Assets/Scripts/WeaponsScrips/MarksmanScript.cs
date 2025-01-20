@@ -53,7 +53,7 @@ public class MarksmanScript : WeaponSystem
     
     public override void Shoot(Transform muzzle, GameObject bullet)
     {
-        if (Input.GetMouseButtonDown(0) && PanelsManager.canReadInput)
+        if (Input.GetMouseButtonDown(0))
         {
 
             if (canShoot && bulletsNum > 0)

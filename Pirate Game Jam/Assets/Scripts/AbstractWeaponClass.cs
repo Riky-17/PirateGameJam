@@ -8,7 +8,7 @@ public abstract class WeaponSystem : MonoBehaviour
     internal int initialBulletNum;
     public int bulletsNum;
     public float reloadTime;
-    internal bool canShoot = true;
+    public bool canShoot = true;
     public float bulletSpeed = 10f;
 
     public abstract void Shoot(Transform muzzle, GameObject bullet); //shoot method called

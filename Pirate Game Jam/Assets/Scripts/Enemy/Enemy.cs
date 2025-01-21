@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Unity.Mathematics;
 using UnityEngine;
 
 public abstract class Enemy : MonoBehaviour, IHealth
@@ -228,7 +227,7 @@ public abstract class Enemy : MonoBehaviour, IHealth
         }
         if (dir.x > 0) // Right Direction
         {
-            transform.rotation = quaternion.identity;
+            transform.rotation = Quaternion.identity;
             // transform.localScale = new Vector2(1, 1);
         }
     }

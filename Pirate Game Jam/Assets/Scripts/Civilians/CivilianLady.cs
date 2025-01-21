@@ -1,23 +1,18 @@
 using UnityEngine;
 
-public class Civilian : MonoBehaviour
+public class CivilianLady : Civilian
 {
-    Rigidbody2D rb;
-    
+    Animator anim;
 
     [SerializeField] bool debugMode = true;
 
-    [SerializeField] float speed = 4f;
+    [SerializeField] float speed = 3f;
 
     //how long should the civilian walk for
     [Range(.5f, 1), SerializeField] float walkTimeMin = .5f;
     [Range(.75f, 1.5f), SerializeField] float walkTimeMax = 1f;
     float walkTime;
     float walkTimer;
-
-    //how long should the civilian wait for
-    [SerializeField] float waitTime = 1f;
-    float waitTimer;
 
     //how far can the civilian get from the originPoint
     [SerializeField] float maxDistance;
@@ -26,24 +21,19 @@ public class Civilian : MonoBehaviour
     // the probability to pick left
     int leftDirChances = 50;
 
-    Vector2 walkDir;
-
-    private void Awake() => rb = GetComponent<Rigidbody2D>();
-
-    void Start()
+    protected override void Awake()
     {
-        GameManager.Instance.Civilians.Add(this);
-        GetNewDirection();
+        base.Awake();
+        anim = GetComponent<Animator>();
     }
-
-    void OnDisable() => GameManager.Instance.Civilians.Remove(this);
 
     void Update()
     {
         if(walkTimer >= walkTime)
         {
-            walkDir = Vector2.zero;
+            dir = Vector2.zero;
             waitTimer+= Time.deltaTime;
+            anim.Play("Idle");
 
             if (waitTimer >= waitTime)
             {
@@ -62,25 +52,28 @@ public class Civilian : MonoBehaviour
         if(walkTimer < walkTime)
             walkTimer += Time.fixedDeltaTime;
 
-        if(transform.position.x <= originPoint.x - maxDistance / 2 || transform.position.x >= originPoint.x + maxDistance / 2)
+        if((transform.position.x <= originPoint.x - maxDistance / 2 && dir.x < 0) || (transform.position.x >= originPoint.x + maxDistance / 2 && dir.x > 0))
         {
             rb.linearVelocityX = 0;
             walkTimer = walkTime;
         }
         
-        Vector2 velocity = walkDir * speed;
+        Vector2 velocity = dir * speed;
         Vector2 velocityDiff = velocity - rb.linearVelocity;
         float accel = 3;
         Vector2 force = velocityDiff * accel;
         rb.AddForce(force);
     }
 
-    void GetNewDirection()
+    protected override void GetNewDirection()
     {
         walkTime = Random.Range(walkTimeMin, walkTimeMax);
         //101 because exclusive
-        int chance = Random.Range(0, 101);
-        walkDir = chance <= leftDirChances ? Vector2.left : Vector2.right;
+        int chance = Random.Range(1, 101);
+
+        dir = chance <= leftDirChances ? Vector2.left : Vector2.right;
+        FaceDirection(dir);
+        anim.Play("Walk");
     }
 
     void CalculateDirectionChances()

@@ -320,7 +320,7 @@ SpriteRenderer:
   m_SortingLayer: -1
   m_SortingOrder: 5
   m_Sprite: {fileID: -54785596800315728, guid: df1c5a8ce965fa048856a7eb768bb181, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.7058824, g: 0.7058824, b: 0.7058824, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -803,7 +803,7 @@ SpriteRenderer:
   m_SortingLayer: -1
   m_SortingOrder: 4
   m_Sprite: {fileID: -2586299640872742600, guid: df1c5a8ce965fa048856a7eb768bb181, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.7058824, g: 0.7058824, b: 0.7058824, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -1006,7 +1006,7 @@ MonoBehaviour:
   reloadTime: 0
   bulletSpeed: 10
   bullet: {fileID: 11400000, guid: 76006c33d9e057d43a431b7a5aa1164e, type: 2}
-  weaponaryText: {fileID: 0}
+  weaponryText: {fileID: 0}
   recoilForce: 20
   shootingPoint: {fileID: 321494942}
 --- !u!212 &180075957
@@ -2025,7 +2025,7 @@ SpriteRenderer:
   m_SortingLayer: -1
   m_SortingOrder: 2
   m_Sprite: {fileID: -4179408309683303955, guid: df1c5a8ce965fa048856a7eb768bb181, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.7058824, g: 0.7058824, b: 0.7058824, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -3623,7 +3623,7 @@ SpriteRenderer:
   m_SortingLayer: -1
   m_SortingOrder: 1
   m_Sprite: {fileID: 8151694563960559484, guid: df1c5a8ce965fa048856a7eb768bb181, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.7058824, g: 0.7058824, b: 0.7058824, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -5316,7 +5316,7 @@ SpriteRenderer:
   m_SortingLayer: -1
   m_SortingOrder: 4
   m_Sprite: {fileID: -2586299640872742600, guid: df1c5a8ce965fa048856a7eb768bb181, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.7058824, g: 0.7058824, b: 0.7058824, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -5442,7 +5442,7 @@ SpriteRenderer:
   m_SortingLayer: -1
   m_SortingOrder: 1
   m_Sprite: {fileID: 8151694563960559484, guid: df1c5a8ce965fa048856a7eb768bb181, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.7058824, g: 0.7058824, b: 0.7058824, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -5487,7 +5487,7 @@ MonoBehaviour:
   reloadTime: 0
   bulletSpeed: 10
   bullet: {fileID: 11400000, guid: 097a0b1c896ac934cbdca4fd38a7a275, type: 2}
-  weaponaryText: {fileID: 0}
+  weaponryText: {fileID: 0}
   recoilForce: 15
   shootingPoint: {fileID: 321494942}
 --- !u!95 &1039735103
@@ -5662,7 +5662,7 @@ SpriteRenderer:
   m_SortingLayer: -1
   m_SortingOrder: 4
   m_Sprite: {fileID: -2586299640872742600, guid: df1c5a8ce965fa048856a7eb768bb181, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.7058824, g: 0.7058824, b: 0.7058824, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -7080,7 +7080,7 @@ SpriteRenderer:
   m_SortingLayer: -1
   m_SortingOrder: 5
   m_Sprite: {fileID: -54785596800315728, guid: df1c5a8ce965fa048856a7eb768bb181, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.7058824, g: 0.7058824, b: 0.7058824, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -7437,7 +7437,7 @@ SpriteRenderer:
   m_SortingLayer: -1
   m_SortingOrder: 1
   m_Sprite: {fileID: 8151694563960559484, guid: df1c5a8ce965fa048856a7eb768bb181, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.7058824, g: 0.7058824, b: 0.7058824, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -7541,7 +7541,7 @@ SpriteRenderer:
   m_SortingLayer: -1
   m_SortingOrder: 3
   m_Sprite: {fileID: -5571565586278667576, guid: df1c5a8ce965fa048856a7eb768bb181, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.7058824, g: 0.7058824, b: 0.7058824, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -7680,7 +7680,7 @@ SpriteRenderer:
   m_SortingLayer: -1
   m_SortingOrder: 5
   m_Sprite: {fileID: -54785596800315728, guid: df1c5a8ce965fa048856a7eb768bb181, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.7058824, g: 0.7058824, b: 0.7058824, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -8197,7 +8197,7 @@ SpriteRenderer:
   m_SortingLayer: -1
   m_SortingOrder: 2
   m_Sprite: {fileID: -4179408309683303955, guid: df1c5a8ce965fa048856a7eb768bb181, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.7058824, g: 0.7058824, b: 0.7058824, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -8337,7 +8337,7 @@ MonoBehaviour:
   reloadTime: 0
   bulletSpeed: 10
   bullet: {fileID: 11400000, guid: 198459120051d93448078b7fad601e65, type: 2}
-  weaponaryText: {fileID: 0}
+  weaponryText: {fileID: 0}
   recoilForce: 25
   shootingPoint: {fileID: 321494942}
 --- !u!212 &1626166211
@@ -9000,7 +9000,7 @@ SpriteRenderer:
   m_SortingLayer: -1
   m_SortingOrder: 2
   m_Sprite: {fileID: -4179408309683303955, guid: df1c5a8ce965fa048856a7eb768bb181, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.7058824, g: 0.7058824, b: 0.7058824, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -9509,7 +9509,7 @@ SpriteRenderer:
   m_SortingLayer: -1
   m_SortingOrder: 3
   m_Sprite: {fileID: -5571565586278667576, guid: df1c5a8ce965fa048856a7eb768bb181, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.7058824, g: 0.7058824, b: 0.7058824, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -9576,7 +9576,7 @@ MonoBehaviour:
   reloadTime: 1.5
   bulletSpeed: 10
   bullet: {fileID: 11400000, guid: 76006c33d9e057d43a431b7a5aa1164e, type: 2}
-  weaponaryText: {fileID: 0}
+  weaponryText: {fileID: 0}
   recoilForce: 5
   shootingPoint: {fileID: 321494942}
 --- !u!212 &1794670592
@@ -9726,7 +9726,7 @@ SpriteRenderer:
   m_SortingLayer: -1
   m_SortingOrder: 3
   m_Sprite: {fileID: -5571565586278667576, guid: df1c5a8ce965fa048856a7eb768bb181, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.7058824, g: 0.7058824, b: 0.7058824, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

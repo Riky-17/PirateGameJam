@@ -19,10 +19,10 @@ public class MarksmanScript : WeaponSystem
     {
 
         //UI
-        weaponaryText = GameObject.FindGameObjectWithTag("Canvas").GetComponent<WeaponDisplay>();
-        weaponaryText.updateWeapon(this.gameObject.name);
-        weaponaryText.UpdateWeaponChosen(0);
-        weaponaryText.PauseWeaponInfo("10", "0.5", recoilTime.ToString(), initialBulletNum.ToString());
+        weaponryText = GameObject.FindGameObjectWithTag("Canvas").GetComponent<WeaponDisplay>();
+        weaponryText.updateWeapon(this.gameObject.name);
+        weaponryText.UpdateWeaponChosen(0);
+        weaponryText.PauseWeaponInfo("10", "0.5", recoilTime.ToString(), initialBulletNum.ToString());
 
 
         rb = GetComponentInParent<Rigidbody2D>();
@@ -41,9 +41,9 @@ public class MarksmanScript : WeaponSystem
     private void OnEnable()
     {
         //UI
-        weaponaryText.UpdateWeaponChosen(0);
-        weaponaryText.updateAmmo(bulletsNum.ToString());
-        weaponaryText.updateWeapon(this.gameObject.name);
+        weaponryText.UpdateWeaponChosen(0);
+        weaponryText.updateAmmo(bulletsNum.ToString());
+        weaponryText.updateWeapon(this.gameObject.name);
         weaponInfo();
 
         //RELOAD
@@ -76,7 +76,7 @@ public class MarksmanScript : WeaponSystem
                 tempBullet.Init(bullet.speed, pm.gameObject.layer, bullet.damage);
 
                 bulletsNum--;
-                weaponaryText.updateAmmo(bulletsNum.ToString());
+                weaponryText.updateAmmo(bulletsNum.ToString());
 
                 Destroy(tempBullet, 2f);
                 anim.Play("Shoot");
@@ -123,6 +123,6 @@ public class MarksmanScript : WeaponSystem
 
     public void weaponInfo()
     {
-        weaponaryText.PauseWeaponInfo("30", "0.1", recoilTime.ToString(), initialBulletNum.ToString());
+        weaponryText.PauseWeaponInfo("30", "0.1", recoilTime.ToString(), initialBulletNum.ToString());
     }
 }

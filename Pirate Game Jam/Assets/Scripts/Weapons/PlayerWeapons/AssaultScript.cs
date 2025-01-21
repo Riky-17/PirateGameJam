@@ -24,7 +24,7 @@ public class AssaultScript : WeaponSystem
     void Awake()
     {
         //Canvas
-        weaponaryText = GameObject.FindGameObjectWithTag("Canvas").GetComponent<WeaponDisplay>();
+        weaponryText = GameObject.FindGameObjectWithTag("Canvas").GetComponent<WeaponDisplay>();
 
         anim = GetComponent<Animator>();
         rb = GetComponentInParent<Rigidbody2D>();
@@ -41,9 +41,9 @@ public class AssaultScript : WeaponSystem
     private void OnEnable()
     {
         //UI
-        weaponaryText.UpdateWeaponChosen(1);
-        weaponaryText.updateAmmo(bulletsNum.ToString());
-        weaponaryText.updateWeapon(this.gameObject.name);
+        weaponryText.UpdateWeaponChosen(1);
+        weaponryText.updateAmmo(bulletsNum.ToString());
+        weaponryText.updateWeapon(this.gameObject.name);
         weaponInfo();
 
         //reload
@@ -83,7 +83,7 @@ public class AssaultScript : WeaponSystem
                         tempBullet.Init(bullet.speed, pm.gameObject.layer, bullet.damage);
 
                         bulletsNum--;
-                        weaponaryText.updateAmmo(bulletsNum.ToString());
+                        weaponryText.updateAmmo(bulletsNum.ToString());
                         StartCoroutine(fireRate());
                         Destroy(tempBullet.gameObject, 2f);
                         anim.SetTrigger("isShooting");
@@ -131,6 +131,6 @@ public class AssaultScript : WeaponSystem
     }
     public void weaponInfo()
     {
-        weaponaryText.PauseWeaponInfo("10", fireRafe.ToString(), recoilTime.ToString(), initialBulletNum.ToString());
+        weaponryText.PauseWeaponInfo("10", fireRafe.ToString(), recoilTime.ToString(), initialBulletNum.ToString());
     }
 }

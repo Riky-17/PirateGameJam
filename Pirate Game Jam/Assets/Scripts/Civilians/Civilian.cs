@@ -46,7 +46,7 @@ public class Civilian : MonoBehaviour, IHealth
     {
         if(dir.x < 0)
             transform.rotation = Quaternion.Euler(0, 180, 0);
-        else
+        else if (dir.x > 0)
             transform.rotation = Quaternion.identity;
     }
 

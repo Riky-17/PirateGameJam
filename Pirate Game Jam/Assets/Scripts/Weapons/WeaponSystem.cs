@@ -16,35 +16,35 @@ public abstract class WeaponSystem : MonoBehaviour
 
     public abstract void Shoot(Transform muzzle, BulletSO bullet); //shoot method called
 
-    public WeaponDisplay weaponaryText;
+    public WeaponDisplay weaponryText;
 
     //timer for reloading weapons when running out of ammo
 
-    public void Reload()
-    {
+    public void Reload() => CoroutineManager.Instance.StartingCoroutine(ReloadCoroutine());
 
-        CourutineManager.Instance.StartingCoroutine(reloadCourutine());
-    }
-    public IEnumerator reloadCourutine()
+    public IEnumerator ReloadCoroutine()
     {
         amountOfCoroutines++;
-        Debug.Log("Courutine N: " + amountOfCoroutines + " Started");
+        Debug.Log("Coroutine N: " + amountOfCoroutines + " Started");
         float remainTime = reloadTime;
-        weaponaryText.updateAmmo("Reloading");
+        weaponryText.updateAmmo("Reloading");
+
         while (remainTime > 0)
         {
             remainTime -= Time.deltaTime;
             //Debug.Log(Mathf.Ceil(remainTime).ToString());
-            weaponaryText.loadingInfo(weaponIndex,(Mathf.Ceil(remainTime).ToString()));
+            weaponryText.loadingInfo(weaponIndex, Mathf.Ceil(remainTime).ToString());
             yield return null;
         }
-        weaponaryText.disablingLoadingPanels(weaponIndex);
-        weaponaryText.updateAmmo(initialBulletNum.ToString());
-        Debug.Log("Courutine N: " + amountOfCoroutines + " Finished");
+
+        weaponryText.disablingLoadingPanels(weaponIndex);
+        weaponryText.updateAmmo(initialBulletNum.ToString());
+        Debug.Log("Coroutine N: " + amountOfCoroutines + " Finished");
         canShoot = true;
         bulletsNum = initialBulletNum;
 
     }
+
     private void Awake()
     {
 

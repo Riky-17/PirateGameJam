@@ -12,14 +12,14 @@ public class EnemyAssaultRifle : EnemyWeapon
     public float FireAmount { get; private set; } = 1.5f;
     [HideInInspector] public float fireTimer;
 
-    public override void Shoot(PlayerMovement player, Vector3 dir, Quaternion aimRotation)
+    public override void Shoot(PlayerMovement player, Quaternion aimRotation)
     {
         this.player = player;
         isShooting = true;
         anim.SetTrigger("isShooting");
         float inaccuracy = Random.Range(-sprayAngle, sprayAngle);
         Quaternion bulletRotation = aimRotation * Quaternion.Euler(0, 0, inaccuracy);
-        Bullet bullet = Instantiate(bulletSO.bulletPrefab, shootingPoint.position + dir, bulletRotation);
+        Bullet bullet = Instantiate(bulletSO.bulletPrefab, shootingPoint.position, bulletRotation);
         bullet.Init(bulletSO.speed, gameObject.layer, bulletSO.damage);
     }
 

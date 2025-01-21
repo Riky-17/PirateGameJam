@@ -22,7 +22,7 @@ public class ShotgunScript : WeaponSystem
     void Awake()
     {
         //Canvas
-        weaponaryText = GameObject.FindGameObjectWithTag("Canvas").GetComponent<WeaponDisplay>();
+        weaponryText = GameObject.FindGameObjectWithTag("Canvas").GetComponent<WeaponDisplay>();
 
         anim = GetComponent<Animator>();
         rb = GetComponentInParent<Rigidbody2D>();
@@ -40,10 +40,10 @@ public class ShotgunScript : WeaponSystem
     private void OnEnable()
     {
         //UI
-        weaponaryText.UpdateWeaponChosen(3);
-        weaponaryText.updateAmmo(bulletsNum.ToString());
+        weaponryText.UpdateWeaponChosen(3);
+        weaponryText.updateAmmo(bulletsNum.ToString());
         weaponInfo();
-        weaponaryText.updateWeapon(this.gameObject.name);
+        weaponryText.updateWeapon(this.gameObject.name);
 
         // reload 
         if (bulletsNum <= 0)
@@ -82,7 +82,7 @@ public class ShotgunScript : WeaponSystem
                 
                 anim.SetTrigger("isShooting");
                 bulletsNum--;
-                weaponaryText.updateAmmo(bulletsNum.ToString());
+                weaponryText.updateAmmo(bulletsNum.ToString());
                 //anim.Play("Shoot");
 
                 //recoil
@@ -124,6 +124,6 @@ public class ShotgunScript : WeaponSystem
 
     public void weaponInfo()
     {
-        weaponaryText.PauseWeaponInfo("50", "0.5", recoilTime.ToString(), initialBulletNum.ToString());
+        weaponryText.PauseWeaponInfo("50", "0.5", recoilTime.ToString(), initialBulletNum.ToString());
     }
 }

@@ -11,6 +11,7 @@ public class WeaponDisplay : MonoBehaviour
 
     [SerializeField] private Image[] weaponsChosen;
     [SerializeField] private TMP_Text[] weaponsInfo;
+    [SerializeField] private GameObject[] loadingPanels;
     private void Awake()
     {
         foreach (var weapon in weaponsChosen)
@@ -19,6 +20,12 @@ public class WeaponDisplay : MonoBehaviour
         }
 
         weaponsChosen[0].gameObject.SetActive(true);
+
+        //turn it off the panels, setting them back on when loading 
+        foreach(GameObject panel in loadingPanels)
+        {
+            panel.gameObject.SetActive(false);
+        }
     }
     public void updateWeapon(string weapon)
     {
@@ -42,5 +49,15 @@ public class WeaponDisplay : MonoBehaviour
         weaponsInfo[1].text = fireRate;
         weaponsInfo[2].text = reloadSpeed;
         weaponsInfo[3].text = maxAmmo;
+    }
+
+    public void loadingInfo(byte weaponIndex, string secondsLeft)
+    {
+        loadingPanels[weaponIndex - 1].gameObject.SetActive(true);
+        loadingPanels[weaponIndex - 1].GetComponentInChildren<TMP_Text>().text = secondsLeft.ToString();
+    }
+    public void disablingLoadingPanels(byte weaponIndex)
+    {
+        loadingPanels[weaponIndex - 1].gameObject.SetActive(false);
     }
 }

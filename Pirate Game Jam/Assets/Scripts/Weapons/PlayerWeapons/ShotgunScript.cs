@@ -10,8 +10,6 @@ public class ShotgunScript : WeaponSystem
     PlayerMovement pm;
     Animator anim;
 
-    
-
     //how much should the recoil last for
     float recoilTime = .3f;
     float lastRecoil;
@@ -33,8 +31,6 @@ public class ShotgunScript : WeaponSystem
         bulletsNum = 5;
         reloadTime = 3f;
         initialBulletNum = 5;
-
-        weaponIndex = 4;
     }
 
     private void OnEnable()
@@ -49,17 +45,15 @@ public class ShotgunScript : WeaponSystem
         if (bulletsNum <= 0)
         {
             canShoot = false;
-            Reload();
+            StartCoroutine(ReloadingSpeed(reloadTime));
         }
     }
 
     void Update()
     {
         Shoot(shootingPoint, bullet);
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            Reload();
-        }
+
+        ManualReload(reloadTime);
     }
     public override void Shoot(Transform muzzle, BulletSO bullet)
     {
@@ -92,7 +86,7 @@ public class ShotgunScript : WeaponSystem
                 if (bulletsNum == 0)
                 {
                     canShoot = false;
-                    Reload();
+                    StartCoroutine(ReloadingSpeed(reloadTime));
                 }
 
             }

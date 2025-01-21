@@ -7261,8 +7261,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   debugMode: 1
   speed: 4
-  walkTimeMin: 0.5
-  walkTimeMax: 1
+  walkTimeMin: 1
+  walkTimeMax: 1.5
   waitTime: 1
   maxDistance: 5
   originPoint: {x: 10, y: -3}

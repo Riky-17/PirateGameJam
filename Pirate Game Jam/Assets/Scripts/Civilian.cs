@@ -27,17 +27,21 @@ public class Civilian : MonoBehaviour
 
     Vector2 walkDir;
 
-    private void Awake()
+    private void Awake() => rb = GetComponent<Rigidbody2D>();
+
+    void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
+        GameManager.Instance.Civilians.Add(this);
+        GetNewDirection();
     }
 
-    void Start() => GetNewDirection();
+    void OnDisable() => GameManager.Instance.Civilians.Remove(this);
 
     void Update()
     {
         if(walkTimer >= walkTime)
         {
+            walkDir = Vector2.zero;
             waitTimer+= Time.deltaTime;
 
             if (waitTimer >= waitTime)
@@ -86,6 +90,7 @@ public class Civilian : MonoBehaviour
         float rightMostX = originX + maxDistance / 2;
 
         leftDirChances =  Mathf.RoundToInt(100 * Mathf.InverseLerp(leftMostX, rightMostX, currentX)); 
+        // Debug.Log(leftDirChances);
     }
 
     void OnDrawGizmos()

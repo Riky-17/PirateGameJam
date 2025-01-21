@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 
 public abstract class Enemy : MonoBehaviour, IHealth
@@ -40,6 +41,7 @@ public abstract class Enemy : MonoBehaviour, IHealth
         if (weapon == null)
             return;
         shootingTimer = weapon.shootingTimer;
+        lastShot = weapon.lastShot;
     }
 
     // doing it on start and not on awake so to avoid racing conflicts
@@ -64,20 +66,37 @@ public abstract class Enemy : MonoBehaviour, IHealth
 
         if (player != null)
         {
+            
             if ((player.transform.position - transform.position).magnitude > lookDistance)
             {
                 player = null;
+                weapon.Reset();
                 if(weapon != null && weapon is EnemyAssaultRifle assaultRifle)
                     assaultRifle.ResetTimers();
                 return;
             }
 
+            FaceDirection(player.transform.position - transform.position);
+
             if(weapon == null)
                 return;
             
+            //taking aim
+            Vector2 shootDir = (player.transform.position - transform.position).normalized;
+            Vector3 upwards = Vector3.Cross(Vector3.forward, shootDir);
+            Vector3 forward = Vector3.forward;
+
+            if(transform.rotation.y % 360 != 0)
+            {
+                forward = -forward;
+                upwards = -upwards;
+            }
+
+            Quaternion aimRot = Quaternion.LookRotation(forward, upwards);
+            weapon.SpriteRotation(aimRot);
+
             if(lastShot >= shootingTimer)
             {   
-                Vector2 shootDir = (player.transform.position - transform.position).normalized;
 
                 //doing it custom for assault rifle since it is the only automatic weapon
                 if(weapon is EnemyAssaultRifle assaultRifle)
@@ -91,7 +110,7 @@ public abstract class Enemy : MonoBehaviour, IHealth
 
                     if(assaultRifle.FireRate <= assaultRifle.fireRateTimer)
                     {
-                        Shoot(shootDir);
+                        Shoot(shootDir, aimRot);
                         assaultRifle.fireRateTimer = 0;
                     }
                     else
@@ -101,10 +120,16 @@ public abstract class Enemy : MonoBehaviour, IHealth
                 }
                 else
                 {
-                    Shoot(shootDir);
+                    Shoot(shootDir, aimRot);
                     lastShot = 0;
                 }
             }
+            else if (lastShot >= 0.1f && lastShot < shootingTimer)
+            {
+                weapon.Idle();
+            }
+
+
         }
     }
 
@@ -161,8 +186,13 @@ public abstract class Enemy : MonoBehaviour, IHealth
         colliders = Physics2D.OverlapCircleAll(transform.position, lookDistance);
 
         foreach (Collider2D collider in colliders)
-            if(collider.TryGetComponent(out player))
+        {
+            if (collider.TryGetComponent(out player))
+            {
+                FaceDirection((player.transform.position - transform.position).normalized);
                 break;
+            }
+        }
     }
 
     protected void AddForce(Vector2 dir, float accelRate)
@@ -173,12 +203,7 @@ public abstract class Enemy : MonoBehaviour, IHealth
         rb.AddForce(force);
     }
 
-    protected virtual void Shoot(Vector2 dir)
-    {
-        Vector3 upwards = Vector3.Cross(Vector3.forward, dir);
-        Quaternion aimRot = Quaternion.LookRotation(Vector3.forward, upwards);
-        weapon.Shoot(dir, aimRot);
-    }
+    protected virtual void Shoot(Vector2 dir, Quaternion aimRot) => weapon.Shoot(player, dir, aimRot);
 
     public void Damage(float damageAmount)
     {
@@ -198,11 +223,13 @@ public abstract class Enemy : MonoBehaviour, IHealth
     {
         if (dir.x < 0) // Left Direction
         {
-            transform.localScale = new Vector2(-1, 1);
+            transform.rotation = Quaternion.Euler(0, 180, 0);
+            // transform.localScale = new Vector2(-1, 1);
         }
         if (dir.x > 0) // Right Direction
         {
-            transform.localScale = new Vector2(1, 1);
+            transform.rotation = quaternion.identity;
+            // transform.localScale = new Vector2(1, 1);
         }
     }
 

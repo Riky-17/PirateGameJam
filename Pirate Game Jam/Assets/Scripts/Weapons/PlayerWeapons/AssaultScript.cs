@@ -15,7 +15,6 @@ public class AssaultScript : WeaponSystem
     float lastRecoil;
     [SerializeField] float recoilForce = 15f;
 
-
     public Transform shootingPoint;
 
     private bool isShooting = true;
@@ -35,7 +34,9 @@ public class AssaultScript : WeaponSystem
         //assigning bullets and reload time 
         bulletsNum = 80;
         initialBulletNum = bulletsNum;
-        reloadTime = 2f;
+        reloadTime = 8f;
+
+        weaponIndex = 2;
     }
     private void OnEnable()
     {
@@ -49,14 +50,17 @@ public class AssaultScript : WeaponSystem
         if (bulletsNum <= 0)
         {
             canShoot = false;
-            StartCoroutine(ReloadingSpeed(reloadTime));
+            Reload();
         }
     }
 
     void Update()
     {
         Shoot(shootingPoint, bullet);
-        ManualReload(reloadTime);
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            Reload();
+        }
     }
 
     public override void Shoot(Transform muzzle, BulletSO bullet)
@@ -64,7 +68,7 @@ public class AssaultScript : WeaponSystem
         if (PanelsManager.canReadInput)
         {
 
-            if (Input.GetMouseButton(0))
+            if (Input.GetMouseButton(0) && !Input.GetKeyDown(KeyCode.Alpha1))
             {
                 if (canShoot && bulletsNum > 0)
                 {
@@ -90,7 +94,7 @@ public class AssaultScript : WeaponSystem
                     if (bulletsNum == 0)
                     {
                         canShoot = false;
-                        StartCoroutine(ReloadingSpeed(reloadTime));
+                        Reload();
                     }
                 }
 

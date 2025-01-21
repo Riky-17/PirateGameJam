@@ -21,8 +21,7 @@ public class MarksmanScript : WeaponSystem
         //UI
         weaponaryText = GameObject.FindGameObjectWithTag("Canvas").GetComponent<WeaponDisplay>();
         weaponaryText.updateWeapon(this.gameObject.name);
-        weaponaryText.UpdateWeaponChosen(0);
-        weaponaryText.PauseWeaponInfo("10", "0.5", recoilTime.ToString(), initialBulletNum.ToString());
+        weaponaryText.UpdateWeaponChosen(0);        
 
 
         rb = GetComponentInParent<Rigidbody2D>();

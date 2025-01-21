@@ -3,6 +3,7 @@ using UnityEngine;
 public class Civilian : MonoBehaviour
 {
     Rigidbody2D rb;
+    
 
     [SerializeField] bool debugMode = true;
 

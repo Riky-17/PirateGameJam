@@ -1,10 +1,25 @@
 fileFormatVersion: 2
-guid: eb300227906ae1c43a1117377aa09180
+guid: df1c5a8ce965fa048856a7eb768bb181
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -9068063280793475306
-    second: DesertMap3_0
+      213: 8151694563960559484
+    second: DesertBackground_0
+  - first:
+      213: -4179408309683303955
+    second: DesertBackground_1
+  - first:
+      213: -5571565586278667576
+    second: DesertBackground_2
+  - first:
+      213: -2586299640872742600
+    second: DesertBackground_3
+  - first:
+      213: -54785596800315728
+    second: DesertBackground_4
+  - first:
+      213: 7140031929749877503
+    second: DesertBackground_5
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,7 +128,95 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: DesertMap3_0
+      name: DesertBackground_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 720
+        width: 320
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c771a523403a02170800000000000000
+      internalID: 8151694563960559484
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DesertBackground_1
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 540
+        width: 320
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: de9c20a2942cff5c0800000000000000
+      internalID: -4179408309683303955
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DesertBackground_2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 360
+        width: 320
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8caa1136e92dda2b0800000000000000
+      internalID: -5571565586278667576
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DesertBackground_3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 180
+        width: 320
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8315f0fed2e9b1cd0800000000000000
+      internalID: -2586299640872742600
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DesertBackground_4
       rect:
         serializedVersion: 2
         x: 0
@@ -128,8 +231,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 617aa83ad74c72280800000000000000
-      internalID: -9068063280793475306
+      spriteID: 0bec8eb3acc5d3ff0800000000000000
+      internalID: -54785596800315728
       vertices: []
       indices: 
       edges: []
@@ -138,7 +241,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 02c7b6cc6e1496245955fd68f960b0ab
+    spriteID: 1a58960ef1ac66d4889f29917fbb7c71
     internalID: 0
     vertices: []
     indices: 
@@ -148,7 +251,11 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      DesertMap3_0: -9068063280793475306
+      DesertBackground_0: 8151694563960559484
+      DesertBackground_1: -4179408309683303955
+      DesertBackground_2: -5571565586278667576
+      DesertBackground_3: -2586299640872742600
+      DesertBackground_4: -54785596800315728
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

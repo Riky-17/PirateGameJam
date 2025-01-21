@@ -52,6 +52,7 @@ public class AssaultScript : WeaponSystem
             canShoot = false;
             Reload();
         }
+        isShooting = true;
     }
 
     void Update()

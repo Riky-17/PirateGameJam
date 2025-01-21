@@ -95,8 +95,7 @@ public abstract class Enemy : MonoBehaviour, IHealth
             weapon.SpriteRotation(aimRot);
 
             if(lastShot >= shootingTimer)
-            {   
-
+            {
                 //doing it custom for assault rifle since it is the only automatic weapon
                 if(weapon is EnemyAssaultRifle assaultRifle)
                 {
@@ -127,8 +126,6 @@ public abstract class Enemy : MonoBehaviour, IHealth
             {
                 weapon.Idle();
             }
-
-
         }
     }
 
@@ -167,14 +164,23 @@ public abstract class Enemy : MonoBehaviour, IHealth
         FaceDirection(dir);
 
         // getting the non flat distance to calculate the actual distance
-        float enemyToPlayer = (player.transform.position - transform.position).magnitude;
-        if(enemyToPlayer < maxDistance + maxDistanceOffset && enemyToPlayer > maxDistance - maxDistanceOffset)
+        Vector2 enemyToPlayer = player.transform.position - transform.position;
+        float enemyToPlayerDist = enemyToPlayer.magnitude;
+        bool isPlayerWithinDist = enemyToPlayerDist < maxDistance + maxDistanceOffset && enemyToPlayerDist > maxDistance - maxDistanceOffset;
+
+        //getting the dot product to see if the player is above the enemy
+        float dotProduct = Vector3.Dot(transform.up, enemyToPlayer.normalized);
+        float dotProductOffset = .9f;
+        //also checks if player is below
+        bool isPlayerAbove = dotProduct >= dotProductOffset || dotProduct <= -dotProductOffset;
+
+        if(isPlayerWithinDist || isPlayerAbove)
         {
             rb.linearVelocityX = 0;
             return;
         }
         
-        if(enemyToPlayer < maxDistance - maxDistanceOffset)
+        if(enemyToPlayerDist < maxDistance - maxDistanceOffset)
             dir = -dir;
         
         AddForce(dir, 3);
@@ -202,7 +208,7 @@ public abstract class Enemy : MonoBehaviour, IHealth
         rb.AddForce(force);
     }
 
-    protected virtual void Shoot(Vector2 dir, Quaternion aimRot) => weapon.Shoot(player, dir, aimRot);
+    protected virtual void Shoot(Vector2 dir, Quaternion aimRot) => weapon.Shoot(player, aimRot);
 
     public void Damage(float damageAmount)
     {
@@ -221,15 +227,9 @@ public abstract class Enemy : MonoBehaviour, IHealth
     public void FaceDirection(Vector2 dir)
     {
         if (dir.x < 0) // Left Direction
-        {
             transform.rotation = Quaternion.Euler(0, 180, 0);
-            // transform.localScale = new Vector2(-1, 1);
-        }
-        if (dir.x > 0) // Right Direction
-        {
+        else if (dir.x > 0) // Right Direction
             transform.rotation = Quaternion.identity;
-            // transform.localScale = new Vector2(1, 1);
-        }
     }
 
     void OnDrawGizmos()

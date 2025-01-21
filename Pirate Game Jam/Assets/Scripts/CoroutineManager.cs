@@ -2,9 +2,9 @@ using System.Collections;
 using System.ComponentModel;
 using UnityEngine;
 
-public class CourutineManager : MonoBehaviour
+public class CoroutineManager : MonoBehaviour
 {
-    public static CourutineManager Instance;
+    public static CoroutineManager Instance { get; private set;}
     private void Awake()
     {
         if (Instance == null) 

@@ -12,7 +12,6 @@ public class GrenadeScript : WeaponSystem
     float lastRecoil;
     [SerializeField] float recoilForce = 15f;
 
-
     public Transform shootingPoint;
 
     void Awake()
@@ -27,7 +26,9 @@ public class GrenadeScript : WeaponSystem
 
         bulletsNum = 5;
         initialBulletNum = bulletsNum;
-        reloadTime = 5f;
+        reloadTime = 10f;
+
+        weaponIndex = 3;
     }
 
     private void OnEnable()
@@ -42,14 +43,18 @@ public class GrenadeScript : WeaponSystem
         if (bulletsNum <= 0)
         {
             canShoot = false;
-            StartCoroutine(ReloadingSpeed(reloadTime));
+            Reload();
         }
     }
 
     void Update()
     {
         Shoot(shootingPoint, bullet);
-        ManualReload(reloadTime);
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            Reload();
+        }
     }
 
     public override void Shoot(Transform muzzle, BulletSO bullet)
@@ -76,7 +81,7 @@ public class GrenadeScript : WeaponSystem
                 if (bulletsNum == 0)
                 {
                     canShoot = false;
-                    StartCoroutine(ReloadingSpeed(reloadTime));
+                    Reload();
                 }
 
             }

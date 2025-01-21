@@ -12,8 +12,9 @@ public class EnemyAssaultRifle : EnemyWeapon
     public float FireAmount { get; private set; } = 1.5f;
     [HideInInspector] public float fireTimer;
 
-    public override void Shoot(Vector3 dir, Quaternion aimRotation)
+    public override void Shoot(PlayerMovement player, Vector3 dir, Quaternion aimRotation)
     {
+        this.player = player;
         isShooting = true;
         anim.SetTrigger("isShooting");
         float inaccuracy = Random.Range(-sprayAngle, sprayAngle);

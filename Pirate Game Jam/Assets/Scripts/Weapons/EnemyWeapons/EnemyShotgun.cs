@@ -4,8 +4,9 @@ public class EnemyShotgun : EnemyWeapon
 {
     int bulletMaxAngles = 30;
 
-    public override void Shoot(Vector3 dir, Quaternion aimRotation)
+    public override void Shoot(PlayerMovement player, Vector3 dir, Quaternion aimRotation)
     {
+        this.player = player;
         isShooting = true;
         anim.Play("Shoot");
 

@@ -2,8 +2,9 @@ using UnityEngine;
 
 public class EnemyGrenadeLauncher : EnemyWeapon
 {
-    public override void Shoot(Vector3 dir, Quaternion aimRotation)
+    public override void Shoot(PlayerMovement player, Vector3 dir, Quaternion aimRotation)
     {
+        this.player = player;
         isShooting = true;
         anim.Play("Shoot");
         Bullet bullet = Instantiate(bulletSO.bulletPrefab, shootingPoint.position + dir, aimRotation);

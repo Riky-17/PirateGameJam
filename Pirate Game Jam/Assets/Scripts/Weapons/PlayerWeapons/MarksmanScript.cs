@@ -1,3 +1,4 @@
+using Unity.Mathematics;
 using UnityEngine;
 
 public class MarksmanScript : WeaponSystem
@@ -13,7 +14,7 @@ public class MarksmanScript : WeaponSystem
 
     public Transform shootingPoint;
 
-
+   
     void Awake()
     {
 
@@ -33,6 +34,8 @@ public class MarksmanScript : WeaponSystem
         bulletsNum = 20;
         reloadTime = 5f;
         initialBulletNum = bulletsNum;
+
+        weaponIndex = 1;
     }
 
     private void OnEnable()
@@ -45,17 +48,19 @@ public class MarksmanScript : WeaponSystem
 
         //RELOAD
         if (bulletsNum <= 0)
-        {
-       
+        {      
             canShoot = false;
-            StartCoroutine(ReloadingSpeed(reloadTime));
+            Reload();
         }
     }
 
     void Update()
     {
         Shoot(shootingPoint, bullet);
-        ManualReload(reloadTime);
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            Reload();
+        }
     }
     
     public override void Shoot(Transform muzzle, BulletSO bullet)
@@ -80,10 +85,10 @@ public class MarksmanScript : WeaponSystem
                 lastRecoil = recoilTime;
                 
                 //check ammo
-                if (bulletsNum == 0)
+                if (bulletsNum <= 0)
                 {
                     canShoot = false;
-                    StartCoroutine(ReloadingSpeed(reloadTime));
+                    Reload();
                 }
 
             }

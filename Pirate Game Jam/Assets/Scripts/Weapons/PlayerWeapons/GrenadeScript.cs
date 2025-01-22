@@ -37,7 +37,7 @@ public class GrenadeScript : WeaponSystem
         weaponryText.UpdateWeaponChosen(2);
         weaponryText.updateAmmo(bulletsNum.ToString());
         weaponryText.updateWeapon(this.gameObject.name);
-        weaponInfo();
+        WeaponInfo();
 
         //reload
         if (bulletsNum <= 0)
@@ -109,7 +109,10 @@ public class GrenadeScript : WeaponSystem
             lastRecoil -= Time.fixedDeltaTime;
         }
     }
-    public void weaponInfo()
+
+    public void ChangeSpriteColor(Color color) => sr.color = color;
+    
+    public void WeaponInfo()
     {
         weaponryText.PauseWeaponInfo("70", "1", recoilTime.ToString(), initialBulletNum.ToString());
     }

@@ -44,7 +44,7 @@ public class AssaultScript : WeaponSystem
         weaponryText.UpdateWeaponChosen(1);
         weaponryText.updateAmmo(bulletsNum.ToString());
         weaponryText.updateWeapon(this.gameObject.name);
-        weaponInfo();
+        WeaponInfo();
 
         //reload
         if (bulletsNum <= 0)
@@ -134,7 +134,10 @@ public class AssaultScript : WeaponSystem
             lastRecoil -= Time.fixedDeltaTime;
         }
     }
-    public void weaponInfo()
+    
+    public void ChangeSpriteColor(Color color) => sr.color = color;
+    
+    public void WeaponInfo()
     {
         weaponryText.PauseWeaponInfo("10", fireRafe.ToString(), recoilTime.ToString(), initialBulletNum.ToString());
     }

@@ -10911,6 +10911,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: FootSoldierSg
       objectReference: {fileID: 0}
+    - target: {fileID: 4549115866879906873, guid: 4a13aa1aad6f48647861c4d1208210e5, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4549115866879906873, guid: 4a13aa1aad6f48647861c4d1208210e5, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4549115866879906873, guid: 4a13aa1aad6f48647861c4d1208210e5, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -10927,6 +10939,18 @@ PrefabInstance:
     - target: {fileID: 4282876385133419597, guid: f770bcd4fd0fb934d81dcc903e1f0cc9, type: 3}
       propertyPath: m_Name
       value: FootSoldierMR
+      objectReference: {fileID: 0}
+    - target: {fileID: 5715286375432048702, guid: f770bcd4fd0fb934d81dcc903e1f0cc9, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5715286375432048702, guid: f770bcd4fd0fb934d81dcc903e1f0cc9, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5715286375432048702, guid: f770bcd4fd0fb934d81dcc903e1f0cc9, type: 3}
+      propertyPath: m_Color.r
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7918400149600194139, guid: f770bcd4fd0fb934d81dcc903e1f0cc9, type: 3}
       propertyPath: m_LocalPosition.x
@@ -11139,6 +11163,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4132893577270053669, guid: b39b40176e804f24bb6bc018cd70d23f, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4132893577270053669, guid: b39b40176e804f24bb6bc018cd70d23f, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4132893577270053669, guid: b39b40176e804f24bb6bc018cd70d23f, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -11155,6 +11191,18 @@ PrefabInstance:
     - target: {fileID: 920199928733028046, guid: 9d39889c46cf9da448cfa3b3afdd3376, type: 3}
       propertyPath: m_Name
       value: Homeless
+      objectReference: {fileID: 0}
+    - target: {fileID: 3211495207902851074, guid: 9d39889c46cf9da448cfa3b3afdd3376, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3211495207902851074, guid: 9d39889c46cf9da448cfa3b3afdd3376, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3211495207902851074, guid: 9d39889c46cf9da448cfa3b3afdd3376, type: 3}
+      propertyPath: m_Color.r
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6635838263348591283, guid: 9d39889c46cf9da448cfa3b3afdd3376, type: 3}
       propertyPath: m_LocalPosition.x

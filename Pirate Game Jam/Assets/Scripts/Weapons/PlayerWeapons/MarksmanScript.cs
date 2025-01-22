@@ -44,7 +44,7 @@ public class MarksmanScript : WeaponSystem
         weaponryText.UpdateWeaponChosen(0);
         weaponryText.updateAmmo(bulletsNum.ToString());
         weaponryText.updateWeapon(this.gameObject.name);
-        weaponInfo();
+        WeaponInfo();
 
         //RELOAD
         if (bulletsNum <= 0)
@@ -125,7 +125,9 @@ public class MarksmanScript : WeaponSystem
         }
     }
 
-    public void weaponInfo()
+    public void ChangeSpriteColor(Color color) => sr.color = color;
+
+    public void WeaponInfo()
     {
         weaponryText.PauseWeaponInfo("30", "0.1", recoilTime.ToString(), initialBulletNum.ToString());
     }

@@ -11,7 +11,8 @@ public class PlayerMovement : MonoBehaviour, IHealth
     bool canMove = true;
 
     //weapon objects -> assigned in inspector
-    [SerializeField] GameObject[] weapons;
+    [SerializeField] WeaponSystem[] weapons;
+    WeaponSystem currentWeapon;
 
     //health system
     public float MaxHealth { get => maxHealth; set => maxHealth = value; }
@@ -26,19 +27,19 @@ public class PlayerMovement : MonoBehaviour, IHealth
         health = maxHealth;
     }
 
-    void Start()
-    {
-        //disabling game objects except for the first weapon 
-        DisablingWeapons();
-        weapons[0].SetActive(true);
-    }
+    // void Start()
+    // {
+    //     //disabling game objects except for the first weapon 
+    //     DisablingWeapons();
+    //     weapons[0].gameObject.SetActive(true);
+    // }
     
     void Update()
     {
         GetMovementInput();
         MousePosition();
         SpriteRotation();
-        SwitchWeapon();
+        GetWeaponInput();
     }
 
     void FixedUpdate() => Movement();
@@ -63,36 +64,30 @@ public class PlayerMovement : MonoBehaviour, IHealth
         }
     }
 
-    void SwitchWeapon()
+    void GetWeaponInput()
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            DisablingWeapons();
-            weapons[0].SetActive(true);
-        }
+            SwitchWeapon(0);
         else if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            DisablingWeapons();
-            weapons[1].SetActive(true);
-        }
+            SwitchWeapon(1);
         else if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            DisablingWeapons();
-            weapons[2].SetActive(true);
-        }
+            SwitchWeapon(2);
         else if (Input.GetKeyDown(KeyCode.Alpha4))
-        {
-            DisablingWeapons();
-            weapons[3].SetActive(true);
-        }
+            SwitchWeapon(3);
     }
 
-    void DisablingWeapons()
+    // void DisablingWeapons()
+    // {
+    //     foreach (var weapon in weapons)
+    //         weapon.gameObject.SetActive(false);
+    // }
+
+    void SwitchWeapon(int index)
     {
-        foreach (var weapon in weapons)
-        {
-            weapon.SetActive(false);
-        }
+        // DisablingWeapons();
+        WeaponSystem nextWeapon = weapons[index];
+        // nextWeapon.
+        nextWeapon.gameObject.SetActive(true);
     }
     
     void MousePosition()

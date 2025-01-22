@@ -41,7 +41,7 @@ public class ShotgunScript : WeaponSystem
         //UI
         weaponryText.UpdateWeaponChosen(3);
         weaponryText.updateAmmo(bulletsNum.ToString());
-        weaponInfo();
+        WeaponInfo();
         weaponryText.updateWeapon(this.gameObject.name);
 
         // reload 
@@ -125,8 +125,10 @@ public class ShotgunScript : WeaponSystem
             lastRecoil -= Time.fixedDeltaTime;
         }
     }
+    
+    public void ChangeSpriteColor(Color color) => sr.color = color;
 
-    public void weaponInfo()
+    public void WeaponInfo()
     {
         weaponryText.PauseWeaponInfo("50", "0.5", recoilTime.ToString(), initialBulletNum.ToString());
     }

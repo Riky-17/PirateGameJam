@@ -20,7 +20,7 @@ public class EnemyAssaultRifle : EnemyWeapon
         float inaccuracy = Random.Range(-sprayAngle, sprayAngle);
         Quaternion bulletRotation = aimRotation * Quaternion.Euler(0, 0, inaccuracy);
         Bullet bullet = Instantiate(bulletSO.bulletPrefab, shootingPoint.position, bulletRotation);
-        bullet.Init(bulletSO.speed, gameObject.layer, bulletSO.damage);
+        bullet.Init(bulletSO.speed, attachedEnemy.layer, bulletSO.damage);
     }
 
     public void ResetTimers()

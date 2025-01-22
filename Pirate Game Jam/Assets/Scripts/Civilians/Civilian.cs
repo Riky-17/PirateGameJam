@@ -3,6 +3,7 @@ using UnityEngine;
 public class Civilian : MonoBehaviour, IHealth
 {
     public float Health { get; set; }
+    public float MaxHealth { get; set; } = 50;
 
     protected Rigidbody2D rb;
 
@@ -53,7 +54,7 @@ public class Civilian : MonoBehaviour, IHealth
     public void Damage(float damageAmount)
     {
         Health-= damageAmount;
-        Debug.Log(Health);
+        Debug.Log(gameObject.name + " Health: " + Health);
         if(Health <= 0)
             Die();
     }

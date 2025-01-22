@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Muzzle
   - Canvas
+  - CameraBoundingBox
   layers:
   - Default
   - TransparentFX

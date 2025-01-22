@@ -49,7 +49,7 @@ public class ShotgunScript : WeaponSystem
         if (bulletsNum <= 0)
         {
             canShoot = false;
-            Reload();
+            Reload(this);
         }
     }
 
@@ -58,7 +58,7 @@ public class ShotgunScript : WeaponSystem
         Shoot(shootingPoint, bullet);
         if (Input.GetKeyDown(KeyCode.R))
         {
-            Reload();
+            Reload(this);
         }
     }
     public override void Shoot(Transform muzzle, BulletSO bullet)
@@ -68,7 +68,7 @@ public class ShotgunScript : WeaponSystem
 
             if (canShoot && bulletsNum > 0)
             {
-
+                CheckShooting(this);
                 //shoot
                 for (int bulletsFriction = 30; bulletsFriction >= -30; bulletsFriction-= 15)
                 {
@@ -92,7 +92,7 @@ public class ShotgunScript : WeaponSystem
                 if (bulletsNum == 0)
                 {
                     canShoot = false;
-                    Reload();
+                    Reload(this);
                 }
 
             }

@@ -21,21 +21,23 @@ public class PlayerMovement : MonoBehaviour, IHealth
     public float Health { get => health; set => health = value; }
     float health;
 
+    float hitTime = .1f;
+    float hitTimer;
+
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         health = maxHealth;
+        currentWeapon = weapons[0];
     }
-
-    // void Start()
-    // {
-    //     //disabling game objects except for the first weapon 
-    //     DisablingWeapons();
-    //     weapons[0].gameObject.SetActive(true);
-    // }
     
     void Update()
     {
+        if(hitTimer > 0)
+            hitTimer-= Time.deltaTime;
+        else
+            currentWeapon.ChangeSpriteColor(Color.white);
+        
         GetMovementInput();
         MousePosition();
         SpriteRotation();
@@ -76,24 +78,17 @@ public class PlayerMovement : MonoBehaviour, IHealth
             SwitchWeapon(3);
     }
 
-    // void DisablingWeapons()
-    // {
-    //     foreach (var weapon in weapons)
-    //         weapon.gameObject.SetActive(false);
-    // }
-
     void SwitchWeapon(int index)
     {
-        // DisablingWeapons();
         WeaponSystem nextWeapon = weapons[index];
-        // nextWeapon.
         nextWeapon.gameObject.SetActive(true);
+        nextWeapon.ChangeSpriteColor(currentWeapon.WeaponSpriteColor());
+        currentWeapon.ChangeSpriteColor(Color.white);
+        currentWeapon.gameObject.SetActive(false);
+        currentWeapon = nextWeapon;
     }
-    
-    void MousePosition()
-    {
-        mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition); // Gets Vector2 mouse position
-    }
+
+    void MousePosition() => mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition); // Gets Vector2 mouse position
 
     void Movement()
     {
@@ -126,6 +121,8 @@ public class PlayerMovement : MonoBehaviour, IHealth
     public void Damage(float damageAmount)
     {
         health -= damageAmount;
+        currentWeapon.ChangeSpriteColor(Color.red);
+        hitTimer = hitTime;
         Debug.Log(gameObject.name + " Health: " + Health);
         if(health <= 0)
             Die();

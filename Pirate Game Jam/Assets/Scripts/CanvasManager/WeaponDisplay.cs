@@ -87,7 +87,7 @@ public class WeaponDisplay : MonoBehaviour
 
     public void onClickWeaponInfo(WeaponSystem obj)
     {
-       reloadTime.text = obj.reloadTime.ToString();
-       maxAmmo.text = obj.initialBulletNum.ToString();       
+       reloadTime.text = obj.ReloadTime.ToString();
+       maxAmmo.text = obj.InitialBulletNum.ToString();       
     }
 }

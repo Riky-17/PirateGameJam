@@ -12,6 +12,13 @@ public class WeaponDisplay : MonoBehaviour
     [SerializeField] private Image[] weaponsChosen;
     [SerializeField] private TMP_Text[] weaponsInfo;
     [SerializeField] private GameObject[] loadingPanels;
+
+
+    //information for the panel -> temporary solution 
+    [SerializeField] private TMP_Text damage;
+    [SerializeField] private TMP_Text fireRate;
+    [SerializeField] private TMP_Text reloadTime;
+    [SerializeField] private TMP_Text maxAmmo;
     private void Awake()
     {
         foreach (var weapon in weaponsChosen)
@@ -60,4 +67,22 @@ public class WeaponDisplay : MonoBehaviour
     {
         loadingPanels[weaponIndex - 1].gameObject.SetActive(false);
     }
+
+    public void OnClickDamage(string damage)       
+    {
+        this.damage.text = damage;  
+    }
+    public void OnClickFireRate(string fireRate)
+    {
+        this.fireRate.text = fireRate;
+    }
+    public void OnClickReloadSPeed(string reloadTime)
+    {
+        this.reloadTime.text = reloadTime;
+    }
+    public void OnClickMaxAmmo(string maxAmmo)
+    {
+        this.damage.text = maxAmmo;
+    }
+
 }

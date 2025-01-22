@@ -43,7 +43,7 @@ public class GrenadeScript : WeaponSystem
         if (bulletsNum <= 0)
         {
             canShoot = false;
-            Reload();
+            Reload(this);
         }
     }
 
@@ -53,7 +53,7 @@ public class GrenadeScript : WeaponSystem
 
         if (Input.GetKeyDown(KeyCode.R))
         {
-            Reload();
+            Reload(this);
         }
     }
 
@@ -64,7 +64,7 @@ public class GrenadeScript : WeaponSystem
             if (canShoot && bulletsNum > 0)
             {
                 //shoot
-
+                CheckShooting(this);
                 Bullet tempBullet = Instantiate(bullet.bulletPrefab, muzzle.position, transform.rotation);
                 //initializing the bullet script
                 tempBullet.Init(bullet.speed, pm.gameObject.layer, bullet.damage);
@@ -81,7 +81,7 @@ public class GrenadeScript : WeaponSystem
                 if (bulletsNum == 0)
                 {
                     canShoot = false;
-                    Reload();
+                    Reload(this);
                 }
 
             }

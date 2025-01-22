@@ -48,9 +48,9 @@ public class MarksmanScript : WeaponSystem
 
         //RELOAD
         if (bulletsNum <= 0)
-        {      
+        {
             canShoot = false;
-            Reload();
+            Reload(this);
         }
     }
 
@@ -59,7 +59,7 @@ public class MarksmanScript : WeaponSystem
         Shoot(shootingPoint, bullet);
         if (Input.GetKeyDown(KeyCode.R))
         {
-            Reload();
+            Reload(this);
         }
     }
     
@@ -70,6 +70,7 @@ public class MarksmanScript : WeaponSystem
 
             if (canShoot && bulletsNum > 0)
             {
+                CheckShooting(this);
                 //shoot
                 Bullet tempBullet = Instantiate(bullet.bulletPrefab, muzzle.position, transform.rotation);
                 //initializing the bullet script
@@ -88,7 +89,7 @@ public class MarksmanScript : WeaponSystem
                 if (bulletsNum <= 0)
                 {
                     canShoot = false;
-                    Reload();
+                    Reload(this);
                 }
 
             }

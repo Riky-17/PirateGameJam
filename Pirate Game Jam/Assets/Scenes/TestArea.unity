@@ -255,6 +255,10 @@ MonoBehaviour:
   - {fileID: 657453627}
   - {fileID: 1945937596}
   - {fileID: 986211007}
+  damage: {fileID: 2069612210}
+  fireRate: {fileID: 1082804672}
+  reloadTime: {fileID: 1925434254}
+  maxAmmo: {fileID: 485494893}
 --- !u!114 &19225843
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -330,7 +334,7 @@ MonoBehaviour:
   m_text: main menu
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3fccca79c69c348438cf009f359c9808, type: 2}
-  m_sharedMaterial: {fileID: 0}
+  m_sharedMaterial: {fileID: 6857721427270754849, guid: 3fccca79c69c348438cf009f359c9808, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -466,7 +470,7 @@ MonoBehaviour:
   m_text: CONTINUE
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3fccca79c69c348438cf009f359c9808, type: 2}
-  m_sharedMaterial: {fileID: 0}
+  m_sharedMaterial: {fileID: 6857721427270754849, guid: 3fccca79c69c348438cf009f359c9808, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1320,7 +1324,7 @@ MonoBehaviour:
   m_text: W-A-S-D
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3fccca79c69c348438cf009f359c9808, type: 2}
-  m_sharedMaterial: {fileID: 0}
+  m_sharedMaterial: {fileID: 6857721427270754849, guid: 3fccca79c69c348438cf009f359c9808, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1494,7 +1498,7 @@ MonoBehaviour:
   m_text: 'Fire rate:'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3fccca79c69c348438cf009f359c9808, type: 2}
-  m_sharedMaterial: {fileID: 0}
+  m_sharedMaterial: {fileID: 6857721427270754849, guid: 3fccca79c69c348438cf009f359c9808, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2098,7 +2102,7 @@ MonoBehaviour:
 '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3fccca79c69c348438cf009f359c9808, type: 2}
-  m_sharedMaterial: {fileID: 0}
+  m_sharedMaterial: {fileID: 6857721427270754849, guid: 3fccca79c69c348438cf009f359c9808, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2352,7 +2356,7 @@ MonoBehaviour:
   m_text: 000
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3fccca79c69c348438cf009f359c9808, type: 2}
-  m_sharedMaterial: {fileID: 0}
+  m_sharedMaterial: {fileID: 6857721427270754849, guid: 3fccca79c69c348438cf009f359c9808, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2643,7 +2647,7 @@ MonoBehaviour:
   m_text: 'OBJECTIVE3:'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3fccca79c69c348438cf009f359c9808, type: 2}
-  m_sharedMaterial: {fileID: 0}
+  m_sharedMaterial: {fileID: 6857721427270754849, guid: 3fccca79c69c348438cf009f359c9808, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3202,7 +3206,7 @@ MonoBehaviour:
   m_text: LEFT CLICK
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3fccca79c69c348438cf009f359c9808, type: 2}
-  m_sharedMaterial: {fileID: 0}
+  m_sharedMaterial: {fileID: 6857721427270754849, guid: 3fccca79c69c348438cf009f359c9808, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3549,7 +3553,7 @@ MonoBehaviour:
   m_text: 'MOVEMENT:'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3fccca79c69c348438cf009f359c9808, type: 2}
-  m_sharedMaterial: {fileID: 0}
+  m_sharedMaterial: {fileID: 6857721427270754849, guid: 3fccca79c69c348438cf009f359c9808, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3685,7 +3689,7 @@ MonoBehaviour:
   m_text: 'PAUSE/UNPAUSE:'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3fccca79c69c348438cf009f359c9808, type: 2}
-  m_sharedMaterial: {fileID: 0}
+  m_sharedMaterial: {fileID: 6857721427270754849, guid: 3fccca79c69c348438cf009f359c9808, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3821,7 +3825,7 @@ MonoBehaviour:
   m_text: 1-2-3-4
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3fccca79c69c348438cf009f359c9808, type: 2}
-  m_sharedMaterial: {fileID: 0}
+  m_sharedMaterial: {fileID: 6857721427270754849, guid: 3fccca79c69c348438cf009f359c9808, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -4324,7 +4328,55 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 0}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 19225842}
+        m_TargetAssemblyTypeName: WeaponDisplay, Assembly-CSharp
+        m_MethodName: OnClickDamage
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 15
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 19225842}
+        m_TargetAssemblyTypeName: WeaponDisplay, Assembly-CSharp
+        m_MethodName: OnClickFireRate
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 1s
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 19225842}
+        m_TargetAssemblyTypeName: WeaponDisplay, Assembly-CSharp
+        m_MethodName: OnClickReloadSPeed
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 8s
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 19225842}
+        m_TargetAssemblyTypeName: WeaponDisplay, Assembly-CSharp
+        m_MethodName: OnClickMaxAmmo
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 80
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!222 &997791384
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4393,7 +4445,7 @@ MonoBehaviour:
   m_text: 'OBJECTIVE1:'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3fccca79c69c348438cf009f359c9808, type: 2}
-  m_sharedMaterial: {fileID: 0}
+  m_sharedMaterial: {fileID: 6857721427270754849, guid: 3fccca79c69c348438cf009f359c9808, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -4529,7 +4581,7 @@ MonoBehaviour:
   m_text: 'SWITCH WEAPON:'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3fccca79c69c348438cf009f359c9808, type: 2}
-  m_sharedMaterial: {fileID: 0}
+  m_sharedMaterial: {fileID: 6857721427270754849, guid: 3fccca79c69c348438cf009f359c9808, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -4665,7 +4717,7 @@ MonoBehaviour:
   m_text: 'max ammo:'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3fccca79c69c348438cf009f359c9808, type: 2}
-  m_sharedMaterial: {fileID: 0}
+  m_sharedMaterial: {fileID: 6857721427270754849, guid: 3fccca79c69c348438cf009f359c9808, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -4842,7 +4894,7 @@ MonoBehaviour:
 '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3fccca79c69c348438cf009f359c9808, type: 2}
-  m_sharedMaterial: {fileID: 0}
+  m_sharedMaterial: {fileID: 6857721427270754849, guid: 3fccca79c69c348438cf009f359c9808, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -5181,7 +5233,7 @@ MonoBehaviour:
   m_text: 000
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3fccca79c69c348438cf009f359c9808, type: 2}
-  m_sharedMaterial: {fileID: 0}
+  m_sharedMaterial: {fileID: 6857721427270754849, guid: 3fccca79c69c348438cf009f359c9808, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -5317,7 +5369,7 @@ MonoBehaviour:
   m_text: PAUSED
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3fccca79c69c348438cf009f359c9808, type: 2}
-  m_sharedMaterial: {fileID: 0}
+  m_sharedMaterial: {fileID: 6857721427270754849, guid: 3fccca79c69c348438cf009f359c9808, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -5528,7 +5580,7 @@ MonoBehaviour:
   m_text: 'SHOOT:'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3fccca79c69c348438cf009f359c9808, type: 2}
-  m_sharedMaterial: {fileID: 0}
+  m_sharedMaterial: {fileID: 6857721427270754849, guid: 3fccca79c69c348438cf009f359c9808, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -6274,7 +6326,7 @@ MonoBehaviour:
 '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3fccca79c69c348438cf009f359c9808, type: 2}
-  m_sharedMaterial: {fileID: 0}
+  m_sharedMaterial: {fileID: 6857721427270754849, guid: 3fccca79c69c348438cf009f359c9808, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -6437,7 +6489,55 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 0}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 19225842}
+        m_TargetAssemblyTypeName: WeaponDisplay, Assembly-CSharp
+        m_MethodName: OnClickDamage
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 130
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 19225842}
+        m_TargetAssemblyTypeName: WeaponDisplay, Assembly-CSharp
+        m_MethodName: OnClickFireRate
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 0.3s
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 19225842}
+        m_TargetAssemblyTypeName: WeaponDisplay, Assembly-CSharp
+        m_MethodName: OnClickReloadSPeed
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 10s
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 19225842}
+        m_TargetAssemblyTypeName: WeaponDisplay, Assembly-CSharp
+        m_MethodName: OnClickMaxAmmo
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 5
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!222 &1483171969
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6962,7 +7062,55 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 0}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 19225842}
+        m_TargetAssemblyTypeName: WeaponDisplay, Assembly-CSharp
+        m_MethodName: OnClickDamage
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 50
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 19225842}
+        m_TargetAssemblyTypeName: WeaponDisplay, Assembly-CSharp
+        m_MethodName: OnClickFireRate
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 0.5s
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 19225842}
+        m_TargetAssemblyTypeName: WeaponDisplay, Assembly-CSharp
+        m_MethodName: OnClickReloadSPeed
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 3 s
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 19225842}
+        m_TargetAssemblyTypeName: WeaponDisplay, Assembly-CSharp
+        m_MethodName: OnClickMaxAmmo
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 5
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!222 &1564530407
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -7167,7 +7315,7 @@ MonoBehaviour:
   m_text: WEAPON STATS
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3fccca79c69c348438cf009f359c9808, type: 2}
-  m_sharedMaterial: {fileID: 0}
+  m_sharedMaterial: {fileID: 6857721427270754849, guid: 3fccca79c69c348438cf009f359c9808, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -7380,7 +7528,7 @@ MonoBehaviour:
 '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3fccca79c69c348438cf009f359c9808, type: 2}
-  m_sharedMaterial: {fileID: 0}
+  m_sharedMaterial: {fileID: 6857721427270754849, guid: 3fccca79c69c348438cf009f359c9808, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -7747,7 +7895,55 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 0}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 19225842}
+        m_TargetAssemblyTypeName: WeaponDisplay, Assembly-CSharp
+        m_MethodName: OnClickDamage
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 70
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 19225842}
+        m_TargetAssemblyTypeName: WeaponDisplay, Assembly-CSharp
+        m_MethodName: OnClickFireRate
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 0.3s
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 19225842}
+        m_TargetAssemblyTypeName: WeaponDisplay, Assembly-CSharp
+        m_MethodName: OnClickReloadSPeed
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 5s
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 19225842}
+        m_TargetAssemblyTypeName: WeaponDisplay, Assembly-CSharp
+        m_MethodName: OnClickMaxAmmo
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 20
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!222 &1698179094
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -7849,7 +8045,7 @@ MonoBehaviour:
 '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3fccca79c69c348438cf009f359c9808, type: 2}
-  m_sharedMaterial: {fileID: 0}
+  m_sharedMaterial: {fileID: 6857721427270754849, guid: 3fccca79c69c348438cf009f359c9808, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -9410,7 +9606,7 @@ MonoBehaviour:
   m_text: 000
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3fccca79c69c348438cf009f359c9808, type: 2}
-  m_sharedMaterial: {fileID: 0}
+  m_sharedMaterial: {fileID: 6857721427270754849, guid: 3fccca79c69c348438cf009f359c9808, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -9836,7 +10032,7 @@ MonoBehaviour:
   m_text: 000
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3fccca79c69c348438cf009f359c9808, type: 2}
-  m_sharedMaterial: {fileID: 0}
+  m_sharedMaterial: {fileID: 6857721427270754849, guid: 3fccca79c69c348438cf009f359c9808, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -9972,7 +10168,7 @@ MonoBehaviour:
   m_text: OBJECTIVES
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3fccca79c69c348438cf009f359c9808, type: 2}
-  m_sharedMaterial: {fileID: 0}
+  m_sharedMaterial: {fileID: 6857721427270754849, guid: 3fccca79c69c348438cf009f359c9808, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

@@ -4,7 +4,7 @@ public abstract class EnemyWeapon : MonoBehaviour
 {
     protected Animator anim;
 
-    GameObject attachedEnemy;
+    protected GameObject attachedEnemy;
     protected PlayerMovement player;
     protected bool isShooting;
 

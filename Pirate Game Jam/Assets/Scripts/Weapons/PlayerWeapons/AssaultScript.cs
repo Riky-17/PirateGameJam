@@ -50,7 +50,7 @@ public class AssaultScript : WeaponSystem
         if (bulletsNum <= 0)
         {
             canShoot = false;
-            Reload();
+            Reload(this);
         }
         isShooting = true;
     }
@@ -60,7 +60,7 @@ public class AssaultScript : WeaponSystem
         Shoot(shootingPoint, bullet);
         if (Input.GetKeyDown(KeyCode.R))
         {
-            Reload();
+            Reload(this);
         }
     }
 
@@ -74,8 +74,10 @@ public class AssaultScript : WeaponSystem
                 if (canShoot && bulletsNum > 0)
                 {
                     //shoot
+                   
                     if (isShooting)
                     {
+                        CheckShooting(this);
                         int Innacuracy = Random.Range(-sprayAngle, sprayAngle); ;
                         Quaternion bulletSprite = Quaternion.Euler(0f, 0f, Innacuracy);
                         Bullet tempBullet = Instantiate(bullet.bulletPrefab, muzzle.position, transform.rotation * bulletSprite);
@@ -95,7 +97,7 @@ public class AssaultScript : WeaponSystem
                     if (bulletsNum == 0)
                     {
                         canShoot = false;
-                        Reload();
+                        Reload(this);
                     }
                 }
 

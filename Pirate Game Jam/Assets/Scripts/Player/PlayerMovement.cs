@@ -14,10 +14,17 @@ public class PlayerMovement : MonoBehaviour, IHealth
     [SerializeField] GameObject[] weapons;
 
     //health system
-    public float Health { get => health; set => health = value; }
-    float health = 100;
+    public float MaxHealth { get => maxHealth; set => maxHealth = value; }
+    [SerializeField] float maxHealth = 150;
 
-    void Awake() => rb = GetComponent<Rigidbody2D>();
+    public float Health { get => health; set => health = value; }
+    float health;
+
+    void Awake()
+    {
+        rb = GetComponent<Rigidbody2D>();
+        health = maxHealth;
+    }
 
     void Start()
     {
@@ -124,7 +131,7 @@ public class PlayerMovement : MonoBehaviour, IHealth
     public void Damage(float damageAmount)
     {
         health -= damageAmount;
-        Debug.Log(health);
+        Debug.Log(gameObject.name + " Health: " + Health);
         if(health <= 0)
             Die();
     }

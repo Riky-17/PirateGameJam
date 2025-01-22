@@ -14,7 +14,7 @@ public class EnemyShotgun : EnemyWeapon
         {
             Quaternion bulletRotation = aimRotation * Quaternion.Euler(0, 0, bulletAngle);
             Bullet bullet = Instantiate(bulletSO.bulletPrefab, shootingPoint.position, bulletRotation);
-            bullet.Init(bulletSO.speed, gameObject.layer, bulletSO.damage);
+            bullet.Init(bulletSO.speed, attachedEnemy.layer, bulletSO.damage);
         }
     }
 

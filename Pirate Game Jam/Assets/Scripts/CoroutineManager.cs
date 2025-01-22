@@ -18,9 +18,11 @@ public class CoroutineManager : MonoBehaviour
         }
     }
 
-    public void StartingCoroutine(IEnumerator cooldown)
-    {        
-        StartCoroutine(cooldown);
-        return;
+    public Coroutine StartingCoroutine(IEnumerator cooldown)
+    {
+        return StartCoroutine(cooldown);
     }
+
+    public void StoppingCoroutine(Coroutine coroutine) => StopCoroutine(coroutine);
+
 }

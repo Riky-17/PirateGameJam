@@ -252,7 +252,7 @@ GameObject:
   - component: {fileID: 11422530}
   - component: {fileID: 11422531}
   m_Layer: 0
-  m_Name: DesertMap1_0
+  m_Name: Background0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -737,7 +737,7 @@ GameObject:
   - component: {fileID: 120144625}
   - component: {fileID: 120144626}
   m_Layer: 0
-  m_Name: DesertMap2_0 (2)
+  m_Name: Background1 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1599,6 +1599,7 @@ MonoBehaviour:
   - {fileID: 1794670589}
   - {fileID: 1626166208}
   - {fileID: 180075954}
+  maxHealth: 150
 --- !u!4 &279136163
 Transform:
   m_ObjectHideFlags: 0
@@ -1957,7 +1958,7 @@ GameObject:
   - component: {fileID: 353915242}
   - component: {fileID: 353915243}
   m_Layer: 0
-  m_Name: DesertMap4_0
+  m_Name: Background3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3557,7 +3558,7 @@ GameObject:
   - component: {fileID: 698341447}
   - component: {fileID: 698341448}
   m_Layer: 0
-  m_Name: DesertMap5_0 (2)
+  m_Name: Background4 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5250,7 +5251,7 @@ GameObject:
   - component: {fileID: 988081324}
   - component: {fileID: 988081325}
   m_Layer: 0
-  m_Name: DesertMap2_0 (1)
+  m_Name: Background1 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5376,7 +5377,7 @@ GameObject:
   - component: {fileID: 1036755423}
   - component: {fileID: 1036755424}
   m_Layer: 0
-  m_Name: DesertMap5_0 (1)
+  m_Name: Background4 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5594,7 +5595,7 @@ GameObject:
   - component: {fileID: 1089562247}
   - component: {fileID: 1089562248}
   m_Layer: 0
-  m_Name: DesertMap2_0
+  m_Name: Background1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7014,7 +7015,7 @@ GameObject:
   - component: {fileID: 1352918972}
   - component: {fileID: 1352918973}
   m_Layer: 0
-  m_Name: DesertMap1_0 (2)
+  m_Name: Background0 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7369,7 +7370,7 @@ GameObject:
   - component: {fileID: 1429814284}
   - component: {fileID: 1429814285}
   m_Layer: 0
-  m_Name: DesertMap5_0
+  m_Name: Background4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7473,7 +7474,7 @@ GameObject:
   - component: {fileID: 1433981676}
   - component: {fileID: 1433981677}
   m_Layer: 0
-  m_Name: DesertMap3_0
+  m_Name: Background2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7614,7 +7615,7 @@ GameObject:
   - component: {fileID: 1522626425}
   - component: {fileID: 1522626426}
   m_Layer: 0
-  m_Name: DesertMap1_0 (1)
+  m_Name: Background0 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8131,7 +8132,7 @@ GameObject:
   - component: {fileID: 1581591752}
   - component: {fileID: 1581591753}
   m_Layer: 0
-  m_Name: DesertMap4_0 (2)
+  m_Name: Background3 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8934,7 +8935,7 @@ GameObject:
   - component: {fileID: 1713471435}
   - component: {fileID: 1713471436}
   m_Layer: 0
-  m_Name: DesertMap4_0 (1)
+  m_Name: Background3 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9443,7 +9444,7 @@ GameObject:
   - component: {fileID: 1790951478}
   - component: {fileID: 1790951479}
   m_Layer: 0
-  m_Name: DesertMap3_0 (1)
+  m_Name: Background2 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9660,7 +9661,7 @@ GameObject:
   - component: {fileID: 1795789750}
   - component: {fileID: 1795789751}
   m_Layer: 0
-  m_Name: DesertMap3_0 (2)
+  m_Name: Background2 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

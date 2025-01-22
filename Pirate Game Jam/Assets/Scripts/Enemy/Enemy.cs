@@ -1,12 +1,13 @@
 using System;
 using System.Collections.Generic;
-using Unity.Mathematics;
 using UnityEngine;
 
 public abstract class Enemy : MonoBehaviour, IHealth
 {
     protected Rigidbody2D rb;
     protected Animator anim;
+
+    const float MAX_CAMERA_HEIGHT = 17f;
 
     [SerializeField] List<Vector2> waypoints;
     int waypointIndex;
@@ -29,7 +30,8 @@ public abstract class Enemy : MonoBehaviour, IHealth
 
     protected PlayerMovement player;
 
-    public float Health { get; set; } = 100;
+    public float Health { get; set; }
+    public float MaxHealth { get; set; } = 150;
 
     void Awake()
     {
@@ -37,6 +39,7 @@ public abstract class Enemy : MonoBehaviour, IHealth
         anim = GetComponent<Animator>();
         //weapon = GetComponent<EnemyWeapon>();
         weapon = GetComponentInChildren<EnemyWeapon>();
+        Health = MaxHealth;
 
         if (weapon == null)
             return;
@@ -52,7 +55,7 @@ public abstract class Enemy : MonoBehaviour, IHealth
     void Update()
     {
         // Plays Idle animation when not moving in x-axis, otherwise plays Walk animation
-        if (rb.linearVelocityX == 0f)
+        if (MathF.Abs(rb.linearVelocityX) < .25f)
         {
             anim.Play("Idle");
         }
@@ -66,8 +69,9 @@ public abstract class Enemy : MonoBehaviour, IHealth
 
         if (player != null)
         {
-            
-            if ((player.transform.position - transform.position).magnitude > lookDistance)
+            Vector3 flatPlayerPos = player.transform.position;
+            flatPlayerPos.y = transform.position.y;
+            if ((flatPlayerPos - transform.position).magnitude > lookDistance / 2)
             {
                 player = null;
                 weapon.Reset();
@@ -96,8 +100,7 @@ public abstract class Enemy : MonoBehaviour, IHealth
             weapon.SpriteRotation(aimRot);
 
             if(lastShot >= shootingTimer)
-            {   
-
+            {
                 //doing it custom for assault rifle since it is the only automatic weapon
                 if(weapon is EnemyAssaultRifle assaultRifle)
                 {
@@ -128,8 +131,6 @@ public abstract class Enemy : MonoBehaviour, IHealth
             {
                 weapon.Idle();
             }
-
-
         }
     }
 
@@ -163,19 +164,17 @@ public abstract class Enemy : MonoBehaviour, IHealth
         Vector3 playerFlat = player.transform.position;
         playerFlat.y = transform.position.y;
         Vector2 enemyToPlayerFlat = playerFlat - transform.position;
+        float enemyToPlayerFlatDist = enemyToPlayerFlat.magnitude;
         Vector2 dir = enemyToPlayerFlat.normalized;
 
         FaceDirection(dir);
-
-        // getting the non flat distance to calculate the actual distance
-        float enemyToPlayer = (player.transform.position - transform.position).magnitude;
-        if(enemyToPlayer < maxDistance + maxDistanceOffset && enemyToPlayer > maxDistance - maxDistanceOffset)
+        if(enemyToPlayerFlatDist < (maxDistance + maxDistanceOffset) / 2 && enemyToPlayerFlatDist > (maxDistance - maxDistanceOffset) / 2)
         {
             rb.linearVelocityX = 0;
             return;
         }
         
-        if(enemyToPlayer < maxDistance - maxDistanceOffset)
+        if(enemyToPlayerFlatDist < (maxDistance - maxDistanceOffset) / 2)
             dir = -dir;
         
         AddForce(dir, 3);
@@ -183,7 +182,10 @@ public abstract class Enemy : MonoBehaviour, IHealth
 
     protected void LookForPlayer()
     {
-        colliders = Physics2D.OverlapCircleAll(transform.position, lookDistance);
+        //getting a flat position of this enemy
+        Vector2 enemyFlatPos = transform.position;
+        enemyFlatPos.y = 0;
+        colliders = Physics2D.OverlapBoxAll(enemyFlatPos, new(lookDistance, MAX_CAMERA_HEIGHT), 0);
 
         foreach (Collider2D collider in colliders)
         {
@@ -203,12 +205,12 @@ public abstract class Enemy : MonoBehaviour, IHealth
         rb.AddForce(force);
     }
 
-    protected virtual void Shoot(Vector2 dir, Quaternion aimRot) => weapon.Shoot(player, dir, aimRot);
+    protected virtual void Shoot(Vector2 dir, Quaternion aimRot) => weapon.Shoot(player, aimRot);
 
     public void Damage(float damageAmount)
     {
         Health-= damageAmount;
-        Debug.Log(Health);
+        Debug.Log(gameObject.name + " Health: " + Health);
         if(Health <= 0)
             Die();
     }
@@ -222,30 +224,26 @@ public abstract class Enemy : MonoBehaviour, IHealth
     public void FaceDirection(Vector2 dir)
     {
         if (dir.x < 0) // Left Direction
-        {
             transform.rotation = Quaternion.Euler(0, 180, 0);
-            // transform.localScale = new Vector2(-1, 1);
-        }
-        if (dir.x > 0) // Right Direction
-        {
-            transform.rotation = quaternion.identity;
-            // transform.localScale = new Vector2(1, 1);
-        }
+        else if (dir.x > 0) // Right Direction
+            transform.rotation = Quaternion.identity;
     }
 
     void OnDrawGizmos()
     {
         if (debugMode)
         {
+            Vector2 flatPos = new(transform.position.x, 0);
             Gizmos.color = Color.green;
-            Gizmos.DrawWireSphere(transform.position, lookDistance);
+            Gizmos.DrawSphere(flatPos, .25f);
+            Gizmos.DrawWireCube(flatPos, new(lookDistance, MAX_CAMERA_HEIGHT));
     
             Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(transform.position, maxDistance);
+            Gizmos.DrawWireCube(flatPos, new(maxDistance, MAX_CAMERA_HEIGHT));
     
             Gizmos.color = Color.blue;
-            Gizmos.DrawWireSphere(transform.position, maxDistance + maxDistanceOffset);
-            Gizmos.DrawWireSphere(transform.position, maxDistance - maxDistanceOffset);
+            Gizmos.DrawWireCube(flatPos, new(maxDistance - maxDistanceOffset, MAX_CAMERA_HEIGHT));
+            Gizmos.DrawWireCube(flatPos, new(maxDistance + maxDistanceOffset, MAX_CAMERA_HEIGHT));
             
             Gizmos.color = Color.red;
             foreach (Vector2 waypoint in waypoints)

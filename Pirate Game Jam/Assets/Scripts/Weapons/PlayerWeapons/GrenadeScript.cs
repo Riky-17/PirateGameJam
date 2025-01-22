@@ -17,7 +17,7 @@ public class GrenadeScript : WeaponSystem
     void Awake()
     {
         //Canvas
-        weaponaryText = GameObject.FindGameObjectWithTag("Canvas").GetComponent<WeaponDisplay>();
+        weaponryText = GameObject.FindGameObjectWithTag("Canvas").GetComponent<WeaponDisplay>();
 
         anim = GetComponent<Animator>();
         rb = GetComponentInParent<Rigidbody2D>();
@@ -34,9 +34,9 @@ public class GrenadeScript : WeaponSystem
     private void OnEnable()
     {
         //UI
-        weaponaryText.UpdateWeaponChosen(2);
-        weaponaryText.updateAmmo(bulletsNum.ToString());
-        weaponaryText.updateWeapon(this.gameObject.name);
+        weaponryText.UpdateWeaponChosen(2);
+        weaponryText.updateAmmo(bulletsNum.ToString());
+        weaponryText.updateWeapon(this.gameObject.name);
         weaponInfo();
 
         //reload
@@ -70,7 +70,7 @@ public class GrenadeScript : WeaponSystem
                 tempBullet.Init(bullet.speed, pm.gameObject.layer, bullet.damage);
 
                 bulletsNum--;
-                weaponaryText.updateAmmo(bulletsNum.ToString());
+                weaponryText.updateAmmo(bulletsNum.ToString());
 
                 Destroy(tempBullet, 2f);
                 anim.SetTrigger("isShooting");
@@ -111,6 +111,6 @@ public class GrenadeScript : WeaponSystem
     }
     public void weaponInfo()
     {
-        weaponaryText.PauseWeaponInfo("70", "1", recoilTime.ToString(), initialBulletNum.ToString());
+        weaponryText.PauseWeaponInfo("70", "1", recoilTime.ToString(), initialBulletNum.ToString());
     }
 }

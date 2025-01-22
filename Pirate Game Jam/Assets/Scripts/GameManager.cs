@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager Instance { get; set; }
+    public static GameManager Instance { get; private set; }
 
     public List<Enemy> Enemies { get; private set; } = new();
     public List<Civilian> Civilians { get; private set; } = new();

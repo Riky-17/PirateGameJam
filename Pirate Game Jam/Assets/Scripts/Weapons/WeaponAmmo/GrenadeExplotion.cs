@@ -8,7 +8,7 @@ public class GrenadeExplotion : Bullet
     float explosionRadius = 15f;
     public GameObject explosionPrefab;
     SpriteRenderer sr;
-    bool hasExploted = false;
+    bool hasExploded = false;
 
     Collider2D[] colliders;
 
@@ -22,6 +22,19 @@ public class GrenadeExplotion : Bullet
     {
         // rb.linearVelocity = transform.right * speed; // Bullet moves towards the right when instantiated
         StartCoroutine(ExplosionDelay());
+    }
+
+    void FixedUpdate()
+    {
+        if(hasExploded)
+            return;
+        
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.right, .25f);
+        if(hit.collider == null || hit.collider.gameObject.layer == shooterLayer.value)
+            return;
+
+        Explosion();
+        hasExploded = true;
     }
 
     void Explosion()
@@ -51,26 +64,27 @@ public class GrenadeExplotion : Bullet
 
         //destroying the object
         Destroy(tempExp, 0.3f);                             
+        Destroy(gameObject, 0.3f);                             
     }
 
     IEnumerator ExplosionDelay()
     {
         
         yield return new WaitForSeconds(explosionDelay);
-        if (!hasExploted)
+        if (!hasExploded)
         {
             Explosion();
-            hasExploted = true;
+            hasExploded = true;
         }      
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (!hasExploted)
-        {
-            Explosion();
-            hasExploted = true;
-        }
+    // private void OnCollisionEnter2D(Collision2D collision)
+    // {
+    //     if (!hasExploded)
+    //     {
+    //         Explosion();
+    //         hasExploded = true;
+    //     }
         
-    }
+    // }
 }

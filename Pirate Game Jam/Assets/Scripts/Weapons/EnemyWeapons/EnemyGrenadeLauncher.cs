@@ -2,13 +2,13 @@ using UnityEngine;
 
 public class EnemyGrenadeLauncher : EnemyWeapon
 {
-    public override void Shoot(PlayerMovement player, Vector3 dir, Quaternion aimRotation)
+    public override void Shoot(PlayerMovement player, Quaternion aimRotation)
     {
         this.player = player;
         isShooting = true;
         anim.Play("Shoot");
-        Bullet bullet = Instantiate(bulletSO.bulletPrefab, shootingPoint.position + dir, aimRotation);
-        bullet.Init(bulletSO.speed, gameObject.layer, bulletSO.damage);
+        Bullet bullet = Instantiate(bulletSO.bulletPrefab, shootingPoint.position, aimRotation);
+        bullet.Init(bulletSO.speed, attachedEnemy.layer, bulletSO.damage);
     }
 
     public override void Idle()

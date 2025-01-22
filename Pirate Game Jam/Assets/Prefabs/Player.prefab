@@ -54,10 +54,11 @@ MonoBehaviour:
   mousePos: {x: 0, y: 0}
   speed: 6
   weapons:
-  - {fileID: 5776126425321583036}
-  - {fileID: 4628879127433209862}
-  - {fileID: 4677334333891908609}
-  - {fileID: 9041122052130909120}
+  - {fileID: 8648692320986109849}
+  - {fileID: 8173256804163627278}
+  - {fileID: 7704850479044293558}
+  - {fileID: 1635132269601203667}
+  maxHealth: 150
 --- !u!58 &7283976341539080834
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -222,13 +223,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9dbf06e2e024cf4b8fb6f888ef22a10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletsNum: 0
-  reloadTime: 1.5
-  bulletSpeed: 10
-  bullet: {fileID: 11400000, guid: 76006c33d9e057d43a431b7a5aa1164e, type: 2}
-  weaponryText: {fileID: 0}
   recoilForce: 5
+  reloadTime: 8
+  initialBulletNum: 80
+  fireRate: 0.1
+  bullet: {fileID: 11400000, guid: 76006c33d9e057d43a431b7a5aa1164e, type: 2}
   shootingPoint: {fileID: 3730729945176514446}
+  weaponIndex: 2
 --- !u!95 &3969019422637723450
 Animator:
   serializedVersion: 7
@@ -352,13 +353,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b51838ed2d85ca74ba7452b8ee3cd319, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletsNum: 0
-  reloadTime: 0
-  bulletSpeed: 10
-  bullet: {fileID: 11400000, guid: 198459120051d93448078b7fad601e65, type: 2}
-  weaponryText: {fileID: 0}
   recoilForce: 25
+  reloadTime: 10
+  initialBulletNum: 5
+  fireRate: 1
+  bullet: {fileID: 11400000, guid: 198459120051d93448078b7fad601e65, type: 2}
   shootingPoint: {fileID: 3730729945176514446}
+  weaponIndex: 3
 --- !u!95 &5898587997016937304
 Animator:
   serializedVersion: 7
@@ -535,13 +536,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60ea700f4d586ba428096583e749e339, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletsNum: 0
-  reloadTime: 0
-  bulletSpeed: 10
-  bullet: {fileID: 11400000, guid: 097a0b1c896ac934cbdca4fd38a7a275, type: 2}
-  weaponryText: {fileID: 0}
   recoilForce: 15
+  reloadTime: 5
+  initialBulletNum: 20
+  fireRate: 0.5
+  bullet: {fileID: 11400000, guid: 097a0b1c896ac934cbdca4fd38a7a275, type: 2}
   shootingPoint: {fileID: 3730729945176514446}
+  weaponIndex: 1
 --- !u!1 &9041122052130909120
 GameObject:
   m_ObjectHideFlags: 0
@@ -643,13 +644,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f1798a373d24fd45a6ffcb38bfcf2c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletsNum: 0
-  reloadTime: 0
-  bulletSpeed: 10
-  bullet: {fileID: 11400000, guid: 76006c33d9e057d43a431b7a5aa1164e, type: 2}
-  weaponryText: {fileID: 0}
   recoilForce: 20
+  reloadTime: 3
+  initialBulletNum: 5
+  fireRate: 0.5
+  bullet: {fileID: 11400000, guid: 76006c33d9e057d43a431b7a5aa1164e, type: 2}
   shootingPoint: {fileID: 3730729945176514446}
+  weaponIndex: 4
 --- !u!95 &517275876695583844
 Animator:
   serializedVersion: 7

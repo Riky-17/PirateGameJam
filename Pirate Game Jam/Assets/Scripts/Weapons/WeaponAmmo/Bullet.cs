@@ -8,8 +8,6 @@ public class Bullet : MonoBehaviour
 
     protected virtual void Awake() => rb = GetComponent<Rigidbody2D>();
 
-    // void Start() => rb.linearVelocity = transform.right * speed; // Bullet moves towards the right when instantiated
-
     void FixedUpdate()
     {
         RaycastHit2D raycastHit = Physics2D.Raycast(transform.position, transform.right, .5f);

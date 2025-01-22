@@ -6,6 +6,7 @@ public abstract class Enemy : MonoBehaviour, IHealth
 {
     protected Rigidbody2D rb;
     protected Animator anim;
+    SpriteRenderer sr;
 
     const float MAX_CAMERA_HEIGHT = 17f;
 
@@ -33,10 +34,15 @@ public abstract class Enemy : MonoBehaviour, IHealth
     public float Health { get; set; }
     public float MaxHealth { get; set; } = 150;
 
+    //how long should the red hit flash last for
+    float hitTime = .1f;
+    float hitTimer;
+
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        sr = GetComponent<SpriteRenderer>();
         //weapon = GetComponent<EnemyWeapon>();
         weapon = GetComponentInChildren<EnemyWeapon>();
         Health = MaxHealth;
@@ -56,13 +62,14 @@ public abstract class Enemy : MonoBehaviour, IHealth
     {
         // Plays Idle animation when not moving in x-axis, otherwise plays Walk animation
         if (MathF.Abs(rb.linearVelocityX) < .25f)
-        {
             anim.Play("Idle");
-        }
         else
-        {
             anim.Play("Walk");
-        }
+
+        if(hitTimer > 0)
+            hitTimer-= Time.deltaTime;
+        else
+            sr.color = Color.white;
 
         if(shootingTimer > lastShot)
             lastShot += Time.deltaTime;
@@ -212,6 +219,8 @@ public abstract class Enemy : MonoBehaviour, IHealth
     public void Damage(float damageAmount)
     {
         Health-= damageAmount;
+        hitTimer = hitTime;
+        sr.color = Color.red;
         Debug.Log(gameObject.name + " Health: " + Health);
         if(Health <= 0)
             Die();

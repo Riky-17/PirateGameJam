@@ -4,15 +4,24 @@ public class Civilian : MonoBehaviour, IHealth
 {
     public float Health { get; set; }
     public float MaxHealth { get; set; } = 50;
+    //how long should the red hit flash last for
+    protected float hitTime = .1f;
+    protected float hitTimer;
 
     protected Rigidbody2D rb;
+    protected SpriteRenderer sr;
 
     [SerializeField] protected float waitTime = 1;
     protected float waitTimer;
 
     protected Vector2 dir;
 
-    protected virtual void Awake() => rb = GetComponent<Rigidbody2D>();
+    protected virtual void Awake()
+    {
+        rb = GetComponent<Rigidbody2D>();
+        sr = GetComponent<SpriteRenderer>();
+        Health = MaxHealth;
+    }
 
     void Start()
     {
@@ -24,6 +33,11 @@ public class Civilian : MonoBehaviour, IHealth
 
     void Update()
     {
+        if(hitTimer > 0)
+            hitTimer-= Time.deltaTime;
+        else
+            sr.color = Color.white;
+
         if(waitTimer >= waitTime)
         {
             waitTimer = 0;
@@ -54,6 +68,8 @@ public class Civilian : MonoBehaviour, IHealth
     public void Damage(float damageAmount)
     {
         Health-= damageAmount;
+        hitTimer = hitTime;
+        sr.color = Color.red;
         Debug.Log(gameObject.name + " Health: " + Health);
         if(Health <= 0)
             Die();
@@ -62,6 +78,6 @@ public class Civilian : MonoBehaviour, IHealth
     //TODO
     public void Die()
     {
-        
+        Destroy(gameObject);
     }
 }

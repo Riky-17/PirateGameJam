@@ -11,7 +11,8 @@ public class PlayerMovement : MonoBehaviour, IHealth
     bool canMove = true;
 
     //weapon objects -> assigned in inspector
-    [SerializeField] GameObject[] weapons;
+    [SerializeField] WeaponSystem[] weapons;
+    WeaponSystem currentWeapon;
 
     //health system
     public float MaxHealth { get => maxHealth; set => maxHealth = value; }
@@ -20,25 +21,27 @@ public class PlayerMovement : MonoBehaviour, IHealth
     public float Health { get => health; set => health = value; }
     float health;
 
+    float hitTime = .1f;
+    float hitTimer;
+
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         health = maxHealth;
-    }
-
-    void Start()
-    {
-        //disabling game objects except for the first weapon 
-        DisablingWeapons();
-        weapons[0].SetActive(true);
+        currentWeapon = weapons[0];
     }
     
     void Update()
     {
+        if(hitTimer > 0)
+            hitTimer-= Time.deltaTime;
+        else
+            currentWeapon.ChangeSpriteColor(Color.white);
+        
         GetMovementInput();
         MousePosition();
         SpriteRotation();
-        SwitchWeapon();
+        GetWeaponInput();
     }
 
     void FixedUpdate() => Movement();
@@ -63,42 +66,29 @@ public class PlayerMovement : MonoBehaviour, IHealth
         }
     }
 
-    void SwitchWeapon()
+    void GetWeaponInput()
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            DisablingWeapons();
-            weapons[0].SetActive(true);
-        }
+            SwitchWeapon(0);
         else if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            DisablingWeapons();
-            weapons[1].SetActive(true);
-        }
+            SwitchWeapon(1);
         else if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            DisablingWeapons();
-            weapons[2].SetActive(true);
-        }
+            SwitchWeapon(2);
         else if (Input.GetKeyDown(KeyCode.Alpha4))
-        {
-            DisablingWeapons();
-            weapons[3].SetActive(true);
-        }
+            SwitchWeapon(3);
     }
 
-    void DisablingWeapons()
+    void SwitchWeapon(int index)
     {
-        foreach (var weapon in weapons)
-        {
-            weapon.SetActive(false);
-        }
+        WeaponSystem nextWeapon = weapons[index];
+        nextWeapon.gameObject.SetActive(true);
+        nextWeapon.ChangeSpriteColor(currentWeapon.WeaponSpriteColor());
+        currentWeapon.ChangeSpriteColor(Color.white);
+        currentWeapon.gameObject.SetActive(false);
+        currentWeapon = nextWeapon;
     }
-    
-    void MousePosition()
-    {
-        mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition); // Gets Vector2 mouse position
-    }
+
+    void MousePosition() => mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition); // Gets Vector2 mouse position
 
     void Movement()
     {
@@ -131,6 +121,8 @@ public class PlayerMovement : MonoBehaviour, IHealth
     public void Damage(float damageAmount)
     {
         health -= damageAmount;
+        currentWeapon.ChangeSpriteColor(Color.red);
+        hitTimer = hitTime;
         Debug.Log(gameObject.name + " Health: " + Health);
         if(health <= 0)
             Die();

@@ -82,7 +82,12 @@ public class WeaponDisplay : MonoBehaviour
     }
     public void OnClickMaxAmmo(string maxAmmo)
     {
-        this.damage.text = maxAmmo;
+        this.maxAmmo.text = maxAmmo;
     }
 
+    public void onClickWeaponInfo(WeaponSystem obj)
+    {
+       reloadTime.text = obj.reloadTime.ToString();
+       maxAmmo.text = obj.initialBulletNum.ToString();       
+    }
 }

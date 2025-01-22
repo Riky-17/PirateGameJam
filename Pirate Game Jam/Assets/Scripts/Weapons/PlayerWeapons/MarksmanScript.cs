@@ -85,6 +85,9 @@ public class MarksmanScript : WeaponSystem
                 //recoil
                 lastRecoil = recoilTime;
                 
+                //fire the shooting event
+                onShotFired?.Invoke(transform);
+                
                 //check ammo
                 if (bulletsNum <= 0)
                 {

@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aeaa94972211b344c867156bf5920d80, type: 3}
+  m_Name: AudioClips
+  m_EditorClassIdentifier: 
+  multipleBullets: {fileID: 8300000, guid: 680c1424199ddd749aab88cde3756215, type: 3}
+  individualBullets:
+  - {fileID: 8300000, guid: 8e8909e393c457b4f9000d5ef1c4b33a, type: 3}
+  - {fileID: 8300000, guid: 6728d78cbb3f1ef48a6b484b4c8eaf4d, type: 3}
+  - {fileID: 8300000, guid: 6f75d6cdc24ae6a41b364aa07ad3e1d9, type: 3}
+  - {fileID: 8300000, guid: 9f3e0dd255bb4424db50d54ead7d87a7, type: 3}
+  - {fileID: 8300000, guid: 9437da1e5330dca4d831b3dcff1fd0cc, type: 3}
+  casingDrops:
+  - {fileID: 8300000, guid: a83f7827976705143b1f66c72334e237, type: 3}
+  - {fileID: 8300000, guid: da771917d20b5134fafc4f6cf6a8098d, type: 3}
+  - {fileID: 8300000, guid: 1bc94b158620a3244bc179e98b2c29df, type: 3}
+  - {fileID: 8300000, guid: addb4bc705a47404bba2d67876aec2e3, type: 3}
+  - {fileID: 8300000, guid: 480f2f391d8bf054f9201745923a06b9, type: 3}
+  - {fileID: 8300000, guid: 736e54c9ba7a32d4299c96a441aa7355, type: 3}
+  - {fileID: 8300000, guid: 7a535f1c65b2f4442b61324d12b4089a, type: 3}
+  - {fileID: 8300000, guid: f82af24d7a286e94f878a98910415686, type: 3}
+  - {fileID: 8300000, guid: 4f266af31fde87a4787b1064140dcf41, type: 3}
+  - {fileID: 8300000, guid: d27e04e8f5fd39e48a760782be706d2c, type: 3}
+  - {fileID: 8300000, guid: db3a97e23f7ed5946849b2e9fc855689, type: 3}
+  - {fileID: 8300000, guid: c03ed4f01ce00f044b6960d16a4eda21, type: 3}
+  - {fileID: 8300000, guid: dd3b346e8b645d14fba1135d36c4e087, type: 3}
+  - {fileID: 8300000, guid: b0752793fc09883489b32cb7fed06d17, type: 3}
+  - {fileID: 8300000, guid: 3c904e4f50716ed439d4f419b53ee6d2, type: 3}
+  explosion: {fileID: 8300000, guid: 6e58c7f594e05f542853d74fd32e007b, type: 3}
+  farExplosions:
+  - {fileID: 8300000, guid: 7a4dd577851cdb541b0b810d0e1b0bac, type: 3}
+  - {fileID: 8300000, guid: f9afe350561bebb4783c8d9f5db4d71b, type: 3}
+  shotgunPump:
+  - {fileID: 8300000, guid: dd33773c086487d4982d39505d68729a, type: 3}
+  - {fileID: 8300000, guid: 9182dcb81d28ea24098e098a3c161bbe, type: 3}
+  - {fileID: 8300000, guid: d7c2b8efb00ffeb49a9b664b257ceb1a, type: 3}
+  - {fileID: 8300000, guid: f4cf23a2dfd3c504f8c4ab36a31f2f27, type: 3}
+  - {fileID: 8300000, guid: a1f5a9e748a3faa4ba5db2b7c4ec1918, type: 3}
+  - {fileID: 8300000, guid: 96c7281d2d6de3346b29898cd8b7f63f, type: 3}
+  shotgunReload:
+  - {fileID: 8300000, guid: ea9777917ec3a2940af97dc912b85eed, type: 3}
+  - {fileID: 8300000, guid: c49c772c756bf6940b27b38a748dd486, type: 3}
+  - {fileID: 8300000, guid: f5282ae06aedcfe41a104e638c45e2d1, type: 3}
+  - {fileID: 8300000, guid: 0fa276584ca980e4790c0132e2301c0a, type: 3}
+  - {fileID: 8300000, guid: b492697507185414893e211227da9233, type: 3}
+  - {fileID: 8300000, guid: 7ad994c541f01b04bb2187a1c1cc94ca, type: 3}
+  - {fileID: 8300000, guid: bc9589e24fc48f54090c18959ee4d3ca, type: 3}
+  - {fileID: 8300000, guid: 1b497ba55250d5c4b9c8c873c50ccdf9, type: 3}
+  sniperReload:
+  - {fileID: 8300000, guid: 9475b22ef762e774b968ba267780ddba, type: 3}
+  - {fileID: 8300000, guid: fe06cc8b76e19b94f87e59ce8ba2bb35, type: 3}
+  - {fileID: 8300000, guid: 65bcd8c099bcd1a4385607f58a56bcd8, type: 3}
+  - {fileID: 8300000, guid: 6448fc56aebbf9c4aacb216eb784a9cd, type: 3}
+  - {fileID: 8300000, guid: 87b6c96d0f0a796429ef5a131d938fd1, type: 3}

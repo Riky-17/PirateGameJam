@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Assault-ShotgunBullet
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: -5718393696883301444, guid: 81ebf33e32ebf724d8b4291ae1995a40, type: 3}
-  speed: 5
-  damage: 10
+  speed: 10
+  damage: 5

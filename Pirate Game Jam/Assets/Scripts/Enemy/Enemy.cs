@@ -7,6 +7,8 @@ public abstract class Enemy : MonoBehaviour, IHealth
     protected Rigidbody2D rb;
     protected Animator anim;
 
+    const float MAX_CAMERA_HEIGHT = 17f;
+
     [SerializeField] List<Vector2> waypoints;
     int waypointIndex;
     //the time to spend between each waypoint
@@ -28,7 +30,8 @@ public abstract class Enemy : MonoBehaviour, IHealth
 
     protected PlayerMovement player;
 
-    public float Health { get; set; } = 100;
+    public float Health { get; set; }
+    public float MaxHealth { get; set; } = 150;
 
     void Awake()
     {
@@ -36,6 +39,7 @@ public abstract class Enemy : MonoBehaviour, IHealth
         anim = GetComponent<Animator>();
         //weapon = GetComponent<EnemyWeapon>();
         weapon = GetComponentInChildren<EnemyWeapon>();
+        Health = MaxHealth;
 
         if (weapon == null)
             return;
@@ -51,7 +55,7 @@ public abstract class Enemy : MonoBehaviour, IHealth
     void Update()
     {
         // Plays Idle animation when not moving in x-axis, otherwise plays Walk animation
-        if (rb.linearVelocityX == 0f)
+        if (MathF.Abs(rb.linearVelocityX) < .25f)
         {
             anim.Play("Idle");
         }
@@ -65,8 +69,9 @@ public abstract class Enemy : MonoBehaviour, IHealth
 
         if (player != null)
         {
-            
-            if ((player.transform.position - transform.position).magnitude > lookDistance)
+            Vector3 flatPlayerPos = player.transform.position;
+            flatPlayerPos.y = transform.position.y;
+            if ((flatPlayerPos - transform.position).magnitude > lookDistance / 2)
             {
                 player = null;
                 weapon.Reset();
@@ -159,28 +164,17 @@ public abstract class Enemy : MonoBehaviour, IHealth
         Vector3 playerFlat = player.transform.position;
         playerFlat.y = transform.position.y;
         Vector2 enemyToPlayerFlat = playerFlat - transform.position;
+        float enemyToPlayerFlatDist = enemyToPlayerFlat.magnitude;
         Vector2 dir = enemyToPlayerFlat.normalized;
 
         FaceDirection(dir);
-
-        // getting the non flat distance to calculate the actual distance
-        Vector2 enemyToPlayer = player.transform.position - transform.position;
-        float enemyToPlayerDist = enemyToPlayer.magnitude;
-        bool isPlayerWithinDist = enemyToPlayerDist < maxDistance + maxDistanceOffset && enemyToPlayerDist > maxDistance - maxDistanceOffset;
-
-        //getting the dot product to see if the player is above the enemy
-        float dotProduct = Vector3.Dot(transform.up, enemyToPlayer.normalized);
-        float dotProductOffset = .9f;
-        //also checks if player is below
-        bool isPlayerAbove = dotProduct >= dotProductOffset || dotProduct <= -dotProductOffset;
-
-        if(isPlayerWithinDist || isPlayerAbove)
+        if(enemyToPlayerFlatDist < (maxDistance + maxDistanceOffset) / 2 && enemyToPlayerFlatDist > (maxDistance - maxDistanceOffset) / 2)
         {
             rb.linearVelocityX = 0;
             return;
         }
         
-        if(enemyToPlayerDist < maxDistance - maxDistanceOffset)
+        if(enemyToPlayerFlatDist < (maxDistance - maxDistanceOffset) / 2)
             dir = -dir;
         
         AddForce(dir, 3);
@@ -188,7 +182,10 @@ public abstract class Enemy : MonoBehaviour, IHealth
 
     protected void LookForPlayer()
     {
-        colliders = Physics2D.OverlapCircleAll(transform.position, lookDistance);
+        //getting a flat position of this enemy
+        Vector2 enemyFlatPos = transform.position;
+        enemyFlatPos.y = 0;
+        colliders = Physics2D.OverlapBoxAll(enemyFlatPos, new(lookDistance, MAX_CAMERA_HEIGHT), 0);
 
         foreach (Collider2D collider in colliders)
         {
@@ -213,7 +210,7 @@ public abstract class Enemy : MonoBehaviour, IHealth
     public void Damage(float damageAmount)
     {
         Health-= damageAmount;
-        Debug.Log(Health);
+        Debug.Log(gameObject.name + " Health: " + Health);
         if(Health <= 0)
             Die();
     }
@@ -236,15 +233,17 @@ public abstract class Enemy : MonoBehaviour, IHealth
     {
         if (debugMode)
         {
+            Vector2 flatPos = new(transform.position.x, 0);
             Gizmos.color = Color.green;
-            Gizmos.DrawWireSphere(transform.position, lookDistance);
+            Gizmos.DrawSphere(flatPos, .25f);
+            Gizmos.DrawWireCube(flatPos, new(lookDistance, MAX_CAMERA_HEIGHT));
     
             Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(transform.position, maxDistance);
+            Gizmos.DrawWireCube(flatPos, new(maxDistance, MAX_CAMERA_HEIGHT));
     
             Gizmos.color = Color.blue;
-            Gizmos.DrawWireSphere(transform.position, maxDistance + maxDistanceOffset);
-            Gizmos.DrawWireSphere(transform.position, maxDistance - maxDistanceOffset);
+            Gizmos.DrawWireCube(flatPos, new(maxDistance - maxDistanceOffset, MAX_CAMERA_HEIGHT));
+            Gizmos.DrawWireCube(flatPos, new(maxDistance + maxDistanceOffset, MAX_CAMERA_HEIGHT));
             
             Gizmos.color = Color.red;
             foreach (Vector2 waypoint in waypoints)

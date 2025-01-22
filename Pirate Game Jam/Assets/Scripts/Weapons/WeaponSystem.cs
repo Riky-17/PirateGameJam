@@ -17,7 +17,6 @@ public abstract class WeaponSystem : MonoBehaviour
     [SerializeField] protected BulletSO bullet;
     internal bool isReloading = false;
 
-
     public abstract void Shoot(Transform muzzle, BulletSO bullet); //shoot method called
 
     public WeaponDisplay weaponryText;

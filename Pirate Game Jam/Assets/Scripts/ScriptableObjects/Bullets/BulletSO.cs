@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "NewBullet", menuName = "Bullet SO")]
+[CreateAssetMenu(fileName = "NewBullet", menuName = "ScriptableObject/Bullet")]
 public class BulletSO : ScriptableObject
 {
     public Bullet bulletPrefab;

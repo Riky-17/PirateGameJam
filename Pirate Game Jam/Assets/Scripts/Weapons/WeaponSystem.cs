@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Cinemachine;
@@ -7,6 +8,9 @@ using UnityEngine.Rendering;
 
 public abstract class WeaponSystem : MonoBehaviour
 {
+    //event fired when the weapon shoots
+    public static Action<Transform> onShotFired;
+
     internal int initialBulletNum;
     public int bulletsNum;
     public float reloadTime;

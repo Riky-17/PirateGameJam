@@ -83,6 +83,9 @@ public class AssaultScript : WeaponSystem
                         Bullet tempBullet = Instantiate(bullet.bulletPrefab, muzzle.position, transform.rotation * bulletSprite);
                         //initializing the bullet script
                         tempBullet.Init(bullet.speed, pm.gameObject.layer, bullet.damage);
+                        
+                        //fire the shooting event
+                        onShotFired?.Invoke(transform);
 
                         bulletsNum--;
                         weaponryText.updateAmmo(bulletsNum.ToString());

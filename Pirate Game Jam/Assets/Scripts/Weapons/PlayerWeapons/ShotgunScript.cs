@@ -1,16 +1,15 @@
+using System;
 using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor.Rendering;
 using UnityEngine;
 
 public class ShotgunScript : WeaponSystem
 {
+    public static Action<Transform> onShotgunPump;
+
     Rigidbody2D rb;
     SpriteRenderer sr;
     PlayerMovement pm;
     Animator anim;
-
-    
 
     //how much should the recoil last for
     float recoilTime = .3f;
@@ -76,6 +75,9 @@ public class ShotgunScript : WeaponSystem
                     Bullet tempBullet = Instantiate(bullet.bulletPrefab, muzzle.position, muzzle.rotation * tempRotation);
                     //initializing the bullet script
                     tempBullet.Init(bullet.speed, pm.gameObject.layer, bullet.damage);
+                    
+                    //fire the shooting event
+                    onShotFired?.Invoke(transform);
 
                     Destroy(tempBullet.gameObject, 1f);
                 }
@@ -87,6 +89,8 @@ public class ShotgunScript : WeaponSystem
 
                 //recoil
                 lastRecoil = recoilTime;
+
+                onShotgunPump?.Invoke(transform);
 
                 //check ammo
                 if (bulletsNum == 0)

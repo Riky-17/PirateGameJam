@@ -201,6 +201,8 @@ public abstract class Enemy : MonoBehaviour, IHealth
     {
         Vector2 velocity = dir * speed;
         Vector2 velocityDiff = velocity - rb.linearVelocity;
+        if(dir == Vector2.zero)
+            accelRate = 6;
         Vector2 force = velocityDiff * accelRate;
         rb.AddForce(force);
     }
@@ -218,7 +220,7 @@ public abstract class Enemy : MonoBehaviour, IHealth
     //TODO
     public void Die()
     {
-        
+        Destroy(gameObject);
     }
 
     public void FaceDirection(Vector2 dir)

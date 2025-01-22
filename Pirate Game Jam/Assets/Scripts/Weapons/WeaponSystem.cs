@@ -67,7 +67,6 @@ public abstract class WeaponSystem : MonoBehaviour
         }
 
         weaponryText.disablingLoadingPanels(weaponIndex);
-        weaponryText.updateAmmo(initialBulletNum.ToString());
         Debug.Log("Coroutine N: " + amountOfCoroutines + " Finished");
         canShoot = true;
         bulletsNum = initialBulletNum;

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7627233100551657116}
   - component: {fileID: -5718393696883301444}
   m_Layer: 0
-  m_Name: Assault-Shotgun Bullet
+  m_Name: AssaultBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -79,7 +79,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 2208703988740019828, guid: 22a0d10ef3deb0f49b0dd313344a9e94, type: 3}
+  m_Sprite: {fileID: 5856914108408290220, guid: 2dfafeac309bb23498cf3406b2e20831, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -155,7 +155,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.125, y: 0.0625}
+    oldSize: {x: 0.125, y: 0.125}
     newSize: {x: 0.125, y: 0.0625}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -175,4 +175,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68360411566dfe14185ac6eb3a39b323, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10

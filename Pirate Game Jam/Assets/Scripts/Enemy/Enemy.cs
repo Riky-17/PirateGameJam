@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Enemy : MonoBehaviour, IHealth
+public abstract class Enemy : MonoBehaviour, IHealth, IItemPicker
 {
     protected Rigidbody2D rb;
     protected Animator anim;
@@ -20,6 +20,10 @@ public abstract class Enemy : MonoBehaviour, IHealth
     [SerializeField] protected float lookDistance = 5;
     [SerializeField] protected float maxDistance = 3;
     [SerializeField] protected float speed = 5;
+
+    float speedBoost;
+    float speedBoostDuration;
+
     protected float maxDistanceOffset = .75f;
     
     float shootingTimer = 2;
@@ -204,6 +208,14 @@ public abstract class Enemy : MonoBehaviour, IHealth
         }
     }
 
+    public void FaceDirection(Vector2 dir)
+    {
+        if (dir.x < 0) // Left Direction
+            transform.rotation = Quaternion.Euler(0, 180, 0);
+        else if (dir.x > 0) // Right Direction
+            transform.rotation = Quaternion.identity;
+    }
+
     protected void AddForce(Vector2 dir, float accelRate)
     {
         Vector2 velocity = dir * speed;
@@ -215,6 +227,14 @@ public abstract class Enemy : MonoBehaviour, IHealth
     }
 
     protected virtual void Shoot(Vector2 dir, Quaternion aimRot) => weapon.Shoot(player, aimRot);
+
+    public void Heal(float healAmount)
+    {
+        Health+= healAmount;
+        if(Health > MaxHealth)
+            Health = MaxHealth;
+        Debug.Log(gameObject.name + " Health: " + Health);
+    }
 
     public void Damage(float damageAmount)
     {
@@ -232,12 +252,13 @@ public abstract class Enemy : MonoBehaviour, IHealth
         Destroy(gameObject);
     }
 
-    public void FaceDirection(Vector2 dir)
+    public void PickItem(PickableItem item) => item.Effect(this);
+
+    //temporary for testing speed boost
+    public void SpeedBoost(float speedBoostAmount, float duration)
     {
-        if (dir.x < 0) // Left Direction
-            transform.rotation = Quaternion.Euler(0, 180, 0);
-        else if (dir.x > 0) // Right Direction
-            transform.rotation = Quaternion.identity;
+        speedBoost = speedBoostAmount;
+        speedBoostDuration = duration;
     }
 
     void OnDrawGizmos()

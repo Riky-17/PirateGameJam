@@ -20,9 +20,9 @@ public abstract class WeaponSystem : MonoBehaviour
     [SerializeField] protected float recoilForce = 15f;
 
     //weapon stats
-    public float ReloadTime { get => reloadTime; private set => reloadTime = value;}
+    public float ReloadTime => reloadTime;
     [SerializeField] float reloadTime;
-    public int InitialBulletNum { get => initialBulletNum; private set => initialBulletNum = value; }
+    public float InitialBulletNum => initialBulletNum;
     [SerializeField] int initialBulletNum = 3;
     protected int bulletsNum;
     [SerializeField] protected float fireRate;

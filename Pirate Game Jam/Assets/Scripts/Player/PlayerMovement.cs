@@ -1,12 +1,16 @@
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour, IHealth
+public class PlayerMovement : MonoBehaviour, IHealth, IItemPicker
 {
     [HideInInspector] public Vector2 mousePos;
     Rigidbody2D rb;
     Vector2 moveInput;
 
     [SerializeField] float speed = 6;
+
+    float speedBoost;
+    float speedBoostDuration;
+    float speedBoosTimer;
 
     bool canMove = true;
 
@@ -21,8 +25,10 @@ public class PlayerMovement : MonoBehaviour, IHealth
     public float Health { get => health; set => health = value; }
     float health;
 
-    float hitTime = .1f;
-    float hitTimer;
+    //fields for the flash
+    float longColorFlashTimer = .2f;
+    ShortColorFlash shortColorFlash;
+    LongColorFlash longColorFlash;
 
     void Awake()
     {
@@ -33,11 +39,8 @@ public class PlayerMovement : MonoBehaviour, IHealth
     
     void Update()
     {
-        if(hitTimer > 0)
-            hitTimer-= Time.deltaTime;
-        else
-            currentWeapon.ChangeSpriteColor(Color.white);
-        
+        ColorFlash();
+        CheckSpeedBoost();
         GetMovementInput();
         MousePosition();
         SpriteRotation();
@@ -63,6 +66,63 @@ public class PlayerMovement : MonoBehaviour, IHealth
                 moveInput += Vector2.right;
 
             moveInput = moveInput.normalized;
+        }
+    }
+
+    void ColorFlash()
+    {
+        if(shortColorFlash.duration > 0)
+        {
+            currentWeapon.ChangeSpriteColor(shortColorFlash.Color);
+            shortColorFlash.duration-= Time.deltaTime;
+            if(shortColorFlash.duration <= 0)
+            {
+                currentWeapon.ChangeSpriteColor(Color.white);
+                shortColorFlash = default;
+            }
+            else
+            {
+                if(longColorFlash.duration > 0)
+                    longColorFlash.duration-= Time.deltaTime;
+                return;
+            }
+        }
+
+        if(longColorFlash.duration > 0)
+        {
+            longColorFlash.duration-= Time.deltaTime;
+            longColorFlashTimer-= Time.deltaTime;
+
+            if(longColorFlashTimer > .1f)
+                currentWeapon.ChangeSpriteColor(longColorFlash.Color);
+            else if(longColorFlashTimer <= 0)
+                currentWeapon.ChangeSpriteColor(Color.white);
+            
+            if(longColorFlashTimer <= 0)
+                longColorFlashTimer = .2f;
+
+            if(longColorFlash.duration <= 0)
+            {
+                currentWeapon.ChangeSpriteColor(Color.white);
+                longColorFlash = default;
+            } 
+            else
+                return;
+        }
+    }
+
+    void CheckSpeedBoost()
+    {
+        if(speedBoost != 0)
+        {
+            if(speedBoosTimer < speedBoostDuration)
+                speedBoosTimer+= Time.deltaTime;
+            else
+            {
+                speedBoosTimer = 0;
+                speedBoostDuration = 0;
+                speedBoost = 0;
+            }
         }
     }
 
@@ -93,7 +153,7 @@ public class PlayerMovement : MonoBehaviour, IHealth
     void Movement()
     {
         //physics calc
-        Vector2 velocityInput = moveInput * speed;
+        Vector2 velocityInput = moveInput * (speed + speedBoost);
         Vector3 velocityDiff = velocityInput - rb.linearVelocity;
         float accelRate = 7f;
         Vector3 force = velocityDiff * accelRate;
@@ -118,12 +178,20 @@ public class PlayerMovement : MonoBehaviour, IHealth
         }
     }
 
+    public void Heal(float healAmount)
+    {
+        health += healAmount;
+        shortColorFlash = new(Color.green);
+        if(health > maxHealth)
+            health = maxHealth;
+        Debug.Log(gameObject.name + " Health: " + health);
+    }
+
     public void Damage(float damageAmount)
     {
         health -= damageAmount;
-        currentWeapon.ChangeSpriteColor(Color.red);
-        hitTimer = hitTime;
-        Debug.Log(gameObject.name + " Health: " + Health);
+        shortColorFlash = new(Color.red);
+        Debug.Log(gameObject.name + " Health: " + health);
         if(health <= 0)
             Die();
     }
@@ -132,5 +200,15 @@ public class PlayerMovement : MonoBehaviour, IHealth
     public void Die()
     {
         
+    }
+
+    public void PickItem(PickableItem item) => item.Effect(this);
+
+    //temporary for testing speed boost
+    public void SpeedBoost(float speedBoostAmount, float duration)
+    {
+        speedBoost = speedBoostAmount;
+        speedBoostDuration = duration;
+        longColorFlash = new(Color.yellow, duration);
     }
 }

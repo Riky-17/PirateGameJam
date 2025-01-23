@@ -7,6 +7,9 @@ public class Obstacle : MonoBehaviour, IHealth
 
     void Awake() => Health = MaxHealth;
 
+    //obstacles don't heal
+    public void Heal(float healAmount) {}
+
     public void Damage(float damageAmount)
     {
         Health -= damageAmount;

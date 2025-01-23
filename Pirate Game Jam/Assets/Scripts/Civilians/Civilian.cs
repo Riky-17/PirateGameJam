@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Civilian : MonoBehaviour, IHealth
+public class Civilian : MonoBehaviour, IHealth, IItemPicker
 {
     public float Health { get; set; }
     public float MaxHealth { get; set; } = 50;
@@ -65,6 +65,21 @@ public class Civilian : MonoBehaviour, IHealth
             transform.rotation = Quaternion.identity;
     }
 
+    void ThrowItem(Vector3 dir, PickableItem item)
+    {
+        PickableItem itemToThrow = Instantiate(item, transform.position + dir, Quaternion.identity);
+        itemToThrow.GetComponent<Rigidbody2D>().AddForce(dir * 5);
+        Destroy(item);
+    }
+
+    public void Heal(float healAmount)
+    {
+        Health+= healAmount;
+        if(Health > MaxHealth)
+            Health = MaxHealth;
+        Debug.Log(gameObject.name + " Health: " + Health);
+    }
+
     public void Damage(float damageAmount)
     {
         Health-= damageAmount;
@@ -79,5 +94,22 @@ public class Civilian : MonoBehaviour, IHealth
     public void Die()
     {
         Destroy(gameObject);
+    }
+
+    public void PickItem(PickableItem item)
+    {
+        switch (item)
+        {
+            case StatBoostItem:
+                Vector2 civilianToItem = new(item.transform.position.x - transform.position.x, 0);
+                civilianToItem = civilianToItem.normalized;
+                civilianToItem += Vector2.up;
+                civilianToItem = civilianToItem.normalized;
+                ThrowItem(civilianToItem, item);
+            break;
+            default:
+                item.Effect(this);
+            break;
+        }
     }
 }

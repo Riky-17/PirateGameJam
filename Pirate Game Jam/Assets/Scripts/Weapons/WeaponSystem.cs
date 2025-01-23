@@ -26,8 +26,11 @@ public abstract class WeaponSystem : MonoBehaviour
     [SerializeField] int initialBulletNum = 3;
     protected int bulletsNum;
     [SerializeField] protected float fireRate;
+    protected float fireRateTimer;
+    public static float FireRateMultiplier = 1;
 
     [SerializeField] protected BulletSO bullet;
+    public static float DamageMultiplier = 1;
     [SerializeField] Transform shootingPoint;
 
     protected bool canShoot = true;
@@ -53,10 +56,6 @@ public abstract class WeaponSystem : MonoBehaviour
         pm = GetComponentInParent<PlayerMovement>();
 
         bulletsNum = initialBulletNum;
-        Debug.Log(rb);
-        Debug.Log(sr);
-        Debug.Log(anim);
-        Debug.Log(pm);
     }
 
     protected virtual void OnEnable()
@@ -73,11 +72,14 @@ public abstract class WeaponSystem : MonoBehaviour
             canShoot = false;
             Reload(this);
         }
+        
+        fireRateTimer = fireRate;
     }
 
     void Update()
     {
-        Shoot(shootingPoint, bullet);
+        if(PanelsManager.canReadInput && Input.GetMouseButton(0) && canShoot && bulletsNum > 0 && CheckFireRate())
+            Shoot(shootingPoint, bullet);
         if (Input.GetKeyDown(KeyCode.R))
             Reload(this);
     }
@@ -108,6 +110,15 @@ public abstract class WeaponSystem : MonoBehaviour
                 weaponryText.disablingLoadingPanels(weaponIndex);
             }
         }
+    }
+
+    public bool CheckFireRate()
+    {
+        if(fireRateTimer >= fireRate * FireRateMultiplier)
+            return true;
+
+        fireRateTimer+= Time.deltaTime;
+        return false;
     }
     
     public IEnumerator ReloadCoroutine()
@@ -154,6 +165,8 @@ public abstract class WeaponSystem : MonoBehaviour
             anim.Play("Idle"); // Plays Idle animation when recoil is finished
         }
     }
+
+    protected void InitBullet(Bullet bullet) => bullet.Init(this.bullet.speed, pm.gameObject.layer, this.bullet.damage * DamageMultiplier);
 
     public Color WeaponSpriteColor() => sr.color;
     public void ChangeSpriteColor(Color color) => sr.color = color;

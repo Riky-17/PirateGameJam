@@ -21,13 +21,12 @@ public abstract class Enemy : MonoBehaviour, IHealth, IItemPicker
     [SerializeField] protected float maxDistance = 3;
     [SerializeField] protected float speed = 5;
 
-    float speedBoost;
-    float speedBoostDuration;
-
     protected float maxDistanceOffset = .75f;
     
     float shootingTimer = 2;
     float  lastShot = 2;
+    float fireRateMultiplier = 1;
+
     Collider2D[] colliders;
 
     //the type of weapon the enemy has
@@ -38,9 +37,16 @@ public abstract class Enemy : MonoBehaviour, IHealth, IItemPicker
     public float Health { get; set; }
     public float MaxHealth { get; set; } = 150;
 
-    //how long should the red hit flash last for
-    float hitTime = .1f;
-    float hitTimer;
+    //fields for the flash
+    float intervalTimer;
+    ShortColorFlash shortColorFlash;
+    LongColorFlash longColorFlash;
+
+    //statBoostTimer
+    float damageBoostTime;
+    float damageBoostTimer;
+    float fireRateBoostTime;
+    float fireRateBoostTimer;
 
     void Awake()
     {
@@ -50,6 +56,7 @@ public abstract class Enemy : MonoBehaviour, IHealth, IItemPicker
         //weapon = GetComponent<EnemyWeapon>();
         weapon = GetComponentInChildren<EnemyWeapon>();
         Health = MaxHealth;
+        longColorFlash = new();
 
         if (weapon == null)
             return;
@@ -70,13 +77,11 @@ public abstract class Enemy : MonoBehaviour, IHealth, IItemPicker
         else
             anim.Play("Walk");
 
-        if(hitTimer > 0)
-            hitTimer-= Time.deltaTime;
-        else
-            sr.color = Color.white;
-
         if(shootingTimer > lastShot)
             lastShot += Time.deltaTime;
+
+        CheckStatBoost();
+        ColorFlash();
 
         if (player != null)
         {
@@ -110,7 +115,7 @@ public abstract class Enemy : MonoBehaviour, IHealth, IItemPicker
             Quaternion aimRot = Quaternion.LookRotation(forward, upwards);
             weapon.SpriteRotation(aimRot);
 
-            if(lastShot >= shootingTimer)
+            if(lastShot >= shootingTimer * fireRateMultiplier)
             {
                 //doing it custom for assault rifle since it is the only automatic weapon
                 if(weapon is EnemyAssaultRifle assaultRifle)
@@ -143,6 +148,68 @@ public abstract class Enemy : MonoBehaviour, IHealth, IItemPicker
                 weapon.Idle();
             }
         }
+    }
+
+    void CheckStatBoost()
+    {
+        if(damageBoostTime != 0)
+        {
+            if (damageBoostTimer >= damageBoostTime)
+            {
+                weapon.damageMultiplier = 1;
+                damageBoostTime = 0;
+                damageBoostTimer = 0;
+            }
+            else
+                damageBoostTimer+= Time.deltaTime;
+        }
+
+        if(fireRateBoostTime != 0)
+        {
+            if (fireRateBoostTimer >= fireRateBoostTime)
+            {
+                fireRateMultiplier = 1;
+                fireRateBoostTime = 0;
+                fireRateBoostTimer = 0;
+            }
+            else
+                fireRateBoostTimer+= Time.deltaTime;
+        }
+    }
+
+    void ColorFlash()
+    {
+        if(shortColorFlash.duration > 0)
+        {
+            sr.color = shortColorFlash.Color;
+            shortColorFlash.duration-= Time.deltaTime;
+            if(shortColorFlash.duration <= 0)
+            {
+                sr.color = Color.white;
+                shortColorFlash = default;
+            }
+            else
+            {
+                if(!longColorFlash.IsEmpty())
+                    longColorFlash.ReduceDurations(Time.deltaTime);
+                return;
+            }
+        }
+
+        if(!longColorFlash.IsEmpty())
+        {
+            if(intervalTimer <= longColorFlash.Interval)
+                intervalTimer+= Time.deltaTime;
+            else
+                intervalTimer = 0;
+
+            sr.color = longColorFlash.GetColor(intervalTimer);
+            longColorFlash.ReduceDurations(Time.deltaTime);
+
+            return;
+        }
+
+        sr.color = Color.white;
     }
 
     protected void Patrol()
@@ -233,14 +300,14 @@ public abstract class Enemy : MonoBehaviour, IHealth, IItemPicker
         Health+= healAmount;
         if(Health > MaxHealth)
             Health = MaxHealth;
+        shortColorFlash = new(Color.green);
         Debug.Log(gameObject.name + " Health: " + Health);
     }
 
     public void Damage(float damageAmount)
     {
         Health-= damageAmount;
-        hitTimer = hitTime;
-        sr.color = Color.red;
+        shortColorFlash = new(Color.red);
         Debug.Log(gameObject.name + " Health: " + Health);
         if(Health <= 0)
             Die();
@@ -255,11 +322,18 @@ public abstract class Enemy : MonoBehaviour, IHealth, IItemPicker
 
     public void PickItem(PickableItem item) => item.Effect(this);
 
-    //temporary for testing speed boost
-    public void SpeedBoost(float speedBoostAmount, float duration)
+    public void DamageBoost(float DamageBoostAmount, float duration)
     {
-        speedBoost = speedBoostAmount;
-        speedBoostDuration = duration;
+        weapon.damageMultiplier = DamageBoostAmount;
+        damageBoostTime+= duration;
+        longColorFlash.AddColor(new(0.2f, 0.6f, 1), duration);
+    }
+
+    public void FireRateBoost(float FireRateBoostAmount, float duration)
+    {
+        fireRateMultiplier = FireRateBoostAmount;
+        fireRateBoostTime+= duration;
+        longColorFlash.AddColor(Color.yellow, duration);
     }
 
     void OnDrawGizmos()

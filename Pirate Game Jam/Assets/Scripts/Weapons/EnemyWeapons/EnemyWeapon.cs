@@ -12,6 +12,7 @@ public abstract class EnemyWeapon : MonoBehaviour
     protected bool isShooting;
 
     [SerializeField] protected BulletSO bulletSO;
+    [HideInInspector] public float damageMultiplier = 1;
 
     public Transform shootingPoint;
 
@@ -20,6 +21,7 @@ public abstract class EnemyWeapon : MonoBehaviour
 
     public abstract void Shoot(PlayerMovement player, Quaternion aimRotation);
     public abstract void Idle();
+    protected void InitBullet(Bullet bullet) => bullet.Init(bulletSO.speed, attachedEnemy.layer, bulletSO.damage * damageMultiplier);
 
     void Awake()
     {

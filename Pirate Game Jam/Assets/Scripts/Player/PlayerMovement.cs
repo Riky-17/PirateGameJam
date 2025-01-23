@@ -140,12 +140,15 @@ public class PlayerMovement : MonoBehaviour, IHealth, IItemPicker
 
     void SwitchWeapon(int index)
     {
-        WeaponSystem nextWeapon = weapons[index];
-        nextWeapon.gameObject.SetActive(true);
-        nextWeapon.ChangeSpriteColor(currentWeapon.WeaponSpriteColor());
-        currentWeapon.ChangeSpriteColor(Color.white);
-        currentWeapon.gameObject.SetActive(false);
-        currentWeapon = nextWeapon;
+        if (weapons[index] != currentWeapon)
+        {
+            WeaponSystem nextWeapon = weapons[index];
+            nextWeapon.gameObject.SetActive(true);
+            nextWeapon.ChangeSpriteColor(currentWeapon.WeaponSpriteColor());
+            currentWeapon.ChangeSpriteColor(Color.white);
+            currentWeapon.gameObject.SetActive(false);
+            currentWeapon = nextWeapon;
+        }
     }
 
     void MousePosition() => mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition); // Gets Vector2 mouse position

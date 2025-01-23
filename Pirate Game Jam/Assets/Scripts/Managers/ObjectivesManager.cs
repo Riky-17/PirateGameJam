@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class ObjectivesManager : MonoBehaviour
 {
@@ -24,10 +25,9 @@ public class ObjectivesManager : MonoBehaviour
 
    
     //objectives accomplished
-    private bool accompObjective1 = false;
-    private bool accompObjective2 = false;
-    private bool accompObjective3 = false;
-    
+    public bool accompObjective1 = false;
+    public bool accompObjective2 = false;
+    public bool accompObjective3 = false;
 
     public static ObjectivesManager Instance { get; private set; }
 
@@ -100,19 +100,26 @@ public class ObjectivesManager : MonoBehaviour
         {
             if (objectives.TryGetValue(1, out byte value))
             {
-                UpdateDic(ref value, ref accompObjective1);
+                UpdateDic(ref value, ref accompObjective1, 3);
             }
         }
         if (initialCiviliansNum != GameManager.Instance.Civilians.Count && !accompObjective2)
         {
             if (objectives.TryGetValue(2, out byte value))
             {
-                UpdateDic(ref value, ref accompObjective2);
+                UpdateDic(ref value, ref accompObjective2, 3);
             }
         }
-        
+        if (initialCiviliansNum != GameManager.Instance.Civilians.Count && !accompObjective3)
+        {
+            if (objectives.TryGetValue(3, out byte value))
+            {
+                UpdateDic(ref value, ref accompObjective3, 3);
+            }
+        }
+
     }
-    byte UpdateDic(ref byte value, ref bool objective)
+    byte UpdateDic(ref byte value, ref bool objective, byte pointsForMission)
     {
         Debug.Log("Mehod UpdateDic was reached");
         value--;
@@ -120,8 +127,16 @@ public class ObjectivesManager : MonoBehaviour
         initialEnemiesNum = GameManager.Instance.Enemies.Count;
         if (value <= 0)
         {
-            Debug.Log("A mission was accomplished");
             objective = true;
+           
+            Debug.Log("A mission was accomplished");
+            
+            
+        }
+        if (objective)
+        {
+            BalancedSliderController.Instance.AddingEvilSide(3);
+            BalancedSliderController.Instance.AddingGoodSide(3);
         }
         return value;
     }

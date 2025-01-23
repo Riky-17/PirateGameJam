@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: b6d7a615276714b4190b9a36a00661a0
+guid: 105ef6e502b198643a82ce777308e8ff
 TextureImporter:
   internalIDToNameTable:
   - first:
@@ -116,10 +116,10 @@ TextureImporter:
       name: MarksmanRifleBullet_0
       rect:
         serializedVersion: 2
-        x: 48
-        y: 28
+        x: 0
+        y: 0
         width: 4
-        height: 1
+        height: 3
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -138,7 +138,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 3f2559fa11b1c34419c247d82ffd7c83
+    spriteID: a24bda34f1d85c8408a88d937a9b6e13
     internalID: 0
     vertices: []
     indices: 

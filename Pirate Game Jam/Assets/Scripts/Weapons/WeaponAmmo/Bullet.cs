@@ -8,6 +8,8 @@ public class Bullet : MonoBehaviour
 
     protected virtual void Awake() => rb = GetComponent<Rigidbody2D>();
 
+    public GameObject bulletHitPrefab;
+
     void FixedUpdate()
     {
         RaycastHit2D raycastHit = Physics2D.Raycast(transform.position, transform.right, .5f);
@@ -21,6 +23,7 @@ public class Bullet : MonoBehaviour
                 return;
 
             target.Damage(damage);
+            Instantiate(bulletHitPrefab, transform.position + (transform.right * 0.3f), transform.rotation);
         }
 
         Destroy(gameObject);

@@ -648,7 +648,7 @@ MonoBehaviour:
   reloadTime: 3
   initialBulletNum: 5
   fireRate: 0.5
-  bullet: {fileID: 11400000, guid: 76006c33d9e057d43a431b7a5aa1164e, type: 2}
+  bullet: {fileID: 11400000, guid: 415443af2ee4f5f4796f4f9a6b3f652f, type: 2}
   shootingPoint: {fileID: 3730729945176514446}
   weaponIndex: 4
 --- !u!95 &517275876695583844

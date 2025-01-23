@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 2629402766658460742}
   - component: {fileID: 7627233100551657116}
   - component: {fileID: -5718393696883301444}
-  - component: {fileID: -8587993260993008946}
+  - component: {fileID: 847262208978168139}
   m_Layer: 0
-  m_Name: Marksman Bullet
+  m_Name: AssaultBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -80,7 +80,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 6349953175351664280, guid: 105ef6e502b198643a82ce777308e8ff, type: 3}
+  m_Sprite: {fileID: 5856914108408290220, guid: 2dfafeac309bb23498cf3406b2e20831, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -156,13 +156,13 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.25, y: 0.1875}
+    oldSize: {x: 0.125, y: 0.125}
     newSize: {x: 0.125, y: 0.0625}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.25, y: 0.1875}
+  m_Size: {x: 0.125, y: 0.125}
   m_EdgeRadius: 0
 --- !u!114 &-5718393696883301444
 MonoBehaviour:
@@ -177,7 +177,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletHitPrefab: {fileID: 5091796435990206960, guid: fa67832ac2d6a9145a02d0c2a081141c, type: 3}
---- !u!114 &-8587993260993008946
+--- !u!114 &847262208978168139
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

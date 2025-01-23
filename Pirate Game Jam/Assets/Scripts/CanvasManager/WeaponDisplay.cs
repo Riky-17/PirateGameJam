@@ -56,6 +56,7 @@ public class WeaponDisplay : MonoBehaviour
         weaponsInfo[1].text = fireRate;
         weaponsInfo[2].text = reloadSpeed;
         weaponsInfo[3].text = maxAmmo;
+        //weaponsInfo[4].text = weaponName;
     }
 
     public void loadingInfo(byte weaponIndex, string secondsLeft)
@@ -87,7 +88,7 @@ public class WeaponDisplay : MonoBehaviour
 
     public void onClickWeaponInfo(WeaponSystem obj)
     {
-       reloadTime.text = obj.reloadTime.ToString();
-       maxAmmo.text = obj.initialBulletNum.ToString();       
+       reloadTime.text = obj.ReloadTime.ToString();
+       maxAmmo.text = obj.InitialBulletNum.ToString();       
     }
 }

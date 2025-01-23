@@ -29,6 +29,11 @@ public class CivilianLady : Civilian
 
     void Update()
     {
+        if(hitTimer > 0)
+            hitTimer-= Time.deltaTime;
+        else
+            sr.color = Color.white;
+
         if(walkTimer >= walkTime)
         {
             dir = Vector2.zero;

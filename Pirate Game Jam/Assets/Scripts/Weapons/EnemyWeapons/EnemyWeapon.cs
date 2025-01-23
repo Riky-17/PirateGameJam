@@ -1,7 +1,10 @@
+using System;
 using UnityEngine;
 
 public abstract class EnemyWeapon : MonoBehaviour
 {
+    public static Action<Transform> onShotFired;
+
     protected Animator anim;
 
     protected GameObject attachedEnemy;

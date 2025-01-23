@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 7f57f653a374ac044abea20bfdc0e765
+guid: 5c993e5791ec90c4b85bab1b9fa2fb50
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5466066267778656046
-    second: ShotgunBullet_0
+      213: -4853341272865606100
+    second: MaxAmmoPickup_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -51,7 +51,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 16
+  spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: ShotgunBullet_0
+      name: MaxAmmoPickup_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 3
-        height: 2
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: e2721b16f4e5bdb40800000000000000
-      internalID: 5466066267778656046
+      spriteID: c267a1193d775acb0800000000000000
+      internalID: -4853341272865606100
       vertices: []
       indices: 
       edges: []
@@ -138,7 +138,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: cbc7e2b803382d74d8f9c5ab8af6429e
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      ShotgunBullet_0: 5466066267778656046
+      MaxAmmoPickup_0: -4853341272865606100
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

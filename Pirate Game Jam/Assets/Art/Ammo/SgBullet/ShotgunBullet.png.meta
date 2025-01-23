@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: bff51ada91f110540b0848cb099c1634
+guid: f87aae12def6cbf49bf93bceeb900a35
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 4383607649180358934
-    second: BulletHit_0
+      213: 5466066267778656046
+    second: ShotgunBullet_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,67 +113,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: BulletHit_0
+      name: ShotgunBullet_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 2
-        height: 7
-      alignment: 5
-      pivot: {x: 1, y: 0.5}
+        width: 3
+        height: 2
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 58f5f1feb83ec3446a88218bfe2cffd7
-      internalID: 4383607649180358934
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: BulletHit_1
-      rect:
-        serializedVersion: 2
-        x: 2
-        y: 0
-        width: 2
-        height: 7
-      alignment: 5
-      pivot: {x: 1, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2857a09e32d189446a19d7d3fb79a2e0
-      internalID: 1736857688
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: BulletHit_2
-      rect:
-        serializedVersion: 2
-        x: 4
-        y: 0
-        width: 2
-        height: 7
-      alignment: 5
-      pivot: {x: 1, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a55984352190f094aa7cb879be4c13bb
-      internalID: 186963401
+      spriteID: e2721b16f4e5bdb40800000000000000
+      internalID: 5466066267778656046
       vertices: []
       indices: 
       edges: []
@@ -182,7 +138,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 9b55f9961ab074240be90807f5d2887c
+    spriteID: b90d42d612d39224ca1ba90597e0b274
     internalID: 0
     vertices: []
     indices: 
@@ -192,9 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      BulletHit_0: 4383607649180358934
-      BulletHit_1: 1736857688
-      BulletHit_2: 186963401
+      ShotgunBullet_0: 5466066267778656046
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

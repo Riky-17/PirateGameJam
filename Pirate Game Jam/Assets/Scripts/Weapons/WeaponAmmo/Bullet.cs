@@ -8,7 +8,7 @@ public class Bullet : MonoBehaviour
 
     protected virtual void Awake() => rb = GetComponent<Rigidbody2D>();
 
-    // void Start() => rb.linearVelocity = transform.right * speed; // Bullet moves towards the right when instantiated
+    public GameObject bulletHitPrefab;
 
     void FixedUpdate()
     {
@@ -23,6 +23,7 @@ public class Bullet : MonoBehaviour
                 return;
 
             target.Damage(damage);
+            Instantiate(bulletHitPrefab, transform.position + (transform.right * 0.3f), transform.rotation);
         }
 
         Destroy(gameObject);

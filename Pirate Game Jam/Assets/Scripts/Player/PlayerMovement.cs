@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour, IHealth
+public class PlayerMovement : MonoBehaviour, IHealth, IItemPicker
 {
     [HideInInspector] public Vector2 mousePos;
     Rigidbody2D rb;
@@ -8,10 +8,15 @@ public class PlayerMovement : MonoBehaviour, IHealth
 
     [SerializeField] float speed = 6;
 
+    float speedBoost;
+    float speedBoostDuration;
+    float speedBoosTimer;
+
     bool canMove = true;
 
     //weapon objects -> assigned in inspector
-    [SerializeField] GameObject[] weapons;
+    [SerializeField] WeaponSystem[] weapons;
+    WeaponSystem currentWeapon;
 
     //health system
     public float MaxHealth { get => maxHealth; set => maxHealth = value; }
@@ -20,25 +25,26 @@ public class PlayerMovement : MonoBehaviour, IHealth
     public float Health { get => health; set => health = value; }
     float health;
 
+    //fields for the flash
+    float longColorFlashTimer = .2f;
+    ShortColorFlash shortColorFlash;
+    LongColorFlash longColorFlash;
+
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         health = maxHealth;
-    }
-
-    void Start()
-    {
-        //disabling game objects except for the first weapon 
-        DisablingWeapons();
-        weapons[0].SetActive(true);
+        currentWeapon = weapons[0];
     }
     
     void Update()
     {
+        ColorFlash();
+        CheckSpeedBoost();
         GetMovementInput();
         MousePosition();
         SpriteRotation();
-        SwitchWeapon();
+        GetWeaponInput();
     }
 
     void FixedUpdate() => Movement();
@@ -63,47 +69,94 @@ public class PlayerMovement : MonoBehaviour, IHealth
         }
     }
 
-    void SwitchWeapon()
+    void ColorFlash()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        if(shortColorFlash.duration > 0)
         {
-            DisablingWeapons();
-            weapons[0].SetActive(true);
+            currentWeapon.ChangeSpriteColor(shortColorFlash.Color);
+            shortColorFlash.duration-= Time.deltaTime;
+            if(shortColorFlash.duration <= 0)
+            {
+                currentWeapon.ChangeSpriteColor(Color.white);
+                shortColorFlash = default;
+            }
+            else
+            {
+                if(longColorFlash.duration > 0)
+                    longColorFlash.duration-= Time.deltaTime;
+                return;
+            }
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha2))
+
+        if(longColorFlash.duration > 0)
         {
-            DisablingWeapons();
-            weapons[1].SetActive(true);
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            DisablingWeapons();
-            weapons[2].SetActive(true);
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha4))
-        {
-            DisablingWeapons();
-            weapons[3].SetActive(true);
+            longColorFlash.duration-= Time.deltaTime;
+            longColorFlashTimer-= Time.deltaTime;
+
+            if(longColorFlashTimer > .1f)
+                currentWeapon.ChangeSpriteColor(longColorFlash.Color);
+            else if(longColorFlashTimer <= 0)
+                currentWeapon.ChangeSpriteColor(Color.white);
+            
+            if(longColorFlashTimer <= 0)
+                longColorFlashTimer = .2f;
+
+            if(longColorFlash.duration <= 0)
+            {
+                currentWeapon.ChangeSpriteColor(Color.white);
+                longColorFlash = default;
+            } 
+            else
+                return;
         }
     }
 
-    void DisablingWeapons()
+    void CheckSpeedBoost()
     {
-        foreach (var weapon in weapons)
+        if(speedBoost != 0)
         {
-            weapon.SetActive(false);
+            if(speedBoosTimer < speedBoostDuration)
+                speedBoosTimer+= Time.deltaTime;
+            else
+            {
+                speedBoosTimer = 0;
+                speedBoostDuration = 0;
+                speedBoost = 0;
+            }
         }
     }
-    
-    void MousePosition()
+
+    void GetWeaponInput()
     {
-        mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition); // Gets Vector2 mouse position
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+            SwitchWeapon(0);
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
+            SwitchWeapon(1);
+        else if (Input.GetKeyDown(KeyCode.Alpha3))
+            SwitchWeapon(2);
+        else if (Input.GetKeyDown(KeyCode.Alpha4))
+            SwitchWeapon(3);
     }
+
+    void SwitchWeapon(int index)
+    {
+        if (weapons[index] != currentWeapon)
+        {
+            WeaponSystem nextWeapon = weapons[index];
+            nextWeapon.gameObject.SetActive(true);
+            nextWeapon.ChangeSpriteColor(currentWeapon.WeaponSpriteColor());
+            currentWeapon.ChangeSpriteColor(Color.white);
+            currentWeapon.gameObject.SetActive(false);
+            currentWeapon = nextWeapon;
+        }
+    }
+
+    void MousePosition() => mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition); // Gets Vector2 mouse position
 
     void Movement()
     {
         //physics calc
-        Vector2 velocityInput = moveInput * speed;
+        Vector2 velocityInput = moveInput * (speed + speedBoost);
         Vector3 velocityDiff = velocityInput - rb.linearVelocity;
         float accelRate = 7f;
         Vector3 force = velocityDiff * accelRate;
@@ -128,10 +181,20 @@ public class PlayerMovement : MonoBehaviour, IHealth
         }
     }
 
+    public void Heal(float healAmount)
+    {
+        health += healAmount;
+        shortColorFlash = new(Color.green);
+        if(health > maxHealth)
+            health = maxHealth;
+        Debug.Log(gameObject.name + " Health: " + health);
+    }
+
     public void Damage(float damageAmount)
     {
         health -= damageAmount;
-        Debug.Log(gameObject.name + " Health: " + Health);
+        shortColorFlash = new(Color.red);
+        Debug.Log(gameObject.name + " Health: " + health);
         if(health <= 0)
             Die();
     }
@@ -140,5 +203,15 @@ public class PlayerMovement : MonoBehaviour, IHealth
     public void Die()
     {
         
+    }
+
+    public void PickItem(PickableItem item) => item.Effect(this);
+
+    //temporary for testing speed boost
+    public void SpeedBoost(float speedBoostAmount, float duration)
+    {
+        speedBoost = speedBoostAmount;
+        speedBoostDuration = duration;
+        longColorFlash = new(Color.yellow, duration);
     }
 }

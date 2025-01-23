@@ -2,10 +2,11 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Enemy : MonoBehaviour, IHealth
+public abstract class Enemy : MonoBehaviour, IHealth, IItemPicker
 {
     protected Rigidbody2D rb;
     protected Animator anim;
+    SpriteRenderer sr;
 
     const float MAX_CAMERA_HEIGHT = 17f;
 
@@ -19,6 +20,10 @@ public abstract class Enemy : MonoBehaviour, IHealth
     [SerializeField] protected float lookDistance = 5;
     [SerializeField] protected float maxDistance = 3;
     [SerializeField] protected float speed = 5;
+
+    float speedBoost;
+    float speedBoostDuration;
+
     protected float maxDistanceOffset = .75f;
     
     float shootingTimer = 2;
@@ -33,10 +38,15 @@ public abstract class Enemy : MonoBehaviour, IHealth
     public float Health { get; set; }
     public float MaxHealth { get; set; } = 150;
 
+    //how long should the red hit flash last for
+    float hitTime = .1f;
+    float hitTimer;
+
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        sr = GetComponent<SpriteRenderer>();
         //weapon = GetComponent<EnemyWeapon>();
         weapon = GetComponentInChildren<EnemyWeapon>();
         Health = MaxHealth;
@@ -56,13 +66,14 @@ public abstract class Enemy : MonoBehaviour, IHealth
     {
         // Plays Idle animation when not moving in x-axis, otherwise plays Walk animation
         if (MathF.Abs(rb.linearVelocityX) < .25f)
-        {
             anim.Play("Idle");
-        }
         else
-        {
             anim.Play("Walk");
-        }
+
+        if(hitTimer > 0)
+            hitTimer-= Time.deltaTime;
+        else
+            sr.color = Color.white;
 
         if(shootingTimer > lastShot)
             lastShot += Time.deltaTime;
@@ -197,19 +208,39 @@ public abstract class Enemy : MonoBehaviour, IHealth
         }
     }
 
+    public void FaceDirection(Vector2 dir)
+    {
+        if (dir.x < 0) // Left Direction
+            transform.rotation = Quaternion.Euler(0, 180, 0);
+        else if (dir.x > 0) // Right Direction
+            transform.rotation = Quaternion.identity;
+    }
+
     protected void AddForce(Vector2 dir, float accelRate)
     {
         Vector2 velocity = dir * speed;
         Vector2 velocityDiff = velocity - rb.linearVelocity;
+        if(dir == Vector2.zero)
+            accelRate = 6;
         Vector2 force = velocityDiff * accelRate;
         rb.AddForce(force);
     }
 
     protected virtual void Shoot(Vector2 dir, Quaternion aimRot) => weapon.Shoot(player, aimRot);
 
+    public void Heal(float healAmount)
+    {
+        Health+= healAmount;
+        if(Health > MaxHealth)
+            Health = MaxHealth;
+        Debug.Log(gameObject.name + " Health: " + Health);
+    }
+
     public void Damage(float damageAmount)
     {
         Health-= damageAmount;
+        hitTimer = hitTime;
+        sr.color = Color.red;
         Debug.Log(gameObject.name + " Health: " + Health);
         if(Health <= 0)
             Die();
@@ -218,15 +249,17 @@ public abstract class Enemy : MonoBehaviour, IHealth
     //TODO
     public void Die()
     {
-        
+        ObjectivesManager.Instance.checkingObjectives();
+        Destroy(gameObject);
     }
 
-    public void FaceDirection(Vector2 dir)
+    public void PickItem(PickableItem item) => item.Effect(this);
+
+    //temporary for testing speed boost
+    public void SpeedBoost(float speedBoostAmount, float duration)
     {
-        if (dir.x < 0) // Left Direction
-            transform.rotation = Quaternion.Euler(0, 180, 0);
-        else if (dir.x > 0) // Right Direction
-            transform.rotation = Quaternion.identity;
+        speedBoost = speedBoostAmount;
+        speedBoostDuration = duration;
     }
 
     void OnDrawGizmos()

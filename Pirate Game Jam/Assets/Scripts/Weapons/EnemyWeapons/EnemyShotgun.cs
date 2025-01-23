@@ -1,7 +1,10 @@
+using System;
 using UnityEngine;
 
 public class EnemyShotgun : EnemyWeapon
 {
+    public static Action<Transform> onShotgunPump;
+
     int bulletMaxAngles = 30;
 
     public override void Shoot(PlayerMovement player, Quaternion aimRotation)
@@ -15,7 +18,10 @@ public class EnemyShotgun : EnemyWeapon
             Quaternion bulletRotation = aimRotation * Quaternion.Euler(0, 0, bulletAngle);
             Bullet bullet = Instantiate(bulletSO.bulletPrefab, shootingPoint.position, bulletRotation);
             bullet.Init(bulletSO.speed, attachedEnemy.layer, bulletSO.damage);
+            onShotFired?.Invoke(transform);
         }
+
+        onShotgunPump?.Invoke(transform);
     }
 
     public override void Idle()

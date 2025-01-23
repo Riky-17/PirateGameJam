@@ -1,37 +1,98 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.Cinemachine;
 using UnityEngine;
-using UnityEngine.AI;
-using UnityEngine.Rendering;
 
 public abstract class WeaponSystem : MonoBehaviour
-{ 
-    internal int initialBulletNum;
-    public int bulletsNum;
-    public float reloadTime;
-    public float bulletSpeed = 10f;
-    internal bool canShoot = true;
-    internal byte weaponIndex;
-    int amountOfCoroutines = 0;
+{
+    //event fired when the weapon shoots
+    public static Action<Transform> onShotFired;
+
+    //components
+    protected Rigidbody2D rb;
+    protected SpriteRenderer sr;
+    protected PlayerMovement pm;
+    protected Animator anim;
+
+    //how much should the recoil last for
+    protected float recoilTime = .3f;
+    protected float lastRecoil;
+    [SerializeField] protected float recoilForce = 15f;
+
+    //weapon stats
+    public float ReloadTime => reloadTime;
+    [SerializeField] float reloadTime;
+    public float InitialBulletNum => initialBulletNum;
+    [SerializeField] int initialBulletNum = 3;
+    protected int bulletsNum;
+    [SerializeField] protected float fireRate;
+
     [SerializeField] protected BulletSO bullet;
-    internal bool isReloading = false;
+    [SerializeField] Transform shootingPoint;
 
-    public abstract void Shoot(Transform muzzle, BulletSO bullet); //shoot method called
+    protected bool canShoot = true;
+    protected bool isReloading = false;
 
-    public WeaponDisplay weaponryText;
+    [SerializeField] protected byte weaponIndex;
 
-    //dictionay to keep thack of my coroutines 
+    protected WeaponDisplay weaponryText;
+
+    int amountOfCoroutines = 0;
+    //dictionary to keep track of my coroutines 
     public Dictionary<WeaponSystem, Coroutine> myRunningCoroutines = new Dictionary<WeaponSystem, Coroutine>();
     //timer for reloading weapons when running out of ammo
+
+    void Awake()
+    {
+        //Canvas
+        weaponryText = GameObject.FindGameObjectWithTag("Canvas").GetComponent<WeaponDisplay>();
+
+        rb = GetComponentInParent<Rigidbody2D>();
+        sr = GetComponent<SpriteRenderer>();
+        anim = GetComponent<Animator>();
+        pm = GetComponentInParent<PlayerMovement>();
+
+        bulletsNum = initialBulletNum;
+        Debug.Log(rb);
+        Debug.Log(sr);
+        Debug.Log(anim);
+        Debug.Log(pm);
+    }
+
+    protected virtual void OnEnable()
+    {
+        //UI
+        weaponryText.UpdateWeaponChosen(1);
+        weaponryText.updateAmmo(bulletsNum.ToString());
+        weaponryText.updateWeapon(gameObject.name);
+        WeaponInfo();
+
+        //reload
+        if (bulletsNum <= 0)
+        {
+            canShoot = false;
+            Reload(this);
+        }
+    }
+
+    void Update()
+    {
+        Shoot(shootingPoint, bullet);
+        if (Input.GetKeyDown(KeyCode.R))
+            Reload(this);
+    }
+
+    private void FixedUpdate() => Recoil();
+
+    public abstract void Shoot(Transform muzzle, BulletSO bullet); //shoot method called
 
     public void Reload(WeaponSystem weapon)
     {
         if (!weapon.isReloading)
         {
-            Coroutine coro = CoroutineManager.Instance.StartingCoroutine(ReloadCoroutine());
+            Coroutine coroutine = CoroutineManager.Instance.StartingCoroutine(ReloadCoroutine());
             weapon.isReloading = true;
-            myRunningCoroutines[weapon] = coro;
+            myRunningCoroutines[weapon] = coroutine;
         }      
     }
 
@@ -48,9 +109,9 @@ public abstract class WeaponSystem : MonoBehaviour
             }
         }
     }
+    
     public IEnumerator ReloadCoroutine()
     {
-
         amountOfCoroutines++;
         Debug.Log("Coroutine N: " + amountOfCoroutines + " Started");
         float remainTime = reloadTime;
@@ -73,9 +134,29 @@ public abstract class WeaponSystem : MonoBehaviour
 
     }
 
-    private void Awake()
+    void Recoil()
     {
+        if (lastRecoil > 0)
+        {
+            //physics calc
+            Vector2 gunToMouse = new Vector2(transform.position.x - pm.mousePos.x, transform.position.y - pm.mousePos.y).normalized;
+            Vector2 recoil = gunToMouse * recoilForce;
+            Vector2 recoilDiff = recoil * lastRecoil / recoilTime;
+            float accelRate = 10f;
+            Vector2 force = recoilDiff * accelRate;
 
+            rb.AddForce(force);
+
+            lastRecoil -= Time.fixedDeltaTime;
+        }
+        else if (lastRecoil <= 0)
+        {
+            anim.Play("Idle"); // Plays Idle animation when recoil is finished
+        }
     }
 
+    public Color WeaponSpriteColor() => sr.color;
+    public void ChangeSpriteColor(Color color) => sr.color = color;
+
+    public void WeaponInfo() => weaponryText.PauseWeaponInfo(bullet.damage.ToString(), fireRate.ToString(), reloadTime.ToString(), initialBulletNum.ToString());
 }

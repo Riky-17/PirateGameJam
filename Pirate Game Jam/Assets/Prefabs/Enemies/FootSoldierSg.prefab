@@ -360,7 +360,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74db0c6e123e4e243a784b95ecf07d56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletSO: {fileID: 11400000, guid: 76006c33d9e057d43a431b7a5aa1164e, type: 2}
+  bulletSO: {fileID: 11400000, guid: 415443af2ee4f5f4796f4f9a6b3f652f, type: 2}
   shootingPoint: {fileID: 156766814135687262}
   shootingTimer: 2
   lastShot: 2

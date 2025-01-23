@@ -8,7 +8,7 @@ public class EnemyGrenadeLauncher : EnemyWeapon
         isShooting = true;
         anim.Play("Shoot");
         Bullet bullet = Instantiate(bulletSO.bulletPrefab, shootingPoint.position, aimRotation);
-        bullet.Init(bulletSO.speed, attachedEnemy.layer, bulletSO.damage);
+        InitBullet(bullet);
     }
 
     public override void Idle()

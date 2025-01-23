@@ -361,6 +361,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletSO: {fileID: 11400000, guid: 76006c33d9e057d43a431b7a5aa1164e, type: 2}
+  damageMultiplier: 1
   shootingPoint: {fileID: 7341734528816553361}
   shootingTimer: 1.5
   lastShot: 2

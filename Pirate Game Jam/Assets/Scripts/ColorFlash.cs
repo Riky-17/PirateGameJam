@@ -83,6 +83,7 @@ public class LongColorFlash
         {
             float finalDuration = durations[color] + duration;
             durations[color] = finalDuration;
+            return;
         }
 
         colors.Add(color);

@@ -249,6 +249,7 @@ public abstract class Enemy : MonoBehaviour, IHealth, IItemPicker
     //TODO
     public void Die()
     {
+        ObjectivesManager.Instance.checkingObjectives();
         Destroy(gameObject);
     }
 

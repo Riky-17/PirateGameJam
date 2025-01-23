@@ -2304,9 +2304,9 @@ RectTransform:
   m_LocalScale: {x: 0.99749994, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1005756644}
   - {fileID: 438134075}
   - {fileID: 638767666}
-  - {fileID: 1005756644}
   - {fileID: 2099377192}
   m_Father: {fileID: 1323381630}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2563,6 +2563,59 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -404}
   m_SizeDelta: {x: 99.28003, y: 100}
   m_Pivot: {x: 3.3, y: 0.5}
+--- !u!1 &569130903
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 569130905}
+  - component: {fileID: 569130904}
+  m_Layer: 0
+  m_Name: ObjectivesManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &569130904
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 569130903}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09227d0e64b3e774197bcd7becf28b11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UIObjective1: {fileID: 1005756645}
+  UIObjective2: {fileID: 438134076}
+  UIObjective3: {fileID: 638767667}
+  objective1: Kill 3 Enemies
+  missionObjective1: 3
+  objective2: Kill 3 Civilians
+  missionObjective2: 3
+  objective3: Pick up 2 Items
+  missionObjective3: 2
+--- !u!4 &569130905
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 569130903}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &635674836
 GameObject:
   m_ObjectHideFlags: 0
@@ -6099,7 +6152,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1323381630
 RectTransform:
   m_ObjectHideFlags: 0
@@ -11255,6 +11308,7 @@ SceneRoots:
   m_Roots:
   - {fileID: 5933933350581856912}
   - {fileID: 2492380277817696483}
+  - {fileID: 569130905}
   - {fileID: 1049360755}
   - {fileID: 19225841}
   - {fileID: 101962056672465478}

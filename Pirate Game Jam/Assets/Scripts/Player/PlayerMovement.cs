@@ -26,7 +26,10 @@ public class PlayerMovement : MonoBehaviour, IHealth, IItemPicker
     float health;
 
     //fields for the flash
-    float longColorFlashTimer = .2f;
+    float testTime = .9f;
+    float testTimer;
+    bool testBool = false;
+    float longColorFlashTimer;
     ShortColorFlash shortColorFlash;
     LongColorFlash longColorFlash;
 
@@ -35,10 +38,26 @@ public class PlayerMovement : MonoBehaviour, IHealth, IItemPicker
         rb = GetComponent<Rigidbody2D>();
         health = maxHealth;
         currentWeapon = weapons[0];
+        longColorFlash = new();
+    }
+
+    void Start()
+    {
+        longColorFlash.AddColor(Color.red, 5);
     }
     
     void Update()
     {
+        if(testTimer >= testTime)
+        {
+            if(!testBool)
+            {
+                longColorFlash.AddColor(Color.blue, 6);
+                testBool = true;
+            }
+        }
+        else
+            testTimer+= Time.deltaTime;
         ColorFlash();
         CheckSpeedBoost();
         GetMovementInput();
@@ -82,33 +101,26 @@ public class PlayerMovement : MonoBehaviour, IHealth, IItemPicker
             }
             else
             {
-                if(longColorFlash.duration > 0)
-                    longColorFlash.duration-= Time.deltaTime;
+                if(!longColorFlash.IsEmpty())
+                    longColorFlash.ReduceDurations(Time.deltaTime);
                 return;
             }
         }
 
-        if(longColorFlash.duration > 0)
+        if(!longColorFlash.IsEmpty())
         {
-            longColorFlash.duration-= Time.deltaTime;
-            longColorFlashTimer-= Time.deltaTime;
-
-            if(longColorFlashTimer > .1f)
-                currentWeapon.ChangeSpriteColor(longColorFlash.Color);
-            else if(longColorFlashTimer <= 0)
-                currentWeapon.ChangeSpriteColor(Color.white);
-            
-            if(longColorFlashTimer <= 0)
-                longColorFlashTimer = .2f;
-
-            if(longColorFlash.duration <= 0)
-            {
-                currentWeapon.ChangeSpriteColor(Color.white);
-                longColorFlash = default;
-            } 
+            if(longColorFlashTimer <= longColorFlash.Interval)
+                longColorFlashTimer+= Time.deltaTime;
             else
-                return;
+                longColorFlashTimer = 0;
+
+            currentWeapon.ChangeSpriteColor(longColorFlash.GetColor(longColorFlashTimer));
+            longColorFlash.ReduceDurations(Time.deltaTime);
+
+            return;
         }
+
+        currentWeapon.ChangeSpriteColor(Color.white);
     }
 
     void CheckSpeedBoost()

@@ -6,7 +6,7 @@ using UnityEngine.AI;
 using UnityEngine.Rendering;
 
 public abstract class WeaponSystem : MonoBehaviour
-{
+{ 
     internal int initialBulletNum;
     public int bulletsNum;
     public float reloadTime;

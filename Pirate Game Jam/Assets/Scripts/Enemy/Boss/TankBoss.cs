@@ -14,7 +14,7 @@ public class TankBoss : Boss
         { 
             new GrenadeBarrage(this, player, shootingPoint, grenade), 
             new BulletRain(this, player, shootingPoint, bullet), 
-            // new SignalFlare(this, player, shootingPoint, grenade, enemyToSpawn),
+            new SignalFlare(this, player, shootingPoint, grenade, enemyToSpawn),
             new SprayAndPray(this, player, shootingPoint, bullet),
         };
     }

@@ -2,12 +2,11 @@ using UnityEngine;
 
 public class SignalFlare : BossAttack
 {
-    public SignalFlare(Boss boss, PlayerMovement player, Transform shootingPoint, BulletSO bullet, Enemy enemies) : base(boss, player, shootingPoint, bullet) {}
+    public SignalFlare(Boss boss, PlayerMovement player, Transform shootingPoint, BulletSO bullet, Enemy enemies) : base(boss, player, shootingPoint, bullet, enemies) {}
 
     const float CAMERA_MAX_WIDTH = 30 / 2;
     const float CAMERA_MAX_HEIGHT = 17 / 2;
 
-    Enemy enemyToSpawn;
     int enemiesAmount = 2;
 
     // the delay after the grenade explodes
@@ -57,7 +56,7 @@ public class SignalFlare : BossAttack
             {
                 float x = Random.Range(-CAMERA_MAX_WIDTH + 1, CAMERA_MAX_WIDTH - 1);
                 Vector2 pos = new(x + boss.CenterPoint.x, CAMERA_MAX_HEIGHT);
-                boss.InstantiateEnemy(enemyToSpawn, pos, Quaternion.identity);
+                boss.InstantiateEnemy(enemies, pos, Quaternion.identity);
                 isAttackDone = true;
             }
         }

@@ -10761,6 +10761,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Female
       objectReference: {fileID: 0}
+    - target: {fileID: 6494342680810148015, guid: a1d953ced07cbfc47829cc0d83e97e53, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -11306,6 +11310,10 @@ PrefabInstance:
     - target: {fileID: 920199928733028046, guid: 9d39889c46cf9da448cfa3b3afdd3376, type: 3}
       propertyPath: m_Name
       value: Homeless
+      objectReference: {fileID: 0}
+    - target: {fileID: 920199928733028046, guid: 9d39889c46cf9da448cfa3b3afdd3376, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3211495207902851074, guid: 9d39889c46cf9da448cfa3b3afdd3376, type: 3}
       propertyPath: m_Color.b

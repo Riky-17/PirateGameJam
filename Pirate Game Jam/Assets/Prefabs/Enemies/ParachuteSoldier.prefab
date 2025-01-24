@@ -200,9 +200,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2deb318d24a3a11448a38998ca11eb31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waypoints:
-  - {x: 44, y: -2}
-  - {x: 30, y: -2}
+  waypoints: []
   waypointTime: 1
   debugMode: 0
   lookDistance: 5
@@ -371,6 +369,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletSO: {fileID: 11400000, guid: 415443af2ee4f5f4796f4f9a6b3f652f, type: 2}
+  damageMultiplier: 0
   shootingPoint: {fileID: 820584810540435314}
   shootingTimer: 2
   lastShot: 2

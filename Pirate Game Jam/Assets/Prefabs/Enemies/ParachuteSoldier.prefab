@@ -200,12 +200,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2deb318d24a3a11448a38998ca11eb31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveSpeed: 6
   waypoints: []
   waypointTime: 1
-  debugMode: 0
-  lookDistance: 5
+  debugMode: 1
+  lookDistance: 15
   maxDistance: 3
-  speed: 5
+  speed: 7
   agentMask:
     serializedVersion: 2
     m_Bits: 128
@@ -369,7 +370,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletSO: {fileID: 11400000, guid: 415443af2ee4f5f4796f4f9a6b3f652f, type: 2}
-  damageMultiplier: 0
+  damageMultiplier: 1
   shootingPoint: {fileID: 820584810540435314}
   shootingTimer: 2
   lastShot: 2

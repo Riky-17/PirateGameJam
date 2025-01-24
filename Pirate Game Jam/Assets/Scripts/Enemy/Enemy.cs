@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Enemy : MonoBehaviour, IHealth, IItemPicker
+public abstract class Enemy : ColorFlashObject, IHealth, IItemPicker
 {
-    protected Rigidbody2D rb;
+    // protected Rigidbody2D rb;
     protected Animator anim;
     SpriteRenderer sr;
 
@@ -24,7 +24,7 @@ public abstract class Enemy : MonoBehaviour, IHealth, IItemPicker
     protected float maxDistanceOffset = .75f;
     
     float shootingTimer = 2;
-    float  lastShot = 2;
+    float lastShot = 2;
     float fireRateMultiplier = 1;
 
     Collider2D[] colliders;
@@ -37,26 +37,20 @@ public abstract class Enemy : MonoBehaviour, IHealth, IItemPicker
     public float Health { get; set; }
     public float MaxHealth { get; set; } = 150;
 
-    //fields for the flash
-    float intervalTimer;
-    ShortColorFlash shortColorFlash;
-    LongColorFlash longColorFlash;
-
     //statBoostTimer
     float damageBoostTime;
     float damageBoostTimer;
     float fireRateBoostTime;
     float fireRateBoostTimer;
 
-    void Awake()
+    protected override void Awake()
     {
-        rb = GetComponent<Rigidbody2D>();
+        base.Awake();
         anim = GetComponent<Animator>();
         sr = GetComponent<SpriteRenderer>();
-        //weapon = GetComponent<EnemyWeapon>();
         weapon = GetComponentInChildren<EnemyWeapon>();
+
         Health = MaxHealth;
-        longColorFlash = new();
 
         if (weapon == null)
             return;
@@ -69,8 +63,10 @@ public abstract class Enemy : MonoBehaviour, IHealth, IItemPicker
 
     void OnDisable() => GameManager.Instance.Enemies.Remove(this);
 
-    void Update()
+    protected override void Update()
     {
+        base.Update();
+
         // Plays Idle animation when not moving in x-axis, otherwise plays Walk animation
         if (MathF.Abs(rb.linearVelocityX) < .25f)
             anim.Play("Idle");
@@ -81,7 +77,6 @@ public abstract class Enemy : MonoBehaviour, IHealth, IItemPicker
             lastShot += Time.deltaTime;
 
         CheckStatBoost();
-        ColorFlash();
 
         if (player != null)
         {
@@ -144,9 +139,7 @@ public abstract class Enemy : MonoBehaviour, IHealth, IItemPicker
                 }
             }
             else if (lastShot >= 0.1f && lastShot < shootingTimer)
-            {
                 weapon.Idle();
-            }
         }
     }
 
@@ -177,41 +170,6 @@ public abstract class Enemy : MonoBehaviour, IHealth, IItemPicker
         }
     }
 
-    void ColorFlash()
-    {
-        if(shortColorFlash.duration > 0)
-        {
-            sr.color = shortColorFlash.Color;
-            shortColorFlash.duration-= Time.deltaTime;
-            if(shortColorFlash.duration <= 0)
-            {
-                sr.color = Color.white;
-                shortColorFlash = default;
-            }
-            else
-            {
-                if(!longColorFlash.IsEmpty())
-                    longColorFlash.ReduceDurations(Time.deltaTime);
-                return;
-            }
-        }
-
-        if(!longColorFlash.IsEmpty())
-        {
-            if(intervalTimer <= longColorFlash.Interval)
-                intervalTimer+= Time.deltaTime;
-            else
-                intervalTimer = 0;
-
-            sr.color = longColorFlash.GetColor(intervalTimer);
-            longColorFlash.ReduceDurations(Time.deltaTime);
-
-            return;
-        }
-
-        sr.color = Color.white;
-    }
-
     protected void Patrol()
     {
         if(waypoints.Count == 0)
@@ -233,7 +191,7 @@ public abstract class Enemy : MonoBehaviour, IHealth, IItemPicker
         }
         
         FaceDirection(enemyToPoint);
-        AddForce(enemyToPoint.normalized, 3);
+        AddForce(enemyToPoint.normalized, speed, 3);
     }
 
     protected virtual void ChasePlayer()
@@ -255,7 +213,7 @@ public abstract class Enemy : MonoBehaviour, IHealth, IItemPicker
         if(enemyToPlayerFlatDist < (maxDistance - maxDistanceOffset) / 2)
             dir = -dir;
         
-        AddForce(dir, 3);
+        AddForce(dir, speed, 3);
     }
 
     protected void LookForPlayer()
@@ -273,24 +231,6 @@ public abstract class Enemy : MonoBehaviour, IHealth, IItemPicker
                 break;
             }
         }
-    }
-
-    public void FaceDirection(Vector2 dir)
-    {
-        if (dir.x < 0) // Left Direction
-            transform.rotation = Quaternion.Euler(0, 180, 0);
-        else if (dir.x > 0) // Right Direction
-            transform.rotation = Quaternion.identity;
-    }
-
-    protected void AddForce(Vector2 dir, float accelRate)
-    {
-        Vector2 velocity = dir * speed;
-        Vector2 velocityDiff = velocity - rb.linearVelocity;
-        if(dir == Vector2.zero)
-            accelRate = 6;
-        Vector2 force = velocityDiff * accelRate;
-        rb.AddForce(force);
     }
 
     protected virtual void Shoot(Vector2 dir, Quaternion aimRot) => weapon.Shoot(player, aimRot);
@@ -320,20 +260,22 @@ public abstract class Enemy : MonoBehaviour, IHealth, IItemPicker
         Destroy(gameObject);
     }
 
+    protected override void UpdateColor(Color color) => sr.color = color;
+
     public void PickItem(PickableItem item) => item.Effect(this);
 
     public void DamageBoost(float DamageBoostAmount, float duration)
     {
         weapon.damageMultiplier = DamageBoostAmount;
         damageBoostTime+= duration;
-        longColorFlash.AddColor(new(0.2f, 0.6f, 1), duration);
+        LongColorFlash.AddColor(new(0.2f, 0.6f, 1), duration);
     }
 
     public void FireRateBoost(float FireRateBoostAmount, float duration)
     {
         fireRateMultiplier = FireRateBoostAmount;
         fireRateBoostTime+= duration;
-        longColorFlash.AddColor(Color.yellow, duration);
+        LongColorFlash.AddColor(Color.yellow, duration);
     }
 
     void OnDrawGizmos()

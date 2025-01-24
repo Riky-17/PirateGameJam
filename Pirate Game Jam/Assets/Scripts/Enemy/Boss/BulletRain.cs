@@ -5,7 +5,7 @@ public class BulletRain : BossAttack
     public BulletRain(Boss boss, PlayerMovement player, Transform shootingPoint, BulletSO bullet) : base(boss, player, shootingPoint, bullet) {}
 
     const float CAMERA_MAX_HEIGHT = 17f / 2f;
-    //how long should the boss shoot staright up
+//how long should the boss shoot straight up
     float shootingTime = 5;
     float shootingTimer;
 
@@ -29,17 +29,16 @@ public class BulletRain : BossAttack
         fireRateTimer = fireRateTime;
         rainFireRateTimer = rainFireRateTime;
         shootingTimer = 0;
-        bulletRainStartTime = 0;
+        bulletRainStartTimer = 0;
         bulletRainTimer = 0;
     }
 
     public override void Attack()
     {
-        Quaternion cannonRotation = Quaternion.Euler(0, 0, 90);
-        boss.RotateGun(cannonRotation);
-        
         if(shootingTimer < shootingTime)
         {
+            Quaternion cannonRotation = Quaternion.Euler(0, 0, 90);
+            boss.RotateGun(cannonRotation);
             if (fireRateTimer >= fireRateTime)
             {
                 fireRateTimer = 0;
@@ -49,7 +48,10 @@ public class BulletRain : BossAttack
                 boss.DestroyBullet(bulletToShoot, 2f);
             }
             else
-                fireRateTimer+= Time.deltaTime;
+            {
+                shootingTimer+= Time.deltaTime;
+                fireRateTimer += Time.deltaTime;
+            }
         }
         else
             boss.TakeAim();
@@ -68,9 +70,9 @@ public class BulletRain : BossAttack
 
             if(rainFireRateTimer >= rainFireRateTime)
             {
-                fireRateTimer = 0;
+                rainFireRateTimer = 0;
                 Vector2 shootingPos = new(player.transform.position.x, CAMERA_MAX_HEIGHT + .2f);
-                Quaternion bulletRotation = Quaternion.Euler(0, 0, 90);
+                Quaternion bulletRotation = Quaternion.Euler(0, 0, -90);
                 Bullet bulletToShoot = boss.InstantiateBullet(bullet.bulletPrefab, shootingPos, bulletRotation);
                 InitBullet(bulletToShoot);
             }

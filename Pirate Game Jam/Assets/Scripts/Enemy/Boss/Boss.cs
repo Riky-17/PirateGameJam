@@ -1,24 +1,39 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Boss : MonoBehaviour, IHealth, IItemPicker
+public abstract class Boss : ColorFlashObject, IHealth, IItemPicker
 {
     const float MAX_CAMERA_WIDTH = 30 / 2;
-    const float MAX_CAMERA_HEIGHT = 17 / 2;
 
     public float MaxHealth { get => maxHealth; set => maxHealth = value; }
-    float maxHealth = 500;
+    [SerializeField] float maxHealth = 500;
     public float Health { get => health; set => health = value; }
     float health;
 
     public float DamageMultiplier => damageMultiplier;
     float damageMultiplier = 1;
 
-    protected Rigidbody2D rb;
+    float fireRateMultiplier = 1;
+
+    protected SpriteRenderer sr;
 
     public Vector2 CenterPoint => centerPoint;
     [SerializeField] Vector2 centerPoint;
     [SerializeField] protected Transform shootingPoint;
+
+    [SerializeField] GameObject deathExplosion;
+    [SerializeField] float deathRadius;
+
+    bool isDead = false;
+
+    float deathTime = 3.5f;
+    float deathTimer;
+
+    float explosionTime = .3f;
+    float explosionTimer;
+
+    float afterDeathTime = 2.5f;
+    float afterDeathTimer;
 
     protected PlayerMovement player;
 
@@ -39,10 +54,13 @@ public abstract class Boss : MonoBehaviour, IHealth, IItemPicker
     float waitTime = 1;
     float waitTimer;
     
-    protected virtual void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         health = maxHealth;
-        rb = GetComponent<Rigidbody2D>();
+        sr = GetComponent<SpriteRenderer>();
+        explosionTimer = explosionTime;
+
         //doing it on Awake right now for testing
         Collider2D[] colliders = Physics2D.OverlapBoxAll(centerPoint, new(30, 17), 0);
 
@@ -55,12 +73,14 @@ public abstract class Boss : MonoBehaviour, IHealth, IItemPicker
         InitBoss();
     }
 
-    void Update()
+    protected override void Update()
     {
+        base.Update();
+        
         if (isIdling)
         {
             TakeAim();
-            if (idleTimer >= idleTime)
+            if (idleTimer >= idleTime * fireRateMultiplier)
             {
                 isIdling = false;
                 PickAttack();
@@ -84,14 +104,49 @@ public abstract class Boss : MonoBehaviour, IHealth, IItemPicker
                 idleTimer = 0;
             }
         }
+
+        if(isDead)
+        {
+            if (deathTimer < deathTime)
+            {
+                deathTimer+= Time.deltaTime;
+                if(explosionTimer >= explosionTime)
+                {
+                    explosionTimer = 0;
+                    DeathExplosion();
+                    return;
+                }
+                else
+                {
+                    explosionTimer += Time.deltaTime;
+                    return;
+                }
+            }
+            else
+            {
+                DeactivateSprite();
+                if(afterDeathTimer < afterDeathTime)
+                {
+                    afterDeathTimer+= Time.deltaTime;
+                    return;
+                }
+                else
+                {
+                    LoadNextScene();
+                }
+            }
+        }
     }
 
     void FixedUpdate()
     {
         if(moveDir == Vector2.zero)
+        {
+            AddForce(moveDir, speed, 3f);
             return;
-        
-        if(walkTimer < walkTime)
+        }
+
+        if (walkTimer < walkTime)
         {
             walkTimer+= Time.deltaTime;
             Walk();
@@ -119,21 +174,16 @@ public abstract class Boss : MonoBehaviour, IHealth, IItemPicker
             rb.linearVelocityX = 0;
             walkTimer = walkTime;
         }
-        
         AddForce(moveDir, speed, 3);
-    }
-
-    public void AddForce(Vector2 dir, float speed, float accel)
-    {
-        Vector2 velocity = dir * speed;
-        Vector2 velocityDiff = velocity - rb.linearVelocity;
-        Vector2 force = velocityDiff * accel;
-        rb.AddForce(force);
     }
 
     public void Heal(float healAmount)
     {
+        if(health <= 0)
+            return;
+        
         health+= healAmount;
+        shortColorFlash = new(Color.green);
         if (health > maxHealth)
             health = maxHealth;
         Debug.Log(gameObject.name + "Health: " + health);
@@ -141,26 +191,45 @@ public abstract class Boss : MonoBehaviour, IHealth, IItemPicker
 
     public void Damage(float damageAmount)
     {
+        if(health <= 0)
+            return;
+
         health-= damageAmount;
+        shortColorFlash = new(Color.red);
         Debug.Log(gameObject.name + "Health: " + health);
         if(health <= 0)
             Die();
     }
 
-    //TODO
     public void Die()
     {
-        Destroy(gameObject);
+        isDead = true;
+        currentAttack = null;
+        isIdling = false;
+        Stop();
+        OnDeath();
     }
+
+    //for the classes that inherits this class
+    protected virtual void OnDeath() {}
+
+    void DeathExplosion()
+    {
+        Vector2 pos = Random.insideUnitCircle * deathRadius + (Vector2)transform.position;
+        GameObject explosion = Instantiate(deathExplosion, pos, Quaternion.identity);
+        Destroy(explosion, .3f);
+    }
+
+    protected virtual void DeactivateSprite() => sr.enabled = false;
 
     public void PickItem(PickableItem item) => item.Effect(this);
 
     protected abstract void InitBoss();
+    protected abstract void LoadNextScene();
 
     void PickAttack()
     {
         currentAttack = attacks[Random.Range(0, attacks.Count)];
-        Debug.Log(currentAttack);
         currentAttack.InitAttack();
     }
 
@@ -186,6 +255,8 @@ public abstract class Boss : MonoBehaviour, IHealth, IItemPicker
         int chance = Random.Range(1, 101);
         moveDir = chance <= 50 ? Vector2.left : Vector2.right;
     }
+
+    public void AddForceBoss(Vector2 dir, float speed, float accelRate) => AddForce(dir, speed, accelRate);
 
     public void Stop() => moveDir = Vector2.zero;
 

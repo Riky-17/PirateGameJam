@@ -17,8 +17,8 @@ TagManager:
   - Player
   - Agent
   - Falling Object
-  - 
-  - 
+  - Bullet
+  - Ignore Bullet
   - 
   - 
   - 

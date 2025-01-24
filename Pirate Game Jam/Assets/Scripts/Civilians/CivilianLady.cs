@@ -88,8 +88,7 @@ public class CivilianLady : Civilian
         float leftMostX = originX - maxDistance / 2;
         float rightMostX = originX + maxDistance / 2;
 
-        leftDirChances =  Mathf.RoundToInt(100 * Mathf.InverseLerp(leftMostX, rightMostX, currentX)); 
-        // Debug.Log(leftDirChances);
+        leftDirChances =  Mathf.RoundToInt(100 * Mathf.InverseLerp(leftMostX, rightMostX, currentX));
     }
 
     void OnDrawGizmos()

@@ -4156,7 +4156,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4282876385133419597, guid: f770bcd4fd0fb934d81dcc903e1f0cc9, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7918400149600194139, guid: f770bcd4fd0fb934d81dcc903e1f0cc9, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5701,7 +5701,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2977798742805292636, guid: 4a13aa1aad6f48647861c4d1208210e5, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6045,6 +6045,63 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 296}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1001 &1076712176
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 962617017161635561, guid: 3858ab3b1ef6c7c41893ce3c09ac2d3d, type: 3}
+      propertyPath: m_Name
+      value: ParachuteSoldier
+      objectReference: {fileID: 0}
+    - target: {fileID: 6279436574967186365, guid: 3858ab3b1ef6c7c41893ce3c09ac2d3d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -6.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6279436574967186365, guid: 3858ab3b1ef6c7c41893ce3c09ac2d3d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6279436574967186365, guid: 3858ab3b1ef6c7c41893ce3c09ac2d3d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6279436574967186365, guid: 3858ab3b1ef6c7c41893ce3c09ac2d3d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6279436574967186365, guid: 3858ab3b1ef6c7c41893ce3c09ac2d3d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6279436574967186365, guid: 3858ab3b1ef6c7c41893ce3c09ac2d3d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6279436574967186365, guid: 3858ab3b1ef6c7c41893ce3c09ac2d3d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6279436574967186365, guid: 3858ab3b1ef6c7c41893ce3c09ac2d3d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6279436574967186365, guid: 3858ab3b1ef6c7c41893ce3c09ac2d3d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6279436574967186365, guid: 3858ab3b1ef6c7c41893ce3c09ac2d3d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3858ab3b1ef6c7c41893ce3c09ac2d3d, type: 3}
 --- !u!1 &1122841337
 GameObject:
   m_ObjectHideFlags: 0
@@ -6250,7 +6307,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2157154995834996865, guid: b39b40176e804f24bb6bc018cd70d23f, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3721089671696908559, guid: b39b40176e804f24bb6bc018cd70d23f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6646,7 +6703,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1272182825
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6683,8 +6740,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed47fbe53399af64a8bdcc17fb850149, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  middleBar: {fileID: 1374405658}
   slider: {fileID: 0}
+  currentXP: {fileID: 0}
+  maxXP: {fileID: 0}
+  currentLevelTxt: {fileID: 0}
 --- !u!114 &1272182827
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10404,7 +10463,7 @@ GameObject:
   - component: {fileID: 2021389518}
   - component: {fileID: 2021389519}
   - component: {fileID: 2021389520}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11571,3 +11630,4 @@ SceneRoots:
   - {fileID: 1796318817}
   - {fileID: 1391565894}
   - {fileID: 926852687}
+  - {fileID: 1076712176}

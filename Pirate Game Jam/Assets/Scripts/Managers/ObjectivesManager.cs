@@ -18,28 +18,23 @@ public class ObjectivesManager : MonoBehaviour
     [SerializeField] private byte missionObjective1;
     [Header("Objective2")]
     [SerializeField] private string objective2;
-    [SerializeField] private byte missionObjective2;   
+    [SerializeField] private byte missionObjective2;
     [Header("Objective3")]
     [SerializeField] private string objective3;
     [SerializeField] private byte missionObjective3;
 
-   
-    //objectives accomplished
-    public bool accompObjective1 = false;
-    public bool accompObjective2 = false;
-    public bool accompObjective3 = false;
 
     public static ObjectivesManager Instance { get; private set; }
+    Dictionary<string, int> objectives = new Dictionary<string, int>();
 
-    byte objectivenum = 0;
-    Dictionary<byte, byte> objectives = new Dictionary<byte, byte>();
-    List<byte> objectiveID = new List<byte>();
-    private int initialEnemiesNum;
-    private int initialCiviliansNum;
+    //necessaries amount for everything 
+    private int progressObjective1 = 0;
+    private int progressObjective2 = 0;
+    private int progressObjective3 = 0;
 
     void Awake()
     {
-        if(Instance == null)
+        if (Instance == null)
         {
             Instance = this;
         }
@@ -48,17 +43,6 @@ public class ObjectivesManager : MonoBehaviour
             Destroy(gameObject);
         }
 
-        //setting the initial amount of enemies
-        if (GameManager.Instance.Enemies != null)
-        {
-            initialEnemiesNum = GameManager.Instance.Enemies.Count;
-        }
-        if(GameManager.Instance.Civilians != null)
-        {
-            initialCiviliansNum = GameManager.Instance.Civilians.Count;
-        }
-        
-      
         UpdatingUI();
 
         //add random events for the dictionary here (later on) 
@@ -71,74 +55,52 @@ public class ObjectivesManager : MonoBehaviour
         UIObjective2.text = objective2;
         UIObjective3.text = objective3;
     }
-
+    public void killEnemy()
+    {
+        progressObjective1++;
+        checkingObjectives();
+    }
+    public void KillCivilian()
+    {
+        progressObjective2++;
+        checkingObjectives();
+    }
+    public void pickUpItem()
+    {
+        progressObjective3++;
+        checkingObjectives();
+    }
     void UpdatingDictionaryObjectives()
     {
         if (missionObjective1 != 0)
-        {
-            objectivenum++;
-            objectiveID.Add(objectivenum);
-            objectives.Add(objectivenum, missionObjective1);
-        }
+            objectives.Add(objective1, missionObjective1);
+
         if (missionObjective2 != 0)
-        {
-            objectivenum++;
-            objectiveID.Add(objectivenum);
-            objectives.Add(objectivenum, missionObjective2);
-        }
+            objectives.Add(objective2, missionObjective2);
+
         if (missionObjective3 != 0)
-        {
-            objectivenum++;
-            objectiveID.Add(objectivenum);
-            objectives.Add(objectivenum, missionObjective3);
-        }
+            objectives.Add(objective3, missionObjective3);
+
     }
 
     public void checkingObjectives()
     {
-        if (initialEnemiesNum != GameManager.Instance.Enemies.Count && !accompObjective1)
+        if(progressObjective1 == missionObjective1)
         {
-            if (objectives.TryGetValue(1, out byte value))
-            {
-                UpdateDic(ref value, ref accompObjective1, 3);
-            }
+            BalancedSliderController.Instance.increasingSliderValue(missionObjective1 * 10);
         }
-        if (initialCiviliansNum != GameManager.Instance.Civilians.Count && !accompObjective2)
+        if(progressObjective2 == missionObjective2)
         {
-            if (objectives.TryGetValue(2, out byte value))
-            {
-                UpdateDic(ref value, ref accompObjective2, 3);
-            }
+            BalancedSliderController.Instance.increasingSliderValue(missionObjective2 * 10);
         }
-        if (initialCiviliansNum != GameManager.Instance.Civilians.Count && !accompObjective3)
+        if (progressObjective3 == missionObjective3)
         {
-            if (objectives.TryGetValue(3, out byte value))
-            {
-                UpdateDic(ref value, ref accompObjective3, 3);
-            }
+            BalancedSliderController.Instance.increasingSliderValue(missionObjective3 * 100);
         }
-
     }
-    byte UpdateDic(ref byte value, ref bool objective, byte pointsForMission)
+    int UpdateDic(ref int value, ref bool objective, int pointsForMission)
     {
-        Debug.Log("Mehod UpdateDic was reached");
-        value--;
-        initialCiviliansNum = GameManager.Instance.Civilians.Count;
-        initialEnemiesNum = GameManager.Instance.Enemies.Count;
-        if (value <= 0)
-        {
-            objective = true;
-           
-            Debug.Log("A mission was accomplished");
-            
-            
-        }
-        if (objective)
-        {
-            BalancedSliderController.Instance.AddingEvilSide(3);
-            BalancedSliderController.Instance.AddingGoodSide(3);
-        }
-        return value;
+        return 0;
     }
     void Update()
     {

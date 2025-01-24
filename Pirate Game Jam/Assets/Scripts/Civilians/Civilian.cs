@@ -93,7 +93,7 @@ public class Civilian : MonoBehaviour, IHealth, IItemPicker
     //TODO
     public void Die()
     {
-        ObjectivesManager.Instance.checkingObjectives();
+        ObjectivesManager.Instance.KillCivilian();
         Destroy(gameObject);
     }
 

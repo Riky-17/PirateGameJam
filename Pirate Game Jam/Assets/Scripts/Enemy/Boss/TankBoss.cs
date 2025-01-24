@@ -3,13 +3,21 @@ using UnityEngine;
 
 public class TankBoss : Boss
 {
+    SpriteRenderer srCannon;
+
     [SerializeField] BulletSO grenade;
     [SerializeField] BulletSO bullet;
     [SerializeField] Enemy enemyToSpawn;
-    [SerializeField] Transform cannonPivot;
+    [SerializeField] Transform cannon;
+
+    public List<Enemy> SpawnedEnemies { get; private set; }
 
     protected override void InitBoss()
     {
+        sr = GetComponent<SpriteRenderer>();
+        srCannon = cannon.GetComponent<SpriteRenderer>();
+        SpawnedEnemies = new();
+
         attacks = new() 
         { 
             new GrenadeBarrage(this, player, shootingPoint, grenade), 
@@ -19,19 +27,37 @@ public class TankBoss : Boss
         };
     }
 
-    public override void RotateGun(Quaternion rotation) => cannonPivot.rotation = rotation;
+    public override void RotateGun(Quaternion rotation) => cannon.rotation = rotation;
+
+    protected override void DeactivateSprite()
+    {
+        sr.enabled = false;
+        srCannon.enabled = false;
+    }
+
+    protected override void LoadNextScene() => GameManager.Instance.LoadScene(2);
+
     public override void TakeAim()
     {
         Vector2 shootDir = (player.transform.position - transform.position).normalized;
         Vector3 upwards = Vector3.Cross(Vector3.forward, shootDir);
         Vector3 forward = Vector3.forward;
 
-        if(transform.rotation.y % 360 != 0)
-        {
-            forward = -forward;
-            upwards = -upwards;
-        }
+        cannon.rotation = Quaternion.LookRotation(forward, upwards);
+    }
 
-        cannonPivot.rotation = Quaternion.LookRotation(forward, upwards);
+    protected override void UpdateColor(Color color)
+    {
+        sr.color = color;
+        srCannon.color = color;
+    }
+
+    protected override void OnDeath()
+    {
+        foreach (Enemy enemy in SpawnedEnemies)
+        {
+            if(enemy != null)
+                enemy.Die();
+        }
     }
 }

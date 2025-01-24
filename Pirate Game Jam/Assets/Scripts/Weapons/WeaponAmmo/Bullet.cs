@@ -10,20 +10,33 @@ public class Bullet : MonoBehaviour
 
     public GameObject bulletHitPrefab;
 
+    IHealth target;
+
     void FixedUpdate()
     {
-        RaycastHit2D raycastHit = Physics2D.Raycast(transform.position, transform.right, .5f);
+        RaycastHit2D raycastHit = Physics2D.Raycast(transform.position, transform.right, .25f);
 
-        if(raycastHit.collider == null)
-            return;
-
-        if(raycastHit.collider.TryGetComponent(out IHealth target))
+        if(raycastHit.collider != null && raycastHit.collider.TryGetComponent(out target) && raycastHit.collider.gameObject.layer != shooterLayer)
         {
-            if(raycastHit.collider.gameObject.layer == shooterLayer)
-                return;
-
             target.Damage(damage);
             Instantiate(bulletHitPrefab, transform.position + (transform.right * 0.3f), transform.rotation);
+        }
+        else
+        {
+            raycastHit = Physics2D.Raycast(transform.position, -transform.right, .25f);
+
+            if(raycastHit.collider == null)
+                return;
+
+            if(raycastHit.collider.TryGetComponent(out target))
+            {
+                if(raycastHit.collider.gameObject.layer == shooterLayer)
+                    return;
+                
+                target.Damage(damage);
+                Instantiate(bulletHitPrefab, transform.position + (-transform.right * 0.3f), transform.rotation);
+            }
+            
         }
 
         Destroy(gameObject);

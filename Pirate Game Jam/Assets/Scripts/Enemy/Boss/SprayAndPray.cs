@@ -16,10 +16,9 @@ public class SprayAndPray : BossAttack
     //trigonometry fields
     int angDegSpray = 180;
     float currentDegAngle;
-    float halfDegAngle => currentDegAngle / 2;
 
-    float CosAngSpray => Mathf.Cos(halfDegAngle * Mathf.Deg2Rad);
-    float SinAngSpray => Mathf.Sin(halfDegAngle * Mathf.Deg2Rad);
+    float CosAngSpray => Mathf.Cos(currentDegAngle * Mathf.Deg2Rad);
+    float SinAngSpray => Mathf.Sin(currentDegAngle * Mathf.Deg2Rad);
 
     float rotationSpeed = 90f;
 
@@ -29,7 +28,6 @@ public class SprayAndPray : BossAttack
         boss.Stop();
         slamCount = 0;
         fireRateTimer = fireRateTime;
-        currentDegAngle = angDegSpray / 2;
         
         dir = new(boss.CenterPoint.x - boss.transform.position.x, 0);
         dir = dir.normalized;
@@ -37,14 +35,13 @@ public class SprayAndPray : BossAttack
 
     public override void Attack()
     {
-        if(slamCount >= 2)
+        if(slamCount >= 2 && boss.transform.position.x >= boss.CenterPoint.x - .5f && boss.transform.position.x <= boss.CenterPoint.x + .5f)
         {
-            Debug.Log("Hi");
             isAttackDone = true;
             return;
         }
 
-        boss.AddForce(dir, 15, 2);
+        boss.AddForceBoss(dir, 15, 2);
         if(boss.transform.position.x < boss.CenterPoint.x - CAMERA_MAX_WIDTH && dir.x < 0 || boss.transform.position.x > boss.CenterPoint.x + CAMERA_MAX_WIDTH && dir.x > 0)
         {
             slamCount++;
@@ -52,12 +49,12 @@ public class SprayAndPray : BossAttack
         }
 
         //rotate
-        if((currentDegAngle <= -(angDegSpray / 2) && Mathf.Sign(rotationSpeed) == 1) || (currentDegAngle >= angDegSpray / 2 && Mathf.Sign(rotationSpeed) == -1))
+        if((currentDegAngle <= 0 && Mathf.Sign(rotationSpeed) == 1) || (currentDegAngle >= angDegSpray && Mathf.Sign(rotationSpeed) == -1))
             rotationSpeed = -rotationSpeed;
         
         currentDegAngle-= rotationSpeed * Time.deltaTime;
 
-        Vector2 shootDir = new(SinAngSpray, CosAngSpray);
+        Vector2 shootDir = new(CosAngSpray, SinAngSpray);
         Vector3 upwards = Vector3.Cross(Vector3.forward, shootDir);
         Vector3 forward = Vector3.forward;
 

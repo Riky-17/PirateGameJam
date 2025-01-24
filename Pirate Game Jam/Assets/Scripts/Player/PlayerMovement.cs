@@ -1,9 +1,9 @@
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour, IHealth, IItemPicker
+public class PlayerMovement : ColorFlashObject, IHealth, IItemPicker
 {
     [HideInInspector] public Vector2 mousePos;
-    Rigidbody2D rb;
+
     Vector2 moveInput;
 
     [SerializeField] float speed = 6;
@@ -21,28 +21,22 @@ public class PlayerMovement : MonoBehaviour, IHealth, IItemPicker
     public float Health { get => health; set => health = value; }
     float health;
 
-    //fields for the flash
-    float intervalTimer;
-    ShortColorFlash shortColorFlash;
-    LongColorFlash longColorFlash;
-
     //statBoostTimer
     float damageBoostTime;
     float damageBoostTimer;
     float fireRateBoostTime;
     float fireRateBoostTimer;
 
-    void Awake()
+    protected override void Awake()
     {
-        rb = GetComponent<Rigidbody2D>();
+        base.Awake();
         health = maxHealth;
         currentWeapon = weapons[0];
-        longColorFlash = new();
     }
     
-    void Update()
+    protected override void Update()
     {
-        ColorFlash();
+        base.Update();
         CheckStatBoost();
         GetMovementInput();
         MousePosition();
@@ -50,7 +44,7 @@ public class PlayerMovement : MonoBehaviour, IHealth, IItemPicker
         GetWeaponInput();
     }
 
-    void FixedUpdate() => Movement();
+    void FixedUpdate() => AddForce(moveInput, speed, 7f);
 
     void GetMovementInput()
     {
@@ -70,41 +64,6 @@ public class PlayerMovement : MonoBehaviour, IHealth, IItemPicker
 
             moveInput = moveInput.normalized;
         }
-    }
-
-    void ColorFlash()
-    {
-        if(shortColorFlash.duration > 0)
-        {
-            currentWeapon.ChangeSpriteColor(shortColorFlash.Color);
-            shortColorFlash.duration-= Time.deltaTime;
-            if(shortColorFlash.duration <= 0)
-            {
-                currentWeapon.ChangeSpriteColor(Color.white);
-                shortColorFlash = default;
-            }
-            else
-            {
-                if(!longColorFlash.IsEmpty())
-                    longColorFlash.ReduceDurations(Time.deltaTime);
-                return;
-            }
-        }
-
-        if(!longColorFlash.IsEmpty())
-        {
-            if(intervalTimer <= longColorFlash.Interval)
-                intervalTimer+= Time.deltaTime;
-            else
-                intervalTimer = 0;
-
-            currentWeapon.ChangeSpriteColor(longColorFlash.GetColor(intervalTimer));
-            longColorFlash.ReduceDurations(Time.deltaTime);
-
-            return;
-        }
-
-        currentWeapon.ChangeSpriteColor(Color.white);
     }
 
     void CheckStatBoost()
@@ -161,16 +120,6 @@ public class PlayerMovement : MonoBehaviour, IHealth, IItemPicker
 
     void MousePosition() => mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition); // Gets Vector2 mouse position
 
-    void Movement()
-    {
-        //physics calc
-        Vector2 velocityInput = moveInput * speed;
-        Vector3 velocityDiff = velocityInput - rb.linearVelocity;
-        float accelRate = 7f;
-        Vector3 force = velocityDiff * accelRate;
-        rb.AddForce(force);
-    }
-
     void SpriteRotation()
     {
         // Rotates sprite based on mouse position
@@ -200,7 +149,6 @@ public class PlayerMovement : MonoBehaviour, IHealth, IItemPicker
 
     public void Damage(float damageAmount)
     {
-        Debug.Log(damageAmount);
         health -= damageAmount;
         shortColorFlash = new(Color.red);
         Debug.Log(gameObject.name + " Health: " + health);
@@ -214,19 +162,21 @@ public class PlayerMovement : MonoBehaviour, IHealth, IItemPicker
         
     }
 
+    protected override void UpdateColor(Color color) => currentWeapon.ChangeSpriteColor(color);
+
     public void PickItem(PickableItem item) => item.Effect(this);
 
     public void DamageBoost(float DamageBoostAmount, float duration)
     {
         WeaponSystem.DamageMultiplier = DamageBoostAmount;
         damageBoostTime+= duration;
-        longColorFlash.AddColor(new(0.2f, 0.6f, 1), duration);
+        LongColorFlash.AddColor(new(0.2f, 0.6f, 1), duration);
     }
 
     public void FireRateBoost(float FireRateBoostAmount, float duration)
     {
         WeaponSystem.FireRateMultiplier = FireRateBoostAmount;
         fireRateBoostTime+= duration;
-        longColorFlash.AddColor(Color.yellow, duration);
+        LongColorFlash.AddColor(Color.yellow, duration);
     }
 }

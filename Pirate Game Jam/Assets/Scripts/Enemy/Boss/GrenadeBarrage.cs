@@ -38,7 +38,7 @@ public class GrenadeBarrage : BossAttack
         Quaternion bulletRotation = shootingPoint.rotation * Quaternion.Euler(0, 0, inaccuracy);
         Bullet bulletToShoot = boss.InstantiateBullet(bullet.bulletPrefab, shootingPoint.position, bulletRotation);
         InitBullet(bulletToShoot);
-        boss.DestroyBullet(bulletToShoot, 2f);
+        boss.DestroyBullet(bulletToShoot, .75f);
 
         if(grenadeCount >= grenadeAmount)
             isAttackDone = true;

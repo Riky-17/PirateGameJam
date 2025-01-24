@@ -16,6 +16,8 @@ public class Civilian : MonoBehaviour, IHealth, IItemPicker
 
     protected Vector2 dir;
 
+    ShortColorFlash shortColorFlash;
+
     protected virtual void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -33,10 +35,7 @@ public class Civilian : MonoBehaviour, IHealth, IItemPicker
 
     void Update()
     {
-        if(hitTimer > 0)
-            hitTimer-= Time.deltaTime;
-        else
-            sr.color = Color.white;
+        CheckColorFlash();
 
         if(waitTimer >= waitTime)
         {
@@ -46,6 +45,20 @@ public class Civilian : MonoBehaviour, IHealth, IItemPicker
         }
 
         waitTimer+= Time.deltaTime;
+    }
+
+    void CheckColorFlash()
+    {
+        if(shortColorFlash.duration > 0)
+        {
+            sr.color = shortColorFlash.Color;
+            shortColorFlash.duration-= Time.deltaTime;
+            if(shortColorFlash.duration <= 0)
+            {
+                sr.color = Color.white;
+                shortColorFlash = default;
+            }
+        }
     }
 
     protected virtual void GetNewDirection()
@@ -75,6 +88,7 @@ public class Civilian : MonoBehaviour, IHealth, IItemPicker
     public void Heal(float healAmount)
     {
         Health+= healAmount;
+        shortColorFlash = new(Color.green);
         if(Health > MaxHealth)
             Health = MaxHealth;
         Debug.Log(gameObject.name + " Health: " + Health);
@@ -83,8 +97,7 @@ public class Civilian : MonoBehaviour, IHealth, IItemPicker
     public void Damage(float damageAmount)
     {
         Health-= damageAmount;
-        hitTimer = hitTime;
-        sr.color = Color.red;
+        shortColorFlash = new(Color.red);
         Debug.Log(gameObject.name + " Health: " + Health);
         if(Health <= 0)
             Die();

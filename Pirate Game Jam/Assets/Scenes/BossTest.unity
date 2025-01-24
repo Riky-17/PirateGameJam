@@ -509,7 +509,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &96790192
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4186,6 +4186,8 @@ GameObject:
   m_Component:
   - component: {fileID: 651926177}
   - component: {fileID: 651926178}
+  - component: {fileID: 651926180}
+  - component: {fileID: 651926179}
   m_Layer: 0
   m_Name: Cannon
   m_TagString: Untagged
@@ -4264,6 +4266,88 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!61 &651926179
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 651926176}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 3, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.33333334, y: 0.5}
+    oldSize: {x: 6, y: 4}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 2.1, y: 1}
+  m_EdgeRadius: 0
+--- !u!58 &651926180
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 651926176}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_Radius: 2
 --- !u!1 &667324947
 GameObject:
   m_ObjectHideFlags: 0
@@ -4296,8 +4380,8 @@ RectTransform:
   - {fileID: 1266934745}
   m_Father: {fileID: 1252454324}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -5635,13 +5719,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbfb0ba2c50e73241922ed5881af6115, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveSpeed: 5
+  maxHealth: 500
   centerPoint: {x: 0, y: 0}
   shootingPoint: {fileID: 1691749603}
+  deathExplosion: {fileID: 1319657421192287489, guid: ed1a3e8e74b71a842a466485eaf2f7ca, type: 3}
+  deathRadius: 3
   speed: 5
-  grenade: {fileID: 11400000, guid: 198459120051d93448078b7fad601e65, type: 2}
-  bullet: {fileID: 11400000, guid: 097a0b1c896ac934cbdca4fd38a7a275, type: 2}
+  grenade: {fileID: 11400000, guid: 907159f08fc67f14ea4f6741e86971be, type: 2}
+  bullet: {fileID: 11400000, guid: 70c0e4367284bd74da537ee24c3d693c, type: 2}
   enemyToSpawn: {fileID: 3288990257193346228, guid: 3858ab3b1ef6c7c41893ce3c09ac2d3d, type: 3}
-  cannonPivot: {fileID: 651926177}
+  cannon: {fileID: 651926177}
 --- !u!50 &1009293614
 Rigidbody2D:
   serializedVersion: 5
@@ -5654,7 +5742,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 100
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_GravityScale: 1
@@ -5713,7 +5801,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 5, y: 3}
+  m_Size: {x: 5, y: 3.5}
   m_EdgeRadius: 0
 --- !u!212 &1009293616
 SpriteRenderer:

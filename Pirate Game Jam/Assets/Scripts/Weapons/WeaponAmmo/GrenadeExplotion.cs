@@ -24,6 +24,12 @@ public class GrenadeExplotion : Bullet
         StartCoroutine(ExplosionDelay());
     }
 
+    void OnDisable()
+    {
+        if(!hasExploded)
+            Explosion();
+    }
+
     void FixedUpdate()
     {
         if(hasExploded)
@@ -34,17 +40,14 @@ public class GrenadeExplotion : Bullet
             return;
 
         Explosion();
-        hasExploded = true;
     }
 
     void Explosion()
     {
         GameObject tempExp = Instantiate(explosionPrefab, transform.position, transform.rotation);
+        hasExploded = true;
 
-        //making it big
-        tempExp.transform.localScale *= explosionRadius;
-
-        colliders = Physics2D.OverlapCircleAll(transform.position, explosionRadius);
+        colliders = Physics2D.OverlapCircleAll(transform.position, explosionRadius * .23f);
         if(colliders != null && colliders.Length > 0)
         {
             foreach (Collider2D collider in colliders)
@@ -72,10 +75,7 @@ public class GrenadeExplotion : Bullet
         
         yield return new WaitForSeconds(explosionDelay);
         if (!hasExploded)
-        {
             Explosion();
-            hasExploded = true;
-        }      
     }
 
     // private void OnCollisionEnter2D(Collision2D collision)

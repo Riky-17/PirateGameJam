@@ -8,5 +8,10 @@ public abstract class PickableItem : MonoBehaviour
     {
         if(other.gameObject.TryGetComponent(out IItemPicker picker))
             picker.PickItem(this);
+
+        if(other.gameObject.CompareTag("Player"))
+        {
+            ObjectivesManager.Instance.pickUpItem();
+        }
     }
 }

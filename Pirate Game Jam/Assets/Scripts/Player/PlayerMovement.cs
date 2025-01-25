@@ -31,8 +31,9 @@ public class PlayerMovement : ColorFlashObject, IHealth, IItemPicker
     float reloadBoostTime;
     float reloadBoostTimer;
 
-    float BulletAmountBoostTime;
-    float BulletAmountBoostTimer;
+    float bulletAmountMultiplier = 1;
+    float bulletAmountBoostTime;
+    float bulletAmountBoostTimer;
 
     protected override void Awake()
     {
@@ -115,18 +116,20 @@ public class PlayerMovement : ColorFlashObject, IHealth, IItemPicker
                 reloadBoostTimer+= Time.deltaTime;
         }
 
-        if(BulletAmountBoostTime != 0)
+        if(bulletAmountBoostTime != 0)
         {
-            if (BulletAmountBoostTimer >= BulletAmountBoostTime)
+            if (bulletAmountBoostTimer >= bulletAmountBoostTime)
             {
+                Debug.Log("Hello");
                 foreach (WeaponSystem weapon in weapons)
-                    weapon.MultiplyBullet(1/2);
+                    weapon.MultiplyBullet(1 / bulletAmountMultiplier);
 
-                BulletAmountBoostTime = 0;
-                BulletAmountBoostTimer = 0;
+                bulletAmountMultiplier = 1;
+                bulletAmountBoostTime = 0;
+                bulletAmountBoostTimer = 0;
             }
             else
-                BulletAmountBoostTimer+= Time.deltaTime;
+                bulletAmountBoostTimer+= Time.deltaTime;
         }
     }
 
@@ -209,33 +212,34 @@ public class PlayerMovement : ColorFlashObject, IHealth, IItemPicker
 
     public void PickItem(PickableItem item) => item.Effect(this);
 
-    public void DamageBoost(float DamageBoostAmount, float duration)
+    public void DamageBoost(float damageBoostAmount, float duration)
     {
-        WeaponSystem.DamageBoostMultiplier = DamageBoostAmount;
+        WeaponSystem.DamageBoostMultiplier = damageBoostAmount;
         damageBoostTime+= duration;
         LongColorFlash.AddColor(new(0.2f, 0.6f, 1), duration);
     }
 
-    public void FireRateBoost(float FireRateBoostAmount, float duration)
+    public void FireRateBoost(float fireRateBoostAmount, float duration)
     {
-        WeaponSystem.FireRateMultiplier = FireRateBoostAmount;
+        WeaponSystem.FireRateMultiplier = fireRateBoostAmount;
         fireRateBoostTime+= duration;
         LongColorFlash.AddColor(Color.yellow, duration);
     }
 
-    public void ReloadBoost(float ReloadBoostAmount, float duration)
+    public void ReloadBoost(float reloadBoostAmount, float duration)
     {
-        WeaponSystem.ReloadMultiplier = ReloadBoostAmount;
+        WeaponSystem.ReloadMultiplier = reloadBoostAmount;
         reloadBoostTime+= duration;
         LongColorFlash.AddColor(Color.magenta, duration);
     }
 
-    public void BulletAmountBoost(float ReloadBoostAmount, float duration)
+    public void BulletAmountBoost(float bulletAmountBoost, float duration)
     {
+        bulletAmountMultiplier = bulletAmountBoost;
         foreach (WeaponSystem weapon in weapons)
-            weapon.MultiplyBullet(2);
+            weapon.MultiplyBullet(bulletAmountMultiplier);
 
-        reloadBoostTime+= duration;
-        LongColorFlash.AddColor(Color.black, duration);
+        bulletAmountBoostTime+= duration;
+        LongColorFlash.AddColor(Color.grey, duration);
     }
 }

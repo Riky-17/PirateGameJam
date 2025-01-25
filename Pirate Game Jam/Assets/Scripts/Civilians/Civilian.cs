@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Civilian : MonoBehaviour, IHealth, IItemPicker
 {
@@ -17,6 +18,15 @@ public class Civilian : MonoBehaviour, IHealth, IItemPicker
     protected Vector2 dir;
 
     ShortColorFlash shortColorFlash;
+
+    //throwing item fields
+    protected bool isThrowingItem = false;
+    protected StatBoostItem itemToThrow;
+    protected float rotatingSpeed = 2;
+    protected float throwingTimer;
+    protected Quaternion initialRot;
+    Vector2 throwDir;
+    int throwTurns = 1;
 
     protected virtual void Awake()
     {
@@ -37,6 +47,23 @@ public class Civilian : MonoBehaviour, IHealth, IItemPicker
     {
         CheckColorFlash();
 
+        if(isThrowingItem)
+        {
+            if(throwingTimer >= 1)
+            {
+                transform.rotation = initialRot;
+                ThrowItem(itemToThrow);
+                throwingTimer = 0;
+                isThrowingItem = false;
+            }
+            else
+            {
+                throwingTimer+= Time.deltaTime * rotatingSpeed;
+                Rotate();
+                return;
+            }
+        }
+
         if(waitTimer >= waitTime)
         {
             waitTimer = 0;
@@ -47,7 +74,7 @@ public class Civilian : MonoBehaviour, IHealth, IItemPicker
         waitTimer+= Time.deltaTime;
     }
 
-    void CheckColorFlash()
+    protected void CheckColorFlash()
     {
         if(shortColorFlash.duration > 0)
         {
@@ -78,11 +105,22 @@ public class Civilian : MonoBehaviour, IHealth, IItemPicker
             transform.rotation = Quaternion.identity;
     }
 
-    void ThrowItem(Vector3 dir, PickableItem item)
+    protected void Rotate()
     {
-        PickableItem itemToThrow = Instantiate(item, transform.position + dir, Quaternion.identity);
-        itemToThrow.GetComponent<Rigidbody2D>().AddForce(dir * 5);
-        Destroy(item);
+        float radAngle = throwTurns * (Mathf.PI * 2);
+        float z = Mathf.Cos(radAngle * throwingTimer);
+        float x = Mathf.Sin(radAngle * throwingTimer);
+
+        Vector3 forward = new(x, 0, z);
+        Quaternion rot = initialRot * Quaternion.LookRotation(forward, transform.up);
+        transform.rotation = rot;
+    }
+
+    protected void ThrowItem(StatBoostItem item)
+    {
+        StatBoostItem itemToThrow = Instantiate(item, (Vector2)transform.position + throwDir * 2, Quaternion.identity);
+        itemToThrow.ThrowItem(throwDir);
+        Destroy(item.gameObject);
     }
 
     public void Heal(float healAmount)
@@ -114,12 +152,22 @@ public class Civilian : MonoBehaviour, IHealth, IItemPicker
     {
         switch (item)
         {
-            case StatBoostItem:
-                Vector2 civilianToItem = new(item.transform.position.x - transform.position.x, 0);
-                civilianToItem = civilianToItem.normalized;
-                civilianToItem += Vector2.up;
-                civilianToItem = civilianToItem.normalized;
-                ThrowItem(civilianToItem, item);
+            case StatBoostItem statBoostItem:
+                if (!isThrowingItem)
+                {
+                    isThrowingItem = true;
+                    float x = item.transform.position.x - transform.position.x;
+                    if(x == 0)
+                        x = 1;
+    
+                    throwDir = new(x, 0);
+                    throwDir = throwDir.normalized;
+                    throwDir += Vector2.up;
+                    throwDir = throwDir.normalized;
+                    itemToThrow = statBoostItem;
+                    statBoostItem.DisableItem();
+                    initialRot = transform.rotation;
+                }
             break;
             default:
                 item.Effect(this);

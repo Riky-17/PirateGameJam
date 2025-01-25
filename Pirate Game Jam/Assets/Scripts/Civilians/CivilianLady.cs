@@ -29,10 +29,24 @@ public class CivilianLady : Civilian
 
     void Update()
     {
-        if(hitTimer > 0)
-            hitTimer-= Time.deltaTime;
-        else
-            sr.color = Color.white;
+        CheckColorFlash();
+        
+        if(isThrowingItem)
+        {
+            if(throwingTimer >= 1)
+            {
+                transform.rotation = initialRot;
+                ThrowItem(itemToThrow);
+                throwingTimer = 0;
+                isThrowingItem = false;
+            }
+            else
+            {
+                throwingTimer+= Time.deltaTime * rotatingSpeed;
+                Rotate();
+                return;
+            }
+        }
 
         if(walkTimer >= walkTime)
         {

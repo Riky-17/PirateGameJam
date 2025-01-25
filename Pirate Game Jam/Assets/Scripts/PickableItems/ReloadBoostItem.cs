@@ -4,6 +4,10 @@ public class ReloadBoostItem : StatBoostItem
 {
     public override void Effect(IItemPicker target)
     {
-        throw new System.NotImplementedException();
+        if(target is PlayerMovement player)
+        {
+            player.ReloadBoost(boostAmount, boostDuration);
+            Destroy(gameObject);
+        }
     }
 }

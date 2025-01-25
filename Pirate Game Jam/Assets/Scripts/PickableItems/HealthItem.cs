@@ -6,7 +6,7 @@ public class HealthItem : PickableItem
 
     public override void Effect(IItemPicker target)
     {
-        if(target is IHealth alive && alive.Health < alive.MaxHealth)
+        if(target is IHealth alive)
         {
             alive.Heal(healAmount);
             Destroy(gameObject);

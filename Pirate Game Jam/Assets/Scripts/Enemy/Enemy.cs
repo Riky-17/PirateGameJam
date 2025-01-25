@@ -43,6 +43,15 @@ public abstract class Enemy : ColorFlashObject, IHealth, IItemPicker
     float fireRateBoostTime;
     float fireRateBoostTimer;
 
+    //throwing item fields
+    bool isThrowingItem = false;
+    PickableItem itemToThrow;
+    float rotatingSpeed = 2;
+    float throwingTimer;
+    Quaternion initialRot;
+    Vector2 throwDir;
+    int throwTurns = 1;
+
     protected override void Awake()
     {
         base.Awake();
@@ -73,10 +82,28 @@ public abstract class Enemy : ColorFlashObject, IHealth, IItemPicker
         else
             anim.Play("Walk");
 
+        CheckStatBoost();
+
+        if(isThrowingItem)
+        {
+            if(throwingTimer >= 1)
+            {
+                transform.rotation = initialRot;
+                ThrowItem(itemToThrow);
+                throwingTimer = 0;
+                isThrowingItem = false;
+            }
+            else
+            {
+                throwingTimer+= Time.deltaTime * rotatingSpeed;
+                Rotate();
+                return;
+            }
+        }
+
         if(shootingTimer > lastShot)
             lastShot += Time.deltaTime;
 
-        CheckStatBoost();
 
         if (player != null)
         {
@@ -262,7 +289,69 @@ public abstract class Enemy : ColorFlashObject, IHealth, IItemPicker
 
     protected override void UpdateColor(Color color) => sr.color = color;
 
-    public void PickItem(PickableItem item) => item.Effect(this);
+    void ThrowingInit(PickableItem statBoostItem)
+    {
+        if (!isThrowingItem)
+        {
+            isThrowingItem = true;
+            float x = statBoostItem.transform.position.x - transform.position.x;
+            if(x == 0)
+                x = 1;
+
+            throwDir = new(x, 0);
+            throwDir = throwDir.normalized;
+            throwDir += Vector2.up;
+            throwDir = throwDir.normalized;
+            itemToThrow = statBoostItem;
+            statBoostItem.DisableItem();
+            initialRot = transform.rotation;
+        }
+    }
+
+    void Rotate()
+    {
+        float radAngle = throwTurns * (Mathf.PI * 2);
+        float z = Mathf.Cos(radAngle * throwingTimer);
+        float x = Mathf.Sin(radAngle * throwingTimer);
+
+        Vector3 forward = new(x, 0, z);
+        Quaternion rot = initialRot * Quaternion.LookRotation(forward, transform.up);
+        transform.rotation = rot;
+    }
+
+    void ThrowItem(PickableItem item)
+    {
+        PickableItem itemToThrow = Instantiate(item, (Vector2)transform.position + throwDir * 2, Quaternion.identity);
+        itemToThrow.ThrowItem(throwDir);
+        Destroy(item.gameObject);
+    }
+
+    public void PickItem(PickableItem item)
+    {
+        switch(item)
+        {
+            case HealthItem:
+                if(Health == MaxHealth)
+                {
+                    if(!isThrowingItem)
+                        ThrowingInit(item);
+                }
+                else
+                    item.Effect(this);
+            break;
+            case ReloadBoostItem:
+                if(!isThrowingItem)
+                    ThrowingInit(item);
+            break;
+            case BulletAmountBoostItem:
+                if(!isThrowingItem)
+                    ThrowingInit(item);
+            break;
+            default:
+                item.Effect(this);
+            break;
+        }
+    }
 
     public void DamageBoost(float DamageBoostAmount, float duration)
     {

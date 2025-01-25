@@ -3973,6 +3973,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: DamagePickup (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 8548475356807709533, guid: f01582527db176147a30255c9b1c352d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -12901,7 +12905,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3102416724573429079, guid: a1d953ced07cbfc47829cc0d83e97e53, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 10
+      value: 16.94
       objectReference: {fileID: 0}
     - target: {fileID: 3102416724573429079, guid: a1d953ced07cbfc47829cc0d83e97e53, type: 3}
       propertyPath: m_LocalPosition.y
@@ -12945,7 +12949,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6494342680810148015, guid: a1d953ced07cbfc47829cc0d83e97e53, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -13320,11 +13324,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2868602006043659658, guid: 36fa289b835a9654c961b5a6b07e1f65, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 17
+      value: -12.85
       objectReference: {fileID: 0}
     - target: {fileID: 2868602006043659658, guid: 36fa289b835a9654c961b5a6b07e1f65, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 2.14
       objectReference: {fileID: 0}
     - target: {fileID: 2868602006043659658, guid: 36fa289b835a9654c961b5a6b07e1f65, type: 3}
       propertyPath: m_LocalPosition.z
@@ -13476,6 +13480,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ReloadPickup
       objectReference: {fileID: 0}
+    - target: {fileID: 7983067742814931598, guid: c3441cc1f6866a241a5d012de387926a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -13617,7 +13625,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 920199928733028046, guid: 9d39889c46cf9da448cfa3b3afdd3376, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3211495207902851074, guid: 9d39889c46cf9da448cfa3b3afdd3376, type: 3}
       propertyPath: m_Color.b
@@ -13633,7 +13641,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6635838263348591283, guid: 9d39889c46cf9da448cfa3b3afdd3376, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 17.43
+      value: 21.42
       objectReference: {fileID: 0}
     - target: {fileID: 6635838263348591283, guid: 9d39889c46cf9da448cfa3b3afdd3376, type: 3}
       propertyPath: m_LocalPosition.y
@@ -13690,7 +13698,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2070158103185945909, guid: cd3e8f36dad563044b097b1436cf0e05, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -8.33
+      value: -9.16
       objectReference: {fileID: 0}
     - target: {fileID: 2070158103185945909, guid: cd3e8f36dad563044b097b1436cf0e05, type: 3}
       propertyPath: m_LocalPosition.y
@@ -13743,7 +13751,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1980038722686065562, guid: f01582527db176147a30255c9b1c352d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 13.86
+      value: 13.6
       objectReference: {fileID: 0}
     - target: {fileID: 1980038722686065562, guid: f01582527db176147a30255c9b1c352d, type: 3}
       propertyPath: m_LocalPosition.y
@@ -13784,6 +13792,10 @@ PrefabInstance:
     - target: {fileID: 8548475356807709533, guid: f01582527db176147a30255c9b1c352d, type: 3}
       propertyPath: m_Name
       value: DamagePickup
+      objectReference: {fileID: 0}
+    - target: {fileID: 8548475356807709533, guid: f01582527db176147a30255c9b1c352d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -31,7 +31,10 @@ public abstract class WeaponSystem : MonoBehaviour
     public static float FireRateMultiplier = 1;
 
     [SerializeField] protected BulletSO bullet;
-    public static float DamageMultiplier = 1;
+    // this is for level ups
+    float damageMultiplier = 1;
+    // this is for boost items
+    public static float DamageBoostMultiplier = 1;
     [SerializeField] Transform shootingPoint;
 
     protected bool canShoot = true;
@@ -121,6 +124,16 @@ public abstract class WeaponSystem : MonoBehaviour
         fireRateTimer+= Time.deltaTime;
         return false;
     }
+
+    public void UpgradeStats()
+    {
+        Debug.Log("hello: " + this.GetType());
+        reloadTime*= .95f;
+        initialBulletNum+= 5;
+        bulletsNum+= 5;
+        damageMultiplier+= .05f;
+        fireRate*= .95f;
+    }
     
     public IEnumerator ReloadCoroutine()
     {
@@ -167,7 +180,7 @@ public abstract class WeaponSystem : MonoBehaviour
         }
     }
 
-    protected void InitBullet(Bullet bullet) => bullet.Init(this.bullet.speed, pm.gameObject.layer, this.bullet.damage * DamageMultiplier);
+    protected void InitBullet(Bullet bullet) => bullet.Init(this.bullet.speed, pm.gameObject.layer, this.bullet.damage * damageMultiplier * DamageBoostMultiplier);
     public void MultiplyBullet(float multiplier) => bulletsNum = (int)MathF.Floor(bulletsNum * multiplier);
 
     public Color WeaponSpriteColor() => sr.color;

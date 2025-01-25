@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -6,14 +7,16 @@ using UnityEngine.UI;
 public class BalancedSliderController : MonoBehaviour
 {
     public Slider slider;
-    public static BalancedSliderController Instance;
+    public static BalancedSliderController Instance { get; private set; }
     int currentValue;
 
+    public static Action onLevelUp;
 
     [SerializeField] private TMP_Text currentXP;
     [SerializeField] private TMP_Text maxXP;
     [SerializeField] private TMP_Text currentLevelTxt;
     private int currentLevel = 1;
+
     private void Awake()
     {
         if (Instance == null)
@@ -44,6 +47,7 @@ public class BalancedSliderController : MonoBehaviour
 
         //increasing current lvl
         currentLevel++;
+        onLevelUp?.Invoke();
         currentLevelTxt.text = currentLevel.ToString();
 
         //increasing max val

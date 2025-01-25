@@ -40,7 +40,11 @@ public class PlayerMovement : ColorFlashObject, IHealth, IItemPicker
         health = maxHealth;
         currentWeapon = weapons[0];
     }
-    
+
+    void OnEnable() => BalancedSliderController.onLevelUp += LevelUp;
+
+    void OnDisable() => BalancedSliderController.onLevelUp -= LevelUp;
+
     protected override void Update()
     {
         base.Update();
@@ -79,7 +83,7 @@ public class PlayerMovement : ColorFlashObject, IHealth, IItemPicker
         {
             if (damageBoostTimer >= damageBoostTime)
             {
-                WeaponSystem.DamageMultiplier = 1;
+                WeaponSystem.DamageBoostMultiplier = 1;
                 damageBoostTime = 0;
                 damageBoostTimer = 0;
             }
@@ -124,6 +128,12 @@ public class PlayerMovement : ColorFlashObject, IHealth, IItemPicker
             else
                 BulletAmountBoostTimer+= Time.deltaTime;
         }
+    }
+
+    void LevelUp()
+    {
+        foreach (WeaponSystem weapon in weapons)
+            weapon.UpgradeStats();
     }
 
     void GetWeaponInput()
@@ -201,7 +211,7 @@ public class PlayerMovement : ColorFlashObject, IHealth, IItemPicker
 
     public void DamageBoost(float DamageBoostAmount, float duration)
     {
-        WeaponSystem.DamageMultiplier = DamageBoostAmount;
+        WeaponSystem.DamageBoostMultiplier = DamageBoostAmount;
         damageBoostTime+= duration;
         LongColorFlash.AddColor(new(0.2f, 0.6f, 1), duration);
     }

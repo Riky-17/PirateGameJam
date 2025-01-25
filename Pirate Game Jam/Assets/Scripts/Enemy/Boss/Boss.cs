@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public abstract class Boss : ColorFlashObject, IHealth, IItemPicker
 {
@@ -53,7 +54,11 @@ public abstract class Boss : ColorFlashObject, IHealth, IItemPicker
 
     float waitTime = 1;
     float waitTimer;
+
+    [Header("UI")]
+    [SerializeField] public Slider bossHP;
     
+
     protected override void Awake()
     {
         base.Awake();
@@ -70,7 +75,19 @@ public abstract class Boss : ColorFlashObject, IHealth, IItemPicker
                 break;
         }
 
+        if (bossHP != null)
+        {
+            bossHP.value = health;
+
+            bossHP.maxValue = maxHealth;
+        }
+
         InitBoss();
+    }
+    void updatingHPSlider(float health)
+    {
+        bossHP.value = Mathf.Clamp(health, 0, bossHP.maxValue);
+    
     }
 
     protected override void Update()
@@ -187,6 +204,9 @@ public abstract class Boss : ColorFlashObject, IHealth, IItemPicker
         if (health > maxHealth)
             health = maxHealth;
         Debug.Log(gameObject.name + "Health: " + health);
+
+        updatingHPSlider(health);
+
     }
 
     public void Damage(float damageAmount)
@@ -197,8 +217,10 @@ public abstract class Boss : ColorFlashObject, IHealth, IItemPicker
         health-= damageAmount;
         shortColorFlash = new(Color.red);
         Debug.Log(gameObject.name + "Health: " + health);
-        if(health <= 0)
-            Die();
+        updatingHPSlider(health);
+
+        if (health <= 0)   
+        Die();
     }
 
     public void Die()

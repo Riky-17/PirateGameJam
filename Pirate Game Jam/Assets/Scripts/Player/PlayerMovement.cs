@@ -1,4 +1,6 @@
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerMovement : ColorFlashObject, IHealth, IItemPicker
 {
@@ -34,11 +36,21 @@ public class PlayerMovement : ColorFlashObject, IHealth, IItemPicker
     float BulletAmountBoostTime;
     float BulletAmountBoostTimer;
 
+    //UI
+    [Header("UI")]
+    [SerializeField] private Slider HPSlider;
+    [SerializeField] private TMP_Text HPText;
     protected override void Awake()
     {
         base.Awake();
         health = maxHealth;
         currentWeapon = weapons[0];
+        HPSlider.maxValue = maxHealth;
+
+
+        HPSlider.value = health;
+        updatingHPSlider(health);
+
     }
 
     void OnEnable() => BalancedSliderController.onLevelUp += LevelUp;
@@ -188,13 +200,15 @@ public class PlayerMovement : ColorFlashObject, IHealth, IItemPicker
         if(health > maxHealth)
             health = maxHealth;
         Debug.Log(gameObject.name + " Health: " + health);
+        updatingHPSlider(health);
     }
-
+    
     public void Damage(float damageAmount)
     {
         health -= damageAmount;
         shortColorFlash = new(Color.red);
         Debug.Log(gameObject.name + " Health: " + health);
+        updatingHPSlider(health);
         if(health <= 0)
             Die();
     }
@@ -202,7 +216,7 @@ public class PlayerMovement : ColorFlashObject, IHealth, IItemPicker
     //TODO
     public void Die()
     {
-        
+        updatingHPSlider(health);
     }
 
     protected override void UpdateColor(Color color) => currentWeapon.ChangeSpriteColor(color);
@@ -238,4 +252,11 @@ public class PlayerMovement : ColorFlashObject, IHealth, IItemPicker
         reloadBoostTime+= duration;
         LongColorFlash.AddColor(Color.black, duration);
     }
+
+    void updatingHPSlider(float health)
+    {
+        HPSlider.value = Mathf.Clamp(health, 0, HPSlider.maxValue);
+        HPText.text = "HP: " + HPSlider.value.ToString();
+    }
+    
 }

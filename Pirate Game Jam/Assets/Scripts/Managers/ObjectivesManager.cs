@@ -23,7 +23,7 @@ public class ObjectivesManager : MonoBehaviour
     [SerializeField] private string objective3;
     [SerializeField] private byte missionObjective3;
 
-
+    private const int xpScale = 10;
     public static ObjectivesManager Instance { get; private set; }
     Dictionary<string, int> objectives = new Dictionary<string, int>();
 
@@ -80,29 +80,22 @@ public class ObjectivesManager : MonoBehaviour
 
         if (missionObjective3 != 0)
             objectives.Add(objective3, missionObjective3);
-
     }
 
     public void checkingObjectives()
     {
         if(progressObjective1 == missionObjective1)
         {
-            BalancedSliderController.Instance.increasingSliderValue(missionObjective1 * 10);
+            BalancedSliderController.Instance.increasingSliderValue(missionObjective1 * xpScale);
         }
         if(progressObjective2 == missionObjective2)
         {
-            BalancedSliderController.Instance.increasingSliderValue(missionObjective2 * 10);
+            BalancedSliderController.Instance.increasingSliderValue(missionObjective2 * xpScale);
         }
         if (progressObjective3 == missionObjective3)
         {
-            BalancedSliderController.Instance.increasingSliderValue(missionObjective3 * 100);
+            BalancedSliderController.Instance.increasingSliderValue(missionObjective3 * xpScale);
         }
     }
-    int UpdateDic(ref int value, ref bool objective, int pointsForMission)
-    {
-        return 0;
-    }
-    void Update()
-    {
-    }
+
 }

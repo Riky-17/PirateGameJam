@@ -1,16 +1,21 @@
 using System.Collections.Generic;
+using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TankBoss : Boss
 {
     SpriteRenderer srCannon;
-
+    [Space]
     [SerializeField] BulletSO grenade;
     [SerializeField] BulletSO bullet;
     [SerializeField] Enemy enemyToSpawn;
     [SerializeField] Transform cannon;
 
     public List<Enemy> SpawnedEnemies { get; private set; }
+
+    
 
     protected override void InitBoss()
     {

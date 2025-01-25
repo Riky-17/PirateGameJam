@@ -22,6 +22,7 @@ public abstract class WeaponSystem : MonoBehaviour
     //weapon stats
     public float ReloadTime => reloadTime;
     [SerializeField] float reloadTime;
+    public static float ReloadMultiplier = 1;
     public float InitialBulletNum => initialBulletNum;
     [SerializeField] int initialBulletNum = 3;
     protected int bulletsNum;
@@ -125,7 +126,7 @@ public abstract class WeaponSystem : MonoBehaviour
     {
         amountOfCoroutines++;
         Debug.Log("Coroutine N: " + amountOfCoroutines + " Started");
-        float remainTime = reloadTime;
+        float remainTime = reloadTime * ReloadMultiplier;
         weaponryText.updateAmmo("Reloading");
 
         while (remainTime > 0)
@@ -167,6 +168,7 @@ public abstract class WeaponSystem : MonoBehaviour
     }
 
     protected void InitBullet(Bullet bullet) => bullet.Init(this.bullet.speed, pm.gameObject.layer, this.bullet.damage * DamageMultiplier);
+    public void MultiplyBullet(float multiplier) => bulletsNum = (int)MathF.Floor(bulletsNum * multiplier);
 
     public Color WeaponSpriteColor() => sr.color;
     public void ChangeSpriteColor(Color color) => sr.color = color;

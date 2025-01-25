@@ -78,8 +78,8 @@ public abstract class Boss : ColorFlashObject, IHealth, IItemPicker
         if (bossHP != null)
         {
             bossHP.value = health;
-
             bossHP.maxValue = maxHealth;
+            updatingHPSlider(health);
         }
 
         InitBoss();

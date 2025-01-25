@@ -10,13 +10,14 @@ public class BalancedSliderController : MonoBehaviour
     public static BalancedSliderController Instance { get; private set; }
     int currentValue;
 
+    const string maxLevel = "MAX";
     public static Action onLevelUp;
 
     [SerializeField] private TMP_Text currentXP;
     [SerializeField] private TMP_Text maxXP;
     [SerializeField] private TMP_Text currentLevelTxt;
     private int currentLevel = 1;
-
+    
     private void Awake()
     {
         if (Instance == null)
@@ -40,18 +41,31 @@ public class BalancedSliderController : MonoBehaviour
 
     void incNeccesaryExp(float experience)
     {
-        //seting value back to 0
-        slider.value = 0;
-        currentXP.text = slider.value.ToString();
-        slider.maxValue += experience;
+        if(currentLevel <= 5)
+        {
+            //seting value back to 0
+            slider.value = 0;
+            currentXP.text = slider.value.ToString();
+            slider.maxValue += experience;
 
-        //increasing current lvl
-        currentLevel++;
-        onLevelUp?.Invoke();
-        currentLevelTxt.text = currentLevel.ToString();
+            //increasing current lvl
+            currentLevel++;
+            onLevelUp?.Invoke();
+            currentLevelTxt.text = currentLevel.ToString();
 
-        //increasing max val
-        maxXP.text = slider.maxValue.ToString();
+            //Add manual increasing stats
+
+            //increasing max val
+            maxXP.text = slider.maxValue.ToString();
+        }
+        else
+        {
+            slider.value = slider.maxValue;
+            maxXP.text = maxLevel;
+            currentLevelTxt.text = maxLevel;
+            currentXP.text = slider.maxValue.ToString();
+        }
+        
     }
 
     public void increasingSliderValue(int experience)

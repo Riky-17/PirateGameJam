@@ -180,7 +180,14 @@ public abstract class WeaponSystem : MonoBehaviour
     }
 
     protected void InitBullet(Bullet bullet) => bullet.Init(this.bullet.speed, pm.gameObject.layer, this.bullet.damage * damageMultiplier * DamageBoostMultiplier);
-    public void MultiplyBullet(float multiplier) => bulletsNum = (int)MathF.Floor(bulletsNum * multiplier);
+
+    public void MultiplyBullet(float multiplier)
+    {
+        initialBulletNum = (int)MathF.Floor(initialBulletNum * multiplier);
+        bulletsNum = (int)MathF.Floor(bulletsNum * multiplier);
+        if(gameObject.activeSelf)
+            weaponryText.updateAmmo(bulletsNum.ToString());
+    }
 
     public Color WeaponSpriteColor() => sr.color;
     public void ChangeSpriteColor(Color color) => sr.color = color;

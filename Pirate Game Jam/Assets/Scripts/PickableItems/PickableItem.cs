@@ -7,11 +7,10 @@ public abstract class PickableItem : MonoBehaviour
     void OnCollisionEnter2D(Collision2D other)
     {
         if(other.gameObject.TryGetComponent(out IItemPicker picker))
-            picker.PickItem(this);
-
-        if(other.gameObject.CompareTag("Player"))
         {
-            ObjectivesManager.Instance.pickUpItem();
+            picker.PickItem(this);
+            if (picker is PlayerMovement)
+                ObjectivesManager.Instance.pickUpItem();
         }
     }
 }

@@ -1,19 +1,24 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PanelsManager : MonoBehaviour
 {
     //panels
     [SerializeField] private GameObject pausePanel;
     [SerializeField] private GameObject gamePanel;
+    [SerializeField] private GameObject quitConfirmationPanel;
     [SerializeField] TMP_Text countDown;
     float timer = 3f;
     bool isPaused = false;
     public static bool canReadInput = true;
+
+    
     private void Awake()
     {
         countDown.gameObject.SetActive(false);
+        quitConfirmationPanel.gameObject.SetActive(false);
         pausePanel.SetActive(false);
         gamePanel.SetActive(true);
     }
@@ -32,7 +37,19 @@ public class PanelsManager : MonoBehaviour
             }
         }
     }
+    public void onClickMenu()
+    {
+        quitConfirmationPanel.gameObject.SetActive(true);
+    }
+    public void ButtonNo()
+    {
+        quitConfirmationPanel.gameObject.SetActive(false);
+    }
 
+    public void loadingSceneOnclick(int index)
+    {
+        SceneManager.LoadScene(index, LoadSceneMode.Single);
+    }
     void PauseGame()
     {
         countDown.gameObject.SetActive(true);
@@ -47,7 +64,7 @@ public class PanelsManager : MonoBehaviour
     {
         StartCoroutine(ContinueDelay());         
     }
-    IEnumerator ContinueDelay()
+    public IEnumerator ContinueDelay()
     {
         timer = 3f;
         pausePanel.SetActive(false);

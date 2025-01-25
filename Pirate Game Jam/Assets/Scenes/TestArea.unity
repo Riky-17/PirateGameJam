@@ -1821,12 +1821,12 @@ GameObject:
   - component: {fileID: 265188964}
   - component: {fileID: 265188963}
   m_Layer: 0
-  m_Name: TankBody
+  m_Name: HelicopterBody
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!95 &265188963
 Animator:
   serializedVersion: 7
@@ -1837,7 +1837,7 @@ Animator:
   m_GameObject: {fileID: 265188962}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: f0ec5ca799d2033478f3acfe80bf05fe, type: 2}
+  m_Controller: {fileID: 9100000, guid: 3537aac3a0e8f99468e942c7951dc684, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1892,8 +1892,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
-  m_Sprite: {fileID: -4999998267798588052, guid: 2e3863508443d66469e0ee88af9984b8, type: 3}
+  m_SortingOrder: 1
+  m_Sprite: {fileID: -1889902838787822586, guid: f6e040dea95adae43b97a4ad622f52cb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -7897,7 +7897,7 @@ GameObject:
   - component: {fileID: 1432209344}
   - component: {fileID: 1432209345}
   m_Layer: 0
-  m_Name: TankGun
+  m_Name: HelicopterGun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7912,7 +7912,7 @@ Transform:
   m_GameObject: {fileID: 1432209343}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.5, z: 0}
+  m_LocalPosition: {x: 1, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7961,8 +7961,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
-  m_Sprite: {fileID: 7915549230347560194, guid: da9c4e5884ee66c43b2b7a84cc14a49a, type: 3}
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 766636653196709409, guid: a0b7fcd730cf73b4baee1525df240d07, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

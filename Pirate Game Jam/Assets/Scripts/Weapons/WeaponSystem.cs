@@ -127,7 +127,6 @@ public abstract class WeaponSystem : MonoBehaviour
 
     public void UpgradeStats()
     {
-        Debug.Log("hello: " + this.GetType());
         reloadTime*= .95f;
         initialBulletNum+= 5;
         bulletsNum+= 5;

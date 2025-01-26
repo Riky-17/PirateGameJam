@@ -447,6 +447,7 @@ MonoBehaviour:
   pausePanel: {fileID: 1721280404}
   gamePanel: {fileID: 1351441868}
   quitConfirmationPanel: {fileID: 1066012901}
+  gameOverPanel: {fileID: 1419749813}
   countDown: {fileID: 846443735}
 --- !u!1 &25829689
 GameObject:

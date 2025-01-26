@@ -1,5 +1,6 @@
 using System.Collections;
 using TMPro;
+using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -9,14 +10,23 @@ public class PanelsManager : MonoBehaviour
     [SerializeField] private GameObject pausePanel;
     [SerializeField] private GameObject gamePanel;
     [SerializeField] private GameObject quitConfirmationPanel;
+    [SerializeField] public GameObject gameOverPanel;
     [SerializeField] TMP_Text countDown;
     float timer = 3f;
     bool isPaused = false;
     public static bool canReadInput = true;
+    public static PanelsManager Instance;
 
-    
     private void Awake()
     {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
         countDown.gameObject.SetActive(false);
         quitConfirmationPanel.gameObject.SetActive(false);
         pausePanel.SetActive(false);
@@ -24,12 +34,12 @@ public class PanelsManager : MonoBehaviour
     }
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P)||
+        if (Input.GetKeyDown(KeyCode.P) ||
             Input.GetKeyDown(KeyCode.Escape))
         {
             if (!isPaused)
             {
-                PauseGame();               
+                PauseGame();
             }
             else if (isPaused)
             {
@@ -62,14 +72,14 @@ public class PanelsManager : MonoBehaviour
     }
     public void UnpauseGame()
     {
-        StartCoroutine(ContinueDelay());         
+        StartCoroutine(ContinueDelay());
     }
     public IEnumerator ContinueDelay()
     {
         timer = 3f;
         pausePanel.SetActive(false);
         gamePanel.SetActive(true);
-        while(timer > 0)
+        while (timer > 0)
         {
             timer -= Time.unscaledDeltaTime;
             countDown.text = Mathf.Ceil(timer).ToString();
@@ -81,4 +91,12 @@ public class PanelsManager : MonoBehaviour
         isPaused = false;
         canReadInput = true;
     }
+    public void RestartScene() 
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        canReadInput = true;
+    }
+
+    
+    public  void GameOver() => gameOverPanel.gameObject.SetActive(true);
 }

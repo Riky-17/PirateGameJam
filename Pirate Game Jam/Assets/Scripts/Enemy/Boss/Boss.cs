@@ -252,7 +252,8 @@ public abstract class Boss : ColorFlashObject, IHealth, IItemPicker
     void PickAttack()
     {
         currentAttack = attacks[Random.Range(0, attacks.Count)];
-        currentAttack.InitAttack();
+        currentAttack.InitAttack(); 
+
     }
 
     public virtual void RotateGun(Quaternion rotation) => shootingPoint.rotation = rotation;

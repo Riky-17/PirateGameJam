@@ -78,13 +78,13 @@ public class GrenadeExplotion : Bullet
             Explosion();
     }
 
-    // private void OnCollisionEnter2D(Collision2D collision)
-    // {
-    //     if (!hasExploded)
-    //     {
-    //         Explosion();
-    //         hasExploded = true;
-    //     }
-        
-    // }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (!hasExploded)
+        {
+            Explosion();
+            hasExploded = true;
+        }
+
+    }
 }

@@ -36,7 +36,7 @@ public class GrenadeExplotion : Bullet
             return;
         
         RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.right, .25f);
-        if(hit.collider == null || hit.collider.gameObject.layer == shooterLayer.value)
+        if(hit.collider == null || hit.collider.gameObject == shooter)
             return;
 
         Explosion();
@@ -54,7 +54,7 @@ public class GrenadeExplotion : Bullet
             {
                 if(collider.TryGetComponent(out IHealth target))
                 {
-                    if(collider.gameObject.layer == shooterLayer.value)
+                    if(collider.gameObject == shooter)
                         continue;
 
                     target.Damage(damage);

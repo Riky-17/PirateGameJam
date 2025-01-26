@@ -23,5 +23,5 @@ public abstract class BossAttack
     public virtual void InitAttack() { isAttackDone = false; }
 
     public abstract void Attack();
-    protected void InitBullet(Bullet bullet) => bullet.Init(this.bullet.speed, boss.gameObject.layer, this.bullet.damage * boss.DamageMultiplier);
+    protected void InitBullet(Bullet bullet) => bullet.Init(this.bullet.speed, boss.gameObject, this.bullet.damage * boss.DamageMultiplier);
 }

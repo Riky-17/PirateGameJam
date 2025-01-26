@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,8 +11,6 @@ public class PlayerMovement : ColorFlashObject, IHealth, IItemPicker
 
     [SerializeField] float speed = 6;
 
-    bool canMove = true;
-
     //weapon objects -> assigned in inspector
     [SerializeField] WeaponSystem[] weapons;
     WeaponSystem currentWeapon;
@@ -22,6 +21,8 @@ public class PlayerMovement : ColorFlashObject, IHealth, IItemPicker
 
     public float Health { get => health; set => health = value; }
     float health;
+
+    public static Action playerDies;
 
     //statBoostTimer
     float damageBoostTime;
@@ -75,7 +76,7 @@ public class PlayerMovement : ColorFlashObject, IHealth, IItemPicker
         moveInput = Vector2.zero;
 
         //getting the move input
-        if (canMove)
+        if (PanelsManager.canReadInput)
         {
             if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
                 moveInput += Vector2.up;
@@ -219,6 +220,7 @@ public class PlayerMovement : ColorFlashObject, IHealth, IItemPicker
     //TODO
     public void Die()
     {
+        playerDies?.Invoke();
         updatingHPSlider(health);
     }
 

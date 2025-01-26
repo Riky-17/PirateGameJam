@@ -7,7 +7,6 @@ public abstract class WeaponSystem : MonoBehaviour
 {
     //event fired when the weapon shoots
     public static Action<Transform> onShotFired;
-
     //components
     protected Rigidbody2D rb;
     protected SpriteRenderer sr;

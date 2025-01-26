@@ -21,7 +21,7 @@ public abstract class EnemyWeapon : MonoBehaviour
 
     public abstract void Shoot(PlayerMovement player, Quaternion aimRotation);
     public abstract void Idle();
-    protected void InitBullet(Bullet bullet) => bullet.Init(bulletSO.speed, attachedEnemy.layer, bulletSO.damage * damageMultiplier);
+    protected void InitBullet(Bullet bullet) => bullet.Init(bulletSO.speed, attachedEnemy, bulletSO.damage * damageMultiplier);
 
     void Awake()
     {

@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class MachineGun : BossAttack
 {
-    public MachineGun(Boss boss, PlayerMovement player, Transform shootingPoint, BulletSO bullet) : base(boss, player, shootingPoint, bullet) {}
+    public MachineGun(Boss boss, PlayerMovement player, Transform shootingPoint, BulletSO bullet) : base(boss, player, bullet) {}
 
     const float CAMERA_MAX_HEIGHT = 17f / 2f;
 

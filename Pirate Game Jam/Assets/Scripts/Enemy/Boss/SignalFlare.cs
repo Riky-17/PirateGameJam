@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class SignalFlare : BossAttack
 {
-    public SignalFlare(Boss boss, PlayerMovement player, Transform shootingPoint, BulletSO bullet, Enemy enemy) : base(boss, player, shootingPoint, bullet) { enemyToSpawn = enemy; }
+    public SignalFlare(Boss boss, PlayerMovement player, Transform shootingPoint, BulletSO bullet, Enemy enemy) : base(boss, player, bullet) { enemyToSpawn = enemy; }
 
     const float CAMERA_MAX_WIDTH = 30 / 2;
     const float CAMERA_MAX_HEIGHT = 17 / 2;

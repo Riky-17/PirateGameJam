@@ -15,13 +15,24 @@ public class TankBoss : Boss
 
     public List<Enemy> SpawnedEnemies { get; private set; }
 
-    
+    [SerializeField] GameObject deathExplosion;
+    [SerializeField] float deathRadius;
+
+    float deathTime = 3.5f;
+    float deathTimer;
+
+    float explosionTime = .3f;
+    float explosionTimer;
+
+    float afterDeathTime = 2.5f;
+    float afterDeathTimer;
 
     protected override void InitBoss()
     {
         sr = GetComponent<SpriteRenderer>();
         srCannon = cannon.GetComponent<SpriteRenderer>();
         SpawnedEnemies = new();
+        explosionTimer = explosionTime;
 
         attacks = new() 
         { 
@@ -64,5 +75,44 @@ public class TankBoss : Boss
             if(enemy != null)
                 enemy.Die();
         }
+    }
+
+    protected override void Dying()
+    {
+        if (deathTimer < deathTime)
+        {
+            deathTimer+= Time.deltaTime;
+            if(explosionTimer >= explosionTime)
+            {
+                explosionTimer = 0;
+                DeathExplosion();
+                return;
+            }
+            else
+            {
+                explosionTimer += Time.deltaTime;
+                return;
+            }
+        }
+        else
+        {
+            DeactivateSprite();
+            if(afterDeathTimer < afterDeathTime)
+            {
+                afterDeathTimer+= Time.deltaTime;
+                return;
+            }
+            else
+            {
+                LoadNextScene();
+            }
+        }
+    }
+
+    void DeathExplosion()
+    {
+        Vector2 pos = Random.insideUnitCircle * deathRadius + (Vector2)transform.position;
+        GameObject explosion = Instantiate(deathExplosion, pos, Quaternion.identity);
+        Destroy(explosion, .3f);
     }
 }

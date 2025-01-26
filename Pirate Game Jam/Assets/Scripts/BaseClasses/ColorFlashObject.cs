@@ -15,12 +15,7 @@ public abstract class ColorFlashObject : Mover
         longColorFlash = new();
     }
 
-    protected virtual void Update()
-    {
-        ColorFlash();
-    }
-
-    void ColorFlash()
+    protected void ColorFlash()
     {
         Color tempColor;
         if(shortColorFlash.duration > 0)

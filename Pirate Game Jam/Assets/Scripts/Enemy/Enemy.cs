@@ -72,10 +72,8 @@ public abstract class Enemy : ColorFlashObject, IHealth, IItemPicker
 
     void OnDisable() => GameManager.Instance.Enemies.Remove(this);
 
-    protected override void Update()
+    void Update()
     {
-        base.Update();
-
         // Plays Idle animation when not moving in x-axis, otherwise plays Walk animation
         if (MathF.Abs(rb.linearVelocityX) < .25f)
             anim.Play("Idle");

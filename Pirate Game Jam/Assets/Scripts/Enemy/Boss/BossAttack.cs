@@ -12,11 +12,11 @@ public abstract class BossAttack
     public bool IsAttackDone => isAttackDone;
     protected bool isAttackDone = false;
 
-    public BossAttack(Boss boss, PlayerMovement player, Transform shootingPoint, BulletSO bullet)
+    public BossAttack(Boss boss, PlayerMovement player, BulletSO bullet)
     {
         this.boss = boss;
         this.player = player;
-        this.shootingPoint = shootingPoint;
+        shootingPoint = boss.ShootingPoint;
         this.bullet = bullet;
     }
 

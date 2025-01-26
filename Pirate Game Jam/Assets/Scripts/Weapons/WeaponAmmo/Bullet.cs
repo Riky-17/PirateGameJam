@@ -3,7 +3,7 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     [HideInInspector] protected float damage = 10;
-    [HideInInspector] protected LayerMask shooterLayer;
+    [HideInInspector] protected GameObject shooter;
     protected Rigidbody2D rb;
 
     protected virtual void Awake() => rb = GetComponent<Rigidbody2D>();
@@ -16,7 +16,7 @@ public class Bullet : MonoBehaviour
     {
         RaycastHit2D raycastHit = Physics2D.Raycast(transform.position, transform.right, .25f);
 
-        if(raycastHit.collider != null && raycastHit.collider.TryGetComponent(out target) && raycastHit.collider.gameObject.layer != shooterLayer)
+        if(raycastHit.collider != null && raycastHit.collider.TryGetComponent(out target) && raycastHit.collider.gameObject != shooter)
         {
             target.Damage(damage);
             Instantiate(bulletHitPrefab, transform.position + (transform.right * 0.3f), transform.rotation);
@@ -30,22 +30,25 @@ public class Bullet : MonoBehaviour
 
             if(raycastHit.collider.TryGetComponent(out target))
             {
-                if(raycastHit.collider.gameObject.layer == shooterLayer)
+                if(raycastHit.collider.gameObject == shooter)
                     return;
                 
                 target.Damage(damage);
                 Instantiate(bulletHitPrefab, transform.position + (-transform.right * 0.3f), transform.rotation);
             }
+
+            if (raycastHit.collider.TryGetComponent(out Bullet _))
+                return;
             
         }
 
         Destroy(gameObject);
     }
 
-    public void Init(float speed, LayerMask shooterLayer, float damage)
+    public void Init(float speed, GameObject shooter, float damage)
     {
         rb.linearVelocity = transform.right * speed;
-        this.shooterLayer = shooterLayer;
+        this.shooter = shooter;
         this.damage = damage;
     }
 }

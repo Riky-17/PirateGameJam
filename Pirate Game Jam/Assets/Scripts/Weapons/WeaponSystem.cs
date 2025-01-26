@@ -124,7 +124,7 @@ public abstract class WeaponSystem : MonoBehaviour
         return false;
     }
 
-    public void UpgradeStats()
+    public virtual void UpgradeStats()
     {
         reloadTime*= .95f;
         initialBulletNum+= 5;
@@ -178,7 +178,7 @@ public abstract class WeaponSystem : MonoBehaviour
         }
     }
 
-    protected void InitBullet(Bullet bullet) => bullet.Init(this.bullet.speed, pm.gameObject.layer, this.bullet.damage * damageMultiplier * DamageBoostMultiplier);
+    protected void InitBullet(Bullet bullet) => bullet.Init(this.bullet.speed, pm.gameObject, this.bullet.damage * damageMultiplier * DamageBoostMultiplier);
 
     public void MultiplyBullet(float multiplier)
     {

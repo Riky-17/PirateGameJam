@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 51304364f3abcbb44950dee002e78c27
+guid: 1a1cc55f1efb5ab47bb3f6f8cfda0c92
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 88981196320771615
-    second: WinterTileset_0
+      213: -1638520947998336199
+    second: CityTilemap_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,7 +113,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: WinterTileset_0
+      name: CityTilemap_0
       rect:
         serializedVersion: 2
         x: 0
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: f1e83663def1c3100800000000000000
-      internalID: 88981196320771615
+      spriteID: 93bd58901edc249e0800000000000000
+      internalID: -1638520947998336199
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      WinterTileset_0: 88981196320771615
+      CityTilemap_0: -1638520947998336199
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

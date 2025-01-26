@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class BulletRain : BossAttack
 {
-    public BulletRain(Boss boss, PlayerMovement player, Transform shootingPoint, BulletSO bullet) : base(boss, player, shootingPoint, bullet) {}
+    public BulletRain(Boss boss, PlayerMovement player, Transform shootingPoint, BulletSO bullet) : base(boss, player, bullet) {}
 
     const float CAMERA_MAX_HEIGHT = 17f / 2f;
 //how long should the boss shoot straight up

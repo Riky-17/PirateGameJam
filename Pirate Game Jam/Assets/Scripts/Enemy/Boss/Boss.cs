@@ -20,25 +20,15 @@ public abstract class Boss : ColorFlashObject, IHealth, IItemPicker
 
     public Vector2 CenterPoint => centerPoint;
     [SerializeField] Vector2 centerPoint;
+    public Transform ShootingPoint => shootingPoint;
     [SerializeField] protected Transform shootingPoint;
 
-    [SerializeField] GameObject deathExplosion;
-    [SerializeField] float deathRadius;
-
     bool isDead = false;
-
-    float deathTime = 3.5f;
-    float deathTimer;
-
-    float explosionTime = .3f;
-    float explosionTimer;
-
-    float afterDeathTime = 2.5f;
-    float afterDeathTimer;
 
     protected PlayerMovement player;
 
     protected List<BossAttack> attacks;
+    protected BossAttack CurrentAttack => currentAttack;
     BossAttack currentAttack;
 
     bool isIdling = true;
@@ -47,7 +37,6 @@ public abstract class Boss : ColorFlashObject, IHealth, IItemPicker
     float idleTimer;
 
     Vector2 moveDir;
-    [SerializeField] float speed = 5;
 
     float walkTime = 3;
     float walkTimer;
@@ -64,7 +53,6 @@ public abstract class Boss : ColorFlashObject, IHealth, IItemPicker
         base.Awake();
         health = maxHealth;
         sr = GetComponent<SpriteRenderer>();
-        explosionTimer = explosionTime;
 
         //doing it on Awake right now for testing
         Collider2D[] colliders = Physics2D.OverlapBoxAll(centerPoint, new(30, 17), 0);
@@ -79,21 +67,20 @@ public abstract class Boss : ColorFlashObject, IHealth, IItemPicker
         {
             bossHP.value = health;
             bossHP.maxValue = maxHealth;
-            updatingHPSlider(health);
+            UpdatingHPSlider(health);
         }
 
         InitBoss();
     }
-    void updatingHPSlider(float health)
+
+    void UpdatingHPSlider(float health)
     {
         bossHP.value = Mathf.Clamp(health, 0, bossHP.maxValue);
-    
     }
 
-    protected override void Update()
+    protected virtual void Update()
     {
-        base.Update();
-        
+        ColorFlash();
         if (isIdling)
         {
             TakeAim();
@@ -109,9 +96,7 @@ public abstract class Boss : ColorFlashObject, IHealth, IItemPicker
         if(currentAttack != null)
         {
             if (!currentAttack.IsAttackDone)
-            {
                 currentAttack.Attack();
-            }
             else
             {
                 if(moveDir == Vector2.zero)
@@ -123,43 +108,14 @@ public abstract class Boss : ColorFlashObject, IHealth, IItemPicker
         }
 
         if(isDead)
-        {
-            if (deathTimer < deathTime)
-            {
-                deathTimer+= Time.deltaTime;
-                if(explosionTimer >= explosionTime)
-                {
-                    explosionTimer = 0;
-                    DeathExplosion();
-                    return;
-                }
-                else
-                {
-                    explosionTimer += Time.deltaTime;
-                    return;
-                }
-            }
-            else
-            {
-                DeactivateSprite();
-                if(afterDeathTimer < afterDeathTime)
-                {
-                    afterDeathTimer+= Time.deltaTime;
-                    return;
-                }
-                else
-                {
-                    LoadNextScene();
-                }
-            }
-        }
+            Dying();
     }
 
     void FixedUpdate()
     {
         if(moveDir == Vector2.zero)
         {
-            AddForce(moveDir, speed, 3f);
+            AddForce(moveDir, moveSpeed, 3f);
             return;
         }
 
@@ -191,7 +147,7 @@ public abstract class Boss : ColorFlashObject, IHealth, IItemPicker
             rb.linearVelocityX = 0;
             walkTimer = walkTime;
         }
-        AddForce(moveDir, speed, 3);
+        AddForce(moveDir, moveSpeed, 3);
     }
 
     public void Heal(float healAmount)
@@ -205,7 +161,7 @@ public abstract class Boss : ColorFlashObject, IHealth, IItemPicker
             health = maxHealth;
         Debug.Log(gameObject.name + "Health: " + health);
 
-        updatingHPSlider(health);
+        UpdatingHPSlider(health);
 
     }
 
@@ -217,7 +173,7 @@ public abstract class Boss : ColorFlashObject, IHealth, IItemPicker
         health-= damageAmount;
         shortColorFlash = new(Color.red);
         Debug.Log(gameObject.name + "Health: " + health);
-        updatingHPSlider(health);
+        UpdatingHPSlider(health);
 
         if (health <= 0)   
         Die();
@@ -232,15 +188,10 @@ public abstract class Boss : ColorFlashObject, IHealth, IItemPicker
         OnDeath();
     }
 
-    //for the classes that inherits this class
+    //this is called once when the boss is dead
     protected virtual void OnDeath() {}
-
-    void DeathExplosion()
-    {
-        Vector2 pos = Random.insideUnitCircle * deathRadius + (Vector2)transform.position;
-        GameObject explosion = Instantiate(deathExplosion, pos, Quaternion.identity);
-        Destroy(explosion, .3f);
-    }
+    //this is called repeatedly after the boss is dead
+    protected virtual void Dying() {}
 
     protected virtual void DeactivateSprite() => sr.enabled = false;
 
@@ -249,11 +200,10 @@ public abstract class Boss : ColorFlashObject, IHealth, IItemPicker
     protected abstract void InitBoss();
     protected abstract void LoadNextScene();
 
-    void PickAttack()
+    protected virtual void PickAttack()
     {
         currentAttack = attacks[Random.Range(0, attacks.Count)];
-        currentAttack.InitAttack(); 
-
+        currentAttack.InitAttack();
     }
 
     public virtual void RotateGun(Quaternion rotation) => shootingPoint.rotation = rotation;

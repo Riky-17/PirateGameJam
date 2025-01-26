@@ -35,7 +35,6 @@ public class ShotgunScript : WeaponSystem
         for (int i = 0; i < tempBulletsAmount; i++)
         {
             float bulletDegAngle = DegShotgunHalfAngle - (degBulletsAngle * i);
-            Debug.Log(bulletDegAngle);
             float bulletRadAngle = bulletDegAngle * Mathf.Deg2Rad;
             float x = MathF.Cos(bulletRadAngle);
             float y = MathF.Sin(bulletRadAngle);

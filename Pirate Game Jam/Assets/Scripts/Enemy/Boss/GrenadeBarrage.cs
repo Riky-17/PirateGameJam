@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class GrenadeBarrage : BossAttack
 {
-    public GrenadeBarrage(Boss boss, PlayerMovement player, Transform shootingPoint, BulletSO bullet) : base(boss, player, shootingPoint, bullet) { }
+    public GrenadeBarrage(Boss boss, PlayerMovement player, Transform shootingPoint, BulletSO bullet) : base(boss, player, bullet) { }
 
     int grenadeAmount = 7;
     int grenadeCount;

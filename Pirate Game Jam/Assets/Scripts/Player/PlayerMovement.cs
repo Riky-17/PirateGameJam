@@ -59,9 +59,9 @@ public class PlayerMovement : ColorFlashObject, IHealth, IItemPicker
 
     void OnDisable() => BalancedSliderController.onLevelUp -= LevelUp;
 
-    protected override void Update()
+    void Update()
     {
-        base.Update();
+        ColorFlash();
         CheckStatBoost();
         GetMovementInput();
         MousePosition();

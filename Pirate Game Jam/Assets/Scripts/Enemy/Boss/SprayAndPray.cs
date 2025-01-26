@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class SprayAndPray : BossAttack
 {
-    public SprayAndPray(Boss boss, PlayerMovement player, Transform shootingPoint, BulletSO bullet) : base(boss, player, shootingPoint, bullet) {}
+    public SprayAndPray(Boss boss, PlayerMovement player, Transform shootingPoint, BulletSO bullet) : base(boss, player, bullet) {}
 
     const float CAMERA_MAX_WIDTH = 30 / 2;
 

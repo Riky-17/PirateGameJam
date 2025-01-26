@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class CarpetBoom : BossAttack
 {
-    public CarpetBoom(Boss boss, PlayerMovement player, Transform shootingPoint, BulletSO bullet) : base(boss, player, shootingPoint, bullet) { }
+    public CarpetBoom(Boss boss, PlayerMovement player, Transform shootingPoint, BulletSO bullet) : base(boss, player, bullet) { }
 
     const float CAMERA_MAX_HEIGHT = 30f / 2f;
     const float CAMERA_MAX_WIDTH = 30 / 2;

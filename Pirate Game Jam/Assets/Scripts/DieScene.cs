@@ -9,7 +9,6 @@ public class DieScene : MonoBehaviour
 {
     //getting components
     private CinemachineCamera cam;
-    public static DieScene Instance;
     private Transform player;
     [SerializeField] float duration = 10f;
     [SerializeField] float cameraZoom = 3.68f;
@@ -20,28 +19,9 @@ public class DieScene : MonoBehaviour
     {
        PlayerMovement.playerDies += Dies;
        cam = GetComponent<CinemachineCamera>();
-       player = GameObject.FindWithTag("Player").GetComponent<Transform>(); 
-        if(Instance == null)
-        {
-            Instance = this;           
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-        
+       player = GameObject.FindWithTag("Player").GetComponent<Transform>();     
     }
 
-    private void Update()
-    {
-        Debug.Log("deltaTime: " + Time.deltaTime);
-        Debug.Log("unscaledDeltaTime: " + Time.unscaledDeltaTime);
-
-        if (Input.anyKeyDown)
-        {
-            
-        }
-    }
     private void OnDestroy()
     {
         PlayerMovement.playerDies -= Dies;

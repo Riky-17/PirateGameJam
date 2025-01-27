@@ -3282,14 +3282,22 @@ MonoBehaviour:
   maxHealth: 800
   centerPoint: {x: 0, y: 0}
   shootingPoint: {fileID: 535233933}
-  deathExplosion: {fileID: 1319657421192287489, guid: ed1a3e8e74b71a842a466485eaf2f7ca, type: 3}
-  deathRadius: 0
-  speed: 5
   bossHP: {fileID: 13025396}
   grenade: {fileID: 11400000, guid: 7a553181f1f3d3246a8ae435d592e457, type: 2}
   bullet: {fileID: 11400000, guid: 6955b400746b4cd4d80abed012c3bc6c, type: 2}
+  marksmanBullet: {fileID: 11400000, guid: ec02643dff57bd64cb76c3b5f0d055f5, type: 2}
+  shotgunBullet: {fileID: 11400000, guid: 64e8368f07bf9e44ea7e62c4313bee73, type: 2}
+  grenadeOverload: {fileID: 11400000, guid: cd7ef74a16f4f1549a45662f1f8650d9, type: 2}
   enemyToSpawn: {fileID: 3288990257193346228, guid: 3858ab3b1ef6c7c41893ce3c09ac2d3d, type: 3}
   cannon: {fileID: 177193458}
+  Items:
+  - {fileID: 11400000, guid: 06de38f97ccd8254abdd82571ea9d9ce, type: 2}
+  - {fileID: 11400000, guid: c10e9772fe456db468afbfbe74c9be97, type: 2}
+  - {fileID: 11400000, guid: 85a9d3161aaa813459fc8dfb5aede879, type: 2}
+  - {fileID: 11400000, guid: 1ae028304527d0c4b9efd0c8c29ec343, type: 2}
+  - {fileID: 11400000, guid: b833d05bd8f32e646bd36398b60da52e, type: 2}
+  deathExplosion: {fileID: 1319657421192287489, guid: ed1a3e8e74b71a842a466485eaf2f7ca, type: 3}
+  deathRadius: 3
 --- !u!50 &444414870
 Rigidbody2D:
   serializedVersion: 5
@@ -14613,12 +14621,12 @@ SceneRoots:
   m_Roots:
   - {fileID: 141092697}
   - {fileID: 912148083}
+  - {fileID: 1079074885}
+  - {fileID: 1268816608}
   - {fileID: 1545264225}
   - {fileID: 226083704}
   - {fileID: 1532577483}
   - {fileID: 1119930274}
   - {fileID: 1127439990}
   - {fileID: 1335084078}
-  - {fileID: 1268816608}
-  - {fileID: 1079074885}
   - {fileID: 444414868}

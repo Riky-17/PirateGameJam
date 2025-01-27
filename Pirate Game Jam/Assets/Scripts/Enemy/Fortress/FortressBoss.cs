@@ -29,7 +29,7 @@ public class FortressBoss : Boss
             new FortressMarksman(this, windows[3], marksmanBullet)
         };
 
-        attacks = new() 
+        attacks = new()  
         {
             new FortressOverclock(this, player, null),
         };

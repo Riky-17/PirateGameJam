@@ -29,7 +29,7 @@ public class MachineGun : BossAttack
         if (shootingTimer < shootingTime)
         {
             shootingTimer += Time.deltaTime;
-            if(fireRateTimer >= fireRateTime)
+            if (fireRateTimer >= fireRateTime)
             {
                 //updating the Aim constantly so it fires the gun
                 int inaccuracy = Random.Range(-sprayAngle, sprayAngle); ;

@@ -30,6 +30,7 @@ public abstract class Boss : ColorFlashObject, IHealth, IItemPicker
     protected PlayerMovement player;
 
     protected List<BossAttack> attacks;
+
     protected BossAttack CurrentAttack => currentAttack;
     BossAttack currentAttack;
 
@@ -237,6 +238,7 @@ public abstract class Boss : ColorFlashObject, IHealth, IItemPicker
 
     public Bullet InstantiateBullet(Bullet bullet, Vector3 position, Quaternion rotation) => Instantiate(bullet, position, rotation);
     public Enemy InstantiateEnemy(Enemy enemy, Vector3 position, Quaternion rotation) => Instantiate(enemy, position, rotation);
+    public PickableItem InstantiateItem(PickableItem item, Vector3 position, Quaternion rotation) => Instantiate(item, position, rotation);
     public void DestroyBullet(Bullet bullet, float t) => Destroy(bullet.gameObject, t);
     public void DestroyBullet(Bullet bullet) => Destroy(bullet.gameObject);
 }

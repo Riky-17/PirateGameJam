@@ -42,9 +42,9 @@ public abstract class PickableItem : MonoBehaviour
         if(other.gameObject.TryGetComponent(out IItemPicker picker))
         {
             picker.PickItem(this);
-            DisableItem();
-            if (picker is PlayerMovement)
-                ObjectivesManager.Instance.pickUpItem();
+            DisableItem(); 
+            //if (picker is PlayerMovement)
+            //    ObjectivesManager.Instance.pickUpItem();
         }
     }
 

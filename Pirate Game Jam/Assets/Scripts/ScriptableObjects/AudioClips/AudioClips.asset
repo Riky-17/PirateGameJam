@@ -62,8 +62,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 6448fc56aebbf9c4aacb216eb784a9cd, type: 3}
   - {fileID: 8300000, guid: 87b6c96d0f0a796429ef5a131d938fd1, type: 3}
   backgroundMusic:
-  - {fileID: 8300000, guid: b7cecc2e5e5d40c45919f29a1cf1cc90, type: 3}
-  - {fileID: 8300000, guid: 9aa1d8c406650364bae9be9cd7fde0d6, type: 3}
-  - {fileID: 8300000, guid: 2b6260dcbef6127449fdfbe499934e9a, type: 3}
-  - {fileID: 8300000, guid: 43441e036e75bec4e89ed999a10d6ee7, type: 3}
-  - {fileID: 8300000, guid: b7cecc2e5e5d40c45919f29a1cf1cc90, type: 3}
+  - {fileID: 8300000, guid: b127c7f08c794564fa109eb9739b1bd2, type: 3}
+  - {fileID: 8300000, guid: 3fa907bb7cf326b439d343e7b2aa250f, type: 3}
+  - {fileID: 8300000, guid: 417a274855801b7489d3d153d65a8395, type: 3}
+  - {fileID: 8300000, guid: fad3b9384d3ce464a870b641e3dee605, type: 3}
+  - {fileID: 8300000, guid: b127c7f08c794564fa109eb9739b1bd2, type: 3}

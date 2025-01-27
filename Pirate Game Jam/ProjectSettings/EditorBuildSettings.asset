@@ -14,9 +14,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Level2WinterTheme.unity
     guid: 0ba370affe61c2045a0e8d4d175c46f7
-  - enabled: 0
-    path: Assets/Scenes/Game.unity
-    guid: 779d80f550788d24c9eebbf1d1a99108
+  - enabled: 1
+    path: Assets/Scenes/Level3CityTheme.unity
+    guid: 1ccd1397103336449ab970c7558112d9
+  - enabled: 1
+    path: Assets/Scenes/Credits.unity
+    guid: 2e7564e5d920ef44d86d1ad1dbedc8dc
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0

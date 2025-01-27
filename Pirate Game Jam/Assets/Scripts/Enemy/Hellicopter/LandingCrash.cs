@@ -114,8 +114,8 @@ public class LandingCrash : BossAttack
                     int randomItem = Random.Range(0, items.Length);
                     PickableItem item = boss.InstantiateItem(items[randomItem].item, pos, Quaternion.identity);
 
-                    //if (boss is HellicopBoss hellicop)
-                    //    hellicop.itemsOnGame.Add(item);
+                    if (boss is HellicopBoss hellicop)
+                       hellicop.itemsOnGame.Add(item);
                 }
             }
             isAttackDone = true;

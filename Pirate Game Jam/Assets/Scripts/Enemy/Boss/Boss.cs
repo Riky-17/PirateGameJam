@@ -74,6 +74,7 @@ public abstract class Boss : ColorFlashObject, IHealth, IItemPicker
         }
 
         InitBoss();
+        PickDirection();
     }
 
     void UpdatingHPSlider(float health)
@@ -239,6 +240,9 @@ public abstract class Boss : ColorFlashObject, IHealth, IItemPicker
     public Bullet InstantiateBullet(Bullet bullet, Vector3 position, Quaternion rotation) => Instantiate(bullet, position, rotation);
     public Enemy InstantiateEnemy(Enemy enemy, Vector3 position, Quaternion rotation) => Instantiate(enemy, position, rotation);
     public PickableItem InstantiateItem(PickableItem item, Vector3 position, Quaternion rotation) => Instantiate(item, position, rotation);
+    public GameObject InstantiateObject(GameObject gameObject, Vector3 position, Quaternion rotation) => Instantiate(gameObject, position, rotation);
     public void DestroyBullet(Bullet bullet, float t) => Destroy(bullet.gameObject, t);
     public void DestroyBullet(Bullet bullet) => Destroy(bullet.gameObject);
+    public void DestroyObject(GameObject gameObject, float t) => Destroy(gameObject, t);
+    public void DestroyObject(GameObject gameObject) => Destroy(gameObject);
 }

@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
 
     public List<Enemy> Enemies { get; private set; } = new();
+    public List<BossParachuteEnemy> BossEnemies { get; private set; } = new();
     public List<Civilian> Civilians { get; private set; } = new();
 
     void Awake()
@@ -24,6 +25,15 @@ public class GameManager : MonoBehaviour
         //Go to the main menu
         if(Input.GetKeyDown(KeyCode.M))
             SceneManager.LoadScene(0);
+    }
+
+    public void ClearBossEnemies()
+    {
+        for (int i = BossEnemies.Count - 1; i >= 0; i--)
+        {
+            BossParachuteEnemy bossEnemy = BossEnemies[i];
+            bossEnemy.Die();
+        }
     }
 
     public void LoadScene(int sceneID) => SceneManager.LoadScene(sceneID);

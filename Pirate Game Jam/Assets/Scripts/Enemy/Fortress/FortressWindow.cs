@@ -39,6 +39,13 @@ public class FortressWindow
         InitBullet(bullet);
     }
 
+    public void Explode(GameObject Explosion)
+    {
+        Vector2 pos = (Vector2)transform.position + (Random.insideUnitCircle * 1.5f);
+        GameObject deathExplosion = boss.InstantiateObject(Explosion, pos, Quaternion.identity);
+        boss.DestroyObject(deathExplosion, .3f);
+    }
+
     public void Overclock(float overclock) => fireRateMultiplier = overclock;
 
     protected void InitBullet(Bullet bullet) => bullet.Init(bulletSO.speed, boss.gameObject, bulletSO.damage);

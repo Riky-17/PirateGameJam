@@ -9,6 +9,7 @@ public class DieScene : MonoBehaviour
 {
     //getting components
     private CinemachineCamera cam;
+    private CinemachineConfiner2D camConfiner;
     private Transform player;
     [SerializeField] float duration = 10f;
     [SerializeField] float cameraZoom = 3.68f;
@@ -19,6 +20,7 @@ public class DieScene : MonoBehaviour
     {
        PlayerMovement.playerDies += Dies;
        cam = GetComponent<CinemachineCamera>();
+       camConfiner = GetComponent<CinemachineConfiner2D>();
        player = GameObject.FindWithTag("Player").GetComponent<Transform>();     
     }
 
@@ -32,6 +34,8 @@ public class DieScene : MonoBehaviour
     }
     public IEnumerator DieAnimation()
     {
+        camConfiner.BoundingShape2D = null;
+
         PanelsManager.canReadInput = false;
         yield return new WaitForSecondsRealtime(1);
         float temp = 0;

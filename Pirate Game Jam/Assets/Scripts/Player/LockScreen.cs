@@ -5,7 +5,7 @@ public class LockScreen : MonoBehaviour
 {
     PlayerCameraBounds playerCameraBounds;
 
-    public List<Enemy> Enemies { get; private set; } = new();
+    public GameObject boss;
 
     bool isCompleted;
 
@@ -19,14 +19,24 @@ public class LockScreen : MonoBehaviour
     void Update()
     {
         Completed();
+        CheckLockScreen();
     }
 
     void Completed()
     {
-        if (isCompleted || Input.GetKeyDown(KeyCode.F)) // F key input is temporary until implementations to set isCompleted to true
+        if (boss == null || Input.GetKeyDown(KeyCode.F)) // F key input is temporary until implementations to set isCompleted to true
         { 
-            playerCameraBounds.isLockScreen = false;
+            //playerCameraBounds.isLockScreen = false;
+            Debug.Log("Next Level");
             Destroy(gameObject);
+        }
+    }
+
+    void CheckLockScreen()
+    {
+        if (playerCameraBounds.isLockScreen)
+        {
+            boss.SetActive(true);
         }
     }
 }

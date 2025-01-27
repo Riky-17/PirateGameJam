@@ -5,7 +5,7 @@ public class SprayAndPray : BossAttack
 {
     public SprayAndPray(Boss boss, PlayerMovement player, Transform shootingPoint, BulletSO bullet) : base(boss, player, bullet) {}
 
-    const float CAMERA_MAX_WIDTH = 30 / 2;
+    const float CAMERA_MAX_WIDTH = (30 / 2)-4;
 
     Vector2 dir;
     int slamCount;

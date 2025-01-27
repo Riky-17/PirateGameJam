@@ -1,8 +1,11 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
 public class GrenadeExplotion : Bullet
 {
+    public static Action<Transform> onExplode;
+
     [SerializeField] float explosionDelay = 1.5f;
 
     float explosionRadius = 15f;
@@ -45,6 +48,7 @@ public class GrenadeExplotion : Bullet
     {
         GameObject tempExp = Instantiate(explosionPrefab, transform.position, transform.rotation);
         hasExploded = true;
+        onExplode?.Invoke(transform);
 
         colliders = Physics2D.OverlapCircleAll(transform.position, explosionRadius * .23f);
         if(colliders != null && colliders.Length > 0)

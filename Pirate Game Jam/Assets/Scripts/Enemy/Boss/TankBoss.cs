@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
@@ -6,6 +7,8 @@ using UnityEngine.UI;
 
 public class TankBoss : Boss
 {
+    public static Action<Transform> onExplode;
+
     SpriteRenderer srCannon;
     [Space]
     [SerializeField] BulletSO grenade;
@@ -94,6 +97,8 @@ public class TankBoss : Boss
             }
             else
             {
+                AudioManager audio = GameObject.Find("AudioManager").GetComponent<AudioManager>();
+                audio.PlayMusic(2);
                 LoadNextScene();
             }
         }
@@ -101,8 +106,9 @@ public class TankBoss : Boss
 
     void DeathExplosion()
     {
-        Vector2 pos = Random.insideUnitCircle * deathRadius + (Vector2)transform.position;
+        Vector2 pos = UnityEngine.Random.insideUnitCircle * deathRadius + (Vector2)transform.position;
         GameObject explosion = Instantiate(deathExplosion, pos, Quaternion.identity);
+        onExplode?.Invoke(transform);
         Destroy(explosion, .3f);
     }
 }

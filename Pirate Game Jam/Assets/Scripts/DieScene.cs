@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using JetBrains.Annotations;
 using Unity.Cinemachine;
@@ -8,6 +9,8 @@ using UnityEngine.InputSystem;
 
 public class DieScene : MonoBehaviour
 {
+    public static Action<Transform> onExplode;
+
     //getting components
     Camera mainCam;
     private CinemachineCamera cam;
@@ -78,8 +81,9 @@ public class DieScene : MonoBehaviour
 
     void DeathExplosion()
     {
-        Vector2 pos = Random.insideUnitCircle * deathRadius + (Vector2)transform.position;
+        Vector2 pos = UnityEngine.Random.insideUnitCircle * deathRadius + (Vector2)transform.position;
         GameObject explosion = Instantiate(explotion, pos, Quaternion.identity);
+        onExplode?.Invoke(transform);
         Destroy(explosion, .3f);
     }
 }

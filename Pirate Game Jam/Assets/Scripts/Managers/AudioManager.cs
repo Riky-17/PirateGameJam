@@ -35,6 +35,9 @@ public class AudioManager : MonoBehaviour
         ShotgunScript.onShotgunPump += ShotgunPump;
         EnemyWeapon.onShotFired += ShotFired;
         EnemyShotgun.onShotgunPump += ShotgunPump;
+        GrenadeExplotion.onExplode += Explode;
+        DieScene.onExplode += Explode;
+        TankBoss.onExplode += Explode;
     }
 
     void OnDisable()
@@ -44,6 +47,9 @@ public class AudioManager : MonoBehaviour
         ShotgunScript.onShotgunPump -= ShotgunPump;
         EnemyWeapon.onShotFired -= ShotFired;
         EnemyShotgun.onShotgunPump -= ShotgunPump;
+        GrenadeExplotion.onExplode -= Explode;
+        DieScene.onExplode -= Explode;
+        TankBoss.onExplode -= Explode;
     }
 
     public void PlayMusic(int sceneIndex)
@@ -60,6 +66,8 @@ public class AudioManager : MonoBehaviour
     void PlaySound(AudioClip audioClip, Vector3 pos, float volume = 1) => AudioSource.PlayClipAtPoint(audioClip, pos, volume);
 
     void ShotFired(Transform trf) => PlaySound(audioClips.GetRandomAudioClip(audioClips.casingDrops), trf.position);
+
+    void Explode(Transform trf) => PlaySound(audioClips.explosion, trf.position, 0.5f);
 
     private void ShotgunPump(Transform trf) => PlaySound(audioClips.GetRandomAudioClip(audioClips.shotgunPump), trf.position);
 }

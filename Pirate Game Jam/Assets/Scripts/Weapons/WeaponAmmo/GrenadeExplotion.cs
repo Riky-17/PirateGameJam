@@ -38,7 +38,6 @@ public class GrenadeExplotion : Bullet
         RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.right, .25f);
         if(hit.collider == null || hit.collider.gameObject == shooter)
             return;
-
         Explosion();
     }
 
@@ -76,15 +75,5 @@ public class GrenadeExplotion : Bullet
         yield return new WaitForSeconds(explosionDelay);
         if (!hasExploded)
             Explosion();
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (!hasExploded)
-        {
-            Explosion();
-            hasExploded = true;
-        }
-
     }
 }

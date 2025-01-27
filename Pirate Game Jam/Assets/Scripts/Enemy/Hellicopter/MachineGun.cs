@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class MachineGun : BossAttack
 {
-    public MachineGun(Boss boss, PlayerMovement player, Transform shootingPoint, BulletSO bullet) : base(boss, player, bullet) {}
+    public MachineGun(Boss boss, PlayerMovement player, BulletSO bullet) : base(boss, player, bullet) {}
 
     const float CAMERA_MAX_HEIGHT = 17f / 2f;
 
@@ -10,11 +10,12 @@ public class MachineGun : BossAttack
     float shootingTime = 10;
     float shootingTimer;
 
-    float fireRateTime = .05f;
+    float fireRateTime = .1f;
     float fireRateTimer; 
 
-    //innacuray from the machineGun 
+    //inaccuracy from the machineGun 
     int sprayAngle = 20;
+
     public override void InitAttack()
     {
         base.InitAttack();
@@ -24,32 +25,26 @@ public class MachineGun : BossAttack
     
     public override void Attack()
     {
-        shootingTimer += Time.deltaTime;
+        boss.TakeAim();
         if (shootingTimer < shootingTime)
         {
+            shootingTimer += Time.deltaTime;
             if(fireRateTimer >= fireRateTime)
             {
-                boss.TakeAim();
                 //updating the Aim constantly so it fires the gun
                 int inaccuracy = Random.Range(-sprayAngle, sprayAngle); ;
                 Quaternion bulletSprite = Quaternion.Euler(0f, 0f, inaccuracy);
-                Bullet bulletToShoot = boss.InstantiateBullet(bullet.bulletPrefab, shootingPoint.position, shootingPoint.rotation * bulletSprite);
+                Bullet bulletToShoot = boss.InstantiateBullet(bullet.bulletPrefab, boss.ShootingPoint.position, boss.ShootingPoint.rotation * bulletSprite);
                 InitBullet(bulletToShoot);
                 boss.DestroyBullet(bulletToShoot, 3f);
 
                 fireRateTimer = 0;
             }
-            fireRateTimer += Time.deltaTime;
-                     
-            
+            else
+                fireRateTimer += Time.deltaTime;
         }
-        if (shootingTimer > shootingTime)
-        {
+        else
             isAttackDone = true;
-            shootingTimer = 0;
-            return;
-        }
-
     }
 
 }

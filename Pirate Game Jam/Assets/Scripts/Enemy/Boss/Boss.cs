@@ -11,6 +11,8 @@ public abstract class Boss : ColorFlashObject, IHealth, IItemPicker
     public float Health { get => health; set => health = value; }
     float health;
 
+    public float Speed => moveSpeed;
+
     public float DamageMultiplier => damageMultiplier;
     float damageMultiplier = 1;
 

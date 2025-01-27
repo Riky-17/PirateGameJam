@@ -9,6 +9,7 @@ public class HellicopBoss : Boss
     [SerializeField] BulletSO bullet;
     [SerializeField] Enemy enemyToSpawn;
     [SerializeField] Transform cannon;
+    
     protected override void InitBoss()
     {
         sr = GetComponent<SpriteRenderer>();
@@ -16,37 +17,37 @@ public class HellicopBoss : Boss
         trCannon = GetComponentInChildren<Transform>();
         attacks = new()
         {
-           new MachineGun(this, player, shootingPoint, bullet),
-           new CarpetBoom(this, player, shootingPoint, grenade)
+           new MachineGun(this, player, bullet),
+           new CarpetBoom(this, player, grenade)
         };
     }
+
     protected override void LoadNextScene() => GameManager.Instance.LoadScene(3);
+    
     protected override void UpdateColor(Color color)
     {
         sr.color = color;
         srCannon.color = color;
     }
+
     public override void TakeAim()
     {
         Vector2 shootDir = (player.transform.position - transform.position).normalized;
         Vector3 upwards = Vector3.Cross(Vector3.forward, shootDir);
         Vector3 forward = Vector3.forward;
 
-        Vector2 playerPo = player.transform.position;
-        Vector2 thisPo = transform.position;
-
-        if (playerPo.x < thisPo.x)
+        if(shootDir.x < 0)
         {
-          
-            this.transform.localScale = new Vector3(-1, 1, 1);
-
+            transform.rotation = Quaternion.Euler(0, 180, 0);
+            upwards = -upwards;
+            forward = - forward;
         }
         else
-        {
-            this.transform.localScale = new Vector3(1, 1, 1);
-        }
+            transform.rotation = Quaternion.identity;
+
         cannon.rotation = Quaternion.LookRotation(forward, upwards);
     }
+
     protected override void DeactivateSprite()
     {
         sr.enabled = false;

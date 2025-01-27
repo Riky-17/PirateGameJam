@@ -1,10 +1,15 @@
 using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.SceneManagement;
 
 public class AudioManager : MonoBehaviour
 {
     public static AudioManager Instance { get; private set; }
 
     [SerializeField] AudioClipsSO audioClips;
+    public AudioSource musicSource;
+
+    Scene scene;
 
     void Awake()
     {
@@ -14,6 +19,13 @@ public class AudioManager : MonoBehaviour
             Destroy(gameObject);
 
         DontDestroyOnLoad(gameObject);
+    }
+
+    void Start()
+    {
+        scene = SceneManager.GetActiveScene();
+        MusicVolume(0.5f);
+        PlayMusic(scene.buildIndex);
     }
 
     void OnEnable()
@@ -32,6 +44,17 @@ public class AudioManager : MonoBehaviour
         ShotgunScript.onShotgunPump -= ShotgunPump;
         EnemyWeapon.onShotFired -= ShotFired;
         EnemyShotgun.onShotgunPump -= ShotgunPump;
+    }
+
+    public void PlayMusic(int sceneIndex)
+    {
+        musicSource.clip = audioClips.backgroundMusic[sceneIndex];
+        musicSource.Play();
+    }
+
+    public void MusicVolume(float volume)
+    {
+        musicSource.volume = volume;
     }
 
     void PlaySound(AudioClip audioClip, Vector3 pos, float volume = 1) => AudioSource.PlayClipAtPoint(audioClip, pos, volume);

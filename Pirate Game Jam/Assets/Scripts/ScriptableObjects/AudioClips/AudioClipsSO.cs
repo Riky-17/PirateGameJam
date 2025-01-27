@@ -11,6 +11,7 @@ public class AudioClipsSO : ScriptableObject
     public AudioClip[] shotgunPump;
     public AudioClip[] shotgunReload;
     public AudioClip[] sniperReload;
+    public AudioClip[] backgroundMusic;
 
     public AudioClip GetRandomAudioClip(AudioClip[] audioClips) => audioClips[Random.Range(0, audioClips.Length)];
 }

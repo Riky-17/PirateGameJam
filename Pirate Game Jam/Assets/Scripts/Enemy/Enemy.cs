@@ -81,8 +81,9 @@ public abstract class Enemy : ColorFlashObject, IHealth, IItemPicker
             anim.Play("Walk");
 
         CheckStatBoost();
+        ColorFlash();
 
-        if(isThrowingItem)
+        if (isThrowingItem)
         {
             if(throwingTimer >= 1)
             {

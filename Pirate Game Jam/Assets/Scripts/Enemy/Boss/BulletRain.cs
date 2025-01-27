@@ -71,7 +71,7 @@ public class BulletRain : BossAttack
             if(rainFireRateTimer >= rainFireRateTime)
             {
                 rainFireRateTimer = 0;
-                Vector2 shootingPos = new(player.transform.position.x, CAMERA_MAX_HEIGHT + .2f);
+                Vector2 shootingPos = new(player.transform.position.x, CAMERA_MAX_HEIGHT);
                 Quaternion bulletRotation = Quaternion.Euler(0, 0, -90);
                 Bullet bulletToShoot = boss.InstantiateBullet(bullet.bulletPrefab, shootingPos, bulletRotation);
                 InitBullet(bulletToShoot);

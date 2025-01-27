@@ -1,4 +1,5 @@
 using System.Collections;
+using JetBrains.Annotations;
 using Unity.Cinemachine;
 using Unity.Hierarchy;
 using Unity.VisualScripting;
@@ -8,8 +9,10 @@ using UnityEngine.InputSystem;
 public class DieScene : MonoBehaviour
 {
     //getting components
+    Camera mainCam;
     private CinemachineCamera cam;
     private CinemachineConfiner2D camConfiner;
+    GameObject playerCameraBounds;
     private Transform player;
     [SerializeField] float duration = 10f;
     [SerializeField] float cameraZoom = 3.68f;
@@ -21,6 +24,7 @@ public class DieScene : MonoBehaviour
        PlayerMovement.playerDies += Dies;
        cam = GetComponent<CinemachineCamera>();
        camConfiner = GetComponent<CinemachineConfiner2D>();
+       playerCameraBounds = GameObject.FindWithTag("CameraBoundingBox");
        player = GameObject.FindWithTag("Player").GetComponent<Transform>();     
     }
 
@@ -35,6 +39,7 @@ public class DieScene : MonoBehaviour
     public IEnumerator DieAnimation()
     {
         camConfiner.BoundingShape2D = null;
+        Destroy(playerCameraBounds);
 
         PanelsManager.canReadInput = false;
         yield return new WaitForSecondsRealtime(1);
@@ -48,13 +53,16 @@ public class DieScene : MonoBehaviour
         //getting the player X and Y 
         float playerX = player.position.x;
         float playerY = player.position.y;
-        
+
+        //float initialPositionX = playerCameraBounds.transform.position.x;
+        //float initialPositionY = playerCameraBounds.transform.position.y;
+        Debug.Log("X:" + playerX + " Y:" + playerY);
 
         while (duration > temp)
         {
             temp += Time.unscaledDeltaTime;
             cam.Lens.OrthographicSize = Mathf.Lerp(camInitialZoom, cameraZoom, temp/duration);
-            transform.position = new Vector3(Mathf.Lerp(cameraX, playerX, temp/duration), Mathf.Lerp(cameraY, playerY, temp / duration), -10);
+            transform.position = new Vector3(Mathf.Lerp(Camera.main.transform.position.x, playerX, temp/duration), Mathf.Lerp(Camera.main.transform.position.y, playerY, temp / duration), -10);
             yield return null;
         }          
         cam.Lens.OrthographicSize = cameraZoom;

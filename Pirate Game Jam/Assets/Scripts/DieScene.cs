@@ -39,7 +39,6 @@ public class DieScene : MonoBehaviour
     public IEnumerator DieAnimation()
     {
         camConfiner.BoundingShape2D = null;
-        Destroy(playerCameraBounds);
 
         PanelsManager.canReadInput = false;
         yield return new WaitForSecondsRealtime(1);
@@ -53,10 +52,6 @@ public class DieScene : MonoBehaviour
         //getting the player X and Y 
         float playerX = player.position.x;
         float playerY = player.position.y;
-
-        //float initialPositionX = playerCameraBounds.transform.position.x;
-        //float initialPositionY = playerCameraBounds.transform.position.y;
-        Debug.Log("X:" + playerX + " Y:" + playerY);
 
         while (duration > temp)
         {

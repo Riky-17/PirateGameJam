@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class SignalFlare : BossAttack
 {
-    public SignalFlare(Boss boss, PlayerMovement player, Transform shootingPoint, BulletSO bullet, Enemy enemy) : base(boss, player, bullet) { enemyToSpawn = enemy; }
+    public SignalFlare(Boss boss, PlayerMovement player, BulletSO bullet, Enemy enemy) : base(boss, player, bullet) { enemyToSpawn = enemy; }
 
     const float CAMERA_MAX_WIDTH = 30 / 2;
     const float CAMERA_MAX_HEIGHT = 17 / 2;
@@ -57,9 +57,7 @@ public class SignalFlare : BossAttack
             {
                 float x = Random.Range(-CAMERA_MAX_WIDTH + 1, CAMERA_MAX_WIDTH - 1);
                 Vector2 pos = new(x + boss.CenterPoint.x, CAMERA_MAX_HEIGHT);
-                Enemy enemy = boss.InstantiateEnemy(enemyToSpawn, pos, Quaternion.identity);
-                if(boss is TankBoss tankBoss)
-                    tankBoss.SpawnedEnemies.Add(enemy);
+                boss.InstantiateEnemy(enemyToSpawn, pos, Quaternion.identity);
                 isAttackDone = true;
             }
         }

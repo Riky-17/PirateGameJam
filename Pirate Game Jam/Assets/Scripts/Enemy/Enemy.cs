@@ -280,7 +280,7 @@ public abstract class Enemy : ColorFlashObject, IHealth, IItemPicker
     }
 
     //TODO
-    public void Die()
+    public virtual void Die()
     {
         ObjectivesManager.Instance.killEnemy();
         Destroy(gameObject);

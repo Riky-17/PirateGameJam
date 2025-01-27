@@ -43,6 +43,7 @@ public class HellicopBoss : Boss
     protected override void InitBoss()
     {
         SpawnedEnemies = new();
+        itemsOnGame = new();
         sr = GetComponent<SpriteRenderer>();
         srCannon = GetComponentInChildren<SpriteRenderer>();
         trCannon = GetComponentInChildren<Transform>();

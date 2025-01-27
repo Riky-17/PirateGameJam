@@ -2,7 +2,14 @@ using UnityEngine;
 
 public class FortressOverclock : BossAttack
 {
-    public FortressOverclock(Boss boss, PlayerMovement player, BulletSO bullet) : base(boss, player, bullet) {}
+    public FortressOverclock(Boss boss, PlayerMovement player, BulletSO bullet, BossParachuteEnemy enemy) : base(boss, player, bullet) { enemyToSpawn = enemy; }
+
+    const float CAMERA_MAX_WIDTH = 30 / 2;
+    const float CAMERA_MAX_HEIGHT = 17 / 2;
+
+    bool SpawnedEnemy;
+
+    Enemy enemyToSpawn;
 
     FortressWindow window;
     float overclock = .5f;
@@ -18,7 +25,15 @@ public class FortressOverclock : BossAttack
 
     public override void Attack()
     {
-        Debug.Log(window);
+        if(!SpawnedEnemy)
+        {
+            SpawnedEnemy = true;
+            float x = Random.Range(-CAMERA_MAX_WIDTH + 1, CAMERA_MAX_WIDTH - 1);
+            Vector2 pos = new(x + boss.CenterPoint.x, CAMERA_MAX_HEIGHT);
+            boss.InstantiateEnemy(enemyToSpawn, pos, Quaternion.identity);
+        }
+
+
         if(overclockTimer >= overclockTime)
         {
             window.Overclock(1);

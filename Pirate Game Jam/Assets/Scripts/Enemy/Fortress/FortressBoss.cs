@@ -6,14 +6,39 @@ public class FortressBoss : Boss
     [SerializeField] Sprite attackSprite;
     [SerializeField] Sprite deathSprite;
 
-    [SerializeField] List<Transform> windows;
-    List<FortressWindow> weapons;
+    [SerializeField] List<Transform> windowsTrfs;
+    [SerializeField] List<Transform> weapons;
+    [SerializeField] Transform livingGunSpawnPos;
+    List<FortressWindow> windows;
     [SerializeField] BulletSO grenade;
     [SerializeField] BulletSO shotgunBullet;
     [SerializeField] BulletSO assaultRifleBullet;
     [SerializeField] BulletSO marksmanBullet;
 
+    [SerializeField] BossParachuteEnemy enemy;
+
+    [SerializeField] GameObject deathExplosion;
+
     public List<Enemy> SpawnedEnemies { get; private set;}
+
+    bool canAttack = true;
+
+    float deathTime = 3.5f;
+    float deathTimer;
+
+    float explosionTime = .3f;
+    float explosionTimer;
+
+    float afterDeathTime = 2.5f;
+    float afterDeathTimer;
+
+    bool weaponSpritesActive = false;
+
+    float weaponsShowTime = 1f;
+    float weaponsShowTimer;
+
+    bool areWeaponsInPos = false;
+    bool livingWeaponExplosion = false;
 
     protected override void InitBoss()
     {
@@ -21,24 +46,24 @@ public class FortressBoss : Boss
         sr.sprite = attackSprite;
         SpawnedEnemies = new();
 
-        weapons = new()
+        windows = new()
         {
-            new FortressGrenadeLauncher(this, windows[0], grenade),
-            new FortressShotgun(this, windows[1], shotgunBullet),
-            new FortressAssaultRifle(this, windows[2], assaultRifleBullet),
-            new FortressMarksman(this, windows[3], marksmanBullet)
+            new FortressAssaultRifle(this, windowsTrfs[0], assaultRifleBullet),
+            new FortressMarksman(this, windowsTrfs[1], marksmanBullet),
+            new FortressShotgun(this, windowsTrfs[2], shotgunBullet),
+            new FortressGrenadeLauncher(this, windowsTrfs[3], grenade),
         };
 
         attacks = new()  
         {
-            new FortressOverclock(this, player, null),
+            new FortressOverclock(this, player, null, enemy),
         };
     }
 
     protected override void PickAttack()
     {
         base.PickAttack();
-        FortressWindow randomWindow = weapons[Random.Range(0, weapons.Count)];
+        FortressWindow randomWindow = windows[Random.Range(0, windows.Count)];
         if(CurrentAttack is FortressOverclock overclock)
             overclock.SetWindow(randomWindow);
         shootingPoint = randomWindow.Transform;
@@ -46,10 +71,12 @@ public class FortressBoss : Boss
 
     protected override void Update()
     {
-        TakeAim();
         base.Update();
+        if(!canAttack)
+            return;
+        TakeAim();
 
-        foreach (FortressWindow weapon in weapons)
+        foreach (FortressWindow weapon in windows)
         {
             if(!weapon.isSpecialAttacking)
                 weapon.Shoot();
@@ -61,10 +88,113 @@ public class FortressBoss : Boss
 
     public override void TakeAim()
     {
-        foreach (FortressWindow weapon in weapons)
+        foreach (FortressWindow weapon in windows)
         {
             if(!weapon.isSpecialAttacking)
                 weapon.TakeAim(player);
+        }
+    }
+
+    protected override void OnDeath()
+    {
+        GameManager.Instance.ClearBossEnemies();
+        canAttack = false;
+    }
+
+    protected override void Dying()
+    {
+        if (deathTimer < deathTime)
+        {
+            deathTimer+= Time.deltaTime;
+            if(explosionTimer >= explosionTime)
+            {
+                explosionTimer = 0;
+                foreach (FortressWindow window in windows)
+                    window.Explode(deathExplosion);
+                return;
+            }
+            else
+            {
+                explosionTimer += Time.deltaTime;
+                return;
+            }
+        }
+        else
+        {
+            explosionTimer = 0;
+            sr.sprite = deathSprite;
+            if(afterDeathTimer < afterDeathTime)
+            {
+                afterDeathTimer+= Time.deltaTime;
+                return;
+            }
+            else
+            {
+                if(!weaponSpritesActive)
+                {
+                    for (int i = 0; i < weapons.Count; i++)
+                    {
+                        Transform window = windowsTrfs[i];
+                        window.rotation = Quaternion.identity;
+                        Transform weapon = weapons[i];
+                        weapon.gameObject.SetActive(true);
+                    }
+                    weaponSpritesActive = true;
+                    return;
+                }
+                
+                if(weaponsShowTimer < weaponsShowTime)
+                {
+                    weaponsShowTimer+= Time.deltaTime;
+                    return;
+                }
+                else if(!areWeaponsInPos)
+                {
+                    MoveWeapons();
+                    return;
+                }
+                else
+                {
+                    if (!livingWeaponExplosion)
+                    {
+                        livingWeaponExplosion = true;
+                        GameObject explosion = Instantiate(deathExplosion, livingGunSpawnPos.position, Quaternion.identity);
+                        Destroy(explosion, 0.3f);
+                        foreach (Transform weapon in weapons)
+                            weapon.gameObject.SetActive(false);
+                    }
+
+
+                    if(explosionTimer < explosionTime)
+                    {
+                        explosionTimer+= Time.deltaTime;
+                        return;
+                    }
+                    else
+                    {
+                        //instantiate living gun boss
+                        Destroy(this);
+                    }
+                }
+            }
+        }
+    }
+
+    void MoveWeapons()
+    {
+        foreach (Transform weapon in weapons)
+        {
+            Vector2 dir = livingGunSpawnPos.position - weapon.position;
+
+            if(dir.magnitude < .1f)
+            {
+                areWeaponsInPos = true;
+                continue;
+            }
+
+            areWeaponsInPos = false;
+            dir = dir.normalized;
+            weapon.transform.position += 3 * Time.deltaTime * (Vector3)dir;
         }
     }
 

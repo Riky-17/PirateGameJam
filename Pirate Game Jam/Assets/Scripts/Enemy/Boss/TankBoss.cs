@@ -13,8 +13,6 @@ public class TankBoss : Boss
     [SerializeField] Enemy enemyToSpawn;
     [SerializeField] Transform cannon;
 
-    public List<Enemy> SpawnedEnemies { get; private set; }
-
     [SerializeField] GameObject deathExplosion;
     [SerializeField] float deathRadius;
 
@@ -31,14 +29,13 @@ public class TankBoss : Boss
     {
         sr = GetComponent<SpriteRenderer>();
         srCannon = cannon.GetComponent<SpriteRenderer>();
-        SpawnedEnemies = new();
         explosionTimer = explosionTime;
 
         attacks = new() 
         { 
             new GrenadeBarrage(this, player, shootingPoint, grenade), 
             new BulletRain(this, player, shootingPoint, bullet), 
-            new SignalFlare(this, player, shootingPoint, grenade, enemyToSpawn),
+            new SignalFlare(this, player, grenade, enemyToSpawn),
             new SprayAndPray(this, player, shootingPoint, bullet),
         };
     }
@@ -68,14 +65,7 @@ public class TankBoss : Boss
         srCannon.color = color;
     }
 
-    protected override void OnDeath()
-    {
-        foreach (Enemy enemy in SpawnedEnemies)
-        {
-            if(enemy != null)
-                enemy.Die();
-        }
-    }
+    protected override void OnDeath() => GameManager.Instance.ClearBossEnemies();
 
     protected override void Dying()
     {

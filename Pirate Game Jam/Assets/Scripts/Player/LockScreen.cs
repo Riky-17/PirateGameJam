@@ -27,7 +27,7 @@ public class LockScreen : MonoBehaviour
         if (boss == null || Input.GetKeyDown(KeyCode.F)) // F key input is temporary until implementations to set isCompleted to true
         { 
             //playerCameraBounds.isLockScreen = false;
-            Debug.Log("Next Level");
+            Debug.Log("LockScreen Destroyed");
             Destroy(gameObject);
         }
     }

@@ -9,9 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3f376302489b293459ac6f3682008f7b, type: 3}
-  m_Name: HellicopiterMachineGun
+  m_Script: {fileID: 11500000, guid: d86cd8dccbbd4e64380b7f5d38237166, type: 3}
+  m_Name: MaxAmmoSO
   m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: -5718393696883301444, guid: 81ebf33e32ebf724d8b4291ae1995a40, type: 3}
-  speed: 20
-  damage: 3
+  item: {fileID: 8832222598487720247, guid: 36fa289b835a9654c961b5a6b07e1f65, type: 3}

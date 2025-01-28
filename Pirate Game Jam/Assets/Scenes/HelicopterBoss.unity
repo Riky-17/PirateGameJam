@@ -3289,7 +3289,7 @@ MonoBehaviour:
   marksmanBullet: {fileID: 11400000, guid: ec02643dff57bd64cb76c3b5f0d055f5, type: 2}
   shotgunBullet: {fileID: 11400000, guid: 64e8368f07bf9e44ea7e62c4313bee73, type: 2}
   grenadeOverload: {fileID: 11400000, guid: cd7ef74a16f4f1549a45662f1f8650d9, type: 2}
-  enemyToSpawn: {fileID: 3288990257193346228, guid: 3858ab3b1ef6c7c41893ce3c09ac2d3d, type: 3}
+  enemyToSpawn: {fileID: -5000161798850301960, guid: 61a0ae5c71caf174c8b5846e1a389978, type: 3}
   cannon: {fileID: 177193458}
   Items:
   - {fileID: 11400000, guid: 06de38f97ccd8254abdd82571ea9d9ce, type: 2}

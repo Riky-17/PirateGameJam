@@ -192,5 +192,5 @@ public abstract class WeaponSystem : MonoBehaviour
     public void ChangeSpriteColor(Color color) => sr.color = color;
 
     float TotalDamage => bullet.damage * damageMultiplier;
-    public void WeaponInfo() => weaponryText.PauseWeaponInfo(TotalDamage.ToString(), fireRate.ToString(), reloadTime.ToString(), initialBulletNum.ToString());
+    public void WeaponInfo() => weaponryText.PauseWeaponInfo(TotalDamage.ToString("0.00"), fireRate.ToString("0.00"), reloadTime.ToString("0.00"), initialBulletNum.ToString("0.00"), gameObject.name);
 }

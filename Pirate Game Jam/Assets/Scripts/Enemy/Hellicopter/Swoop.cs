@@ -50,6 +50,8 @@ public class Swoop : BossAttack
     public override void Attack()
     {
         boss.TakeAim();
+      
+
         if (!isUp)
         {
             //bring him up
@@ -64,7 +66,7 @@ public class Swoop : BossAttack
             return;
 
         }
-        if (!isLeft)
+        if (!isLeft && isUp)
         {
             //bring him left
             if (boss.transform.position.x <= -CAMERA_MAX_WIDTH - 5f)
@@ -77,6 +79,13 @@ public class Swoop : BossAttack
         }
         if (slamsCount >= SlamsAmount)
         {
+            if ((boss.transform.position.x < boss.CenterPoint.x - CAMERA_MAX_WIDTH - 5 && dir.x < 0) || (boss.transform.position.x > boss.CenterPoint.x + CAMERA_MAX_WIDTH + 5 && dir.x > 0))
+            {
+                slamsCount++;
+                dir = -dir;
+
+            }
+            boss.AddForceBoss(dir, heliSpeed, 5);
             isAttackDone = true;
             return;
         }

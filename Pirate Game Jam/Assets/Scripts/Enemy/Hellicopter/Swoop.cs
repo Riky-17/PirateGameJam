@@ -17,11 +17,13 @@ public class Swoop : BossAttack
     bool isLeft = false;
     bool isUp = false;
 
-    int SlamsAmount = 4;
+    int SlamsAmount = 3;
     int slamsCount;
 
-    float droppingRate = 1.5f;
+    float droppingRate = 0.6f;
     float droppingRater;
+
+    float heliSpeed = 30;
 
     Vector2 dir;
     Vector2 dirY;
@@ -57,7 +59,7 @@ public class Swoop : BossAttack
                 return;
             }
 
-            boss.AddForceBoss(Vector2.up, boss.Speed, 2);
+            boss.AddForceBoss(Vector2.up, boss.Speed * 1.5f, 2);
 
             return;
 
@@ -65,7 +67,7 @@ public class Swoop : BossAttack
         if (!isLeft)
         {
             //bring him left
-            if (boss.transform.position.x <= -CAMERA_MAX_WIDTH + 5f)
+            if (boss.transform.position.x <= -CAMERA_MAX_WIDTH - 5f)
             {
                 isLeft = true;
                 return;
@@ -79,13 +81,13 @@ public class Swoop : BossAttack
             return;
         }
 
-        if ((boss.transform.position.x < boss.CenterPoint.x - CAMERA_MAX_WIDTH + 5 && dir.x < 0) || (boss.transform.position.x > boss.CenterPoint.x + CAMERA_MAX_WIDTH - 3 && dir.x > 0))
+        if ((boss.transform.position.x < boss.CenterPoint.x - CAMERA_MAX_WIDTH - 5 && dir.x < 0) || (boss.transform.position.x > boss.CenterPoint.x + CAMERA_MAX_WIDTH + 5 && dir.x > 0))
         {
             slamsCount++;
             dir = -dir;
 
         }
-        boss.AddForceBoss(dir, 10, 5);
+        boss.AddForceBoss(dir, heliSpeed, 5);
 
 
         if (droppingRater >= droppingRate)

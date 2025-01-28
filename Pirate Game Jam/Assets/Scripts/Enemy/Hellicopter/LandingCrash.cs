@@ -21,8 +21,7 @@ public class LandingCrash : BossAttack
     Enemy enemyToSpawn;
     int enemiesAmount = 2;
 
-    float landingImpactDamage = 30f; //to be used 
-    float landingSpeed = 15f;   
+    float landingSpeed = 35f;   
 
     bool isHigh = false;
     bool isLeft = false;

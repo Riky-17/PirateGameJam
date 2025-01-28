@@ -5,13 +5,13 @@ using UnityEngine;
 
 public class LandingCrash : BossAttack
 {
-    public LandingCrash(Boss boss, PlayerMovement player, BulletSO bullet, Enemy enemy, PickUpItemSO[] Items) : base(boss, player, bullet) 
-    { 
+    public LandingCrash(Boss boss, PlayerMovement player, BulletSO bullet, Enemy enemy, PickUpItemSO[] Items) : base(boss, player, bullet)
+    {
         enemyToSpawn = enemy;
         items = Items;
     }
 
-   
+
     const float CAMERA_MAX_HEIGHT = 17 / 2f;
     const float CAMERA_MAX_WIDTH = 30 / 2f;
 
@@ -21,7 +21,7 @@ public class LandingCrash : BossAttack
     Enemy enemyToSpawn;
     int enemiesAmount = 2;
 
-    float landingSpeed = 35f;   
+    float landingSpeed = 35f;
 
     bool isHigh = false;
     bool isLeft = false;
@@ -34,7 +34,7 @@ public class LandingCrash : BossAttack
     float itemsSpawnTimer;
 
     float attackTimer;
-    float attackTime =5f;
+    float attackTime = 5f;
 
     public override void InitAttack()
     {
@@ -51,21 +51,23 @@ public class LandingCrash : BossAttack
     public override void Attack()
     {
         boss.TakeAim();
+
         if (!isHigh)
         {
             //bring him up
-            if (boss.transform.position.y >= CAMERA_MAX_HEIGHT - 3f )
+            if (boss.transform.position.y >= CAMERA_MAX_HEIGHT - 3f)
             {
                 isHigh = true;
                 return;
             }
 
-            boss.AddForceBoss(Vector2.up, boss.Speed, 2);       
-         
+            boss.AddForceBoss(Vector2.up, boss.Speed, 2);
+
             return;
 
         }
-        if(!isLeft)
+
+        if (!isLeft && isHigh)
         {
             //bring him left
             if (boss.transform.position.x <= -CAMERA_MAX_WIDTH + 5f)
@@ -76,7 +78,8 @@ public class LandingCrash : BossAttack
             boss.AddForceBoss(Vector2.left, boss.Speed, 2);
             return;
         }
-        if(!haslanded && isHigh && isLeft)
+
+        if (!haslanded && isHigh && isLeft)
         {
 
             //make him crash ha ha ha ha
@@ -92,24 +95,24 @@ public class LandingCrash : BossAttack
         }
         if (haslanded)
         {
-              //attackTimer += Time.deltaTime;
-                enemySpawnTimer += Time.deltaTime;
-               
-                //calling items
-                itemsSpawnTimer += Time.deltaTime;
-                if (itemsSpawnTimer >= itemsSpawnTime)
-                {
-                    for (int i = 0; i < itemsAmount; i++)
-                    {
-                        float x = Random.Range(-CAMERA_MAX_WIDTH + 2, CAMERA_MAX_WIDTH - 2);
-                        Vector2 pos = new(x, CAMERA_MAX_HEIGHT + 3);
-                        int randomItem = Random.Range(0, items.Length);
-                        PickableItem item = boss.InstantiateItem(items[randomItem].item, pos, Quaternion.identity);
+            //attackTimer += Time.deltaTime;
+            enemySpawnTimer += Time.deltaTime;
 
-                        if (boss is HellicopBoss hellicop)
-                            hellicop.itemsOnGame.Add(item);
-                    }
+            //calling items
+            itemsSpawnTimer += Time.deltaTime;
+            if (itemsSpawnTimer >= itemsSpawnTime)
+            {
+                for (int i = 0; i < itemsAmount; i++)
+                {
+                    float x = Random.Range(-CAMERA_MAX_WIDTH + 2, CAMERA_MAX_WIDTH - 2);
+                    Vector2 pos = new(x, CAMERA_MAX_HEIGHT + 3);
+                    int randomItem = Random.Range(0, items.Length);
+                    PickableItem item = boss.InstantiateItem(items[randomItem].item, pos, Quaternion.identity);
+
+                    if (boss is HellicopBoss hellicop)
+                        hellicop.itemsOnGame.Add(item);
                 }
+            }
             if (enemySpawnTimer >= enemySpawnTime)
             {
                 //call reinforcement
@@ -124,13 +127,14 @@ public class LandingCrash : BossAttack
                 }
 
             }
-
+            if (boss.transform.position.y < boss.CenterPoint.y - CAMERA_MAX_HEIGHT - 3)
+                boss.AddForceBoss(Vector2.up, boss.Speed, 2);
 
             isAttackDone = true;
 
 
         }
-        //if(boss.transform.position.y <= CAMERA_MAX_HEIGHT/2-1)
-        //    boss.AddForceBoss(Vector2.up, boss.Speed, 2);
+        
+            
     }
 }

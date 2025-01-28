@@ -51,6 +51,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4cab94a71adedf4281a91d0144e384b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveSpeed: 6
   mousePos: {x: 0, y: 0}
   speed: 6
   weapons:
@@ -58,7 +59,9 @@ MonoBehaviour:
   - {fileID: 8173256804163627278}
   - {fileID: 7704850479044293558}
   - {fileID: 1635132269601203667}
-  maxHealth: 150
+  maxHealth: 500
+  HPSlider: {fileID: 0}
+  HPText: {fileID: 0}
 --- !u!58 &7283976341539080834
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -225,8 +228,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   recoilForce: 5
   reloadTime: 8
-  initialBulletNum: 80
-  fireRate: 0.1
+  initialBulletNum: 20
+  fireRate: 0.2
   bullet: {fileID: 11400000, guid: 76006c33d9e057d43a431b7a5aa1164e, type: 2}
   shootingPoint: {fileID: 3730729945176514446}
   weaponIndex: 2
@@ -355,7 +358,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   recoilForce: 25
   reloadTime: 10
-  initialBulletNum: 5
+  initialBulletNum: 2
   fireRate: 1
   bullet: {fileID: 11400000, guid: 198459120051d93448078b7fad601e65, type: 2}
   shootingPoint: {fileID: 3730729945176514446}
@@ -538,7 +541,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   recoilForce: 15
   reloadTime: 5
-  initialBulletNum: 20
+  initialBulletNum: 4
   fireRate: 0.5
   bullet: {fileID: 11400000, guid: 097a0b1c896ac934cbdca4fd38a7a275, type: 2}
   shootingPoint: {fileID: 3730729945176514446}
@@ -646,7 +649,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   recoilForce: 20
   reloadTime: 3
-  initialBulletNum: 5
+  initialBulletNum: 4
   fireRate: 0.5
   bullet: {fileID: 11400000, guid: 415443af2ee4f5f4796f4f9a6b3f652f, type: 2}
   shootingPoint: {fileID: 3730729945176514446}

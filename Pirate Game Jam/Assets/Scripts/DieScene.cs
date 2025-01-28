@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using JetBrains.Annotations;
 using Unity.Cinemachine;
@@ -8,13 +9,16 @@ using UnityEngine.InputSystem;
 
 public class DieScene : MonoBehaviour
 {
+    public static Action<Transform> onExplode;
+
     //getting components
     Camera mainCam;
     private CinemachineCamera cam;
     private CinemachineConfiner2D camConfiner;
     GameObject playerCameraBounds;
+    Coroutine coroutine;
     private Transform player;
-    [SerializeField] float duration = 10f;
+    [SerializeField] float duration = 5f;
     [SerializeField] float cameraZoom = 3.68f;
     [SerializeField] float deathRadius;
     [SerializeField] GameObject explotion;
@@ -34,14 +38,17 @@ public class DieScene : MonoBehaviour
     }
     void Dies()
     {
-        StartCoroutine(DieAnimation());
+        if (coroutine == null)
+        {
+            coroutine = StartCoroutine(DieAnimation());
+        }
     }
     public IEnumerator DieAnimation()
     {
         camConfiner.BoundingShape2D = null;
-
+        this.transform.position = new Vector3(playerCameraBounds.transform.position.x, playerCameraBounds.transform.position.y, -10);
         PanelsManager.canReadInput = false;
-        yield return new WaitForSecondsRealtime(1);
+
         float temp = 0;
         float camInitialZoom = cam.Lens.OrthographicSize;
 
@@ -57,23 +64,26 @@ public class DieScene : MonoBehaviour
         {
             temp += Time.unscaledDeltaTime;
             cam.Lens.OrthographicSize = Mathf.Lerp(camInitialZoom, cameraZoom, temp/duration);
-            transform.position = new Vector3(Mathf.Lerp(Camera.main.transform.position.x, playerX, temp/duration), Mathf.Lerp(Camera.main.transform.position.y, playerY, temp / duration), -10);
+            transform.position = new Vector3(Mathf.Lerp(cameraX, playerX, temp / duration), Mathf.Lerp(cameraY, playerY, temp / duration), -10);
             yield return null;
-        }          
+        }
+
         cam.Lens.OrthographicSize = cameraZoom;
-        DeathExplosion();
-        yield return new WaitForSecondsRealtime(0.5f);
-        DeathExplosion();
-        yield return new WaitForSecondsRealtime(0.5f);
-        DeathExplosion();
-        yield return new WaitForSecondsRealtime(0.5f);
+        transform.position = new Vector3(player.position.x, player.position.y, -10);
+
+        for (int i = 0; i < 20; i++)
+        {
+            DeathExplosion();
+            yield return new WaitForSecondsRealtime(0.2f);
+        }
         PanelsManager.Instance.GameOver();
     }
 
     void DeathExplosion()
     {
-        Vector2 pos = Random.insideUnitCircle * deathRadius + (Vector2)transform.position;
+        Vector2 pos = UnityEngine.Random.insideUnitCircle * deathRadius + (Vector2)transform.position;
         GameObject explosion = Instantiate(explotion, pos, Quaternion.identity);
+        onExplode?.Invoke(transform);
         Destroy(explosion, .3f);
     }
 }

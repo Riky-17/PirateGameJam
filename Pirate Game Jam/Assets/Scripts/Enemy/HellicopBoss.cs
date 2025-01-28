@@ -5,7 +5,8 @@ using UnityEngine.Rendering;
 
 public class HellicopBoss : Boss
 {
-    SpriteRenderer srCannon;
+    [Space]
+    [SerializeField]SpriteRenderer srCannon;
     Transform trCannon;
 
     [Space]
@@ -37,33 +38,48 @@ public class HellicopBoss : Boss
     float afterDeathTime = 2.5f;
     float afterDeathTimer;
 
+    bool canAttack = true;
+
     public List<Enemy> SpawnedEnemies { get; private set; }
     public List<PickableItem> itemsOnGame {  get; private set; }
+
+    MachineGun machineGun;
 
     protected override void InitBoss()
     {
         SpawnedEnemies = new();
         itemsOnGame = new();
         sr = GetComponent<SpriteRenderer>();
-        srCannon = GetComponentInChildren<SpriteRenderer>();
         trCannon = GetComponentInChildren<Transform>();
+     
+        machineGun = new MachineGun(this, player, bullet);
         attacks = new()
-        {           
+        {
+           new Swoop(this, player, bullet, Items),
            new LandingCrash(this, player, bullet, enemyToSpawn, Items),
-           //new CarpetBoom(this, player, grenade),
-           //new OverloadedGun(this, player, marksmanBullet, grenadeOverload, shotgunBullet),
-           //new MachineGun(this, player, bullet)
+           new CarpetBoom(this, player, grenade),
+           new OverloadedGun(this, player, marksmanBullet, grenadeOverload, shotgunBullet),
         };
 
     }
-
+    protected override void Awake()
+    {
+        base.Awake();
+       
+    }
     protected override void LoadNextScene() => GameManager.Instance.LoadScene(3);
     protected override void UpdateColor(Color color)
     {
         sr.color = color;
         srCannon.color = color;
     }
-
+    protected override void Update()
+    {
+        base.Update();
+        
+        if(canAttack)
+            machineGun.Attack();
+    }
     public override void TakeAim()
     {
         Vector2 shootDir = (player.transform.position - transform.position).normalized;
@@ -90,6 +106,8 @@ public class HellicopBoss : Boss
 
     protected override void OnDeath()
     {
+        
+        canAttack = false;
         foreach (Enemy enemy in SpawnedEnemies)
         {
             if (enemy != null)

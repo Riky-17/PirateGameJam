@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public abstract class Enemy : ColorFlashObject, IHealth, IItemPicker
 {
@@ -279,10 +280,10 @@ public abstract class Enemy : ColorFlashObject, IHealth, IItemPicker
             Die();
     }
 
-    //TODO
     public virtual void Die()
     {
         ObjectivesManager.Instance.killEnemy();
+        BalancedSliderController.Instance.increasingSliderValue(40);
         Destroy(gameObject);
     }
 

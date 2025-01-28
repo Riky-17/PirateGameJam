@@ -30,4 +30,10 @@ public class MarksmanScript : WeaponSystem
             Reload(this);
         }
     }
+
+    public override void UpgradeStats()
+    {
+        base.UpgradeStats();
+        damageMultiplier += .2f;
+    }
 }

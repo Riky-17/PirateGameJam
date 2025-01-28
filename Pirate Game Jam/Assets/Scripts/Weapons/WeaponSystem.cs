@@ -20,10 +20,10 @@ public abstract class WeaponSystem : MonoBehaviour
 
     //weapon stats
     public float ReloadTime => reloadTime;
-    [SerializeField] float reloadTime;
+    [SerializeField] protected float reloadTime;
     public static float ReloadMultiplier = 1;
     public float InitialBulletNum => initialBulletNum;
-    [SerializeField] int initialBulletNum = 3;
+    [SerializeField] protected int initialBulletNum = 3;
     protected int bulletsNum;
     [SerializeField] protected float fireRate;
     protected float fireRateTimer;
@@ -31,7 +31,7 @@ public abstract class WeaponSystem : MonoBehaviour
 
     [SerializeField] protected BulletSO bullet;
     // this is for level ups
-    float damageMultiplier = 1;
+    protected float damageMultiplier = 1;
     // this is for boost items
     public static float DamageBoostMultiplier = 1;
     [SerializeField] Transform shootingPoint;
@@ -126,11 +126,11 @@ public abstract class WeaponSystem : MonoBehaviour
 
     public virtual void UpgradeStats()
     {
-        reloadTime*= .95f;
-        initialBulletNum+= 5;
-        bulletsNum+= 5;
-        damageMultiplier+= .05f;
-        fireRate*= .95f;
+        reloadTime*= .90f;
+        initialBulletNum+= 1;
+        bulletsNum+= 1;
+        damageMultiplier+= .1f;
+        fireRate*= .90f;
     }
     
     public IEnumerator ReloadCoroutine()
@@ -191,5 +191,6 @@ public abstract class WeaponSystem : MonoBehaviour
     public Color WeaponSpriteColor() => sr.color;
     public void ChangeSpriteColor(Color color) => sr.color = color;
 
-    public void WeaponInfo() => weaponryText.PauseWeaponInfo(bullet.damage.ToString(), fireRate.ToString(), reloadTime.ToString(), initialBulletNum.ToString());
+    float TotalDamage => bullet.damage * damageMultiplier;
+    public void WeaponInfo() => weaponryText.PauseWeaponInfo(TotalDamage.ToString(), fireRate.ToString(), reloadTime.ToString(), initialBulletNum.ToString());
 }

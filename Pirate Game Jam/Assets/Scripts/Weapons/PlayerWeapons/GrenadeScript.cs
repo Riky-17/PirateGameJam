@@ -19,11 +19,20 @@ public class GrenadeScript : WeaponSystem
         //recoil
         lastRecoil = recoilTime;
 
+        //fire the shooting event
+        onShotFired?.Invoke(transform);
+
         //check ammo
         if (bulletsNum == 0)
         {
             canShoot = false;
             Reload(this);
         }
+    }
+
+    public override void UpgradeStats()
+    {
+        base.UpgradeStats();
+        reloadTime *= .9f;
     }
 }

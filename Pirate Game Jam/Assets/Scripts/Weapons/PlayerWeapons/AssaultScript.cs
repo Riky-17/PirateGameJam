@@ -41,6 +41,14 @@ public class AssaultScript : WeaponSystem
         }
     }
 
+    public override void UpgradeStats()
+    {
+        base.UpgradeStats();
+        initialBulletNum += 4;
+        bulletsNum += 4;
+        fireRate *= .9f;
+    }
+
     // IEnumerator FireRate()
     // {
     //     isShooting = false;

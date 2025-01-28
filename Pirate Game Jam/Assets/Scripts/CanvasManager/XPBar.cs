@@ -78,27 +78,12 @@ public class BalancedSliderController : MonoBehaviour
             incNeccesaryExp((float)(slider.maxValue * 0.20));
         }
     }
-    private void FixedUpdate()
-    {
 
-    }
     void Update()
     {
-        // Move the bar left (Z) or right (X) based on input
-        //if (Input.GetKey(KeyCode.Z))
-        //{
-        //    currentPosition -= moveSpeed * Time.deltaTime; // Move left
-        //}
-        //if (Input.GetKey(KeyCode.X))
-        //{
-        //    currentPosition += moveSpeed * Time.deltaTime; // Move right
-        //}
-
-        //// Clamp the position to ensure it doesn't move out of bounds
-        //currentPosition = Mathf.Clamp(currentPosition, minPosition, maxPosition);
-
-        //// Update the middle bar's position
-        //middleBar.anchorMin = new Vector2(currentPosition, middleBar.anchorMin.y);
-        //middleBar.anchorMax = new Vector2(currentPosition, middleBar.anchorMax.y);
+        if(Input.GetKeyDown(KeyCode.V)) // For testing purposes
+        {
+            increasingSliderValue(100);
+        }
     }
 }

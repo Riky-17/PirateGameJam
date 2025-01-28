@@ -19,6 +19,8 @@ public class FortressBoss : Boss
 
     [SerializeField] GameObject deathExplosion;
 
+    [SerializeField] LivingGunBoss livingGunBoss;
+
     public List<Enemy> SpawnedEnemies { get; private set;}
 
     bool canAttack = true;
@@ -173,6 +175,7 @@ public class FortressBoss : Boss
                     else
                     {
                         //instantiate living gun boss
+                        Instantiate(livingGunBoss, livingGunSpawnPos.position, Quaternion.identity);
                         Destroy(this);
                     }
                 }

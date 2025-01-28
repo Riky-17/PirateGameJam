@@ -6,7 +6,8 @@ public class LivingGunBoss : Boss
     [SerializeField] List<LivingGunBossGun> weapons;
     LivingGunBossGun currentWeapon;
 
-    
+    float weaponTime = 15f;
+    float weaponTimer;
 
     protected override void InitBoss()
     {
@@ -15,10 +16,19 @@ public class LivingGunBoss : Boss
 
     protected override void Update()
     {
-        base.Update();
+        ColorFlash();
         TakeAim();
 
-        currentWeapon.Shoot();
+        if(weaponTimer < weaponTime)
+        {
+            weaponTimer+= Time.deltaTime;
+            currentWeapon.Shoot();
+        }
+        else
+        {
+            weaponTimer = 0;
+            SwitchWeapon();
+        }
     }
 
     public override void TakeAim()
@@ -38,6 +48,13 @@ public class LivingGunBoss : Boss
         int randomWeaponIndex = Random.Range(0, weapons.Count);
         if(weapons[randomWeaponIndex] == currentWeapon)
             return;
+
+        LivingGunBossGun nextWeapon = weapons[randomWeaponIndex];
+        nextWeapon.gameObject.SetActive(true);
+        nextWeapon.ChangeWeaponColor(currentWeapon.WeaponColorSprite());
+        currentWeapon.ChangeWeaponColor(Color.white);
+        currentWeapon.gameObject.SetActive(true);
+        currentWeapon = nextWeapon;
     } 
 
     protected override void LoadNextScene()
@@ -47,6 +64,6 @@ public class LivingGunBoss : Boss
 
     protected override void UpdateColor(Color color)
     {
-        sr.color = color;
+        currentWeapon.ChangeWeaponColor(color);
     }
 }

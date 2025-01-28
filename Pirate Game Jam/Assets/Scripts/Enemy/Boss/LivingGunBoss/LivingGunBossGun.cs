@@ -2,9 +2,12 @@ using UnityEngine;
 
 public abstract class LivingGunBossGun : MonoBehaviour
 {
-    public SpriteRenderer Sr { get; private set; }
+    SpriteRenderer sr;
 
-    void Awake() => Sr = GetComponent<SpriteRenderer>();
+    void Awake() => sr = GetComponent<SpriteRenderer>();
 
     public abstract void Shoot();
+
+    public void ChangeWeaponColor(Color color) => sr.color = color;
+    public Color WeaponColorSprite() => sr.color;
 }

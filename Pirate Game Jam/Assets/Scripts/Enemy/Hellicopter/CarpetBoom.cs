@@ -24,9 +24,7 @@ public class CarpetBoom : BossAttack
         boss.Stop();
 
         slamsCount = 0;
-
-        droppingRater = droppingRate;
-
+        
         dir = new(boss.CenterPoint.x - boss.transform.position.x, 0);
         dir = dir.normalized;
 

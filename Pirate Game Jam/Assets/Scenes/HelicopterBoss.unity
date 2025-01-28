@@ -3297,7 +3297,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 1ae028304527d0c4b9efd0c8c29ec343, type: 2}
   - {fileID: 11400000, guid: b833d05bd8f32e646bd36398b60da52e, type: 2}
   deathExplosion: {fileID: 1319657421192287489, guid: ed1a3e8e74b71a842a466485eaf2f7ca, type: 3}
-  deathRadius: 3
+  deathRadius: 4
 --- !u!50 &444414870
 Rigidbody2D:
   serializedVersion: 5

@@ -29,4 +29,10 @@ public class GrenadeScript : WeaponSystem
             Reload(this);
         }
     }
+
+    public override void UpgradeStats()
+    {
+        base.UpgradeStats();
+        reloadTime *= .95f;
+    }
 }

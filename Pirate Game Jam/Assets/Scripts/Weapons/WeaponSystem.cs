@@ -20,7 +20,7 @@ public abstract class WeaponSystem : MonoBehaviour
 
     //weapon stats
     public float ReloadTime => reloadTime;
-    [SerializeField] float reloadTime;
+    [SerializeField] protected float reloadTime;
     public static float ReloadMultiplier = 1;
     public float InitialBulletNum => initialBulletNum;
     [SerializeField] int initialBulletNum = 3;
@@ -31,7 +31,7 @@ public abstract class WeaponSystem : MonoBehaviour
 
     [SerializeField] protected BulletSO bullet;
     // this is for level ups
-    float damageMultiplier = 1;
+    protected float damageMultiplier = 1;
     // this is for boost items
     public static float DamageBoostMultiplier = 1;
     [SerializeField] Transform shootingPoint;
@@ -127,8 +127,8 @@ public abstract class WeaponSystem : MonoBehaviour
     public virtual void UpgradeStats()
     {
         reloadTime*= .95f;
-        initialBulletNum+= 5;
-        bulletsNum+= 5;
+        initialBulletNum+= 1;
+        bulletsNum+= 1;
         damageMultiplier+= .05f;
         fireRate*= .95f;
     }

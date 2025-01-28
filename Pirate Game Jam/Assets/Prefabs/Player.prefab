@@ -59,7 +59,7 @@ MonoBehaviour:
   - {fileID: 8173256804163627278}
   - {fileID: 7704850479044293558}
   - {fileID: 1635132269601203667}
-  maxHealth: 150
+  maxHealth: 500
   HPSlider: {fileID: 0}
   HPText: {fileID: 0}
 --- !u!58 &7283976341539080834

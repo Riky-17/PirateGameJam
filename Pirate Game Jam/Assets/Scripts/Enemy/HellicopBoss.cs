@@ -5,7 +5,8 @@ using UnityEngine.Rendering;
 
 public class HellicopBoss : Boss
 {
-    SpriteRenderer srCannon;
+    [Space]
+    [SerializeField]SpriteRenderer srCannon;
     Transform trCannon;
 
     [Space]
@@ -49,7 +50,6 @@ public class HellicopBoss : Boss
         SpawnedEnemies = new();
         itemsOnGame = new();
         sr = GetComponent<SpriteRenderer>();
-        srCannon = GetComponentInChildren<SpriteRenderer>();
         trCannon = GetComponentInChildren<Transform>();
      
         machineGun = new MachineGun(this, player, bullet);
@@ -106,7 +106,7 @@ public class HellicopBoss : Boss
 
     protected override void OnDeath()
     {
-
+        
         canAttack = false;
         foreach (Enemy enemy in SpawnedEnemies)
         {

@@ -3278,7 +3278,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ecc3f19bb4b56f42a33e5659d3be7e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 6
+  moveSpeed: 8
   maxHealth: 800
   centerPoint: {x: 0, y: 0}
   shootingPoint: {fileID: 535233933}

@@ -33,6 +33,10 @@ public class LandingCrash : BossAttack
 
     float itemsSpawnTime = 1f;
     float itemsSpawnTimer;
+
+    float attackTimer;
+    float attackTime =5f;
+
     public override void InitAttack()
     {
         base.InitAttack();
@@ -40,8 +44,9 @@ public class LandingCrash : BossAttack
         isHigh = false;
         isLeft = false;
         haslanded = false;
-        enemySpawnTimer = 0f;
+        enemySpawnTime = 0f;
         itemsSpawnTime = 0f;
+        attackTimer = attackTime;
     }
 
     public override void Attack()
@@ -88,8 +93,25 @@ public class LandingCrash : BossAttack
         }
         if (haslanded)
         {
-            enemySpawnTimer += Time.deltaTime;
-            if(enemySpawnTimer >= enemySpawnTime)
+              //attackTimer += Time.deltaTime;
+                enemySpawnTimer += Time.deltaTime;
+               
+                //calling items
+                itemsSpawnTimer += Time.deltaTime;
+                if (itemsSpawnTimer >= itemsSpawnTime)
+                {
+                    for (int i = 0; i < itemsAmount; i++)
+                    {
+                        float x = Random.Range(-CAMERA_MAX_WIDTH + 2, CAMERA_MAX_WIDTH - 2);
+                        Vector2 pos = new(x, CAMERA_MAX_HEIGHT + 3);
+                        int randomItem = Random.Range(0, items.Length);
+                        PickableItem item = boss.InstantiateItem(items[randomItem].item, pos, Quaternion.identity);
+
+                        if (boss is HellicopBoss hellicop)
+                            hellicop.itemsOnGame.Add(item);
+                    }
+                }
+            if (enemySpawnTimer >= enemySpawnTime)
             {
                 //call reinforcement
                 for (int i = 0; i < enemiesAmount; i++)
@@ -99,26 +121,14 @@ public class LandingCrash : BossAttack
                     Enemy enemy = boss.InstantiateEnemy(enemyToSpawn, pos, Quaternion.identity);
                     if (boss is HellicopBoss hellicop)
                         hellicop.SpawnedEnemies.Add(enemy);
-                   
-                }
-                
-            }
-            //calling items
-            itemsSpawnTimer += Time.deltaTime;
-            if (itemsSpawnTimer >= itemsSpawnTime)
-            {
-                for (int i = 0; i < itemsAmount; i++)
-                {
-                    float x = Random.Range(-CAMERA_MAX_WIDTH + 2, CAMERA_MAX_WIDTH - 2);
-                    Vector2 pos = new(x, CAMERA_MAX_HEIGHT);
-                    int randomItem = Random.Range(0, items.Length);
-                    PickableItem item = boss.InstantiateItem(items[randomItem].item, pos, Quaternion.identity);
 
-                    if (boss is HellicopBoss hellicop)
-                       hellicop.itemsOnGame.Add(item);
                 }
+
             }
+
+
             isAttackDone = true;
+
 
         }
         //if(boss.transform.position.y <= CAMERA_MAX_HEIGHT/2-1)

@@ -44,7 +44,9 @@ public class AssaultScript : WeaponSystem
     public override void UpgradeStats()
     {
         base.UpgradeStats();
-        fireRate *= .95f;
+        initialBulletNum += 4;
+        bulletsNum += 4;
+        fireRate *= .9f;
     }
 
     // IEnumerator FireRate()

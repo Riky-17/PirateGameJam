@@ -33,6 +33,6 @@ public class GrenadeScript : WeaponSystem
     public override void UpgradeStats()
     {
         base.UpgradeStats();
-        reloadTime *= .95f;
+        reloadTime *= .9f;
     }
 }

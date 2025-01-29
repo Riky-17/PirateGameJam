@@ -20,6 +20,8 @@ public class FortressBoss : Boss
 
     [SerializeField] BossParachuteEnemy enemy;
 
+    [SerializeField] PickUpItemSO[] Items;
+
     [SerializeField] GameObject deathExplosion;
 
     [SerializeField] LivingGunBoss livingGunBoss;
@@ -63,7 +65,7 @@ public class FortressBoss : Boss
 
         attacks = new()  
         {
-            new FortressOverclock(this, player, null, enemy),
+            new FortressOverclock(this, player, null, enemy, Items),
         };
     }
 

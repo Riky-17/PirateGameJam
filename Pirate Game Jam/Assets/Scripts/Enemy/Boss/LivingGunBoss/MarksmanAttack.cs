@@ -86,7 +86,7 @@ public class MarksmanAttack : BossAttack
                     {
                         fireRateTimer = 0;
                         float y = Random.Range(-CAMERA_MAX_HEIGHT, CAMERA_MAX_HEIGHT);
-                        Vector2 pos = new(boss.CenterPoint.x - CAMERA_MAX_WIDTH, y);
+                        Vector2 pos = new(boss.CenterPoint.x - CAMERA_MAX_WIDTH + 5, y);
                         Quaternion rotation = Quaternion.Euler(0, 0, 0);
                         marksmanBoss.ShootBullet(pos, rotation);
                         return;

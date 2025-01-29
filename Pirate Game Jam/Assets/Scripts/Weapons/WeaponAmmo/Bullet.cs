@@ -15,7 +15,7 @@ public class Bullet : MonoBehaviour
 
     void FixedUpdate()
     {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.right, .25f);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.right, .25f * (rb.linearVelocityX / 3f));
 
         if(hit.collider != null && hit.collider.TryGetComponent(out target) && hit.collider.gameObject != shooter && hit.collider.gameObject.layer != Mathf.Log(ignoreBulletMask, 2))
         {

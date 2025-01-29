@@ -39,8 +39,10 @@ public class GrenadeExplotion : Bullet
             return;
         
         RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.right, .25f);
-        if(hit.collider == null || hit.collider.gameObject == shooter || hit.collider.gameObject.layer == Mathf.Log(ignoreBulletMask, 2))
+        if(hit.collider == null || hit.collider.gameObject == gameObject || hit.collider.gameObject == shooter || hit.collider.gameObject.layer == Mathf.Log(ignoreBulletMask, 2))
             return;
+
+        Debug.Log(hit.collider.name);
         Explosion();
     }
 

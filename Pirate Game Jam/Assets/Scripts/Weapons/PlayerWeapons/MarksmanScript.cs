@@ -34,6 +34,6 @@ public class MarksmanScript : WeaponSystem
     public override void UpgradeStats()
     {
         base.UpgradeStats();
-        damageMultiplier += .25f;
+        damageMultiplier += .10f;
     }
 }

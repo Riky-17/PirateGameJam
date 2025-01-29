@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour
     public List<BossParachuteEnemy> BossEnemies { get; private set; } = new();
     public List<Civilian> Civilians { get; private set; } = new();
 
+    public int totalEXP;
+
     void Awake()
     {
         if(Instance == null)
@@ -19,6 +21,9 @@ public class GameManager : MonoBehaviour
 
         DontDestroyOnLoad(gameObject);
     }
+
+    void OnEnable() => SceneManager.sceneLoaded += GiveExpToPlayer;
+    void OnDisable() => SceneManager.sceneLoaded -= GiveExpToPlayer;
 
     void Update()
     {
@@ -34,6 +39,12 @@ public class GameManager : MonoBehaviour
             BossParachuteEnemy bossEnemy = BossEnemies[i];
             bossEnemy.Die();
         }
+    }
+
+    private void GiveExpToPlayer(Scene arg0, LoadSceneMode arg1)
+    {
+        Debug.Log(totalEXP);
+        BalancedSliderController.Instance.IncreasingSliderValueSilent(totalEXP);
     }
 
     public void LoadScene(int sceneID) => SceneManager.LoadScene(sceneID);

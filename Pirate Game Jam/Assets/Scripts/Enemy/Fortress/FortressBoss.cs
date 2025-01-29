@@ -85,6 +85,7 @@ public class FortressBoss : Boss
             if(!weapon.isSpecialAttacking)
                 weapon.Shoot();
         }
+        Debug.Log(currentAttack);
     }
 
     //removing the base fixedUpdate

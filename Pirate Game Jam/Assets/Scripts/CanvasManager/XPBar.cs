@@ -8,6 +8,7 @@ public class BalancedSliderController : MonoBehaviour
 {
     public Slider slider;
     public static BalancedSliderController Instance { get; private set; }
+    float excessEXP;
     int currentValue;
 
     const string maxLevel = "MAX";
@@ -38,7 +39,7 @@ public class BalancedSliderController : MonoBehaviour
     }
 
 
-    void incNeccesaryExp(float experience)
+    void IncreaseNecessaryExp(float experience)
     {
         if(currentLevel <= 5)
         {
@@ -56,6 +57,13 @@ public class BalancedSliderController : MonoBehaviour
 
             //increasing max val
             maxXP.text = slider.maxValue.ToString();
+            
+            if(excessEXP != 0)
+            {
+                float tempVar = excessEXP;
+                excessEXP = 0;
+                IncreasingSliderValueSilent((int)tempVar);
+            }
         }
         else
         {
@@ -67,15 +75,33 @@ public class BalancedSliderController : MonoBehaviour
         
     }
 
-    public void increasingSliderValue(int experience)
+    public void IncreasingSliderValue(int experience)
     {
-
+        GameManager.Instance.totalEXP+= experience;
+        if(slider.value + experience > slider.maxValue)
+            excessEXP = slider.value + experience - slider.maxValue;
+            
         slider.value += experience;
         currentXP.text = slider.value.ToString();
 
         if (slider.value >= slider.maxValue)
         {        
-            incNeccesaryExp((float)(slider.maxValue * 0.20));
+            IncreaseNecessaryExp((float)(slider.maxValue * 0.20));
+        }
+    }
+
+    // this one does not change the game manager value
+    public void IncreasingSliderValueSilent(int experience)
+    {
+        if(slider.value + experience > slider.maxValue)
+            excessEXP = slider.value + experience - slider.maxValue;
+            
+        slider.value += experience;
+        currentXP.text = slider.value.ToString();
+
+        if (slider.value >= slider.maxValue)
+        {        
+            IncreaseNecessaryExp((float)(slider.maxValue * 0.20));
         }
     }
 
@@ -83,7 +109,7 @@ public class BalancedSliderController : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.V)) // For testing purposes
         {
-            increasingSliderValue(100);
+            IncreasingSliderValue(100);
         }
     }
 }

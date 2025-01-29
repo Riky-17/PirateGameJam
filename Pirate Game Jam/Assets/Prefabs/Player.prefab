@@ -227,7 +227,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   recoilForce: 5
-  reloadTime: 15
+  reloadTime: 10
   initialBulletNum: 20
   fireRate: 0.2
   bullet: {fileID: 11400000, guid: 76006c33d9e057d43a431b7a5aa1164e, type: 2}
@@ -540,7 +540,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   recoilForce: 15
-  reloadTime: 10
+  reloadTime: 5
   initialBulletNum: 4
   fireRate: 0.5
   bullet: {fileID: 11400000, guid: 097a0b1c896ac934cbdca4fd38a7a275, type: 2}
@@ -648,7 +648,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   recoilForce: 20
-  reloadTime: 10
+  reloadTime: 7
   initialBulletNum: 4
   fireRate: 0.75
   bullet: {fileID: 11400000, guid: 415443af2ee4f5f4796f4f9a6b3f652f, type: 2}

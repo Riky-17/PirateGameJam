@@ -86,15 +86,15 @@ public class ObjectivesManager : MonoBehaviour
     {
         if(progressObjective1 == missionObjective1)
         {
-            BalancedSliderController.Instance.increasingSliderValue(missionObjective1 * xpScale);
+            BalancedSliderController.Instance.IncreasingSliderValue(missionObjective1 * xpScale);
         }
         if(progressObjective2 == missionObjective2)
         {
-            BalancedSliderController.Instance.increasingSliderValue(missionObjective2 * xpScale);
+            BalancedSliderController.Instance.IncreasingSliderValue(missionObjective2 * xpScale);
         }
         if (progressObjective3 == missionObjective3)
         {
-            BalancedSliderController.Instance.increasingSliderValue(missionObjective3 * xpScale);
+            BalancedSliderController.Instance.IncreasingSliderValue(missionObjective3 * xpScale);
         }
     }
 

@@ -3115,7 +3115,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 0
   m_Sprite: {fileID: 4452342461537125273, guid: bd4deb138d887ba499f0b4186835047e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -6928,7 +6928,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Sprite: {fileID: 7225575888738433091, guid: 5e4ba1a0a9a4ebc48917227107d2093f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -6974,7 +6974,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 0
-  maxHealth: 1
+  maxHealth: 1000
   centerPoint: {x: 0, y: 0}
   shootingPoint: {fileID: 0}
   bossHP: {fileID: 1826194270}
@@ -8121,7 +8121,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 0
   m_Sprite: {fileID: -3403888145056752653, guid: c850cb2dafa831a4cac71800d4ac9a5d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -8908,6 +8908,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08237cbb3e994a4419686bf7c8d8778e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  totalEXP: 0
 --- !u!4 &1174599350
 Transform:
   m_ObjectHideFlags: 0
@@ -9667,7 +9668,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 0
   m_Sprite: {fileID: -2408530018317867212, guid: 2cdfcf2d4f1658d4a9ddc3920672f2ae, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -11343,7 +11344,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 0
   m_Sprite: {fileID: -3294788082675926453, guid: 76ea44063b1be4f4298fa7f608771db5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -12403,6 +12404,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   boss: {fileID: 0}
+  bossHP: {fileID: 0}
 --- !u!50 &1735079190
 Rigidbody2D:
   serializedVersion: 5

@@ -20,6 +20,7 @@ public class FortressOverclock : BossAttack
     public override void InitAttack()
     {
         base.InitAttack();
+        SpawnedEnemy = false;
         overclockTimer = 0;
     }
 
@@ -28,7 +29,7 @@ public class FortressOverclock : BossAttack
         if(!SpawnedEnemy)
         {
             SpawnedEnemy = true;
-            float x = Random.Range(-CAMERA_MAX_WIDTH + 1, CAMERA_MAX_WIDTH - 1);
+            float x = Random.Range(-CAMERA_MAX_WIDTH + 1, CAMERA_MAX_WIDTH - 5);
             Vector2 pos = new(x + boss.CenterPoint.x, CAMERA_MAX_HEIGHT);
             boss.InstantiateEnemy(enemyToSpawn, pos, Quaternion.identity);
         }

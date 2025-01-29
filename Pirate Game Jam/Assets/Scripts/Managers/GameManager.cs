@@ -43,7 +43,12 @@ public class GameManager : MonoBehaviour
 
     private void GiveExpToPlayer(Scene arg0, LoadSceneMode arg1)
     {
-        Debug.Log(totalEXP);
+        Enemy.CanShoot = true;
+        Boss.CanShoot = true;
+
+        if(arg0.buildIndex == 0)
+            return;
+            
         BalancedSliderController.Instance.IncreasingSliderValueSilent(totalEXP);
     }
 

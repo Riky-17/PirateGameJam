@@ -46,6 +46,8 @@ public abstract class Enemy : ColorFlashObject, IHealth, IItemPicker
     float fireRateBoostTime;
     float fireRateBoostTimer;
 
+    public static bool CanShoot = true;
+
     //throwing item fields
     bool isThrowingItem = false;
     PickableItem itemToThrow;
@@ -140,7 +142,7 @@ public abstract class Enemy : ColorFlashObject, IHealth, IItemPicker
             Quaternion aimRot = Quaternion.LookRotation(forward, upwards);
             weapon.SpriteRotation(aimRot);
 
-            if(lastShot >= shootingTimer * fireRateMultiplier)
+            if(lastShot >= shootingTimer * fireRateMultiplier && CanShoot)
             {
                 //doing it custom for assault rifle since it is the only automatic weapon
                 if(weapon is EnemyAssaultRifle assaultRifle)

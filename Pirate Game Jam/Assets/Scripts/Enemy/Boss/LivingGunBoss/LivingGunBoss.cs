@@ -68,6 +68,9 @@ public class LivingGunBoss : Boss
         ColorFlash();
         GetDir();
 
+        if(!CanShoot)
+            return;
+
         if(canAutoAttack)
         {
             TakeAim();   

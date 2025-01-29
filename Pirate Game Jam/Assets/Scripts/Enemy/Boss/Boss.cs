@@ -26,6 +26,8 @@ public abstract class Boss : ColorFlashObject, IHealth, IItemPicker
     public Transform ShootingPoint => shootingPoint;
     [SerializeField] protected Transform shootingPoint;
 
+    public static bool CanShoot;
+
     protected bool IsDead => isDead; 
     bool isDead = false;
 
@@ -72,9 +74,10 @@ public abstract class Boss : ColorFlashObject, IHealth, IItemPicker
         {
             if (collider.gameObject.TryGetComponent(out player))
                 break;
-            else
-                Debug.Log("Could not find player in Physics2D.OverlapBoxAll. Centerpoint: " + centerPoint);
         }
+
+        if(player == null)
+            Debug.Log("Could not find player in Physics2D.OverlapBoxAll. Centerpoint: " + centerPoint);
 
         if (bossHP != null)
         {
@@ -105,7 +108,7 @@ public abstract class Boss : ColorFlashObject, IHealth, IItemPicker
                 idleTimer += Time.deltaTime;
         }
 
-        if(currentAttack != null)
+        if(currentAttack != null && CanShoot)
         {
             if (!currentAttack.IsAttackDone)
                 currentAttack.Attack();

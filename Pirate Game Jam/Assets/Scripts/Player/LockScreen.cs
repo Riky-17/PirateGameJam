@@ -6,6 +6,7 @@ public class LockScreen : MonoBehaviour
     PlayerCameraBounds playerCameraBounds;
 
     public GameObject boss;
+    public GameObject bossHP;
 
     bool isCompleted;
 
@@ -37,6 +38,7 @@ public class LockScreen : MonoBehaviour
         if (playerCameraBounds.isLockScreen)
         {
             boss.SetActive(true);
+            bossHP.SetActive(true);
         }
     }
 }

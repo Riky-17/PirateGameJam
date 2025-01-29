@@ -5,6 +5,8 @@ using UnityEngine.UIElements;
 
 public abstract class Enemy : ColorFlashObject, IHealth, IItemPicker
 {
+    [SerializeField] HPBar healthBarSlider;
+
     // protected Rigidbody2D rb;
     protected Animator anim;
     SpriteRenderer sr;
@@ -61,6 +63,7 @@ public abstract class Enemy : ColorFlashObject, IHealth, IItemPicker
         weapon = GetComponentInChildren<EnemyWeapon>();
 
         Health = MaxHealth;
+        healthBarSlider.UpdateHealthBar(Health, MaxHealth);
 
         if (weapon == null)
             return;
@@ -267,6 +270,7 @@ public abstract class Enemy : ColorFlashObject, IHealth, IItemPicker
         Health+= healAmount;
         if(Health > MaxHealth)
             Health = MaxHealth;
+        healthBarSlider.UpdateHealthBar(Health, MaxHealth);
         shortColorFlash = new(Color.green);
         Debug.Log(gameObject.name + " Health: " + Health);
     }
@@ -274,6 +278,7 @@ public abstract class Enemy : ColorFlashObject, IHealth, IItemPicker
     public void Damage(float damageAmount)
     {
         Health-= damageAmount;
+        healthBarSlider.UpdateHealthBar(Health, MaxHealth);
         shortColorFlash = new(Color.red);
         Debug.Log(gameObject.name + " Health: " + Health);
         if(Health <= 0)
@@ -283,7 +288,7 @@ public abstract class Enemy : ColorFlashObject, IHealth, IItemPicker
     public virtual void Die()
     {
         ObjectivesManager.Instance.killEnemy();
-        BalancedSliderController.Instance.increasingSliderValue(40);
+        BalancedSliderController.Instance.increasingSliderValue(50);
         Destroy(gameObject);
     }
 

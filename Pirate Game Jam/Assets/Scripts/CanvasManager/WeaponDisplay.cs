@@ -50,13 +50,13 @@ public class WeaponDisplay : MonoBehaviour
         }
         weaponsChosen[number].gameObject.SetActive(true);
     }
-    public void PauseWeaponInfo(string damage, string fireRate, string reloadSpeed, string maxAmmo)
+    public void PauseWeaponInfo(string damage, string fireRate, string reloadSpeed, string maxAmmo, string name)
     {
         weaponsInfo[0].text = damage;
         weaponsInfo[1].text = fireRate;
         weaponsInfo[2].text = reloadSpeed;
         weaponsInfo[3].text = maxAmmo;
-        //weaponsInfo[4].text = weaponName;
+        weaponsInfo[4].text = name;
     }
 
     public void loadingInfo(byte weaponIndex, string secondsLeft)

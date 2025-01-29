@@ -70,7 +70,7 @@ public class LandingCrash : BossAttack
         if (!isLeft && isHigh)
         {
             //bring him left
-            if (boss.transform.position.x <= -CAMERA_MAX_WIDTH + 5f)
+            if (boss.transform.position.x <= boss.CenterPoint.x - CAMERA_MAX_WIDTH + 2)
             {
                 isLeft = true;
                 return;
@@ -104,7 +104,7 @@ public class LandingCrash : BossAttack
             {
                 for (int i = 0; i < itemsAmount; i++)
                 {
-                    float x = Random.Range(-CAMERA_MAX_WIDTH + 2, CAMERA_MAX_WIDTH - 2);
+                    float x = Random.Range(boss.CenterPoint.x - CAMERA_MAX_WIDTH + 2, boss.CenterPoint.x + CAMERA_MAX_WIDTH - 2);
                     Vector2 pos = new(x, CAMERA_MAX_HEIGHT + 3);
                     int randomItem = Random.Range(0, items.Length);
                     PickableItem item = boss.InstantiateItem(items[randomItem].item, pos, Quaternion.identity);

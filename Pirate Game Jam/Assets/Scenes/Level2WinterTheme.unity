@@ -2560,7 +2560,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 8
   maxHealth: 800
-  centerPoint: {x: 0, y: 0}
+  centerPoint: {x: 74.5, y: 0}
   shootingPoint: {fileID: 630270479}
   bossHP: {fileID: 711818467}
   srCannon: {fileID: 256935002}
@@ -3789,6 +3789,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7531401433052407010, guid: b39b40176e804f24bb6bc018cd70d23f, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4757,6 +4761,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5832465814478138484, guid: 4d47ba5f57dd1494690394592f564fa0, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5431,6 +5439,10 @@ PrefabInstance:
     - target: {fileID: 2977798742805292636, guid: 4a13aa1aad6f48647861c4d1208210e5, type: 3}
       propertyPath: m_Name
       value: FootSoldierSg
+      objectReference: {fileID: 0}
+    - target: {fileID: 4162404247294723282, guid: 4a13aa1aad6f48647861c4d1208210e5, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -11626,6 +11638,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7531401433052407010, guid: b39b40176e804f24bb6bc018cd70d23f, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -12198,6 +12214,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 901671946}
     m_Modifications:
+    - target: {fileID: 805835808341829848, guid: f770bcd4fd0fb934d81dcc903e1f0cc9, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3152142124182699705, guid: f770bcd4fd0fb934d81dcc903e1f0cc9, type: 3}
       propertyPath: waypoints.Array.size
       value: 2
@@ -15271,6 +15291,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7531401433052407010, guid: b39b40176e804f24bb6bc018cd70d23f, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -16102,6 +16126,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6279436574967186365, guid: 3858ab3b1ef6c7c41893ce3c09ac2d3d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8856463124847414624, guid: 3858ab3b1ef6c7c41893ce3c09ac2d3d, type: 3}
+      propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

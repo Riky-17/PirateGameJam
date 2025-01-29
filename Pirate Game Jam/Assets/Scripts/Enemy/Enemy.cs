@@ -38,7 +38,7 @@ public abstract class Enemy : ColorFlashObject, IHealth, IItemPicker
     protected PlayerMovement player;
 
     public float Health { get; set; }
-    public float MaxHealth { get; set; } = 150;
+    public float MaxHealth { get; set; } = 100;
 
     //statBoostTimer
     float damageBoostTime;

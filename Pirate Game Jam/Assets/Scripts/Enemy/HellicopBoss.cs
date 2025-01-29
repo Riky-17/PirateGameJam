@@ -56,9 +56,9 @@ public class HellicopBoss : Boss
         attacks = new()
         {
            new Swoop(this, player, bullet, Items),
-           //new LandingCrash(this, player, bullet, enemyToSpawn, Items),
-           //new CarpetBoom(this, player, grenade),
-           //new OverloadedGun(this, player, marksmanBullet, grenadeOverload, shotgunBullet),
+           new LandingCrash(this, player, bullet, enemyToSpawn, Items),
+           new CarpetBoom(this, player, grenade),
+           new OverloadedGun(this, player, marksmanBullet, grenadeOverload, shotgunBullet),
         };
 
     }

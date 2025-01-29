@@ -61,7 +61,7 @@ public class Swoop : BossAttack
                 return;
             }
 
-            boss.AddForceBoss(Vector2.up, boss.Speed * 1.5f, 2);
+            boss.AddForceBoss(Vector2.up, boss.Speed * 1.5f, 5);
 
             return;
 
@@ -69,17 +69,17 @@ public class Swoop : BossAttack
         if (!isLeft && isUp)
         {
             //bring him left
-            if (boss.transform.position.x <= -CAMERA_MAX_WIDTH - 5f)
+            if (boss.transform.position.x <= boss.CenterPoint.x - CAMERA_MAX_WIDTH + 2)
             {
                 isLeft = true;
                 return;
             }
-            boss.AddForceBoss(Vector2.left, boss.Speed, 2);
+            boss.AddForceBoss(Vector2.left, boss.Speed * 1.5f, 5);
             return;
         }
         if (slamsCount >= SlamsAmount)
         {
-            if ((boss.transform.position.x < boss.CenterPoint.x - CAMERA_MAX_WIDTH - 5 && dir.x < 0) || (boss.transform.position.x > boss.CenterPoint.x + CAMERA_MAX_WIDTH + 5 && dir.x > 0))
+            if ((boss.transform.position.x < boss.CenterPoint.x - CAMERA_MAX_WIDTH && dir.x < 0) || (boss.transform.position.x > boss.CenterPoint.x + CAMERA_MAX_WIDTH && dir.x > 0))
             {
                 slamsCount++;
                 dir = -dir;
@@ -90,7 +90,7 @@ public class Swoop : BossAttack
             return;
         }
 
-        if ((boss.transform.position.x < boss.CenterPoint.x - CAMERA_MAX_WIDTH - 5 && dir.x < 0) || (boss.transform.position.x > boss.CenterPoint.x + CAMERA_MAX_WIDTH + 5 && dir.x > 0))
+        if ((boss.transform.position.x < boss.CenterPoint.x - CAMERA_MAX_WIDTH && dir.x < 0) || (boss.transform.position.x > boss.CenterPoint.x + CAMERA_MAX_WIDTH && dir.x > 0))
         {
             slamsCount++;
             dir = -dir;

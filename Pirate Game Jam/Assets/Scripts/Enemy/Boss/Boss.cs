@@ -64,9 +64,9 @@ public abstract class Boss : ColorFlashObject, IHealth, IItemPicker
         base.Awake();
         health = maxHealth;
         sr = GetComponent<SpriteRenderer>();
-        this.centerPoint = new Vector2(this.transform.position.x - 5, this.transform.position.y);
+        this.centerPoint = new Vector2(this.transform.position.x - 11.5f, this.transform.position.y);
         //doing it on Awake right now for testing
-        Collider2D[] colliders = Physics2D.OverlapBoxAll(centerPoint, new(30, 17), 0);
+        Collider2D[] colliders = Physics2D.OverlapBoxAll(centerPoint, new(60, 34), 0);
 
         foreach (Collider2D collider in colliders)
         {
@@ -225,6 +225,22 @@ public abstract class Boss : ColorFlashObject, IHealth, IItemPicker
         isIdle = false;
         Stop();
         OnDeath();
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        IHealth damageable = collision.gameObject.GetComponent<IHealth>();
+        Rigidbody2D collisionRB = collision.gameObject.GetComponent<Rigidbody2D>();
+        Enemy collisionEnemy = collision.gameObject.GetComponent<Enemy>();
+        if (damageable != null && collisionRB != null)
+        {
+            Vector2 forceVector = (collision.gameObject.transform.position - transform.position).normalized * 5f; // Direction and force to be knockbacked for collision object
+            collisionRB.AddForce(forceVector, ForceMode2D.Impulse);
+        }
+        if (collisionEnemy != null)
+        {
+            collisionEnemy.Damage(100f);
+        }
     }
 
     //this is called once when the boss is dead

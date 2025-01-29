@@ -55,7 +55,7 @@ public class Swoop : BossAttack
         if (!isUp)
         {
             //bring him up
-            if (boss.transform.position.y >= CAMERA_MAX_HEIGHT - 5f)
+            if (boss.transform.position.y >= CAMERA_MAX_HEIGHT)
             {
                 isUp = true;
                 return;

@@ -201,7 +201,7 @@ public abstract class Boss : ColorFlashObject, IHealth, IItemPicker
         shortColorFlash = new(Color.green);
         if (health > maxHealth)
             health = maxHealth;
-        Debug.Log(gameObject.name + "Health: " + health);
+        //Debug.Log(gameObject.name + "Health: " + health);
 
         UpdatingHPSlider(health);
 
@@ -214,7 +214,7 @@ public abstract class Boss : ColorFlashObject, IHealth, IItemPicker
 
         health-= damageAmount;
         shortColorFlash = new(Color.red);
-        Debug.Log(gameObject.name + "Health: " + health);
+        //Debug.Log(gameObject.name + "Health: " + health);
         UpdatingHPSlider(health);
 
         if (health <= 0)   

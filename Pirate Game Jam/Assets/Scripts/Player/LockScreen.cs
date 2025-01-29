@@ -28,7 +28,7 @@ public class LockScreen : MonoBehaviour
         if (boss == null)
         { 
             //playerCameraBounds.isLockScreen = false;
-            Debug.Log("LockScreen Destroyed");
+            //Debug.Log("LockScreen Destroyed");
             Destroy(gameObject);
         }
     }

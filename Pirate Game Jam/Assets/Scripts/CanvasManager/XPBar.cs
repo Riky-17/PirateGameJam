@@ -107,9 +107,11 @@ public class BalancedSliderController : MonoBehaviour
 
     void Update()
     {
+        /*
         if(Input.GetKeyDown(KeyCode.V)) // For testing purposes
         {
             IncreasingSliderValue(100);
         }
+        */
     }
 }

@@ -28,8 +28,10 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         //Go to the main menu
+        /*
         if(Input.GetKeyDown(KeyCode.M))
             SceneManager.LoadScene(0);
+        */
     }
 
     public void ClearBossEnemies()

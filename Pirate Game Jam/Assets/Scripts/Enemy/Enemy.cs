@@ -274,7 +274,7 @@ public abstract class Enemy : ColorFlashObject, IHealth, IItemPicker
             Health = MaxHealth;
         healthBarSlider.UpdateHealthBar(Health, MaxHealth);
         shortColorFlash = new(Color.green);
-        Debug.Log(gameObject.name + " Health: " + Health);
+        //Debug.Log(gameObject.name + " Health: " + Health);
     }
 
     public void Damage(float damageAmount)
@@ -282,7 +282,7 @@ public abstract class Enemy : ColorFlashObject, IHealth, IItemPicker
         Health-= damageAmount;
         healthBarSlider.UpdateHealthBar(Health, MaxHealth);
         shortColorFlash = new(Color.red);
-        Debug.Log(gameObject.name + " Health: " + Health);
+        //Debug.Log(gameObject.name + " Health: " + Health);
         if(Health <= 0)
             Die();
     }

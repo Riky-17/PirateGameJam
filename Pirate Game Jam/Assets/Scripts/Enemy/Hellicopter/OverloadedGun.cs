@@ -22,6 +22,9 @@ public class OverloadedGun : BossAttack
 
     float fireRateTimerShotgun;
     float fireRateTimeShotgun = 2f;
+    float bulletsSplit = 30;
+    int amountOfShots = 5;
+
 
     float shootingTimer;
     float shootingTime = 7f;
@@ -63,15 +66,23 @@ public class OverloadedGun : BossAttack
             else
                 fireRateTimerGrenade += Time.deltaTime;
 
-            if (fireRateTimerShotgun >= fireRateTimerGrenade)
+            if (fireRateTimerShotgun >= fireRateTimeShotgun)
             {
-                Bullet shotgunBull = boss.InstantiateBullet(shotgunBullet.bulletPrefab, shootingPoint.position, shootingPoint.rotation);
-                InitBullet(shotgunBull);
-                boss.DestroyBullet(shotgunBull, 3f);
-                fireRateTimerShotgun = 0;
+                for(int i = 0; i < amountOfShots; i++)
+                {
+                    Quaternion bulletRo = Quaternion.Euler(shootingPoint.rotation.x,shootingPoint.rotation.y, shootingPoint.rotation.z + bulletsSplit);
+                    Bullet shotgunBull = boss.InstantiateBullet(shotgunBullet.bulletPrefab, shootingPoint.position, shootingPoint.rotation * bulletRo);
+                    InitBullet(shotgunBull);
+                    boss.DestroyBullet(shotgunBull, 3f);
+                    fireRateTimerShotgun = 0;
+                    bulletsSplit -= 15;
+                }               
             }
             else
-                fireRateTimerGrenade += Time.deltaTime;
+            {
+                fireRateTimerShotgun += Time.deltaTime;
+                bulletsSplit = 30;
+            }
         }
         else
             isAttackDone = true;

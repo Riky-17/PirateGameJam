@@ -288,7 +288,7 @@ public abstract class Enemy : ColorFlashObject, IHealth, IItemPicker
     public virtual void Die()
     {
         ObjectivesManager.Instance.killEnemy();
-        BalancedSliderController.Instance.increasingSliderValue(40);
+        BalancedSliderController.Instance.increasingSliderValue(50);
         Destroy(gameObject);
     }
 

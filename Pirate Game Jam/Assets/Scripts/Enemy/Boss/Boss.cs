@@ -22,7 +22,7 @@ public abstract class Boss : ColorFlashObject, IHealth, IItemPicker
     protected SpriteRenderer sr;
 
     public Vector2 CenterPoint => centerPoint;
-    [SerializeField] Vector2 centerPoint;
+    [SerializeField] protected Vector2 centerPoint;
     public Transform ShootingPoint => shootingPoint;
     [SerializeField] protected Transform shootingPoint;
 
@@ -64,14 +64,16 @@ public abstract class Boss : ColorFlashObject, IHealth, IItemPicker
         base.Awake();
         health = maxHealth;
         sr = GetComponent<SpriteRenderer>();
-
+        this.centerPoint = new Vector2(this.transform.position.x - 5, this.transform.position.y);
         //doing it on Awake right now for testing
         Collider2D[] colliders = Physics2D.OverlapBoxAll(centerPoint, new(30, 17), 0);
 
         foreach (Collider2D collider in colliders)
         {
-            if(collider.gameObject.TryGetComponent(out player))
+            if (collider.gameObject.TryGetComponent(out player))
                 break;
+            else
+                Debug.Log("Could not find player in Physics2D.OverlapBoxAll. Centerpoint: " + centerPoint);
         }
 
         if (bossHP != null)

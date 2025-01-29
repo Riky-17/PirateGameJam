@@ -235,7 +235,7 @@ public class LivingGunBoss : Boss
 
     protected override void LoadNextScene()
     {
-        //load Credits Scene
+        GameManager.Instance.LoadScene(4);
     }
 
     protected override void UpdateColor(Color color)

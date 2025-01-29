@@ -133,7 +133,6 @@ public class PlayerMovement : ColorFlashObject, IHealth, IItemPicker
         {
             if (bulletAmountBoostTimer >= bulletAmountBoostTime)
             {
-                Debug.Log("Hello");
                 foreach (WeaponSystem weapon in weapons)
                     weapon.MultiplyBullet(1 / bulletAmountMultiplier);
 
@@ -203,7 +202,6 @@ public class PlayerMovement : ColorFlashObject, IHealth, IItemPicker
         shortColorFlash = new(Color.green);
         if(health > maxHealth)
             health = maxHealth;
-        Debug.Log(gameObject.name + " Health: " + health);
         updatingHPSlider(health);
     }
     
@@ -211,7 +209,6 @@ public class PlayerMovement : ColorFlashObject, IHealth, IItemPicker
     {
         health -= damageAmount;
         shortColorFlash = new(Color.red);
-        Debug.Log(gameObject.name + " Health: " + health);
         updatingHPSlider(health);
         if(health <= 0)
             Die();

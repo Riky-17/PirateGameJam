@@ -19,6 +19,8 @@ public class FortressBoss : Boss
 
     [SerializeField] GameObject deathExplosion;
 
+    [SerializeField] LivingGunBoss livingGunBoss;
+
     public List<Enemy> SpawnedEnemies { get; private set;}
 
     bool canAttack = true;
@@ -39,6 +41,8 @@ public class FortressBoss : Boss
 
     bool areWeaponsInPos = false;
     bool livingWeaponExplosion = false;
+    float bossGunExplosionTime = .3f;
+    float bossGunExplosionTimer;
 
     protected override void InitBoss()
     {
@@ -64,7 +68,7 @@ public class FortressBoss : Boss
     {
         base.PickAttack();
         FortressWindow randomWindow = windows[Random.Range(0, windows.Count)];
-        if(CurrentAttack is FortressOverclock overclock)
+        if(currentAttack is FortressOverclock overclock)
             overclock.SetWindow(randomWindow);
         shootingPoint = randomWindow.Transform;
     }
@@ -164,15 +168,15 @@ public class FortressBoss : Boss
                             weapon.gameObject.SetActive(false);
                     }
 
-
-                    if(explosionTimer < explosionTime)
+                    if(bossGunExplosionTimer < bossGunExplosionTime)
                     {
-                        explosionTimer+= Time.deltaTime;
+                        bossGunExplosionTimer+= Time.deltaTime;
                         return;
                     }
                     else
                     {
-                        //instantiate living gun boss
+                        LivingGunBoss bossGun = Instantiate(livingGunBoss, livingGunSpawnPos.position, Quaternion.identity);
+                        bossGun.SetHPSlider(bossHP);
                         Destroy(this);
                     }
                 }

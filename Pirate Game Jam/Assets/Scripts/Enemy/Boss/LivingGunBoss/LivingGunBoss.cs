@@ -22,8 +22,6 @@ public class LivingGunBoss : Boss
     float idlingTime = 5f;
     float idlingTimer;
 
-    float distanceOffset = .5f;
-
     Vector2 bossToPlayer;
 
     float deathTime = 3;
@@ -118,11 +116,9 @@ public class LivingGunBoss : Boss
             return;
         }
 
-        float bossToPlayerDist = bossToPlayer.magnitude;
+        Vector2 bossToPlayerFlat = new(0, player.transform.position.y - transform.position.y);
 
-        if(bossToPlayerDist < currentWeapon.MaxDistance - distanceOffset)
-            moveDir = -moveDir;
-        else if(bossToPlayerDist > currentWeapon.MaxDistance - distanceOffset && bossToPlayerDist < currentWeapon.MaxDistance + distanceOffset)
+        if(bossToPlayerFlat.magnitude < .1f)
             moveDir = Vector2.zero;
         
         AddForce(moveDir, moveSpeed, 5);
@@ -135,7 +131,7 @@ public class LivingGunBoss : Boss
         else
             transform.rotation = Quaternion.identity;
 
-        Vector3 upwards = Vector3.Cross(Vector3.forward, moveDir);
+        Vector3 upwards = Vector3.Cross(Vector3.forward, bossToPlayer.normalized);
         Vector3 forward = Vector3.forward;
 
         if(transform.rotation.y % 360 != 0)
@@ -165,7 +161,8 @@ public class LivingGunBoss : Boss
     void GetDir()
     {
         bossToPlayer = player.transform.position - transform.position;
-        moveDir = bossToPlayer.normalized;
+        moveDir = new(0, player.transform.position.y - transform.position.y);
+        moveDir = moveDir.normalized;
     }
 
     protected override void PickAttack()

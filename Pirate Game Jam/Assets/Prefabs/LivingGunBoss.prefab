@@ -102,7 +102,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletSO: {fileID: 11400000, guid: 415443af2ee4f5f4796f4f9a6b3f652f, type: 2}
   shootingPoint: {fileID: 3109613694411913284}
-  maxDistance: 2
   fireRateBaseTime: 0.5
 --- !u!1 &1541382207778862605
 GameObject:
@@ -206,7 +205,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletSO: {fileID: 11400000, guid: 76006c33d9e057d43a431b7a5aa1164e, type: 2}
   shootingPoint: {fileID: 3109613694411913284}
-  maxDistance: 3
   fireRateBaseTime: 3.5
 --- !u!1 &2940081847879765129
 GameObject:
@@ -310,7 +308,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletSO: {fileID: 11400000, guid: 198459120051d93448078b7fad601e65, type: 2}
   shootingPoint: {fileID: 3109613694411913284}
-  maxDistance: 7
   fireRateBaseTime: 1
 --- !u!1 &3732321513925087731
 GameObject:
@@ -414,7 +411,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletSO: {fileID: 11400000, guid: 097a0b1c896ac934cbdca4fd38a7a275, type: 2}
   shootingPoint: {fileID: 3109613694411913284}
-  maxDistance: 10
   fireRateBaseTime: 0.5
 --- !u!1 &6695766546430758395
 GameObject:
@@ -428,7 +424,7 @@ GameObject:
   - component: {fileID: -4537511894404006216}
   - component: {fileID: -8260441331533699911}
   - component: {fileID: -9192973403052670693}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: LivingGunBoss
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -517,7 +513,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 5
 --- !u!114 &-9192973403052670693
 MonoBehaviour:
   m_ObjectHideFlags: 0

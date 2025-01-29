@@ -604,7 +604,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 59083069}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Window
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1419,7 +1419,7 @@ GameObject:
   - component: {fileID: 248580046}
   - component: {fileID: 248580048}
   - component: {fileID: 248580047}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: InvisibleLeftWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3050,7 +3050,7 @@ GameObject:
   m_Component:
   - component: {fileID: 439202708}
   - component: {fileID: 439202709}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: MarksmanRifle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4743,6 +4743,84 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 675044632}
   m_CullTransparentMesh: 1
+--- !u!1 &687085779
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 687085780}
+  - component: {fileID: 687085781}
+  m_Layer: 10
+  m_Name: Collider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &687085780
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 687085779}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -6.9, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 923272367}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &687085781
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 687085779}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 4, y: 17}
+  m_EdgeRadius: 0
 --- !u!1 &704749278
 GameObject:
   m_ObjectHideFlags: 0
@@ -5081,7 +5159,7 @@ GameObject:
   - component: {fileID: 739303925}
   - component: {fileID: 739303927}
   - component: {fileID: 739303926}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: InvisibleRightWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5658,7 +5736,7 @@ GameObject:
   - component: {fileID: 816599191}
   - component: {fileID: 816599193}
   - component: {fileID: 816599192}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: InvisibleCeiling
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6297,6 +6375,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 5280259594750790692, guid: 207dc70a42eb0bf499a90408faba61de, type: 3}
+      propertyPath: m_Constraints
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5461517278322731816, guid: 207dc70a42eb0bf499a90408faba61de, type: 3}
       propertyPath: m_LocalPosition.x
       value: -10
@@ -6646,7 +6728,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 899489311}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Window (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6796,7 +6878,7 @@ GameObject:
   - component: {fileID: 923272366}
   - component: {fileID: 923272369}
   - component: {fileID: 923272368}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: FortressBoss
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6876,6 +6958,7 @@ Transform:
   - {fileID: 1056765688}
   - {fileID: 899489311}
   - {fileID: 1027566444}
+  - {fileID: 687085780}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &923272368
@@ -7669,7 +7752,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1027566444}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: LivingGunSpawn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7685,7 +7768,7 @@ Transform:
   m_GameObject: {fileID: 1027566443}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10, y: 0, z: 0}
+  m_LocalPosition: {x: -7.75, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7973,7 +8056,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1042493405}
   - component: {fileID: 1042493406}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: GrenadeLauncher
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8059,7 +8142,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1056765688}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Window (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8499,7 +8582,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1100707377}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Window (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9519,7 +9602,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1358551042}
   - component: {fileID: 1358551043}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Shotgun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11195,7 +11278,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1544550287}
   - component: {fileID: 1544550288}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: AssaultRifle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14887,7 +14970,7 @@ GameObject:
   - component: {fileID: 2104889275}
   - component: {fileID: 2104889274}
   - component: {fileID: 2104889273}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: CameraBoundingBox
   m_TagString: CameraBoundingBox
   m_Icon: {fileID: 0}

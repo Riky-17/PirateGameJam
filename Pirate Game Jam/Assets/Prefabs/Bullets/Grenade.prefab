@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4368514305103083322}
   - component: {fileID: 8407109443583685030}
   - component: {fileID: -1816008785092455696}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Grenade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -168,6 +168,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletHitPrefab: {fileID: 0}
   explosionDelay: 1.5
+  ignoreBulletMask:
+    serializedVersion: 2
+    m_Bits: 1024
   explosionPrefab: {fileID: 1319657421192287489, guid: ed1a3e8e74b71a842a466485eaf2f7ca, type: 3}
 --- !u!114 &-1816008785092455696
 MonoBehaviour:

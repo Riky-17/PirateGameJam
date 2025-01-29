@@ -9,9 +9,6 @@ public abstract class LivingGunBossGun : MonoBehaviour
     [SerializeField] protected BulletSO bulletSO;
     [SerializeField] protected Transform shootingPoint;
 
-    public float MaxDistance => maxDistance;
-    [SerializeField] float maxDistance;
-
     [SerializeField] float fireRateBaseTime;
     protected float FireRateTime => fireRateBaseTime * boss.FireRateMultiplier;
     protected float fireRateTimer;

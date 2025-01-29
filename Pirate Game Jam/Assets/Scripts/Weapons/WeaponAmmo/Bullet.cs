@@ -4,6 +4,7 @@ public class Bullet : MonoBehaviour
 {
     [HideInInspector] protected float damage = 10;
     [HideInInspector] protected GameObject shooter;
+    [SerializeField] protected LayerMask ignoreBulletMask;
     protected Rigidbody2D rb;
 
     protected virtual void Awake() => rb = GetComponent<Rigidbody2D>();
@@ -14,30 +15,33 @@ public class Bullet : MonoBehaviour
 
     void FixedUpdate()
     {
-        RaycastHit2D raycastHit = Physics2D.Raycast(transform.position, transform.right, .25f);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.right, .25f);
 
-        if(raycastHit.collider != null && raycastHit.collider.TryGetComponent(out target) && raycastHit.collider.gameObject != shooter)
+        if(hit.collider != null && hit.collider.TryGetComponent(out target) && hit.collider.gameObject != shooter && hit.collider.gameObject.layer != Mathf.Log(ignoreBulletMask, 2))
         {
             target.Damage(damage);
             Instantiate(bulletHitPrefab, transform.position + (transform.right * 0.3f), transform.rotation);
         }
         else
         {
-            raycastHit = Physics2D.Raycast(transform.position, -transform.right, .25f);
+            hit = Physics2D.Raycast(transform.position, -transform.right, .25f);
 
-            if(raycastHit.collider == null)
+            if(hit.collider == null)
                 return;
 
-            if(raycastHit.collider.TryGetComponent(out target))
+            if(hit.collider.gameObject.layer == Mathf.Log(ignoreBulletMask, 2))
+                return;
+
+            if(hit.collider.TryGetComponent(out target))
             {
-                if(raycastHit.collider.gameObject == shooter)
+                if(hit.collider.gameObject == shooter)
                     return;
                 
                 target.Damage(damage);
                 Instantiate(bulletHitPrefab, transform.position + (-transform.right * 0.3f), transform.rotation);
             }
 
-            if (raycastHit.collider.TryGetComponent(out Bullet _))
+            if (hit.collider.TryGetComponent(out Bullet _))
                 return;
             
         }

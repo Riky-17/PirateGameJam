@@ -89,7 +89,7 @@ public class AssaultRifleAttack : BossAttack
             {
                 Vector2 moveDir = dashTarget - (Vector2)boss.transform.position;
                 moveDir = moveDir.normalized;
-                boss.AddForceBoss(moveDir, 10, 12);
+                boss.AddForceBoss(moveDir, 20, 15);
             }
         }
     }

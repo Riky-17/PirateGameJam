@@ -79,7 +79,7 @@ public class FortressBoss : Boss
     protected override void Update()
     {
         base.Update();
-        if(!canAttack)
+        if(!canAttack || !CanShoot)
             return;
         TakeAim();
 
@@ -88,7 +88,6 @@ public class FortressBoss : Boss
             if(!weapon.isSpecialAttacking)
                 weapon.Shoot();
         }
-        Debug.Log(currentAttack);
     }
 
     //removing the base fixedUpdate

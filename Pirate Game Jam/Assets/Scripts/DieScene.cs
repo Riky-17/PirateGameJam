@@ -36,8 +36,11 @@ public class DieScene : MonoBehaviour
     {
         PlayerMovement.playerDies -= Dies;
     }
+
     void Dies()
     {
+        Enemy.CanShoot = false;
+        Boss.CanShoot = false;
         if (coroutine == null)
         {
             coroutine = StartCoroutine(DieAnimation());

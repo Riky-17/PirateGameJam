@@ -6914,7 +6914,7 @@ MonoBehaviour:
   marksmanBullet: {fileID: 11400000, guid: 097a0b1c896ac934cbdca4fd38a7a275, type: 2}
   enemy: {fileID: -5000161798850301960, guid: 61a0ae5c71caf174c8b5846e1a389978, type: 3}
   deathExplosion: {fileID: 1319657421192287489, guid: ed1a3e8e74b71a842a466485eaf2f7ca, type: 3}
-  livingGunBoss: {fileID: 0}
+  livingGunBoss: {fileID: -9192973403052670693, guid: dca407a860f906d438cc30e52be26cee, type: 3}
 --- !u!61 &923272369
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -15209,63 +15209,6 @@ RectTransform:
   m_AnchoredPosition: {x: 100, y: 10}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1001 &6168290360862166095
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 5059459758256006885, guid: dca407a860f906d438cc30e52be26cee, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5059459758256006885, guid: dca407a860f906d438cc30e52be26cee, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5059459758256006885, guid: dca407a860f906d438cc30e52be26cee, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5059459758256006885, guid: dca407a860f906d438cc30e52be26cee, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5059459758256006885, guid: dca407a860f906d438cc30e52be26cee, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5059459758256006885, guid: dca407a860f906d438cc30e52be26cee, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5059459758256006885, guid: dca407a860f906d438cc30e52be26cee, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5059459758256006885, guid: dca407a860f906d438cc30e52be26cee, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5059459758256006885, guid: dca407a860f906d438cc30e52be26cee, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5059459758256006885, guid: dca407a860f906d438cc30e52be26cee, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6695766546430758395, guid: dca407a860f906d438cc30e52be26cee, type: 3}
-      propertyPath: m_Name
-      value: LivingGunBoss
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: dca407a860f906d438cc30e52be26cee, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -15281,4 +15224,3 @@ SceneRoots:
   - {fileID: 1443930443}
   - {fileID: 869504941}
   - {fileID: 923272367}
-  - {fileID: 6168290360862166095}

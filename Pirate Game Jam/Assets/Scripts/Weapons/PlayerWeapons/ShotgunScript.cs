@@ -9,7 +9,6 @@ public class ShotgunScript : WeaponSystem
     float DegShotgunHalfAngle => DegShotgunAngle / 2;
     int bulletsToShoot = 3;
 
-
     public override void Shoot(Transform muzzle, BulletSO bullet)
     {
         CheckShooting(this);

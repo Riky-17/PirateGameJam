@@ -16,6 +16,7 @@ public abstract class Boss : ColorFlashObject, IHealth, IItemPicker
     public float DamageMultiplier => damageMultiplier;
     float damageMultiplier = 1;
 
+    public float FireRateMultiplier => fireRateMultiplier;
     float fireRateMultiplier = 1;
 
     protected SpriteRenderer sr;
@@ -25,21 +26,21 @@ public abstract class Boss : ColorFlashObject, IHealth, IItemPicker
     public Transform ShootingPoint => shootingPoint;
     [SerializeField] protected Transform shootingPoint;
 
+    protected bool IsDead => isDead; 
     bool isDead = false;
 
     protected PlayerMovement player;
 
     protected List<BossAttack> attacks;
 
-    protected BossAttack CurrentAttack => currentAttack;
-    BossAttack currentAttack;
+    protected BossAttack currentAttack;
 
-    bool isIdling = true;
+    protected bool isIdle = true;
 
     float idleTime = 2;
     float idleTimer;
 
-    Vector2 moveDir;
+    protected Vector2 moveDir;
 
     float walkTime = 3;
     float walkTimer;
@@ -49,6 +50,13 @@ public abstract class Boss : ColorFlashObject, IHealth, IItemPicker
 
     [Header("UI")]
     [SerializeField] public Slider bossHP;
+    
+    //statBoostTimer
+    float damageBoostTime;
+    float damageBoostTimer;
+
+    float fireRateBoostTime;
+    float fireRateBoostTimer;
     
 
     protected override void Awake()
@@ -77,20 +85,18 @@ public abstract class Boss : ColorFlashObject, IHealth, IItemPicker
         PickDirection();
     }
 
-    void UpdatingHPSlider(float health)
-    {
-        bossHP.value = Mathf.Clamp(health, 0, bossHP.maxValue);
-    }
+    protected void UpdatingHPSlider(float health) => bossHP.value = Mathf.Clamp(health, 0, bossHP.maxValue);
 
     protected virtual void Update()
     {
+        CheckStatBoost();
         ColorFlash();
-        if (isIdling)
+        if (isIdle)
         {
             TakeAim();
             if (idleTimer >= idleTime * fireRateMultiplier)
             {
-                isIdling = false;
+                isIdle = false;
                 PickAttack();
             }
             else
@@ -106,7 +112,7 @@ public abstract class Boss : ColorFlashObject, IHealth, IItemPicker
                 if(moveDir == Vector2.zero)
                     PickDirection();
                 currentAttack = null;
-                isIdling = true;
+                isIdle = true;
                 idleTimer = 0;
             }
         }
@@ -154,6 +160,33 @@ public abstract class Boss : ColorFlashObject, IHealth, IItemPicker
         AddForce(moveDir, moveSpeed, 3);
     }
 
+    protected void CheckStatBoost()
+    {
+        if(damageBoostTime != 0)
+        {
+            if (damageBoostTimer >= damageBoostTime)
+            {
+                damageMultiplier = 1;
+                damageBoostTime = 0;
+                damageBoostTimer = 0;
+            }
+            else
+                damageBoostTimer+= Time.deltaTime;
+        }
+
+        if(fireRateBoostTime != 0)
+        {
+            if (fireRateBoostTimer >= fireRateBoostTime)
+            {
+                fireRateMultiplier = 1;
+                fireRateBoostTime = 0;
+                fireRateBoostTimer = 0;
+            }
+            else
+                fireRateBoostTimer+= Time.deltaTime;
+        }
+    }
+
     public void Heal(float healAmount)
     {
         if(health <= 0)
@@ -187,7 +220,7 @@ public abstract class Boss : ColorFlashObject, IHealth, IItemPicker
     {
         isDead = true;
         currentAttack = null;
-        isIdling = false;
+        isIdle = false;
         Stop();
         OnDeath();
     }
@@ -200,6 +233,20 @@ public abstract class Boss : ColorFlashObject, IHealth, IItemPicker
     protected virtual void DeactivateSprite() => sr.enabled = false;
 
     public void PickItem(PickableItem item) => item.Effect(this);
+
+    public void DamageBoost(float damageBoostAmount, float duration)
+    {
+        damageMultiplier = damageBoostAmount;
+        damageBoostTime+= duration;
+        LongColorFlash.AddColor(new(0.2f, 0.6f, 1), duration);
+    }
+
+    public void FireRateBoost(float fireRateBoostAmount, float duration)
+    {
+        fireRateMultiplier = fireRateBoostAmount;
+        fireRateBoostTime+= duration;
+        LongColorFlash.AddColor(Color.yellow, duration);
+    }
 
     protected abstract void InitBoss();
     protected abstract void LoadNextScene();

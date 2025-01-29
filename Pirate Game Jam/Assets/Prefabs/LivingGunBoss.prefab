@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 169921679722829996}
   - component: {fileID: 3286183872226572381}
+  - component: {fileID: 566536344476903590}
   m_Layer: 0
   m_Name: Shotgun
   m_TagString: Untagged
@@ -87,6 +88,22 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &566536344476903590
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 767040433329567844}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04d645969ca4fd743a36d37877c145fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletSO: {fileID: 11400000, guid: 415443af2ee4f5f4796f4f9a6b3f652f, type: 2}
+  shootingPoint: {fileID: 3109613694411913284}
+  maxDistance: 2
+  fireRateBaseTime: 0.5
 --- !u!1 &1541382207778862605
 GameObject:
   m_ObjectHideFlags: 0
@@ -97,6 +114,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7353391936889336718}
   - component: {fileID: 100478196561789468}
+  - component: {fileID: 8514457884944059669}
   m_Layer: 0
   m_Name: 'AssaultRifle '
   m_TagString: Untagged
@@ -174,6 +192,22 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &8514457884944059669
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1541382207778862605}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: adf0fe5720310a14b890e913dc5f8878, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletSO: {fileID: 11400000, guid: 76006c33d9e057d43a431b7a5aa1164e, type: 2}
+  shootingPoint: {fileID: 3109613694411913284}
+  maxDistance: 3
+  fireRateBaseTime: 3.5
 --- !u!1 &2940081847879765129
 GameObject:
   m_ObjectHideFlags: 0
@@ -184,6 +218,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3419298799751025140}
   - component: {fileID: 2755387165389544589}
+  - component: {fileID: 6288389271398983100}
   m_Layer: 0
   m_Name: GrenadeLauncher
   m_TagString: Untagged
@@ -261,6 +296,22 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &6288389271398983100
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2940081847879765129}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe208331be2adb246ab4d8a04fc4e46f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletSO: {fileID: 11400000, guid: 198459120051d93448078b7fad601e65, type: 2}
+  shootingPoint: {fileID: 3109613694411913284}
+  maxDistance: 7
+  fireRateBaseTime: 1
 --- !u!1 &3732321513925087731
 GameObject:
   m_ObjectHideFlags: 0
@@ -271,6 +322,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1816598842639538760}
   - component: {fileID: 2862463416218295362}
+  - component: {fileID: 4668028539509077360}
   m_Layer: 0
   m_Name: MarksmanRifle
   m_TagString: Untagged
@@ -348,6 +400,22 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &4668028539509077360
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3732321513925087731}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e26a26383b5c97342b6cb492033f72ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletSO: {fileID: 11400000, guid: 097a0b1c896ac934cbdca4fd38a7a275, type: 2}
+  shootingPoint: {fileID: 3109613694411913284}
+  maxDistance: 10
+  fireRateBaseTime: 0.5
 --- !u!1 &6695766546430758395
 GameObject:
   m_ObjectHideFlags: 0
@@ -375,7 +443,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6695766546430758395}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -386,7 +454,7 @@ Transform:
   - {fileID: 169921679722829996}
   - {fileID: 3109613694411913284}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!58 &-4537511894404006216
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -438,7 +506,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -467,7 +535,13 @@ MonoBehaviour:
   centerPoint: {x: 0, y: 0}
   shootingPoint: {fileID: 3109613694411913284}
   bossHP: {fileID: 0}
-  weapons: []
+  marksmanGun: {fileID: 4668028539509077360}
+  assaultRifleGun: {fileID: 8514457884944059669}
+  grenadeLauncherGun: {fileID: 6288389271398983100}
+  shotgunGun: {fileID: 566536344476903590}
+  canMove: 1
+  canAutoAttack: 1
+  deathExplosion: {fileID: 1319657421192287489, guid: ed1a3e8e74b71a842a466485eaf2f7ca, type: 3}
 --- !u!1 &9069351933993597351
 GameObject:
   m_ObjectHideFlags: 0

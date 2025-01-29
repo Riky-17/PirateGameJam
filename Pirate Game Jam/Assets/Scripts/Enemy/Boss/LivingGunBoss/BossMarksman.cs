@@ -1,16 +1,22 @@
 using UnityEngine;
 
-public class BossMarksman : MonoBehaviour
+public class BossMarksman : LivingGunBossGun
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public override void Shoot()
     {
-        
+        if(fireRateTimer >= FireRateTime)
+        {
+            fireRateTimer = 0;
+            ShootBullet();
+        }
+        else
+            fireRateTimer+= Time.deltaTime;
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void ShootBullet(Vector2 pos, Quaternion rotation)
     {
-        
+        Bullet bullet = Instantiate(bulletSO.bulletPrefab, pos, rotation);
+        InitBullet(bullet);
+        Destroy(bullet.gameObject, 5f);
     }
 }

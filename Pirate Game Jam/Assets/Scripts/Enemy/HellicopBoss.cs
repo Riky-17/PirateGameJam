@@ -5,6 +5,8 @@ using UnityEngine.Rendering;
 
 public class HellicopBoss : Boss
 {
+    public static Action<Transform> onExplode;
+
     [Space]
     [SerializeField]SpriteRenderer srCannon;
     Transform trCannon;
@@ -149,6 +151,7 @@ public class HellicopBoss : Boss
             }
             else
             {
+                AudioManager.Instance.PlayMusic(3);
                 LoadNextScene();
             }
         }
@@ -158,6 +161,7 @@ public class HellicopBoss : Boss
     {
         Vector2 pos = UnityEngine.Random.insideUnitCircle * deathRadius + (Vector2)transform.position;
         GameObject explosion = Instantiate(deathExplosion, pos, Quaternion.identity);
+        onExplode?.Invoke(transform);
         Destroy(explosion, .3f);
     }
 }

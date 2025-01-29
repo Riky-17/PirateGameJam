@@ -38,6 +38,10 @@ public class AudioManager : MonoBehaviour
         GrenadeExplotion.onExplode += Explode;
         DieScene.onExplode += Explode;
         TankBoss.onExplode += Explode;
+        HellicopBoss.onExplode += Explode;
+        FortressBoss.onExplode += Explode;
+        FortressWindow.onExplode += Explode;
+        LivingGunBoss.onExplode += Explode;
     }
 
     void OnDisable()
@@ -50,6 +54,10 @@ public class AudioManager : MonoBehaviour
         GrenadeExplotion.onExplode -= Explode;
         DieScene.onExplode -= Explode;
         TankBoss.onExplode -= Explode;
+        HellicopBoss.onExplode -= Explode;
+        FortressBoss.onExplode -= Explode;
+        FortressWindow.onExplode -= Explode;
+        LivingGunBoss.onExplode -= Explode;
     }
 
     public void PlayMusic(int sceneIndex)

@@ -1,8 +1,11 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class FortressBoss : Boss
 {
+    public static Action<Transform> onExplode;
+
     [SerializeField] Sprite attackSprite;
     [SerializeField] Sprite deathSprite;
 
@@ -67,7 +70,7 @@ public class FortressBoss : Boss
     protected override void PickAttack()
     {
         base.PickAttack();
-        FortressWindow randomWindow = windows[Random.Range(0, windows.Count)];
+        FortressWindow randomWindow = windows[UnityEngine.Random.Range(0, windows.Count)];
         if(currentAttack is FortressOverclock overclock)
             overclock.SetWindow(randomWindow);
         shootingPoint = randomWindow.Transform;
@@ -164,6 +167,7 @@ public class FortressBoss : Boss
                     {
                         livingWeaponExplosion = true;
                         GameObject explosion = Instantiate(deathExplosion, livingGunSpawnPos.position, Quaternion.identity);
+                        onExplode?.Invoke(transform);
                         Destroy(explosion, 0.3f);
                         foreach (Transform weapon in weapons)
                             weapon.gameObject.SetActive(false);

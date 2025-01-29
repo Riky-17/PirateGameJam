@@ -1,7 +1,10 @@
+using System;
 using UnityEngine;
 
 public class FortressWindow
 {
+    public static Action<Transform> onExplode;
+
     public Transform Transform => transform;
     Transform transform;
     protected BulletSO bulletSO;
@@ -41,8 +44,9 @@ public class FortressWindow
 
     public void Explode(GameObject Explosion)
     {
-        Vector2 pos = (Vector2)transform.position + (Random.insideUnitCircle * 1.5f);
+        Vector2 pos = (Vector2)transform.position + (UnityEngine.Random.insideUnitCircle * 1.5f);
         GameObject deathExplosion = boss.InstantiateObject(Explosion, pos, Quaternion.identity);
+        onExplode?.Invoke(transform);
         boss.DestroyObject(deathExplosion, .3f);
     }
 

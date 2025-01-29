@@ -55,7 +55,7 @@ public class MarksmanAttack : BossAttack
             float x = Mathf.Cos(currentAngle * Mathf.Deg2Rad);
             float y = Mathf.Sin(currentAngle * Mathf.Deg2Rad);
 
-            Vector2 shootDir = new(y, -x);
+            Vector2 shootDir = new(-y, x);
             Vector3 forward = Vector3.forward;
             Vector3 upward = Vector3.Cross(forward, shootDir);
             boss.RotateGun(Quaternion.LookRotation(forward, upward));
@@ -86,7 +86,7 @@ public class MarksmanAttack : BossAttack
                     {
                         fireRateTimer = 0;
                         float y = Random.Range(-CAMERA_MAX_HEIGHT, CAMERA_MAX_HEIGHT);
-                        Vector2 pos = new(-CAMERA_MAX_WIDTH, y);
+                        Vector2 pos = new(boss.CenterPoint.x - CAMERA_MAX_WIDTH, y);
                         Quaternion rotation = Quaternion.Euler(0, 0, 0);
                         marksmanBoss.ShootBullet(pos, rotation);
                         return;

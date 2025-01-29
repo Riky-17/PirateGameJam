@@ -101,7 +101,7 @@ public class ShotgunAttack : BossAttack
                 {
                     if(bulletBehindTimer >= bulletBehindTime)
                     {
-                        Vector2 pos = new(-CAMERA_MAX_WIDTH, player.transform.position.y);
+                        Vector2 pos = new(boss.CenterPoint.x - CAMERA_MAX_WIDTH + 5, player.transform.position.y);
                         Quaternion rotation = Quaternion.Euler(0, 0, 0);
                         shotgunBoss.ShootBullet(pos, rotation);
                         isAttackDone = true;

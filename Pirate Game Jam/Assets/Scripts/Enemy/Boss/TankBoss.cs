@@ -97,8 +97,7 @@ public class TankBoss : Boss
             }
             else
             {
-                AudioManager audio = GameObject.Find("AudioManager").GetComponent<AudioManager>();
-                audio.PlayMusic(2);
+                AudioManager.Instance.PlayMusic(2);
                 LoadNextScene();
             }
         }

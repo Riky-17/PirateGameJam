@@ -1,9 +1,12 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class LivingGunBoss : Boss
 {
+    public static Action<Transform> onExplode;
+
     List<LivingGunBossGun> weapons;
     [SerializeField] BossMarksman marksmanGun;
     [SerializeField] BossAssaultRifle assaultRifleGun;
@@ -13,7 +16,7 @@ public class LivingGunBoss : Boss
 
     Dictionary<LivingGunBossGun, BossAttack> gunAttacks;
 
-    float weaponTime = 15f;
+    float weaponTime = 5f;
     float weaponTimer;
 
     public bool canMove = true;
@@ -145,7 +148,7 @@ public class LivingGunBoss : Boss
 
     void SwitchWeapon()
     {
-        int randomWeaponIndex = Random.Range(0, weapons.Count);
+        int randomWeaponIndex = UnityEngine.Random.Range(0, weapons.Count);
         if(weapons[randomWeaponIndex] == currentWeapon)
             return;
 
@@ -220,8 +223,9 @@ public class LivingGunBoss : Boss
 
     void DeathExplosion()
     {
-        Vector2 pos = Random.insideUnitCircle + (Vector2)transform.position;
+        Vector2 pos = UnityEngine.Random.insideUnitCircle + (Vector2)transform.position;
         GameObject explosion = Instantiate(deathExplosion, pos, Quaternion.identity);
+        onExplode?.Invoke(transform);
         Destroy(explosion, .3f);
     }
 

@@ -528,7 +528,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 6
   maxHealth: 1500
-  centerPoint: {x: 0, y: 0}
+  centerPoint: {x: 76, y: 0}
   shootingPoint: {fileID: 3109613694411913284}
   bossHP: {fileID: 0}
   marksmanGun: {fileID: 4668028539509077360}

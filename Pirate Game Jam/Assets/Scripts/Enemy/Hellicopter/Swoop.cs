@@ -20,7 +20,7 @@ public class Swoop : BossAttack
     int SlamsAmount = 3;
     int slamsCount;
 
-    float droppingRate = 0.6f;
+    float droppingRate = 0.8f;
     float droppingRater;
 
     float heliSpeed = 30;

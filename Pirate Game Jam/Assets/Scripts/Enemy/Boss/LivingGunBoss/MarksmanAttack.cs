@@ -55,10 +55,10 @@ public class MarksmanAttack : BossAttack
             float x = Mathf.Cos(currentAngle * Mathf.Deg2Rad);
             float y = Mathf.Sin(currentAngle * Mathf.Deg2Rad);
 
-            Vector2 shootDir = new(-y, x);
+            Vector2 shootDir = new(y, x);
             Vector3 forward = Vector3.forward;
             Vector3 upward = Vector3.Cross(forward, shootDir);
-            boss.RotateGun(Quaternion.LookRotation(forward, upward));
+            boss.RotateGun(Quaternion.Euler(0, 180, 0) * Quaternion.LookRotation(forward, upward));
             currentAngle-= rotationSpeed * 30 * Time.deltaTime;
 
             if (backFireRateTimer >= backFireRateTime)

@@ -1,5 +1,3 @@
-using UnityEngine;
-
 public class FootSoldier : Enemy
 {
     void FixedUpdate()

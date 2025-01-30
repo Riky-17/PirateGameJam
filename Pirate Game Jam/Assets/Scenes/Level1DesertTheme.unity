@@ -3182,7 +3182,7 @@ GameObject:
   - component: {fileID: 390398781}
   - component: {fileID: 390398782}
   - component: {fileID: 390398783}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: InvisibleRightWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4772,7 +4772,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 496842142}
         m_TargetAssemblyTypeName: PanelsManager, Assembly-CSharp
-        m_MethodName: UnpauseGame
+        m_MethodName: StartUnpauseCoroutine
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4832,7 +4832,7 @@ GameObject:
   - component: {fileID: 552801419}
   - component: {fileID: 552801422}
   - component: {fileID: 552801421}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: LockScreen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7502,7 +7502,7 @@ GameObject:
   - component: {fileID: 945583826}
   - component: {fileID: 945583828}
   - component: {fileID: 945583827}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: CameraBoundingBox
   m_TagString: CameraBoundingBox
   m_Icon: {fileID: 0}
@@ -9430,7 +9430,7 @@ GameObject:
   - component: {fileID: 1194112235}
   - component: {fileID: 1194112236}
   - component: {fileID: 1194112237}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: InvisibleCeiling
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9592,7 +9592,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1253387108}
   - component: {fileID: 1253387109}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: StartingWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9703,7 +9703,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1278494315}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: LevelColliders
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9736,7 +9736,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1292440805}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: ShootingPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9980,7 +9980,7 @@ GameObject:
   - component: {fileID: 1336924142}
   - component: {fileID: 1336924143}
   - component: {fileID: 1336924144}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: InvisibleLeftWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13098,7 +13098,7 @@ GameObject:
   - component: {fileID: 1777052333}
   - component: {fileID: 1777052332}
   - component: {fileID: 1777052331}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cannon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15268,7 +15268,7 @@ GameObject:
   - component: {fileID: 2091192267}
   - component: {fileID: 2091192266}
   - component: {fileID: 2091192265}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Boss
   m_TagString: Untagged
   m_Icon: {fileID: 0}

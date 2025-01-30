@@ -301,7 +301,11 @@ public abstract class Boss : ColorFlashObject, IHealth, IItemPicker
         moveDir = chance <= 50 ? Vector2.left : Vector2.right;
     }
 
-    public void AddForceBoss(Vector2 dir, float speed, float accelRate) => AddForce(dir, speed, accelRate);
+    public void AddForceBoss(Vector2 dir, float speed, float accelRate)
+    {
+        if(Time.timeScale != 0)
+            AddForce(dir, speed, accelRate);
+    }
 
     public void Stop() => moveDir = Vector2.zero;
 

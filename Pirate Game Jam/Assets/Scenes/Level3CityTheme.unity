@@ -13785,7 +13785,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 0
-  maxHealth: 2000
+  maxHealth: 1500
   centerPoint: {x: 76, y: 0}
   shootingPoint: {fileID: 0}
   bossHP: {fileID: 1667389521}

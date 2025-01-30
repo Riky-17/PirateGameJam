@@ -61,7 +61,6 @@ public class AudioManager : MonoBehaviour
 
     public void PlayMusic(int sceneIndex)
     {
-        Debug.Log(sceneIndex);
         musicSource.clip = audioClips.backgroundMusic[sceneIndex];
         musicSource.Play();
     }

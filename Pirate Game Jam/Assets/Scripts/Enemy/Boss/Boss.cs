@@ -66,18 +66,15 @@ public abstract class Boss : ColorFlashObject, IHealth, IItemPicker
         base.Awake();
         health = maxHealth;
         sr = GetComponent<SpriteRenderer>();
-        this.centerPoint = new Vector2(this.transform.position.x - 11.5f, this.transform.position.y);
+
         //doing it on Awake right now for testing
-        Collider2D[] colliders = Physics2D.OverlapBoxAll(centerPoint, new(60, 34), 0);
+        Collider2D[] colliders = Physics2D.OverlapBoxAll(centerPoint, new(30, 17), 0);
 
         foreach (Collider2D collider in colliders)
         {
             if (collider.gameObject.TryGetComponent(out player))
                 break;
         }
-
-        if(player == null)
-            Debug.Log("Could not find player in Physics2D.OverlapBoxAll. Centerpoint: " + centerPoint);
 
         if (bossHP != null)
         {
@@ -201,8 +198,6 @@ public abstract class Boss : ColorFlashObject, IHealth, IItemPicker
         shortColorFlash = new(Color.green);
         if (health > maxHealth)
             health = maxHealth;
-        //Debug.Log(gameObject.name + "Health: " + health);
-
         UpdatingHPSlider(health);
 
     }
@@ -214,7 +209,6 @@ public abstract class Boss : ColorFlashObject, IHealth, IItemPicker
 
         health-= damageAmount;
         shortColorFlash = new(Color.red);
-        //Debug.Log(gameObject.name + "Health: " + health);
         UpdatingHPSlider(health);
 
         if (health <= 0)   
@@ -295,7 +289,7 @@ public abstract class Boss : ColorFlashObject, IHealth, IItemPicker
         shootingPoint.rotation = Quaternion.LookRotation(forward, upwards);
     }
 
-    void PickDirection()
+    protected virtual void PickDirection()
     {
         int chance = Random.Range(1, 101);
         moveDir = chance <= 50 ? Vector2.left : Vector2.right;

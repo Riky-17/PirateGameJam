@@ -82,14 +82,12 @@ public class PanelsManager : MonoBehaviour
         AudioListener.pause = false;
         isPaused = false;
         canReadInput = true;
-        Debug.Log("Hi");
     }
 
     public void StartUnpauseCoroutine() => StartCoroutine(ContinueDelay());
 
     public IEnumerator ContinueDelay()
     {
-        Debug.Log("Hello");
         timer = 3f;
         pausePanel.SetActive(false);
         gamePanel.SetActive(true);

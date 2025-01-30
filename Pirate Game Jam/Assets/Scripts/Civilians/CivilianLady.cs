@@ -4,8 +4,6 @@ public class CivilianLady : Civilian
 {
     Animator anim;
 
-    [SerializeField] bool debugMode = true;
-
     [SerializeField] float speed = 3f;
 
     //how long should the civilian walk for
@@ -103,15 +101,5 @@ public class CivilianLady : Civilian
         float rightMostX = originX + maxDistance / 2;
 
         leftDirChances =  Mathf.RoundToInt(100 * Mathf.InverseLerp(leftMostX, rightMostX, currentX));
-    }
-
-    void OnDrawGizmos()
-    {
-        if (debugMode)
-        {
-            Gizmos.color = Color.red;
-            Gizmos.DrawWireCube(originPoint, new(maxDistance, 1, 0));
-            Gizmos.DrawSphere(originPoint, .25f);
-        }
     }
 }

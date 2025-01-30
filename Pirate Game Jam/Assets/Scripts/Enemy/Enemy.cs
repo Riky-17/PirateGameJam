@@ -18,7 +18,6 @@ public abstract class Enemy : ColorFlashObject, IHealth, IItemPicker
     [SerializeField] float waypointTime = 1;
     float lastWaypointTime;
 
-    [SerializeField] bool debugMode = false;
     [SerializeField] protected float lookDistance = 5;
     [SerializeField] protected float maxDistance = 3;
     [SerializeField] protected float speed = 5;
@@ -273,7 +272,6 @@ public abstract class Enemy : ColorFlashObject, IHealth, IItemPicker
             Health = MaxHealth;
         healthBarSlider.UpdateHealthBar(Health, MaxHealth);
         shortColorFlash = new(Color.green);
-        //Debug.Log(gameObject.name + " Health: " + Health);
     }
 
     public void Damage(float damageAmount)
@@ -281,7 +279,6 @@ public abstract class Enemy : ColorFlashObject, IHealth, IItemPicker
         Health-= damageAmount;
         healthBarSlider.UpdateHealthBar(Health, MaxHealth);
         shortColorFlash = new(Color.red);
-        //Debug.Log(gameObject.name + " Health: " + Health);
         if(Health <= 0)
             Die();
     }
@@ -371,27 +368,5 @@ public abstract class Enemy : ColorFlashObject, IHealth, IItemPicker
         fireRateMultiplier = FireRateBoostAmount;
         fireRateBoostTime+= duration;
         LongColorFlash.AddColor(Color.yellow, duration);
-    }
-
-    void OnDrawGizmos()
-    {
-        if (debugMode)
-        {
-            Vector2 flatPos = new(transform.position.x, 0);
-            Gizmos.color = Color.green;
-            Gizmos.DrawSphere(flatPos, .25f);
-            Gizmos.DrawWireCube(flatPos, new(lookDistance, MAX_CAMERA_HEIGHT));
-    
-            Gizmos.color = Color.red;
-            Gizmos.DrawWireCube(flatPos, new(maxDistance, MAX_CAMERA_HEIGHT));
-    
-            Gizmos.color = Color.blue;
-            Gizmos.DrawWireCube(flatPos, new(maxDistance - maxDistanceOffset, MAX_CAMERA_HEIGHT));
-            Gizmos.DrawWireCube(flatPos, new(maxDistance + maxDistanceOffset, MAX_CAMERA_HEIGHT));
-            
-            Gizmos.color = Color.red;
-            foreach (Vector2 waypoint in waypoints)
-                Gizmos.DrawSphere(waypoint, .25f);
-        }
     }
 }

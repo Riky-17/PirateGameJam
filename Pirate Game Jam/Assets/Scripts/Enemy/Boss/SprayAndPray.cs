@@ -41,7 +41,7 @@ public class SprayAndPray : BossAttack
         }
 
         boss.AddForceBoss(dir, 15, 2);
-        if((boss.transform.position.x < boss.CenterPoint.x - CAMERA_MAX_WIDTH + 4 && dir.x < 0) || (boss.transform.position.x > boss.CenterPoint.x + CAMERA_MAX_WIDTH && dir.x > 0))
+        if((boss.transform.position.x < boss.CenterPoint.x - CAMERA_MAX_WIDTH + 1 && dir.x < 0) || (boss.transform.position.x > boss.CenterPoint.x + CAMERA_MAX_WIDTH - 1 && dir.x > 0))
         {
             slamCount++;
             dir = -dir;

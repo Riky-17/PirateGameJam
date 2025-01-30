@@ -5,12 +5,16 @@ public class TankBoss : Boss
 {
     public static Action<Transform> onExplode;
 
+    const float CAMERA_MAX_WIDTH = 30 / 2f;
+
     SpriteRenderer srCannon;
     [Space]
     [SerializeField] BulletSO grenade;
     [SerializeField] BulletSO bullet;
     [SerializeField] Enemy enemyToSpawn;
     [SerializeField] Transform cannon;
+
+    float leftDirChances;
 
     [SerializeField] GameObject deathExplosion;
     [SerializeField] float deathRadius;
@@ -56,6 +60,24 @@ public class TankBoss : Boss
         Vector3 forward = Vector3.forward;
 
         cannon.rotation = Quaternion.LookRotation(forward, upwards);
+    }
+
+    protected override void PickDirection()
+    {
+        CalculateDirectionChances();
+        int chance = UnityEngine.Random.Range(1, 101);
+
+        moveDir = chance <= leftDirChances ? Vector2.left : Vector2.right;
+    }
+
+    void CalculateDirectionChances()
+    {
+        float currentX = transform.position.x;
+        float originX = centerPoint.x;
+        float leftMostX = originX - (CAMERA_MAX_WIDTH + 1.5f);
+        float rightMostX = originX + (CAMERA_MAX_WIDTH - 1.5f);
+
+        leftDirChances =  Mathf.RoundToInt(100 * Mathf.InverseLerp(leftMostX, rightMostX, currentX));
     }
 
     protected override void UpdateColor(Color color)

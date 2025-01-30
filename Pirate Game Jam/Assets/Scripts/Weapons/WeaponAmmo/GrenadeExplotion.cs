@@ -42,7 +42,6 @@ public class GrenadeExplotion : Bullet
         if(hit.collider == null || hit.collider.gameObject == gameObject || hit.collider.gameObject == shooter || hit.collider.gameObject.layer == Mathf.Log(ignoreBulletMask, 2))
             return;
 
-        Debug.Log(hit.collider.name);
         Explosion();
     }
 

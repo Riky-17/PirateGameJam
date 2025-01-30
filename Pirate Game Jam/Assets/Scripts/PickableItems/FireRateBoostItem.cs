@@ -1,5 +1,3 @@
-using UnityEngine;
-
 public class FireRateBoostItem : StatBoostItem
 {
     public override void Effect(IItemPicker target)

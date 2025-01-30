@@ -1,11 +1,7 @@
 using System;
 using System.Collections;
-using JetBrains.Annotations;
 using Unity.Cinemachine;
-using Unity.Hierarchy;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class DieScene : MonoBehaviour
 {

@@ -233,7 +233,7 @@ GameObject:
   m_Component:
   - component: {fileID: 17649337}
   - component: {fileID: 17649338}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: StartingWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3308,7 +3308,7 @@ GameObject:
   - component: {fileID: 390398781}
   - component: {fileID: 390398782}
   - component: {fileID: 390398783}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: InvisibleRightWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4868,7 +4868,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 321319283}
         m_TargetAssemblyTypeName: PanelsManager, Assembly-CSharp
-        m_MethodName: UnpauseGame
+        m_MethodName: StartUnpauseCoroutine
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4925,7 +4925,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 577371219}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: LevelColliders
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7656,7 +7656,7 @@ GameObject:
   - component: {fileID: 945583826}
   - component: {fileID: 945583828}
   - component: {fileID: 945583827}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: CameraBoundingBox
   m_TagString: CameraBoundingBox
   m_Icon: {fileID: 0}
@@ -9636,7 +9636,7 @@ GameObject:
   - component: {fileID: 1194112235}
   - component: {fileID: 1194112236}
   - component: {fileID: 1194112237}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: InvisibleCeiling
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10592,7 +10592,7 @@ GameObject:
   - component: {fileID: 1336924142}
   - component: {fileID: 1336924143}
   - component: {fileID: 1336924144}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: InvisibleLeftWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11085,7 +11085,7 @@ GameObject:
   - component: {fileID: 1394624912}
   - component: {fileID: 1394624911}
   - component: {fileID: 1394624910}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: LockScreen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13904,7 +13904,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Sprite: {fileID: 7225575888738433091, guid: 5e4ba1a0a9a4ebc48917227107d2093f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

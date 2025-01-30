@@ -46,6 +46,7 @@ public class Bullet : MonoBehaviour
             
         }
 
+        Debug.Log(hit.collider.name);
         Destroy(gameObject);
     }
 

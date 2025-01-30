@@ -1,6 +1,5 @@
 using System.Collections;
 using TMPro;
-using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -32,6 +31,7 @@ public class PanelsManager : MonoBehaviour
         pausePanel.SetActive(false);
         gamePanel.SetActive(true);
     }
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.P) ||
@@ -43,14 +43,16 @@ public class PanelsManager : MonoBehaviour
             }
             else if (isPaused)
             {
-                UnpauseGame();
+                StartCoroutine(ContinueDelay());
             }
         }
     }
+
     public void onClickMenu()
     {
         quitConfirmationPanel.gameObject.SetActive(true);
     }
+
     public void ButtonNo()
     {
         quitConfirmationPanel.gameObject.SetActive(false);
@@ -58,8 +60,10 @@ public class PanelsManager : MonoBehaviour
 
     public void loadingSceneOnclick(int index)
     {
+        UnpauseGame();
         SceneManager.LoadScene(index, LoadSceneMode.Single);
     }
+
     void PauseGame()
     {
         countDown.gameObject.SetActive(true);
@@ -70,12 +74,21 @@ public class PanelsManager : MonoBehaviour
         isPaused = true;
         canReadInput = false;
     }
+
     public void UnpauseGame()
     {
-        StartCoroutine(ContinueDelay());
+        Time.timeScale = 1;
+        AudioListener.pause = false;
+        isPaused = false;
+        canReadInput = true;
+        Debug.Log("Hi");
     }
+
+    public void StartUnpauseCoroutine() => StartCoroutine(ContinueDelay());
+
     public IEnumerator ContinueDelay()
     {
+        Debug.Log("Hello");
         timer = 3f;
         pausePanel.SetActive(false);
         gamePanel.SetActive(true);
@@ -86,11 +99,9 @@ public class PanelsManager : MonoBehaviour
             yield return null;
         }
         countDown.gameObject.SetActive(false);
-        Time.timeScale = 1;
-        AudioListener.pause = false;
-        isPaused = false;
-        canReadInput = true;
+        UnpauseGame();
     }
+
     public void RestartScene() 
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);

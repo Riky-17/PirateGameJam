@@ -795,7 +795,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 471575190}
         m_TargetAssemblyTypeName: PanelsManager, Assembly-CSharp
-        m_MethodName: UnpauseGame
+        m_MethodName: StartUnpauseCoroutine
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3074,7 +3074,7 @@ GameObject:
   - component: {fileID: 390398781}
   - component: {fileID: 390398782}
   - component: {fileID: 390398783}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: InvisibleRightWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7305,7 +7305,7 @@ GameObject:
   - component: {fileID: 945583826}
   - component: {fileID: 945583828}
   - component: {fileID: 945583827}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: CameraBoundingBox
   m_TagString: CameraBoundingBox
   m_Icon: {fileID: 0}
@@ -9143,7 +9143,7 @@ GameObject:
   - component: {fileID: 1194112235}
   - component: {fileID: 1194112236}
   - component: {fileID: 1194112237}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: InvisibleCeiling
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9822,7 +9822,7 @@ GameObject:
   - component: {fileID: 1336924142}
   - component: {fileID: 1336924143}
   - component: {fileID: 1336924144}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: InvisibleLeftWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10063,7 +10063,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1342013424}
   - component: {fileID: 1342013425}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: StartingWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10652,7 +10652,7 @@ GameObject:
   - component: {fileID: 1379770180}
   - component: {fileID: 1379770179}
   - component: {fileID: 1379770178}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: LockScreen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14661,7 +14661,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1896785396}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: LevelColliders
   m_TagString: Untagged
   m_Icon: {fileID: 0}

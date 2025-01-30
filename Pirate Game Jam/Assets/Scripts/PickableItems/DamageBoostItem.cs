@@ -1,5 +1,3 @@
-using UnityEngine;
-
 public class DamageBoostItem : StatBoostItem
 {
     public override void Effect(IItemPicker target)

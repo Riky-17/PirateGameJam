@@ -5601,7 +5601,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 292153579}
         m_TargetAssemblyTypeName: PanelsManager, Assembly-CSharp
-        m_MethodName: UnpauseGame
+        m_MethodName: StartUnpauseCoroutine
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

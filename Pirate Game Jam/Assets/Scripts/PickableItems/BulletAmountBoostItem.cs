@@ -1,5 +1,3 @@
-using UnityEngine;
-
 public class BulletAmountBoostItem : StatBoostItem
 {
     public override void Effect(IItemPicker target)

@@ -11085,7 +11085,7 @@ GameObject:
   - component: {fileID: 1394624912}
   - component: {fileID: 1394624911}
   - component: {fileID: 1394624910}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: LockScreen
   m_TagString: Untagged
   m_Icon: {fileID: 0}

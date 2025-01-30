@@ -78,7 +78,7 @@ public class LandingCrash : BossAttack
         if (!isLeft && isHigh)
         {
             //bring him left
-            if (boss.transform.position.x <= boss.CenterPoint.x - CAMERA_MAX_WIDTH + 2)
+            if (boss.transform.position.x <= boss.CenterPoint.x - CAMERA_MAX_WIDTH + 5)
             {
                 isLeft = true;
                 return;

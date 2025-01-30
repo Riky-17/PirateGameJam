@@ -4306,7 +4306,7 @@ GameObject:
   - component: {fileID: 651926178}
   - component: {fileID: 651926180}
   - component: {fileID: 651926179}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cannon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6643,14 +6643,13 @@ MonoBehaviour:
   maxHealth: 500
   centerPoint: {x: 0, y: 0}
   shootingPoint: {fileID: 1691749603}
-  deathExplosion: {fileID: 1319657421192287489, guid: ed1a3e8e74b71a842a466485eaf2f7ca, type: 3}
-  deathRadius: 3
-  speed: 5
   bossHP: {fileID: 233797622}
   grenade: {fileID: 11400000, guid: 907159f08fc67f14ea4f6741e86971be, type: 2}
   bullet: {fileID: 11400000, guid: 70c0e4367284bd74da537ee24c3d693c, type: 2}
   enemyToSpawn: {fileID: 3288990257193346228, guid: 3858ab3b1ef6c7c41893ce3c09ac2d3d, type: 3}
   cannon: {fileID: 651926177}
+  deathExplosion: {fileID: 1319657421192287489, guid: ed1a3e8e74b71a842a466485eaf2f7ca, type: 3}
+  deathRadius: 3
 --- !u!50 &1009293614
 Rigidbody2D:
   serializedVersion: 5
@@ -6788,7 +6787,7 @@ Transform:
   m_GameObject: {fileID: 1009293612}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -12, y: 0, z: 0}
+  m_LocalPosition: {x: 12, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -10825,7 +10824,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1691749603}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: ShootingPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12366,7 +12365,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5461517278322731816, guid: 207dc70a42eb0bf499a90408faba61de, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 9.54
+      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 5461517278322731816, guid: 207dc70a42eb0bf499a90408faba61de, type: 3}
       propertyPath: m_LocalPosition.y

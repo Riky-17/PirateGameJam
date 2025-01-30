@@ -9736,7 +9736,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1292440805}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: ShootingPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13098,7 +13098,7 @@ GameObject:
   - component: {fileID: 1777052333}
   - component: {fileID: 1777052332}
   - component: {fileID: 1777052331}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cannon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15268,7 +15268,7 @@ GameObject:
   - component: {fileID: 2091192267}
   - component: {fileID: 2091192266}
   - component: {fileID: 2091192265}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Boss
   m_TagString: Untagged
   m_Icon: {fileID: 0}

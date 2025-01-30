@@ -3453,6 +3453,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7531401433052407010, guid: b39b40176e804f24bb6bc018cd70d23f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4425,6 +4429,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5832465814478138484, guid: 4d47ba5f57dd1494690394592f564fa0, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5102,6 +5110,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4162404247294723282, guid: 4a13aa1aad6f48647861c4d1208210e5, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4162404247294723282, guid: 4a13aa1aad6f48647861c4d1208210e5, type: 3}
+      propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -10652,7 +10664,7 @@ GameObject:
   - component: {fileID: 1379770180}
   - component: {fileID: 1379770179}
   - component: {fileID: 1379770178}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: LockScreen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11876,6 +11888,10 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 805835808341829848, guid: f770bcd4fd0fb934d81dcc903e1f0cc9, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 805835808341829848, guid: f770bcd4fd0fb934d81dcc903e1f0cc9, type: 3}
+      propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3152142124182699705, guid: f770bcd4fd0fb934d81dcc903e1f0cc9, type: 3}
@@ -14953,6 +14969,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7531401433052407010, guid: b39b40176e804f24bb6bc018cd70d23f, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7531401433052407010, guid: b39b40176e804f24bb6bc018cd70d23f, type: 3}
+      propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

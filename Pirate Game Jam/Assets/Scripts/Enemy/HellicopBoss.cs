@@ -57,10 +57,10 @@ public class HellicopBoss : Boss
         machineGun = new MachineGun(this, player, bullet);
         attacks = new()
         {
-           //new Swoop(this, player, bullet, Items),
-           new LandingCrash(this, player, bullet, enemyToSpawn, Items),
-           //new CarpetBoom(this, player, grenade),
-           //new OverloadedGun(this, player, marksmanBullet, grenadeOverload, shotgunBullet),
+           new Swoop(this, player, bullet, Items),
+           new LandingCrash(this, player, bullet, enemyToSpawn, Items, deathExplosion),
+           new CarpetBoom(this, player, grenade),
+           new OverloadedGun(this, player, marksmanBullet, grenadeOverload, shotgunBullet),
         };
 
     }
@@ -164,4 +164,5 @@ public class HellicopBoss : Boss
         onExplode?.Invoke(transform);
         Destroy(explosion, .3f);
     }
+ 
 }

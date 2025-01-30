@@ -136,7 +136,6 @@ public abstract class WeaponSystem : MonoBehaviour
     public IEnumerator ReloadCoroutine()
     {
         amountOfCoroutines++;
-        Debug.Log("Coroutine N: " + amountOfCoroutines + " Started");
         float remainTime = reloadTime * ReloadMultiplier;
         if (weaponryText != null)
             weaponryText.updateAmmo("Reloading");
@@ -145,7 +144,6 @@ public abstract class WeaponSystem : MonoBehaviour
         {
             isReloading = true;
             remainTime -= Time.deltaTime;
-            //Debug.Log(Mathf.Ceil(remainTime).ToString());
             if (weaponryText != null)
                 weaponryText.loadingInfo(weaponIndex, Mathf.Ceil(remainTime).ToString());
 
@@ -153,7 +151,6 @@ public abstract class WeaponSystem : MonoBehaviour
         }
         if (weaponryText != null)
             weaponryText.disablingLoadingPanels(weaponIndex);
-        Debug.Log("Coroutine N: " + amountOfCoroutines + " Finished");
         canShoot = true;
         bulletsNum = initialBulletNum;
 

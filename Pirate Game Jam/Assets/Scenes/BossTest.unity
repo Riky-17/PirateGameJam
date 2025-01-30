@@ -1456,7 +1456,7 @@ Transform:
   m_GameObject: {fileID: 165655320}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: 30, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3130,7 +3130,7 @@ Transform:
   m_GameObject: {fileID: 474945709}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 30, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -6641,7 +6641,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   maxHealth: 500
-  centerPoint: {x: 0, y: 0}
+  centerPoint: {x: 30, y: 0}
   shootingPoint: {fileID: 1691749603}
   bossHP: {fileID: 233797622}
   grenade: {fileID: 11400000, guid: 907159f08fc67f14ea4f6741e86971be, type: 2}
@@ -6787,7 +6787,7 @@ Transform:
   m_GameObject: {fileID: 1009293612}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 12, y: 0, z: 0}
+  m_LocalPosition: {x: 40, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -9266,7 +9266,7 @@ Transform:
   m_GameObject: {fileID: 1385031775}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: 30, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -12365,7 +12365,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5461517278322731816, guid: 207dc70a42eb0bf499a90408faba61de, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -10
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 5461517278322731816, guid: 207dc70a42eb0bf499a90408faba61de, type: 3}
       propertyPath: m_LocalPosition.y

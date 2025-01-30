@@ -128,14 +128,12 @@ public class Civilian : MonoBehaviour, IHealth, IItemPicker
         shortColorFlash = new(Color.green);
         if(Health > MaxHealth)
             Health = MaxHealth;
-        //Debug.Log(gameObject.name + " Health: " + Health);
     }
 
     public void Damage(float damageAmount)
     {
         Health-= damageAmount;
         shortColorFlash = new(Color.red);
-        //Debug.Log(gameObject.name + " Health: " + Health);
         if(Health <= 0)
             Die();
     }

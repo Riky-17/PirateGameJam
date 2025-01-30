@@ -1,16 +1,20 @@
+using System.Collections;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
+using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class LandingCrash : BossAttack
 {
-    public LandingCrash(Boss boss, PlayerMovement player, BulletSO bullet, Enemy enemy, PickUpItemSO[] Items) : base(boss, player, bullet)
+    public LandingCrash(Boss boss, PlayerMovement player, BulletSO bullet, Enemy enemy, PickUpItemSO[] Items, GameObject explosion) : base(boss, player, bullet)
     {
         enemyToSpawn = enemy;
         items = Items;
+        grenadeExplosion = explosion;
     }
 
+    GameObject grenadeExplosion;
 
     const float CAMERA_MAX_HEIGHT = 17 / 2f;
     const float CAMERA_MAX_WIDTH = 30 / 2f;
@@ -36,6 +40,8 @@ public class LandingCrash : BossAttack
     float attackTimer;
     float attackTime = 5f;
 
+    bool hasExploded = false;
+    float landingExplosion = 15f;
     public override void InitAttack()
     {
         base.InitAttack();
@@ -43,9 +49,11 @@ public class LandingCrash : BossAttack
         isHigh = false;
         isLeft = false;
         haslanded = false;
+        hasExploded = false;
         enemySpawnTime = 0f;
         itemsSpawnTime = 0f;
         attackTimer = attackTime;
+        grenadeExplosion.transform.localScale = new Vector3(landingExplosion, landingExplosion, 1);
     }
 
     public override void Attack()
@@ -97,6 +105,11 @@ public class LandingCrash : BossAttack
         {
             //attackTimer += Time.deltaTime;
             enemySpawnTimer += Time.deltaTime;
+            if (!hasExploded)
+            {
+                DeathExplosion();
+                hasExploded = true;
+            }
 
             //calling items
             itemsSpawnTimer += Time.deltaTime;
@@ -130,11 +143,22 @@ public class LandingCrash : BossAttack
             if (boss.transform.position.y < boss.CenterPoint.y - CAMERA_MAX_HEIGHT - 3)
                 boss.AddForceBoss(Vector2.up, boss.Speed, 2);
 
+
+            
+            //add explotion
             isAttackDone = true;
 
 
         }
+
+        void DeathExplosion()
+        {
+            Vector3 exploPo = new Vector3(boss.transform.position.x + 3f,boss.transform.position.y -2, boss.transform.position.z);
+            GameObject Explosion = boss.InstantiateObject(grenadeExplosion, exploPo, Quaternion.identity);                        
+            boss.DestroyObject(Explosion, .5f);
+        }
         
-            
+           
+        
     }
 }

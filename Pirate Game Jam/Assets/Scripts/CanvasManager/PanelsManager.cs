@@ -61,6 +61,7 @@ public class PanelsManager : MonoBehaviour
     public void loadingSceneOnclick(int index)
     {
         UnpauseGame();
+        AudioManager.Instance.PlayMusic(index);
         SceneManager.LoadScene(index, LoadSceneMode.Single);
     }
 

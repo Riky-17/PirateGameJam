@@ -138,19 +138,21 @@ public abstract class WeaponSystem : MonoBehaviour
         amountOfCoroutines++;
         Debug.Log("Coroutine N: " + amountOfCoroutines + " Started");
         float remainTime = reloadTime * ReloadMultiplier;
-        weaponryText.updateAmmo("Reloading");
+        if (weaponryText != null)
+            weaponryText.updateAmmo("Reloading");
 
         while (remainTime > 0)
         {
             isReloading = true;
             remainTime -= Time.deltaTime;
             //Debug.Log(Mathf.Ceil(remainTime).ToString());
-            weaponryText.loadingInfo(weaponIndex, Mathf.Ceil(remainTime).ToString());
+            if (weaponryText != null)
+                weaponryText.loadingInfo(weaponIndex, Mathf.Ceil(remainTime).ToString());
 
             yield return null;
         }
-
-        weaponryText.disablingLoadingPanels(weaponIndex);
+        if (weaponryText != null)
+            weaponryText.disablingLoadingPanels(weaponIndex);
         Debug.Log("Coroutine N: " + amountOfCoroutines + " Finished");
         canShoot = true;
         bulletsNum = initialBulletNum;

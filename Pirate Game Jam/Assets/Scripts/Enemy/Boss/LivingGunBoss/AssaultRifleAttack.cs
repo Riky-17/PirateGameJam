@@ -35,7 +35,7 @@ public class AssaultRifleAttack : BossAttack
         bossGun.StopAngularVelocity();
         boss.RotateGun(Quaternion.Euler(0, 180, 0));
         isHighEnough = false;
-        dashTarget = dashTarget = new(boss.transform.position.x, Random.Range(1, CAMERA_MAX_HEIGHT));
+        dashTarget = dashTarget = new(boss.transform.position.x, Random.Range(2, CAMERA_MAX_HEIGHT - 2));
         shootingTimer = 0;
         fireRateTimer = fireRateTime;
         dashCount = 0;
@@ -60,9 +60,9 @@ public class AssaultRifleAttack : BossAttack
                 isHighEnough = false;
 
                 if(dashCount % 2 != 0)
-                    dashTarget = new(boss.transform.position.x, Random.Range(1, CAMERA_MAX_HEIGHT));
+                    dashTarget = new(boss.transform.position.x, Random.Range(2, CAMERA_MAX_HEIGHT - 2));
                 else
-                    dashTarget = new(boss.transform.position.x, Random.Range(-CAMERA_MAX_HEIGHT, -1));
+                    dashTarget = new(boss.transform.position.x, Random.Range(-CAMERA_MAX_HEIGHT + 2, -2));
 
                 dashCount++;
                 return;
